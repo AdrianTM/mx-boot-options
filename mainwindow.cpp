@@ -3,7 +3,7 @@
  **********************************************************************
  * Copyright (C) 2017 MX Authors
  *
- * Authors: Adrian
+ * Authors: Adrian, Dolphin Oracle
  *          MX Linux <http://mxlinux.org>
  *
  * This is free software: you can redistribute it and/or modify
