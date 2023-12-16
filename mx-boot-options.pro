@@ -39,9 +39,9 @@ SOURCES += \
 
 HEADERS  += \
     about.h \
+    common.h \
     mainwindow.h \
     dialog.h \
-    version.h \
     cmd.h
 
 FORMS    += \
