@@ -394,6 +394,7 @@ bool MainWindow::installSplash()
     progress->setCancelButton(nullptr);
     progress->setWindowTitle(tr("Installing bootsplash, please wait"));
     progress->setBar(bar);
+    bar->setTextVisible(false);
     progress->resize(500, progress->height());
     progress->show();
 
@@ -781,22 +782,28 @@ void MainWindow::readKernelOpts()
 void MainWindow::cmdStart()
 {
     setCursor(QCursor(Qt::BusyCursor));
-    bar->setRange(0, 0);
-    bar->show();
-    bar->setTextVisible(false);
+    bar->setValue(0);
     timer.start(100ms);
 }
 
 void MainWindow::cmdDone()
 {
     setCursor(QCursor(Qt::ArrowCursor));
+    bar->setValue(bar->maximum());
     timer.stop();
+}
+
+void MainWindow::procTime()
+{
+    bar->setValue((bar->value() + 10) % bar->maximum() + 1);
 }
 
 void MainWindow::setConnections()
 {
     timer.disconnect();
     timer.stop();
+
+    connect(&timer, &QTimer::timeout, this, &MainWindow::procTime);
     connect(&cmd, &QProcess::started, this, &MainWindow::cmdStart);
     connect(&cmd, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MainWindow::cmdDone);
 }
@@ -814,6 +821,7 @@ void MainWindow::pushApply_clicked()
     progress->setCancelButton(nullptr);
     progress->setWindowTitle(tr("Updating configuration, please wait"));
     progress->setBar(bar);
+    bar->setTextVisible(false);
     progress->resize(500, progress->height());
     progress->show();
     setConnections();
@@ -1235,6 +1243,7 @@ void MainWindow::combo_enable_flatmenus_clicked(bool checked)
     progress->setCancelButton(nullptr);
     progress->setWindowTitle(tr("Updating configuration, please wait"));
     progress->setBar(bar);
+    bar->setTextVisible(false);
     progress->resize(500, progress->height());
     progress->show();
 
