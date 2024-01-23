@@ -17,7 +17,7 @@
 void displayDoc(const QString &url, const QString &title)
 {
     qputenv("HOME", starting_home.toUtf8());
-    // prefer mx-viewer otherwise use xdg-open (use runuser to run that as logname user) "gio open" would also work here
+    // Prefer mx-viewer otherwise use xdg-open (use runuser to run that as logname user) "gio open" would also work here
     QString executablePath = QStandardPaths::findExecutable("mx-viewer");
     if (!executablePath.isEmpty()) {
         QProcess::startDetached("mx-viewer", {url, title});
