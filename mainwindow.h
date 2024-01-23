@@ -47,7 +47,6 @@ private slots:
     void cleanup();
     void cmdDone();
     void cmdStart();
-    void procTime();
     void setConnections();
 
     void btn_bg_file_clicked();
