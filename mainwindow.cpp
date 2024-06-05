@@ -450,15 +450,10 @@ void MainWindow::writeDefaultGrub()
 
 QStringList MainWindow::getLinuxPartitions()
 {
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-#define SKIPEMPTYPARTS QString::SkipEmptyParts
-#else
-#define SKIPEMPTYPARTS Qt::SkipEmptyParts
-#endif
     const QStringList partitions
         = cmd.getOutAsRoot("lsblk -ln -o NAME,SIZE,FSTYPE,MOUNTPOINT,LABEL -e 2,11 -x NAME | "
                            "grep -E '^x?[h,s,v].[a-z][0-9]|^mmcblk[0-9]+p|^nvme[0-9]+n[0-9]+p'")
-              .split('\n', SKIPEMPTYPARTS);
+              .split('\n', Qt::SkipEmptyParts);
     QStringList new_list;
     qDebug() << "PARTITIONS" << partitions;
     for (const QString &part_info : partitions) {
