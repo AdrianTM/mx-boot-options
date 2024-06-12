@@ -828,7 +828,10 @@ void MainWindow::pushApply_clicked()
     if (options_changed) {
         cmd.runAsRoot("grub-editenv /boot/grub/grubenv unset next_entry"); // uset the saved entry from grubenv
         if (ui->pushBgFile->isEnabled() && QFile::exists(ui->pushBgFile->property("file").toString())) {
-            replaceGrubArg("export GRUB_MENU_PICTURE", "\"" + ui->pushBgFile->property("file").toString() + "\"");
+            if (!replaceGrubArg("export GRUB_MENU_PICTURE",
+                                "\"" + ui->pushBgFile->property("file").toString() + "\"")) {
+                addGrubLine("export GRUB_MENU_PICTURE=\"" + ui->pushBgFile->property("file").toString() + "\"");
+            }
         } else if (ui->checkGrubTheme->isChecked() && QFile::exists(ui->pushThemeFile->property("file").toString())) {
             disableGrubLine("export GRUB_MENU_PICTURE");
             if (!replaceGrubArg("GRUB_THEME", "\"" + ui->pushThemeFile->property("file").toString() + "\"")) {
