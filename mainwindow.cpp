@@ -324,36 +324,35 @@ bool MainWindow::isUefi()
 
 void MainWindow::addUefiEntry(QListWidget *listEntries, QDialog *dialogUefi)
 {
-    QString file_name;
     // Mount all ESPs
-    QStringList mount_list
-        = cmd.getOutAsRoot(
-                 "lsblk -no PATH,PARTTYPE |grep -iE 'c12a7328-f81f-11d2-ba4b-00a0c93ec93b|0xef' |cut -d' ' -f1")
-              .split("\n");
-    for (const auto &mount_point : qAsConst(mount_list)) {
-        if (QProcess::execute("findmnt", {"-n", mount_point}) != 0) {
-            QString part_name = mount_point.section('/', 2, 2);
-            cmd.runAsRoot("mkdir -p /boot/efi/" + part_name);
-            cmd.runAsRoot("mount " + mount_point + " /boot/efi/" + part_name);
+    QStringList mountList = cmd.getOutAsRoot(
+        "lsblk -no PATH,PARTTYPE | grep -iE 'c12a7328-f81f-11d2-ba4b-00a0c93ec93b|0xef' | cut -d' ' -f1"
+    ).split("\n");
+
+    for (const auto &mountPoint : qAsConst(mountList)) {
+        if (QProcess::execute("findmnt", {"-n", mountPoint}) != 0) {
+            QString partName = mountPoint.section('/', 2, 2);
+            cmd.runAsRoot("mkdir -p /boot/efi/" + partName);
+            cmd.runAsRoot("mount " + mountPoint + " /boot/efi/" + partName);
         }
     }
 
     QString initialPath = QFile::exists("/boot/efi/EFI") ? "/boot/efi/EFI" : "/boot/efi/";
-    file_name = QFileDialog::getOpenFileName(dialogUefi, tr("Select EFI file"), initialPath, tr("EFI files (*.efi *.EFI)"));
+    QString fileName = QFileDialog::getOpenFileName(dialogUefi, tr("Select EFI file"), initialPath, tr("EFI files (*.efi *.EFI)"));
 
-    if (!QFile::exists(file_name)) {
-        unmountAndClean(mount_list);
+    if (!QFile::exists(fileName)) {
+        unmountAndClean(mountList);
         return;
     }
 
-    QString partition_name = cmd.getOut("df " + file_name + " --output=source | sed 1d");
-    QString disk = "/dev/" + cmd.getOut("lsblk -no PKNAME " + partition_name);
-    QString partition = partition_name.mid(partition_name.lastIndexOf(QRegularExpression("[0-9]+$")));
+    QString partitionName = cmd.getOut("df " + fileName + " --output=source | sed 1d");
+    QString disk = "/dev/" + cmd.getOut("lsblk -no PKNAME " + partitionName);
+    QString partition = partitionName.mid(partitionName.lastIndexOf(QRegularExpression("[0-9]+$")));
 
     if (cmd.exitCode() != 0) {
         QMessageBox::critical(dialogUefi, tr("Error"),
-                              tr("Could not find the source mountpoint for %1").arg(file_name));
-        unmountAndClean(mount_list);
+                              tr("Could not find the source mountpoint for %1").arg(fileName));
+        unmountAndClean(mountList);
         return;
     }
 
@@ -362,17 +361,18 @@ void MainWindow::addUefiEntry(QListWidget *listEntries, QDialog *dialogUefi)
         name = "New entry";
     }
 
-    file_name = "/EFI/" + file_name.section("/EFI/", 1);
-    QString out = cmd.getOutAsRoot(QString("efibootmgr -cL \"%1\" -d %2 -p %3 -l %4").arg(name, disk, partition, file_name));
+    fileName = "/EFI/" + fileName.section("/EFI/", 1);
+    QString command = QString("efibootmgr -cL \"%1\" -d %2 -p %3 -l %4").arg(name, disk, partition, fileName);
+    QString out = cmd.getOutAsRoot(command);
 
     if (cmd.exitCode() != 0) {
         QMessageBox::critical(dialogUefi, tr("Error"), tr("Something went wrong, could not add entry."));
-        unmountAndClean(mount_list);
+        unmountAndClean(mountList);
         return;
     }
 
-    QStringList out_list = out.split('\n');
-    listEntries->insertItem(0, out_list.constLast());
+    QStringList outList = out.split('\n');
+    listEntries->insertItem(0, outList.constLast());
     emit listEntries->itemSelectionChanged();
 }
 
@@ -411,6 +411,7 @@ bool MainWindow::installSplash()
     }
 
     progress->close();
+    QMessageBox::information(this, tr("Success"), tr("Bootsplash installed successfully."));
     return true;
 }
 
@@ -461,39 +462,40 @@ QStringList MainWindow::getLinuxPartitions()
         = cmd.getOutAsRoot("lsblk -ln -o NAME,SIZE,FSTYPE,MOUNTPOINT,LABEL -e 2,11 -x NAME | "
                            "grep -E '^x?[h,s,v].[a-z][0-9]|^mmcblk[0-9]+p|^nvme[0-9]+n[0-9]+p'")
               .split('\n', Qt::SkipEmptyParts);
-    QStringList new_list;
+    QStringList validPartitions;
     qDebug() << "PARTITIONS" << partitions;
     for (const QString &part_info : partitions) {
-        QString part = part_info.section(' ', 0, 0);
-        if (cmd.runAsRoot(
-                "lsblk -ln -o PARTTYPE /dev/" + part
-                + "| grep -qEi "
-                  "'0x83|0fc63daf-8483-4772-8e79-3d69d8477de4|44479540-F297-41B2-9AF7-D131D5F0458A|4F68BCE3-E8CD-"
-                  "4DB1-96E7-FBCAF984B709'")) {
-            new_list << part_info;
+        QString partName = part_info.section(' ', 0, 0);
+        QString partType = cmd.getOutAsRoot("lsblk -ln -o PARTTYPE /dev/" + partName).trimmed();
+
+        if (partType.contains(QRegularExpression(R"(0x83|0fc63daf-8483-4772-8e79-3d69d8477de4|44479540-F297-41B2-9AF7-D131D5F0458A|4F68BCE3-E8CD-4DB1-96E7-FBCAF984B709)"))) {
+            validPartitions << part_info;
         }
     }
-    return new_list;
+    return validPartitions;
 }
 
 void MainWindow::readBootEntries(QListWidget *listEntries, QLabel *textTimeout, QLabel *textBootNext,
                                  QLabel *textBootCurrent, QStringList *bootorder)
 {
-    QStringList entries = cmd.getOutAsRoot("efibootmgr").split('\n');
+    QStringList entries = cmd.getOutAsRoot("efibootmgr").split('\n', Qt::SkipEmptyParts);
+    QRegularExpression bootEntryRegex(R"(^Boot[0-9A-F]{4}\*?\s+)");
+
     for (const auto &item : qAsConst(entries)) {
-        if (item.contains(QRegularExpression(R"(^Boot[0-9A-F]{4}\*?\s+)"))) {
-            listEntries->addItem(item);
-            if (item.contains(QRegularExpression(R"(^Boot[0-9A-F]{4}\s+)"))) {
-                listEntries->item(listEntries->count() - 1)->setBackground(QBrush(Qt::gray));
+        if (bootEntryRegex.match(item).hasMatch()) {
+            auto *listItem = new QListWidgetItem(item);
+            if (!item.contains("*")) {
+                listItem->setBackground(QBrush(Qt::gray));
             }
-        } else if (item.startsWith(QLatin1String("Timeout:"))) {
-            textTimeout->setText(tr("Timeout: %1 seconds").arg(item.section(' ', 1, 1)));
-        } else if (item.startsWith(QLatin1String("BootNext:"))) {
-            textBootNext->setText(tr("Boot Next: %1").arg(item.section(' ', 1, 1)));
-        } else if (item.startsWith(QLatin1String("BootCurrent:"))) {
-            textBootCurrent->setText(tr("Boot Current: %1").arg(item.section(' ', 1, 1)));
-        } else if (item.startsWith(QLatin1String("BootOrder:"))) {
-            *bootorder = item.section(' ', 1, 1).split(',');
+            listEntries->addItem(listItem);
+        } else if (item.startsWith("Timeout:")) {
+            textTimeout->setText(tr("Timeout: %1 seconds").arg(item.section(' ', 1).trimmed()));
+        } else if (item.startsWith("BootNext:")) {
+            textBootNext->setText(tr("Boot Next: %1").arg(item.section(' ', 1).trimmed()));
+        } else if (item.startsWith("BootCurrent:")) {
+            textBootCurrent->setText(tr("Boot Current: %1").arg(item.section(' ', 1).trimmed()));
+        } else if (item.startsWith("BootOrder:")) {
+            *bootorder = item.section(' ', 1).split(',', Qt::SkipEmptyParts);
         }
     }
 }
@@ -519,19 +521,24 @@ QString MainWindow::selectPartiton(const QStringList &list)
 {
     auto *dialog = new CustomDialog(list);
 
-    // Guess MX install, find first partition with rootMX* label
-    auto it = std::find_if(list.begin(), list.end(), [&](const QString &part_info) {
+    // Guess MX install by finding the first partition with a rootMX* label
+    auto it = std::find_if(list.cbegin(), list.cend(), [&](const QString &part_info) {
         QString label = part_info.section(' ', 0, 0);
-        QString command = "lsblk -ln -o LABEL /dev/" + label + " | grep -q rootMX";
+        QString command = QString("lsblk -ln -o LABEL /dev/%1 | grep -q rootMX").arg(label);
         return cmd.run(command);
     });
-    if (it != list.end()) {
-        dialog->comboBox()->setCurrentIndex(dialog->comboBox()->findText(*it));
+
+    if (it != list.cend()) {
+        int index = dialog->comboBox()->findText(*it);
+        if (index != -1) {
+            dialog->comboBox()->setCurrentIndex(index);
+        }
     }
 
     if (dialog->exec() == QDialog::Accepted) {
-        qDebug() << "exec true" << dialog->comboBox()->currentText().section(' ', 0, 0);
-        return dialog->comboBox()->currentText().section(' ', 0, 0);
+        QString selectedText = dialog->comboBox()->currentText().section(' ', 0, 0);
+        qDebug() << "exec true" << selectedText;
+        return selectedText;
     } else {
         qDebug() << "exec false" << dialog->comboBox()->currentText().section(' ', 0, 0);
         return {};
@@ -549,140 +556,151 @@ void MainWindow::createChrootEnv(const QString &root)
         QMessageBox::critical(this, tr("Error"), tr("Could not create a temporary folder"));
         exit(EXIT_FAILURE);
     }
-    cmd.run("mkdir " + tmpdir.path() + "/{dev,sys,proc,run}");
-    QString cmd_str = QStringLiteral("/bin/mount /dev/%1 %2 && /bin/mount --rbind --make-rslave /dev %2/dev && "
-                                     "/bin/mount --rbind --make-rslave /sys %2/sys && /bin/mount --rbind /proc %2/proc "
-                                     "&& /bin/mount -t tmpfs -o size=100m,nodev,mode=755 tmpfs %2/run && /bin/mkdir "
-                                     "%2/run/udev && /bin/mount --rbind /run/udev %2/run/udev")
-                          .arg(root, tmpdir.path());
+
+    // Create necessary directories for the chroot environment
+    QStringList directories = {"dev", "sys", "proc", "run"};
+    for (const QString &dir : directories) {
+        cmd.run("mkdir -p " + tmpdir.path() + "/" + dir);
+    }
+
+    // Prepare the mount command
+    QString cmd_str = QStringLiteral(
+        "/bin/mount /dev/%1 %2 && "
+        "/bin/mount --rbind --make-rslave /dev %2/dev && "
+        "/bin/mount --rbind --make-rslave /sys %2/sys && "
+        "/bin/mount --rbind /proc %2/proc && "
+        "/bin/mount -t tmpfs -o size=100m,nodev,mode=755 tmpfs %2/run && "
+        "/bin/mkdir -p %2/run/udev && "
+        "/bin/mount --rbind /run/udev %2/run/udev"
+    ).arg(root, tmpdir.path());
+
+    // Execute the mount command and handle failure
     if (!cmd.runAsRoot(cmd_str)) {
         QMessageBox::critical(this, tr("Cannot continue"),
                               tr("Cannot create chroot environment, cannot change boot options. Exiting..."));
         exit(EXIT_FAILURE);
     }
+
     chroot = "chroot " + tmpdir.path() + " ";
-    ui->pushPreview->setDisabled(true); // no preview when running chroot.
+    ui->pushPreview->setDisabled(true); // Disable preview when running chroot
 }
 
 // Uncomment or add line in /etc/default/grub
 void MainWindow::enableGrubLine(const QString &item)
 {
-    bool found = false;
     QStringList new_list;
+    bool isItemFound = false;
+
     for (const QString &line : qAsConst(default_grub)) {
-        if (line == item
-            || line.contains(
-                QRegularExpression("^#.*" + item))) { // mark found and add item if found disabled or enabled
-            found = true;
-            new_list << item;
+        if (line == item || line.startsWith("#" + item)) {
+            isItemFound = true;
+            new_list << item; // Add the item as enabled
         } else {
-            new_list << line;
+            new_list << line; // Keep the existing line
         }
     }
-    if (found) {
-        default_grub = new_list;
-    } else {
-        default_grub << "\n" << item;
+
+    // If the item was not found, add it to the list
+    if (!isItemFound) {
+        new_list.prepend("\n"); // Add a newline before the new item for better formatting
+        new_list << item;
     }
+
+    default_grub = new_list; // Update the default_grub list
 }
 
-// Comment out line in /etc/default/grub that starts with passed item
+// Comment out lines in /etc/default/grub that start with the specified item
 void MainWindow::disableGrubLine(const QString &item)
 {
     QStringList new_list;
+    new_list.reserve(default_grub.size());
     for (const QString &line : qAsConst(default_grub)) {
-        if (line.startsWith(item)) {
-            new_list << "#" + line;
-        } else {
-            new_list << line;
-        }
+        new_list << (line.startsWith(item) ? "#" + line : line);
     }
     default_grub = new_list;
 }
 
 void MainWindow::saveBootOrder(const QListWidget *list)
 {
-    QString order;
+    QStringList orderList;
     for (int i = 0; i < list->count(); ++i) {
         QString item = list->item(i)->text().section(' ', 0, 0);
-        item.remove(QRegularExpression("^Boot"));
-        item.remove(QRegularExpression(R"(\*$)"));
+        item.remove(QRegularExpression("^Boot|\\*$"));
         if (item.contains(QRegularExpression("^[0-9A-Z]{4}$"))) {
-            if (order.isEmpty()) {
-                order += item;
-            } else {
-                order += "," + item;
-            }
+            orderList.append(item);
         }
     }
+
+    QString order = orderList.join(",");
     if (!cmd.runAsRoot("efibootmgr -o " + order)) {
         qDebug() << "Order:" << order;
         QMessageBox::critical(this, tr("Error"), tr("Something went wrong, could not save boot order."));
     }
 }
 
-// Replace the argument in /etc/default/grub return false if nothing was replaced
+// Replace the argument in /etc/default/grub and return false if nothing was replaced
 bool MainWindow::replaceGrubArg(const QString &key, const QString &item)
 {
-    bool replaced = false;
     QStringList new_list;
+    bool replaced = false;
+
     for (const QString &line : qAsConst(default_grub)) {
-        if (line.contains(key)) { // find key
-            new_list << key + "=" + item;
+        if (line.startsWith(key + "=")) {
+            new_list << key + "=" + item; // Replace the entire line with the new argument
             replaced = true;
         } else {
-            new_list << line;
+            new_list << line; // Keep the existing line
         }
     }
-    default_grub = new_list;
-    return replaced;
+
+    default_grub = new_list; // Update the default_grub list
+    return replaced; // Return whether a replacement occurred
 }
 
 void MainWindow::readGrubCfg()
 {
     QStringList content;
-    if (chroot.isEmpty()) {
-        content = cmd.getOutAsRoot("cat /boot/grub/grub.cfg", true).split("\n");
-    } else {
-        content = cmd.getOutAsRoot("cat " + chroot.section(' ', 1, 1) + "/boot/grub/grub.cfg", true).split('\n');
-    }
+    QString grubFilePath = chroot.isEmpty() ? "/boot/grub/grub.cfg" : chroot.section(' ', 1, 1) + "/boot/grub/grub.cfg";
+    content = cmd.getOutAsRoot("cat " + grubFilePath, true).split('\n', Qt::SkipEmptyParts);
+
     if (content.isEmpty()) {
         qDebug() << "Could not read grub.cfg file";
         return;
     }
-    ui->comboMenuEntry->clear();
 
-    int menu_level = 0;
-    int menu_count = 0;
-    int submenu_count = 0;
-    QString menu_id;
-    for (auto line : content) {
-        line = line.trimmed();
-        grub_cfg << line;
-        if (line.startsWith("menuentry ") || line.startsWith("submenu ")) {
-            menu_id = line.section("$menuentry_id_option", 1, -1).section(' ', 1, 1);
+    ui->comboMenuEntry->clear();
+    int menuLevel = 0;
+    int menuCount = 0;
+    int submenuCount = 0;
+    QString menuId;
+
+    for (const auto &line : content) {
+        QString trimmedLine = line.trimmed();
+        grub_cfg << trimmedLine;
+
+        if (trimmedLine.startsWith("menuentry ") || trimmedLine.startsWith("submenu ")) {
+            menuId = trimmedLine.section("$menuentry_id_option", 1, -1).section(' ', 1, 1);
+            QString item = trimmedLine.section(QRegularExpression("['\"]"), 1, 1);
             QString info;
-            QString item = line.section(QRegularExpression("['\"]"), 1, 1);
-            if (menu_level > 0) {
-                info = menu_id + " " + QString::number(menu_count - 1) + ">" + QString::number(submenu_count);
-                item = "    " + item;
-                ++submenu_count;
-            } else if (menu_level == 0) {
-                info = menu_id + " " + QString::number(menu_count);
-                ++menu_count;
+
+            if (menuLevel > 0) {
+                info = QString("%1 %2>%3").arg(menuId, QString::number(menuCount - 1), QString::number(submenuCount));
+                item.prepend("    ");
+                ++submenuCount;
+            } else {
+                info = QString("%1 %2").arg(menuId, QString::number(menuCount));
+                ++menuCount;
             }
             ui->comboMenuEntry->addItem(item, info);
         }
-        // Assuming one "{" per line, this might not work in all cases and with custom made grub.cfg
-        if (line.contains('{')) {
-            ++menu_level;
-        }
-        if (line.contains('}')) {
-            --menu_level;
-        }
-        // Reset submenu count
-        if (menu_level == 0) {
-            submenu_count = 0;
+
+        // Adjust menu level based on braces
+        menuLevel += trimmedLine.contains('{') ? 1 : 0;
+        menuLevel -= trimmedLine.contains('}') ? 1 : 0;
+
+        // Reset submenu count when returning to top level
+        if (menuLevel == 0) {
+            submenuCount = 0;
         }
     }
 }
@@ -694,77 +712,52 @@ void MainWindow::readDefaultGrub()
         qDebug() << "Could not open file:" << file.fileName();
         return;
     }
-    QString line;
+
     while (!file.atEnd()) {
-        line = file.readLine().trimmed();
+        QString line = file.readLine().trimmed();
         default_grub << line;
+
         if (line.startsWith("GRUB_DEFAULT=")) {
             QString entry = line.section("=", 1).remove("\"").remove("'");
-            bool ok {false};
+            bool ok = false;
             int number = entry.toInt(&ok);
+
             if (ok) {
-                if (ui->checkEnableFlatmenus->isChecked()) {
-                    ui->comboMenuEntry->setCurrentIndex(number);
-                } else {
-                    ui->comboMenuEntry->setCurrentIndex(
-                        ui->comboMenuEntry->findData(" " + entry, Qt::UserRole, Qt::MatchEndsWith));
-                }
+                ui->comboMenuEntry->setCurrentIndex(ui->checkEnableFlatmenus->isChecked() ? number :
+                    ui->comboMenuEntry->findData(" " + entry, Qt::UserRole, Qt::MatchEndsWith));
             } else if (entry == QLatin1String("saved")) {
                 ui->checkSaveDefault->setChecked(true);
-                // If not saved but still long word assume it's a menuendtry_id or menuentry_name
-            } else if (entry.length() > 3) {
-                int index = ui->comboMenuEntry->findData(entry, Qt::UserRole, Qt::MatchContains);
-                if (index != -1) { // menuentry_id
-                    ui->comboMenuEntry->setCurrentIndex(index);
-                } else { // menuentry_name most likely
-                    ui->comboMenuEntry->setCurrentIndex(ui->comboMenuEntry->findText(entry));
-                }
-            } else { // if 1>2 format
-                int index = ui->comboMenuEntry->findData(entry, Qt::UserRole, Qt::MatchEndsWith);
-                if (index != -1) {
-                    ui->comboMenuEntry->setCurrentIndex(index);
-                } else { // menuentry_name most likely
-                    ui->comboMenuEntry->setCurrentIndex(ui->comboMenuEntry->findText(entry));
-                }
+            } else {
+                int index = entry.length() > 3 ?
+                    ui->comboMenuEntry->findData(entry, Qt::UserRole, Qt::MatchContains) :
+                    ui->comboMenuEntry->findData(entry, Qt::UserRole, Qt::MatchEndsWith);
+
+                ui->comboMenuEntry->setCurrentIndex(index != -1 ? index : ui->comboMenuEntry->findText(entry));
             }
         } else if (line.startsWith("GRUB_TIMEOUT=")) {
             ui->spinBoxTimeout->setValue(line.section("=", 1).remove("\"").remove("'").toInt());
         } else if (line.startsWith("export GRUB_MENU_PICTURE=")) {
-            ui->pushBgFile->setText(line.section("=", 1).remove("\""));
-            ui->pushBgFile->setProperty("file", line.section("=", 1).remove("\""));
+            QString picturePath = line.section("=", 1).remove("\"");
+            ui->pushBgFile->setText(picturePath);
+            ui->pushBgFile->setProperty("file", picturePath);
         } else if (line.startsWith("GRUB_THEME=")) {
-            ui->pushThemeFile->setText(line.section("=", 1).remove("\""));
-            ui->pushThemeFile->setProperty("file", line.section("=", 1).remove("\""));
-            if (QFile::exists(ui->pushThemeFile->property("file").toString())) {
-                ui->pushThemeFile->setEnabled(true);
-                ui->checkGrubTheme->setChecked(true);
-                ui->pushBgFile->setDisabled(true);
-            } else {
-                ui->pushThemeFile->setDisabled(true);
-                ui->pushBgFile->setEnabled(true);
-                ui->pushThemeFile->setText("");
-                ui->pushThemeFile->setProperty("file", "");
-            }
+            QString themePath = line.section("=", 1).remove("\"");
+            ui->pushThemeFile->setText(themePath);
+            ui->pushThemeFile->setProperty("file", themePath);
+            bool themeExists = QFile::exists(themePath);
+            ui->pushThemeFile->setEnabled(themeExists);
+            ui->checkGrubTheme->setChecked(themeExists);
+            ui->pushBgFile->setDisabled(themeExists);
         } else if (line.startsWith("GRUB_CMDLINE_LINUX_DEFAULT=")) {
-            ui->textKernel->setText(line.remove("GRUB_CMDLINE_LINUX_DEFAULT=").remove("\"").remove("'"));
-            if (line.contains("hush")) {
-                ui->radioLimitedMsg->setChecked(true);
-            } else if (line.contains("quiet")) {
-                ui->radioDetailedMsg->setChecked(true);
-            } else {
-                ui->radioVeryDetailedMsg->setChecked(true);
-            }
-            ui->checkBootsplash->setChecked(line.contains("splash"));
-            if (!isInstalled({"plymouth", "plymouth-x11", "plymouth-themes", "plymouth-themes-mx"})) {
-                ui->checkBootsplash->setChecked(false);
-            }
+            QString cmdline = line.remove("GRUB_CMDLINE_LINUX_DEFAULT=").remove("\"").remove("'");
+            ui->textKernel->setText(cmdline);
+            ui->radioLimitedMsg->setChecked(cmdline.contains("hush"));
+            ui->radioDetailedMsg->setChecked(cmdline.contains("quiet"));
+            ui->radioVeryDetailedMsg->setChecked(!cmdline.contains("hush") && !cmdline.contains("quiet"));
+            ui->checkBootsplash->setChecked(cmdline.contains("splash") && isInstalled({"plymouth", "plymouth-x11", "plymouth-themes", "plymouth-themes-mx"}));
         } else if (line.startsWith("GRUB_DISABLE_SUBMENU=")) {
             QString token = line.section("=", 1).remove("\"").remove("'");
-            if (token == "y" || token == "yes" || token == "true") {
-                ui->checkEnableFlatmenus->setChecked(true);
-            } else {
-                ui->checkEnableFlatmenus->setChecked(false);
-            }
+            ui->checkEnableFlatmenus->setChecked(token == "y" || token == "yes" || token == "true");
         }
     }
     file.close();
@@ -775,22 +768,22 @@ void MainWindow::readKernelOpts()
 {
     QFile file("/proc/cmdline");
     if (!file.open(QIODevice::ReadOnly)) {
-        qDebug() << "Could not open file:" << file.fileName();
+        qWarning() << "Failed to open file:" << file.fileName() << "- Error:" << file.errorString();
         return;
     }
-    kernel_options = file.readAll();
+    kernel_options = file.readAll().trimmed();
 }
 
 void MainWindow::cmdStart()
 {
-    setCursor(QCursor(Qt::BusyCursor));
+    setCursor(Qt::BusyCursor);
     bar->setValue(0);
     timer.start(100ms);
 }
 
 void MainWindow::cmdDone()
 {
-    setCursor(QCursor(Qt::ArrowCursor));
+    setCursor(Qt::ArrowCursor);
     bar->setValue(bar->maximum());
     timer.stop();
 }
@@ -814,18 +807,20 @@ void MainWindow::pushApply_clicked()
 {
     ui->pushCancel->setDisabled(true);
     ui->pushApply->setDisabled(true);
+
     auto *progress = new QProgressDialog(this);
     bar = new QProgressBar(progress);
 
     progress->setWindowModality(Qt::WindowModal);
-    progress->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowSystemMenuHint
-                             | Qt::WindowStaysOnTopHint);
+    progress->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint |
+                             Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint);
     progress->setCancelButton(nullptr);
     progress->setWindowTitle(tr("Updating configuration, please wait"));
     progress->setBar(bar);
     bar->setTextVisible(false);
     progress->resize(500, progress->height());
     progress->show();
+
     setConnections();
 
     if (kernel_options_changed) {
@@ -833,18 +828,22 @@ void MainWindow::pushApply_clicked()
     }
 
     if (options_changed) {
-        cmd.runAsRoot("grub-editenv /boot/grub/grubenv unset next_entry"); // uset the saved entry from grubenv
-        if (ui->pushBgFile->isEnabled() && QFile::exists(ui->pushBgFile->property("file").toString())) {
-            if (!replaceGrubArg("export GRUB_MENU_PICTURE",
-                                "\"" + ui->pushBgFile->property("file").toString() + "\"")) {
-                addGrubLine("export GRUB_MENU_PICTURE=\"" + ui->pushBgFile->property("file").toString() + "\"");
+        cmd.runAsRoot("grub-editenv /boot/grub/grubenv unset next_entry"); // unset the saved entry from grubenv
+
+        const QString bgFilePath = ui->pushBgFile->property("file").toString();
+        const QString themeFilePath = ui->pushThemeFile->property("file").toString();
+
+        if (ui->pushBgFile->isEnabled() && QFile::exists(bgFilePath)) {
+            if (!replaceGrubArg("export GRUB_MENU_PICTURE", "\"" + bgFilePath + "\"")) {
+                addGrubLine("export GRUB_MENU_PICTURE=\"" + bgFilePath + "\"");
             }
-        } else if (ui->checkGrubTheme->isChecked() && QFile::exists(ui->pushThemeFile->property("file").toString())) {
+        } else if (ui->checkGrubTheme->isChecked() && QFile::exists(themeFilePath)) {
             disableGrubLine("export GRUB_MENU_PICTURE");
-            if (!replaceGrubArg("GRUB_THEME", "\"" + ui->pushThemeFile->property("file").toString() + "\"")) {
-                addGrubLine("GRUB_THEME=\"" + ui->pushThemeFile->property("file").toString() + "\"");
+            if (!replaceGrubArg("GRUB_THEME", "\"" + themeFilePath + "\"")) {
+                addGrubLine("GRUB_THEME=\"" + themeFilePath + "\"");
             }
         }
+
         if (ui->checkGrubTheme->isVisible() && !ui->checkGrubTheme->isChecked()) {
             disableGrubLine("GRUB_THEME=");
         }
@@ -853,12 +852,14 @@ void MainWindow::pushApply_clicked()
         QString grub_entry = ui->checkEnableFlatmenus->isChecked()
                                  ? QString::number(ui->comboMenuEntry->currentIndex())
                                  : ui->comboMenuEntry->currentData().toString().section(' ', 1, 1);
+
         if (ui->comboMenuEntry->currentText().contains(QLatin1String("memtest"))) {
             ui->spinBoxTimeout->setValue(5);
             cmd.runAsRoot(chroot + "grub-reboot \"" + ui->comboMenuEntry->currentText() + '"');
         } else {
             replaceGrubArg("GRUB_DEFAULT", "\"" + grub_entry + '"');
         }
+
         if (ui->checkSaveDefault->isChecked()) {
             replaceGrubArg("GRUB_DEFAULT", "saved");
             enableGrubLine("GRUB_SAVEDEFAULT=true");
@@ -866,8 +867,10 @@ void MainWindow::pushApply_clicked()
         } else {
             disableGrubLine("GRUB_SAVEDEFAULT=true");
         }
+
         replaceGrubArg("GRUB_TIMEOUT", QString::number(ui->spinBoxTimeout->value()));
     }
+
     if (splash_changed) {
         if (ui->checkBootsplash->isChecked()) {
             if (!ui->comboTheme->currentText().isEmpty()) {
@@ -880,12 +883,13 @@ void MainWindow::pushApply_clicked()
         progress->setLabelText(tr("Updating initramfs..."));
         cmd.runAsRoot(chroot + "update-initramfs -u -k all");
     }
+
     if (messages_changed && ui->radioLimitedMsg->isChecked()) {
-        cmd.runAsRoot(chroot
-                      + "grep -q hush /etc/default/rcS || echo \"\n# hush boot-log into /run/rc.log\n"
+        cmd.runAsRoot(chroot + "grep -q hush /etc/default/rcS || echo \"\n# hush boot-log into /run/rc.log\n"
                         "[ \\\"\\$init\\\" ] && grep -qw hush /proc/cmdline && exec >> /run/rc.log 2>&1 || true \" >> "
                         "/etc/default/rcS");
     }
+
     if (options_changed || splash_changed || messages_changed) {
         if (grub_installed) {
             writeDefaultGrub();
@@ -895,6 +899,8 @@ void MainWindow::pushApply_clicked()
         progress->close();
         QMessageBox::information(this, tr("Done"), tr("Changes have been successfully applied."));
     }
+
+    // Reset change flags
     options_changed = false;
     splash_changed = false;
     messages_changed = false;
@@ -938,6 +944,7 @@ void MainWindow::pushHelp_clicked()
 void MainWindow::combo_bootsplash_clicked(bool checked)
 {
     ui->radioLimitedMsg->setVisible(!checked);
+
     if (checked) {
         if (inVirtualMachine()) {
             QMessageBox::information(
@@ -946,11 +953,13 @@ void MainWindow::combo_bootsplash_clicked(bool checked)
                    "Plymouth bootsplash will work in a limited way, you also won't be able to preview the theme"));
             // ui->pushPreview->setDisabled(true);
         }
-        if (!isInstalled({"plymouth", "plymouth-x11", "plymouth-themes", "plymouth-themes-mx"})) {
-            int ans = QMessageBox::question(this, tr("Plymouth packages not installed"),
+
+        const QStringList requiredPackages = {"plymouth", "plymouth-x11", "plymouth-themes", "plymouth-themes-mx"};
+        if (!isInstalled(requiredPackages)) {
+           int response = QMessageBox::question(this, tr("Plymouth packages not installed"),
                                             tr("Plymouth packages are not currently installed.\nOK to go ahead and "
                                                "install them?"));
-            if (ans == QMessageBox::No) {
+            if (response == QMessageBox::No) {
                 ui->checkBootsplash->setChecked(false);
                 ui->radioLimitedMsg->setVisible(!checked);
                 return;
@@ -964,15 +973,16 @@ void MainWindow::combo_bootsplash_clicked(bool checked)
             ui->radioDetailedMsg->setChecked(true);
         }
     }
+
     splash_changed = true;
     ui->pushApply->setEnabled(true);
 }
 
 void MainWindow::btn_bg_file_clicked()
 {
-    QString selected = QFileDialog::getOpenFileName(this, QObject::tr("Select image to display in bootloader"),
-                                                    chroot.section(' ', 1, 1) + "/usr/share/backgrounds/MXLinux/grub",
-                                                    tr("Images (*.png *.jpg *.jpeg *.tga)"));
+    QString initialPath = chroot.isEmpty() ? "/usr/share/backgrounds/MXLinux/grub" : chroot.section(' ', 1, 1) + "/usr/share/backgrounds/MXLinux/grub";
+    QString selected = QFileDialog::getOpenFileName(this, tr("Select image to display in bootloader"), initialPath, tr("Images (*.png *.jpg *.jpeg *.tga)"));
+
     if (!selected.isEmpty()) {
         if (!chroot.isEmpty()) {
             selected.remove(chroot.section(' ', 1, 1));
@@ -989,13 +999,12 @@ void MainWindow::radio_detailed_msg_toggled(bool checked)
     if (checked) {
         messages_changed = true;
         ui->pushApply->setEnabled(true);
+
         QString line = ui->textKernel->text();
         if (!line.contains(QLatin1String("quiet"))) {
-            if (!line.isEmpty()) {
-                line.append(' ');
-            }
-            line.append("quiet");
+            line.append(line.isEmpty() ? "quiet" : " quiet");
         }
+
         line.remove(QRegularExpression("\\s*hush"));
         ui->textKernel->setText(line.trimmed());
     }
@@ -1006,9 +1015,9 @@ void MainWindow::radio_very_detailed_msg_toggled(bool checked)
     if (checked) {
         messages_changed = true;
         ui->pushApply->setEnabled(true);
+
         QString line = ui->textKernel->text();
-        line.remove(QRegularExpression("\\s*quiet"));
-        line.remove(QRegularExpression("\\s*hush"));
+        line.remove(QRegularExpression("\\s*quiet|\\s*hush"));
         ui->textKernel->setText(line.trimmed());
     }
 }
@@ -1018,20 +1027,25 @@ void MainWindow::radio_limited_msg_toggled(bool checked)
     if (checked) {
         messages_changed = true;
         ui->pushApply->setEnabled(true);
+
         QString line = ui->textKernel->text();
+        QStringList options;
+
         if (!line.contains(QLatin1String("quiet"))) {
-            if (!line.isEmpty()) {
-                line.append(' ');
-            }
-            line.append("quiet");
+            options << "quiet";
         }
         if (!line.contains(QLatin1String("hush"))) {
-            if (!line.endsWith(' ')) {
+            options << "hush";
+        }
+
+        if (!options.isEmpty()) {
+            if (!line.isEmpty() && !line.endsWith(' ')) {
                 line.append(' ');
             }
-            line.append("hush");
+            line.append(options.join(' '));
         }
-        ui->textKernel->setText(line);
+
+        ui->textKernel->setText(line.trimmed());
     }
 }
 
@@ -1052,50 +1066,56 @@ void MainWindow::combo_bootsplash_toggled(bool checked)
 {
     ui->comboTheme->setEnabled(checked);
     ui->pushPreview->setEnabled(checked);
+
     QString line = ui->textKernel->text();
     if (checked) {
         loadPlymouthThemes();
         if (!line.contains(QLatin1String("splash"))) {
-            if (!line.isEmpty()) {
-                line.append(" ");
-            }
-            line.append("splash");
+            line.append(line.isEmpty() ? "splash" : " splash");
         }
     } else {
         ui->comboTheme->clear();
         ui->pushPreview->setDisabled(true);
         line.remove(QRegularExpression("\\s*splash"));
     }
+
     ui->textKernel->setText(line.trimmed());
     kernel_options_changed = true;
 }
 
 void MainWindow::pushLog_clicked()
 {
-    QString location = "/var/log/boot.log";
-    if (kernel_options.contains(QLatin1String("hush"))) {
-        location = "/run/rc.log";
-    }
-    if (!QFile::exists(location)) { // try aternate location
+    QString location = kernel_options.contains("hush") ? "/run/rc.log" : "/var/log/boot.log";
+
+    // Check for alternate log location if the primary one doesn't exist
+    if (!QFile::exists(location)) {
         location = "/var/log/boot";
     }
+
     if (QFile::exists(location)) {
-        QString sed = R"(sed 's/\x1b\[?([0-9]{1,2}(;[0-9]{1,2})*)?m?//g; s/\r//;')"; // Remove formatting escape char
-        QString log = cmd.getOutAsRoot(sed + " " + location);
-        QDialog customDialog;
-        customDialog.setWindowTitle(tr("Boot log"));
-        auto *textEdit = new QPlainTextEdit(&customDialog);
+        // Prepare command to remove formatting escape characters
+        QString sedCommand = R"(sed 's/\x1b\[?([0-9]{1,2}(;[0-9]{1,2})*)?m?//g; s/\r//;')";
+        QString logContent = cmd.getOutAsRoot(sedCommand + " " + location);
+
+        // Create and configure the dialog to display the log
+        QDialog logDialog;
+        logDialog.setWindowTitle(tr("Boot Log"));
+
+        auto *textEdit = new QPlainTextEdit(&logDialog);
         textEdit->setReadOnly(true);
         textEdit->setMinimumSize(600, 500);
-        textEdit->setPlainText(log);
-        auto *closeButton = new QPushButton(tr("&Close"), &customDialog);
-        auto *layout = new QVBoxLayout(&customDialog);
+        textEdit->setPlainText(logContent);
+
+        auto *closeButton = new QPushButton(tr("&Close"), &logDialog);
+        connect(closeButton, &QPushButton::clicked, &logDialog, &QDialog::accept);
+
+        auto *layout = new QVBoxLayout(&logDialog);
         layout->addWidget(textEdit);
         layout->addWidget(closeButton);
-        QObject::connect(closeButton, &QPushButton::clicked, &customDialog, &QDialog::accept);
-        customDialog.setModal(true);
-        customDialog.setSizeGripEnabled(true);
-        customDialog.exec();
+
+        logDialog.setModal(true);
+        logDialog.setSizeGripEnabled(true);
+        logDialog.exec();
     } else {
         QMessageBox::critical(this, tr("Log not found"), tr("Could not find log at ") + location);
     }
@@ -1111,28 +1131,28 @@ void MainWindow::pushUefi_clicked()
                                     "- Items are listed in the boot order.\n"
                                     "- Grayed out lines are inactive."),
                                  uefiDialog);
-    auto *pushActive = new QPushButton(tr("Set ac&tive"), uefiDialog);
-    auto *pushAddEntry = new QPushButton(tr("&Add entry"), uefiDialog);
-    auto *pushBootNext = new QPushButton(tr("Boot &next"), uefiDialog);
-    auto *pushCancel = new QPushButton(tr("&Close"), uefiDialog);
-    auto *pushDown = new QPushButton(tr("Move &down"), uefiDialog);
-    auto *pushRemove = new QPushButton(tr("&Remove entry"), uefiDialog);
-    auto *pushResetNext = new QPushButton(tr("Re&set next"), uefiDialog);
-    auto *pushTimeout = new QPushButton(tr("Change &timeout"), uefiDialog);
-    auto *pushUp = new QPushButton(tr("Move &up"), uefiDialog);
+
+    auto createButton = [&](const QString &text, const QString &iconName) {
+        auto *button = new QPushButton(text, uefiDialog);
+        button->setIcon(QIcon::fromTheme(iconName));
+        return button;
+    };
+
+    auto *pushActive = createButton(tr("Set ac&tive"), "star-on");
+    auto *pushAddEntry = createButton(tr("&Add entry"), "list-add");
+    auto *pushBootNext = createButton(tr("Boot &next"), "go-next");
+    auto *pushCancel = createButton(tr("&Close"), "window-close");
+    auto *pushDown = createButton(tr("Move &down"), "arrow-down");
+    auto *pushRemove = createButton(tr("&Remove entry"), "trash-empty");
+    auto *pushResetNext = createButton(tr("Re&set next"), "edit-undo");
+    auto *pushTimeout = createButton(tr("Change &timeout"), "timer-symbolic");
+    auto *pushUp = createButton(tr("Move &up"), "arrow-up");
+
     auto *spacer = new QSpacerItem(0, 0, QSizePolicy::Fixed, QSizePolicy::Expanding);
     auto *textBootCurrent = new QLabel(uefiDialog);
     auto *textBootNext = new QLabel(tr("Boot Next: %1").arg(tr("not set, will boot using list order")), uefiDialog);
     auto *textTimeout = new QLabel(tr("Timeout: %1 seconds").arg("0"), uefiDialog);
     listEntries->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    pushAddEntry->setIcon(QIcon::fromTheme("list-add"));
-    pushCancel->setIcon(QIcon::fromTheme("window-close"));
-    pushDown->setIcon(QIcon::fromTheme("arrow-down"));
-    pushRemove->setIcon(QIcon::fromTheme("trash-empty"));
-    pushResetNext->setIcon(QIcon::fromTheme("edit-undo"));
-    pushBootNext->setIcon(QIcon::fromTheme("go-next"));
-    pushTimeout->setIcon(QIcon::fromTheme("timer-symbolic"));
-    pushUp->setIcon(QIcon::fromTheme("arrow-up"));
 
     QStringList bootorder;
     connect(pushCancel, &QPushButton::clicked, uefiDialog, &QDialog::close);
@@ -1218,10 +1238,12 @@ void MainWindow::push_preview_clicked()
             this, tr("Needs reboot"),
             tr("Plymouth was just installed, you might need to reboot before being able to display previews"));
     }
+
     QString current_theme = cmd.getOut("/sbin/plymouth-set-default-theme");
     if (ui->comboTheme->currentText() == "details") {
         return;
     }
+
     if (inVirtualMachine()) {
         QMessageBox::information(
             this, tr("Running in a Virtual Machine"),
@@ -1229,6 +1251,7 @@ void MainWindow::push_preview_clicked()
                "Plymouth bootsplash will work in a limited way, you also won't be able to preview the theme"));
     }
     cmd.runAsRoot("/sbin/plymouth-set-default-theme " + ui->comboTheme->currentText());
+
     QTimer tick;
     tick.start(100ms);
     connect(&tick, &QTimer::timeout, this, &MainWindow::sendMouseEvents);
@@ -1243,8 +1266,8 @@ void MainWindow::combo_enable_flatmenus_clicked(bool checked)
     bar = new QProgressBar(progress);
 
     progress->setWindowModality(Qt::WindowModal);
-    progress->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowSystemMenuHint
-                             | Qt::WindowStaysOnTopHint);
+    progress->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint |
+                             Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint);
     progress->setCancelButton(nullptr);
     progress->setWindowTitle(tr("Updating configuration, please wait"));
     progress->setBar(bar);
@@ -1252,10 +1275,12 @@ void MainWindow::combo_enable_flatmenus_clicked(bool checked)
     progress->resize(500, progress->height());
     progress->show();
 
+    // Update GRUB configuration based on the checked state
+    const QString grubLine = "GRUB_DISABLE_SUBMENU=y";
     if (checked) {
-        enableGrubLine("GRUB_DISABLE_SUBMENU=y");
+        enableGrubLine(grubLine);
     } else {
-        disableGrubLine("GRUB_DISABLE_SUBMENU=y");
+        disableGrubLine(grubLine);
     }
 
     writeDefaultGrub();
@@ -1290,8 +1315,9 @@ void MainWindow::combo_grub_theme_toggled(bool checked)
 
 void MainWindow::btn_theme_file_clicked()
 {
-    QString selected = QFileDialog::getOpenFileName(this, QObject::tr("Select GRUB theme"),
-                                                    chroot.section(' ', 1, 1) + "/boot/grub/themes", "*.txt;; *.*");
+    QString themeDirectory = chroot.section(' ', 1, 1) + "/boot/grub/themes";
+    QString selected = QFileDialog::getOpenFileName(this, tr("Select GRUB theme"), themeDirectory, "*.txt;; *.*");
+
     if (!selected.isEmpty()) {
         if (!chroot.isEmpty()) {
             selected.remove(chroot.section(' ', 1, 1));
