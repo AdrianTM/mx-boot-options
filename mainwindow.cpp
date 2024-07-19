@@ -226,7 +226,8 @@ void MainWindow::setUefiTimeout(QDialog *uefiDialog, QLabel *textTimeout)
 {
     bool ok = false;
     ushort initialTimeout = textTimeout->text().section(' ', 1, 1).toUInt();
-    ushort newTimeout = QInputDialog::getInt(uefiDialog, tr("Set timeout"), tr("Timeout in seconds:"), initialTimeout, 0, 65535, 1, &ok);
+    ushort newTimeout = QInputDialog::getInt(uefiDialog, tr("Set timeout"), tr("Timeout in seconds:"), initialTimeout,
+                                             0, 65535, 1, &ok);
 
     if (ok && Cmd().runAsRoot(QString("efibootmgr -t %1").arg(newTimeout))) {
         textTimeout->setText(tr("Timeout: %1 seconds").arg(newTimeout));
@@ -240,8 +241,7 @@ void MainWindow::setUefiBootNext(QListWidget *listEntries, QLabel *textBootNext)
         item.remove(QRegularExpression("^Boot"));
         item.remove(QRegularExpression(R"(\*$)"));
 
-        if (QRegularExpression("^[0-9A-Z]{4}$").match(item).hasMatch() &&
-            Cmd().runAsRoot("efibootmgr -n " + item)) {
+        if (QRegularExpression("^[0-9A-Z]{4}$").match(item).hasMatch() && Cmd().runAsRoot("efibootmgr -n " + item)) {
             textBootNext->setText(tr("Boot Next: %1").arg(item));
         }
     }
@@ -255,8 +255,9 @@ void MainWindow::removeUefiEntry(QListWidget *listEntries, QDialog *uefiDialog)
     }
 
     QString itemText = currentItem->text();
-    if (QMessageBox::Yes != QMessageBox::question(uefiDialog, tr("Removal confirmation"),
-                                                  tr("Are you sure you want to delete this boot entry?\n%1").arg(itemText))) {
+    if (QMessageBox::Yes
+        != QMessageBox::question(uefiDialog, tr("Removal confirmation"),
+                                 tr("Are you sure you want to delete this boot entry?\n%1").arg(itemText))) {
         return;
     }
 
@@ -325,9 +326,10 @@ bool MainWindow::isUefi()
 void MainWindow::addUefiEntry(QListWidget *listEntries, QDialog *dialogUefi)
 {
     // Mount all ESPs
-    QStringList mountList = cmd.getOutAsRoot(
-        "lsblk -no PATH,PARTTYPE | grep -iE 'c12a7328-f81f-11d2-ba4b-00a0c93ec93b|0xef' | cut -d' ' -f1"
-    ).split("\n");
+    QStringList mountList
+        = cmd.getOutAsRoot(
+                 "lsblk -no PATH,PARTTYPE | grep -iE 'c12a7328-f81f-11d2-ba4b-00a0c93ec93b|0xef' | cut -d' ' -f1")
+              .split("\n");
 
     for (const auto &mountPoint : qAsConst(mountList)) {
         if (QProcess::execute("findmnt", {"-n", mountPoint}) != 0) {
@@ -338,7 +340,8 @@ void MainWindow::addUefiEntry(QListWidget *listEntries, QDialog *dialogUefi)
     }
 
     QString initialPath = QFile::exists("/boot/efi/EFI") ? "/boot/efi/EFI" : "/boot/efi/";
-    QString fileName = QFileDialog::getOpenFileName(dialogUefi, tr("Select EFI file"), initialPath, tr("EFI files (*.efi *.EFI)"));
+    QString fileName
+        = QFileDialog::getOpenFileName(dialogUefi, tr("Select EFI file"), initialPath, tr("EFI files (*.efi *.EFI)"));
 
     if (!QFile::exists(fileName)) {
         unmountAndClean(mountList);
@@ -350,8 +353,7 @@ void MainWindow::addUefiEntry(QListWidget *listEntries, QDialog *dialogUefi)
     QString partition = partitionName.mid(partitionName.lastIndexOf(QRegularExpression("[0-9]+$")));
 
     if (cmd.exitCode() != 0) {
-        QMessageBox::critical(dialogUefi, tr("Error"),
-                              tr("Could not find the source mountpoint for %1").arg(fileName));
+        QMessageBox::critical(dialogUefi, tr("Error"), tr("Could not find the source mountpoint for %1").arg(fileName));
         unmountAndClean(mountList);
         return;
     }
@@ -383,8 +385,8 @@ bool MainWindow::installSplash()
 
     const QStringList packages = {"plymouth", "plymouth-x11", "plymouth-themes", "plymouth-themes-mx"};
     progress->setWindowModality(Qt::WindowModal);
-    progress->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint |
-                             Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint);
+    progress->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowSystemMenuHint
+                             | Qt::WindowStaysOnTopHint);
     progress->setCancelButton(nullptr);
     progress->setWindowTitle(tr("Installing bootsplash, please wait"));
     progress->setBar(bar);
@@ -468,7 +470,8 @@ QStringList MainWindow::getLinuxPartitions()
         QString partName = part_info.section(' ', 0, 0);
         QString partType = cmd.getOutAsRoot("lsblk -ln -o PARTTYPE /dev/" + partName).trimmed();
 
-        if (partType.contains(QRegularExpression(R"(0x83|0fc63daf-8483-4772-8e79-3d69d8477de4|44479540-F297-41B2-9AF7-D131D5F0458A|4F68BCE3-E8CD-4DB1-96E7-FBCAF984B709)"))) {
+        if (partType.contains(QRegularExpression(
+                R"(0x83|0fc63daf-8483-4772-8e79-3d69d8477de4|44479540-F297-41B2-9AF7-D131D5F0458A|4F68BCE3-E8CD-4DB1-96E7-FBCAF984B709)"))) {
             validPartitions << part_info;
         }
     }
@@ -564,15 +567,14 @@ void MainWindow::createChrootEnv(const QString &root)
     }
 
     // Prepare the mount command
-    QString cmd_str = QStringLiteral(
-        "/bin/mount /dev/%1 %2 && "
-        "/bin/mount --rbind --make-rslave /dev %2/dev && "
-        "/bin/mount --rbind --make-rslave /sys %2/sys && "
-        "/bin/mount --rbind /proc %2/proc && "
-        "/bin/mount -t tmpfs -o size=100m,nodev,mode=755 tmpfs %2/run && "
-        "/bin/mkdir -p %2/run/udev && "
-        "/bin/mount --rbind /run/udev %2/run/udev"
-    ).arg(root, tmpdir.path());
+    QString cmd_str = QStringLiteral("/bin/mount /dev/%1 %2 && "
+                                     "/bin/mount --rbind --make-rslave /dev %2/dev && "
+                                     "/bin/mount --rbind --make-rslave /sys %2/sys && "
+                                     "/bin/mount --rbind /proc %2/proc && "
+                                     "/bin/mount -t tmpfs -o size=100m,nodev,mode=755 tmpfs %2/run && "
+                                     "/bin/mkdir -p %2/run/udev && "
+                                     "/bin/mount --rbind /run/udev %2/run/udev")
+                          .arg(root, tmpdir.path());
 
     // Execute the mount command and handle failure
     if (!cmd.runAsRoot(cmd_str)) {
@@ -654,7 +656,7 @@ bool MainWindow::replaceGrubArg(const QString &key, const QString &item)
     }
 
     default_grub = new_list; // Update the default_grub list
-    return replaced; // Return whether a replacement occurred
+    return replaced;         // Return whether a replacement occurred
 }
 
 void MainWindow::readGrubCfg()
@@ -723,14 +725,15 @@ void MainWindow::readDefaultGrub()
             int number = entry.toInt(&ok);
 
             if (ok) {
-                ui->comboMenuEntry->setCurrentIndex(ui->checkEnableFlatmenus->isChecked() ? number :
-                    ui->comboMenuEntry->findData(" " + entry, Qt::UserRole, Qt::MatchEndsWith));
+                ui->comboMenuEntry->setCurrentIndex(
+                    ui->checkEnableFlatmenus->isChecked()
+                        ? number
+                        : ui->comboMenuEntry->findData(" " + entry, Qt::UserRole, Qt::MatchEndsWith));
             } else if (entry == QLatin1String("saved")) {
                 ui->checkSaveDefault->setChecked(true);
             } else {
-                int index = entry.length() > 3 ?
-                    ui->comboMenuEntry->findData(entry, Qt::UserRole, Qt::MatchContains) :
-                    ui->comboMenuEntry->findData(entry, Qt::UserRole, Qt::MatchEndsWith);
+                int index = entry.length() > 3 ? ui->comboMenuEntry->findData(entry, Qt::UserRole, Qt::MatchContains)
+                                               : ui->comboMenuEntry->findData(entry, Qt::UserRole, Qt::MatchEndsWith);
 
                 ui->comboMenuEntry->setCurrentIndex(index != -1 ? index : ui->comboMenuEntry->findText(entry));
             }
@@ -754,7 +757,9 @@ void MainWindow::readDefaultGrub()
             ui->radioLimitedMsg->setChecked(cmdline.contains("hush"));
             ui->radioDetailedMsg->setChecked(cmdline.contains("quiet"));
             ui->radioVeryDetailedMsg->setChecked(!cmdline.contains("hush") && !cmdline.contains("quiet"));
-            ui->checkBootsplash->setChecked(cmdline.contains("splash") && isInstalled({"plymouth", "plymouth-x11", "plymouth-themes", "plymouth-themes-mx"}));
+            ui->checkBootsplash->setChecked(
+                cmdline.contains("splash")
+                && isInstalled({"plymouth", "plymouth-x11", "plymouth-themes", "plymouth-themes-mx"}));
         } else if (line.startsWith("GRUB_DISABLE_SUBMENU=")) {
             QString token = line.section("=", 1).remove("\"").remove("'");
             ui->checkEnableFlatmenus->setChecked(token == "y" || token == "yes" || token == "true");
@@ -812,8 +817,8 @@ void MainWindow::pushApply_clicked()
     bar = new QProgressBar(progress);
 
     progress->setWindowModality(Qt::WindowModal);
-    progress->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint |
-                             Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint);
+    progress->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowSystemMenuHint
+                             | Qt::WindowStaysOnTopHint);
     progress->setCancelButton(nullptr);
     progress->setWindowTitle(tr("Updating configuration, please wait"));
     progress->setBar(bar);
@@ -885,7 +890,8 @@ void MainWindow::pushApply_clicked()
     }
 
     if (messages_changed && ui->radioLimitedMsg->isChecked()) {
-        cmd.runAsRoot(chroot + "grep -q hush /etc/default/rcS || echo \"\n# hush boot-log into /run/rc.log\n"
+        cmd.runAsRoot(chroot
+                      + "grep -q hush /etc/default/rcS || echo \"\n# hush boot-log into /run/rc.log\n"
                         "[ \\\"\\$init\\\" ] && grep -qw hush /proc/cmdline && exec >> /run/rc.log 2>&1 || true \" >> "
                         "/etc/default/rcS");
     }
@@ -956,9 +962,10 @@ void MainWindow::combo_bootsplash_clicked(bool checked)
 
         const QStringList requiredPackages = {"plymouth", "plymouth-x11", "plymouth-themes", "plymouth-themes-mx"};
         if (!isInstalled(requiredPackages)) {
-           int response = QMessageBox::question(this, tr("Plymouth packages not installed"),
-                                            tr("Plymouth packages are not currently installed.\nOK to go ahead and "
-                                               "install them?"));
+            int response
+                = QMessageBox::question(this, tr("Plymouth packages not installed"),
+                                        tr("Plymouth packages are not currently installed.\nOK to go ahead and "
+                                           "install them?"));
             if (response == QMessageBox::No) {
                 ui->checkBootsplash->setChecked(false);
                 ui->radioLimitedMsg->setVisible(!checked);
@@ -980,8 +987,10 @@ void MainWindow::combo_bootsplash_clicked(bool checked)
 
 void MainWindow::btn_bg_file_clicked()
 {
-    QString initialPath = chroot.isEmpty() ? "/usr/share/backgrounds/MXLinux/grub" : chroot.section(' ', 1, 1) + "/usr/share/backgrounds/MXLinux/grub";
-    QString selected = QFileDialog::getOpenFileName(this, tr("Select image to display in bootloader"), initialPath, tr("Images (*.png *.jpg *.jpeg *.tga)"));
+    QString initialPath = chroot.isEmpty() ? "/usr/share/backgrounds/MXLinux/grub"
+                                           : chroot.section(' ', 1, 1) + "/usr/share/backgrounds/MXLinux/grub";
+    QString selected = QFileDialog::getOpenFileName(this, tr("Select image to display in bootloader"), initialPath,
+                                                    tr("Images (*.png *.jpg *.jpeg *.tga)"));
 
     if (!selected.isEmpty()) {
         if (!chroot.isEmpty()) {
@@ -1266,8 +1275,8 @@ void MainWindow::combo_enable_flatmenus_clicked(bool checked)
     bar = new QProgressBar(progress);
 
     progress->setWindowModality(Qt::WindowModal);
-    progress->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint |
-                             Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint);
+    progress->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowSystemMenuHint
+                             | Qt::WindowStaysOnTopHint);
     progress->setCancelButton(nullptr);
     progress->setWindowTitle(tr("Updating configuration, please wait"));
     progress->setBar(bar);
