@@ -121,7 +121,7 @@ void MainWindow::setup()
     ui->pushThemeFile->setDisabled(true);
 
     // If running live, read Linux partitions and set chroot on the selected one
-    if (cmd.run("mountpoint -q /live/aufs")) {
+    if (live) {
         QString part = selectPartiton(getLinuxPartitions());
         if (!part.isEmpty()) {
             createChrootEnv(part);
@@ -315,6 +315,12 @@ bool MainWindow::isInstalled(const QStringList &packages)
     bool allPackagesInstalled
         = std::all_of(packages.begin(), packages.end(), [&](const QString &package) { return isInstalled(package); });
     return allPackagesInstalled;
+}
+
+// Check if running from a live envoronment
+bool MainWindow::isLive()
+{
+    return QProcess::execute("mountpoint", {"-q", "/live/aufs"}) == 0;
 }
 
 bool MainWindow::isUefi()

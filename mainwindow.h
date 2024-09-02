@@ -87,6 +87,7 @@ private:
     bool messages_changed {};
     bool options_changed {};
     bool splash_changed {};
+    bool live = isLive();
 
     QString chroot;
     QString kernel_options;
@@ -101,6 +102,7 @@ private:
     bool installSplash();
     bool isInstalled(const QString &package);
     bool isInstalled(const QStringList &packages);
+    bool isLive();
     bool replaceGrubArg(const QString &key, const QString &item);
     static bool isUefi();
     static void removeUefiEntry(QListWidget *listEntries, QDialog *uefiDialog);
