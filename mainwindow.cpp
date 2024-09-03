@@ -120,11 +120,23 @@ void MainWindow::setup()
     ui->pushThemeFile->setVisible(grubThemesExist);
     ui->pushThemeFile->setDisabled(true);
 
-    // If running live, read Linux partitions and set chroot on the selected one
+    // If running live, prompt user to choose between changing options for the live system or the installed system
     if (live) {
-        QString part = selectPartiton(getLinuxPartitions());
-        if (!part.isEmpty()) {
-            createChrootEnv(part);
+        QMessageBox msgBox(this);
+        msgBox.setWindowTitle(tr("Live System Detected"));
+        msgBox.setText(tr("You are currently running a live system. Would you like to modify the boot options for the live system "
+                          "or for an installed system?"));
+        QPushButton *liveButton = msgBox.addButton(tr("Live System"), QMessageBox::ActionRole);
+        QPushButton *installedButton = msgBox.addButton(tr("Installed System"), QMessageBox::ActionRole);
+        msgBox.exec();
+
+        if (msgBox.clickedButton() == installedButton) {
+            QString partition = selectPartiton(getLinuxPartitions());
+            if (!partition.isEmpty()) {
+                createChrootEnv(partition);
+            }
+        } else if (msgBox.clickedButton() == liveButton) {
+            boot_location = QFileInfo::exists("/live/config/did-toram") ? "/live/to-ram" : "/live/boot-dev";
         }
     }
 
@@ -665,6 +677,68 @@ bool MainWindow::replaceGrubArg(const QString &key, const QString &item)
     return replaced;         // Return whether a replacement occurred
 }
 
+void MainWindow::replaceSyslinuxArg(const QString &args)
+{
+    const QStringList configFiles
+        = {boot_location + "/boot/syslinux/syslinux.cfg", boot_location + "/boot/isolinux/isolinux.cfg"};
+
+    for (const QString &configFile : configFiles) {
+        QFile file(configFile);
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            qWarning() << "Failed to open" << configFile << "for reading.";
+            continue;
+        }
+
+        QStringList new_list;
+        bool replaced = false;
+
+        while (!file.atEnd()) {
+            QString line = file.readLine().trimmed();
+            if (!kernel_options.isEmpty() && line.contains(kernel_options)) {
+                line.replace(kernel_options, args);
+                replaced = true;
+            } else if (kernel_options.isEmpty() && line.startsWith("APPEND") && !replaced) {
+                QStringList parts = line.split(' ', Qt::SkipEmptyParts);
+                if (parts.size() > 1) {
+                    parts[1] = args;
+                } else {
+                    parts.append(args);
+                }
+                line = parts.join(' ');
+                replaced = true;
+            }
+            new_list << line;
+        }
+
+        file.close();
+
+        if (!replaced) {
+            qWarning() << "No" << (kernel_options.isEmpty() ? "APPEND line" : kernel_options) << "found to replace in"
+                       << configFile << ".";
+            continue;
+        }
+
+        // Write to a temporary file using QTemporaryFile
+        QTemporaryFile tempFile(QDir::tempPath() + "/XXXXXX.tmp");
+        if (!tempFile.open()) {
+            qWarning() << "Failed to open temporary file for writing.";
+            continue;
+        }
+
+        QTextStream stream(&tempFile);
+        stream.setCodec("UTF-8");
+        stream << new_list.join("\n") << "\n";
+        tempFile.flush();
+        tempFile.close();
+
+        // Move the temporary file to the original file
+        QString tempFilePath = tempFile.fileName();
+        if (!cmd.runAsRoot("mv " + tempFilePath + " " + configFile)) {
+            qWarning() << "Failed to move" << tempFilePath << "to" << configFile << ".";
+        }
+    }
+}
+
 void MainWindow::readGrubCfg()
 {
     QStringList content;
@@ -759,7 +833,7 @@ void MainWindow::readDefaultGrub()
             ui->pushBgFile->setDisabled(themeExists);
         } else if (line.startsWith("GRUB_CMDLINE_LINUX_DEFAULT=")) {
             QString cmdline = line.remove("GRUB_CMDLINE_LINUX_DEFAULT=").remove("\"").remove("'");
-            ui->textKernel->setText(cmdline);
+            ui->textKernel->setText(live ? kernel_options : cmdline);
             ui->radioLimitedMsg->setChecked(cmdline.contains("hush"));
             ui->radioDetailedMsg->setChecked(cmdline.contains("quiet"));
             ui->radioVeryDetailedMsg->setChecked(!cmdline.contains("hush") && !cmdline.contains("quiet"));
@@ -775,14 +849,14 @@ void MainWindow::readDefaultGrub()
 }
 
 // Read kernel line and options from /proc/cmdline
-void MainWindow::readKernelOpts()
+QString MainWindow::readKernelOpts()
 {
     QFile file("/proc/cmdline");
     if (!file.open(QIODevice::ReadOnly)) {
         qWarning() << "Failed to open file:" << file.fileName() << "- Error:" << file.errorString();
-        return;
+        return {};
     }
-    kernel_options = file.readAll().trimmed();
+    return file.readAll().trimmed();
 }
 
 void MainWindow::cmdStart()
@@ -836,6 +910,9 @@ void MainWindow::pushApply_clicked()
 
     if (kernel_options_changed) {
         replaceGrubArg("GRUB_CMDLINE_LINUX_DEFAULT", "\"" + ui->textKernel->text() + "\"");
+        if (live) {
+            replaceSyslinuxArg(ui->textKernel->text());
+        }
     }
 
     if (options_changed) {
@@ -907,9 +984,15 @@ void MainWindow::pushApply_clicked()
             writeDefaultGrub();
             progress->setLabelText(tr("Updating grub..."));
             cmd.runAsRoot(chroot + "update-grub");
+            if (live) {
+                cmd.runAsRoot("cp /boot/grub/grub.cfg " + boot_location + "/boot/grub/grub.cfg");
+            }
         }
         progress->close();
-        QMessageBox::information(this, tr("Done"), tr("Changes have been successfully applied."));
+        QString message = live && boot_location == "/live/to-ram"
+            ? tr("You are currently running in live mode with the 'toram' option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.")
+            : tr("Your changes have been successfully applied.");
+        QMessageBox::information(this, tr("Operation Complete"), message);
     }
 
     // Reset change flags

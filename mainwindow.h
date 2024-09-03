@@ -89,13 +89,15 @@ private:
     bool splash_changed {};
     bool live = isLive();
 
+    const QString kernel_options {readKernelOpts()};
+    QString boot_location;
     QString chroot;
-    QString kernel_options;
     QString user;
     QStringList default_grub;
     QStringList grub_cfg;
     QTemporaryDir tmpdir;
 
+    QString readKernelOpts();
     QString selectPartiton(const QStringList &list);
     QStringList getLinuxPartitions();
     bool inVirtualMachine();
@@ -121,7 +123,7 @@ private:
                          QStringList *bootorder);
     void readDefaultGrub();
     void readGrubCfg();
-    void readKernelOpts();
+    void replaceSyslinuxArg(const QString &args);
     void saveBootOrder(const QListWidget *list);
     void setGeneralConnections();
     void setup();

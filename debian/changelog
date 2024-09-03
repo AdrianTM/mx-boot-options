@@ -1,3 +1,10 @@
+mx-boot-options (24.9) mx; urgency=medium
+
+  * When running Live prompt to change live boot options or chroot to an installed system
+  * Change syslinux.cfg and isolinux.cfg when running Live
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 02 Sep 2024 21:10:05 -0400
+
 mx-boot-options (24.6) mx; urgency=medium
 
   * Fix: setting GRUB background photo
