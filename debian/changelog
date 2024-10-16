@@ -1,3 +1,10 @@
+mx-boot-options (24.9+dev) mx; urgency=medium
+
+  * Fix: enable grub-timeout to be changed, even if GRUB_TIMEOUT does
+    not exist within /etc/default/grub
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 16 Oct 2024 17:17:50 -0400
+
 mx-boot-options (24.9) mx; urgency=medium
 
   * When running Live prompt to change live boot options or chroot to an installed system
