@@ -956,7 +956,9 @@ void MainWindow::pushApply_clicked()
             disableGrubLine("GRUB_SAVEDEFAULT=true");
         }
 
-        replaceGrubArg("GRUB_TIMEOUT", QString::number(ui->spinBoxTimeout->value()));
+        if (!replaceGrubArg("GRUB_TIMEOUT", QString::number(ui->spinBoxTimeout->value()))) {
+            addGrubLine("GRUB_TIMEOUT=" + QString::number(ui->spinBoxTimeout->value()));
+        }
     }
 
     if (splash_changed) {
