@@ -435,6 +435,8 @@ void MainWindow::appendLogWithColors(QTextEdit *textEdit, const QString &logCont
                 format.setForeground(Qt::red);
             } else if (value == 32) {
                 format.setForeground(Qt::darkGreen);
+            } else if (value == 33) {
+                format.setForeground(Qt::yellow);
             } else if (value == 39) {
                 format.setForeground(Qt::black);
             }
