@@ -19,7 +19,15 @@
 # **********************************************************************/
 
 QT       += widgets
-CONFIG   += c++17 warn_on
+DEFINES  += QT_DEPRECATED_WARNINGS
+CONFIG   += debug_and_release warn_on strict_c++ c++17
+CONFIG(release, debug|release) {
+    DEFINES += NDEBUG
+    QMAKE_CXXFLAGS += -flto=auto
+    QMAKE_LFLAGS += -flto=auto
+}
+
+QMAKE_CXXFLAGS += -Wpedantic -pedantic  -Werror=return-type -Werror=switch -Werror=uninitialized -Werror=return-local-addr -Werror
 
 TARGET = mx-boot-options
 TEMPLATE = app
