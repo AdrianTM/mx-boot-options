@@ -28,12 +28,10 @@
 #include <QInputDialog>
 #include <QKeyEvent>
 #include <QListWidget>
-#include <QPlainTextEdit>
 #include <QProgressDialog>
 #include <QScreen>
 #include <QStandardPaths>
 #include <QTemporaryFile>
-#include <QTextEdit>
 #include <QTimer>
 
 #include "about.h"
@@ -124,8 +122,9 @@ void MainWindow::setup()
     if (live) {
         QMessageBox msgBox(this);
         msgBox.setWindowTitle(tr("Live System Detected"));
-        msgBox.setText(tr("You are currently running a live system. Would you like to modify the boot options for the live system "
-                          "or for an installed system?"));
+        msgBox.setText(
+            tr("You are currently running a live system. Would you like to modify the boot options for the live system "
+               "or for an installed system?"));
         QPushButton *liveButton = msgBox.addButton(tr("Live System"), QMessageBox::ActionRole);
         QPushButton *installedButton = msgBox.addButton(tr("Installed System"), QMessageBox::ActionRole);
         msgBox.exec();
@@ -394,6 +393,60 @@ void MainWindow::addUefiEntry(QListWidget *listEntries, QDialog *dialogUefi)
     QStringList outList = out.split('\n');
     listEntries->insertItem(0, outList.constLast());
     emit listEntries->itemSelectionChanged();
+}
+
+void MainWindow::appendLogWithColors(QTextEdit *textEdit, const QString &logContent)
+{
+    // Regular expression to match ANSI escape sequences
+    QRegularExpression ansiRegex(R"(\x1B\[(\d+)(;\d+)*m)");
+
+    QTextCursor cursor = textEdit->textCursor();
+    cursor.movePosition(QTextCursor::End);
+
+    int lastPos = 0;
+    QRegularExpressionMatchIterator matches = ansiRegex.globalMatch(logContent);
+
+    QTextCharFormat format;
+    format.setForeground(Qt::black); // Default text color
+
+    while (matches.hasNext()) {
+        QRegularExpressionMatch match = matches.next();
+
+        // Add text before the ANSI sequence
+        int matchStart = match.capturedStart();
+        if (lastPos < matchStart) {
+            cursor.insertText(logContent.mid(lastPos, matchStart - lastPos), format);
+        }
+
+        // Process the ANSI sequence
+        QStringList codes = match.captured(0).mid(2).split(';');
+        for (const QString &code : codes) {
+            QString cleanCode = code;
+            cleanCode.remove(QRegularExpression("[^0-9]")); // Remove non-numeric chars
+            int value = cleanCode.toInt();
+
+            if (value == 0) {
+                // Reset to default
+                format.setForeground(Qt::black);
+                format.setFontWeight(QFont::Normal);
+            } else if (value == 1) {
+                format.setFontWeight(QFont::Bold);
+            } else if (value == 31) {
+                format.setForeground(Qt::red);
+            } else if (value == 32) {
+                format.setForeground(Qt::darkGreen);
+            } else if (value == 39) {
+                format.setForeground(Qt::black);
+            }
+        }
+
+        lastPos = match.capturedEnd();
+    }
+
+    // Add remaining text after the last match
+    if (lastPos < logContent.length()) {
+        cursor.insertText(logContent.mid(lastPos), format);
+    }
 }
 
 bool MainWindow::installSplash()
@@ -992,8 +1045,9 @@ void MainWindow::pushApply_clicked()
         }
         progress->close();
         QString message = live && boot_location == "/live/to-ram"
-            ? tr("You are currently running in live mode with the 'toram' option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.")
-            : tr("Your changes have been successfully applied.");
+                              ? tr("You are currently running in live mode with the 'toram' option. Please remember to "
+                                   "save the persistence file or remaster, otherwise any changes made will be lost.")
+                              : tr("Your changes have been successfully applied.");
         QMessageBox::information(this, tr("Operation Complete"), message);
     }
 
@@ -1194,17 +1248,19 @@ void MainWindow::pushLog_clicked()
 
     if (QFile::exists(location)) {
         // Prepare command to remove formatting escape characters
-        QString sedCommand = R"(sed 's/\x1b\[?([0-9]{1,2}(;[0-9]{1,2})*)?m?//g; s/\r//;')";
-        QString logContent = cmd.getOutAsRoot(sedCommand + " " + location);
+        // QString sedCommand = R"(sed 's/\x1b\[?([0-9]{1,2}(;[0-9]{1,2})*)?m?//g; s/\r//;')";
+
+        QString logContent = cmd.getOutAsRoot("cat " + location);
 
         // Create and configure the dialog to display the log
         QDialog logDialog;
         logDialog.setWindowTitle(tr("Boot Log"));
 
-        auto *textEdit = new QPlainTextEdit(&logDialog);
+        auto *textEdit = new QTextEdit(&logDialog);
         textEdit->setReadOnly(true);
         textEdit->setMinimumSize(600, 500);
-        textEdit->setPlainText(logContent);
+        appendLogWithColors(textEdit, logContent);
+        // textEdit->setPlainText(logContent);
 
         auto *closeButton = new QPushButton(tr("&Close"), &logDialog);
         connect(closeButton, &QPushButton::clicked, &logDialog, &QDialog::accept);

@@ -25,6 +25,7 @@
 #include <QMessageBox>
 #include <QProgressBar>
 #include <QTemporaryDir>
+#include <QTextEdit>
 #include <QTimer>
 
 #include <cmd.h>
@@ -115,6 +116,7 @@ private:
     static void toggleUefiActive(QListWidget *listEntries);
     void addGrubLine(const QString &item);
     void addUefiEntry(QListWidget *listEntries, QDialog *dialogUefi);
+    void appendLogWithColors(QTextEdit *textEdit, const QString &logContent);
     void createChrootEnv(const QString &root);
     void disableGrubLine(const QString &item);
     void enableGrubLine(const QString &item);
