@@ -538,13 +538,14 @@ QStringList MainWindow::getLinuxPartitions()
                            "grep -E '^x?[h,s,v].[a-z][0-9]|^mmcblk[0-9]+p|^nvme[0-9]+n[0-9]+p'")
               .split('\n', Qt::SkipEmptyParts);
     QStringList validPartitions;
+    validPartitions.reserve(partitions.size());
     qDebug() << "PARTITIONS" << partitions;
     for (const QString &part_info : partitions) {
         QString partName = part_info.section(' ', 0, 0);
-        QString partType = cmd.getOutAsRoot("lsblk -ln -o PARTTYPE /dev/" + partName).trimmed();
+        QString partType = cmd.getOutAsRoot("lsblk -ln -o PARTTYPE /dev/" + partName).trimmed().toLower();
 
         if (partType.contains(QRegularExpression(
-                R"(0x83|0fc63daf-8483-4772-8e79-3d69d8477de4|44479540-F297-41B2-9AF7-D131D5F0458A|4F68BCE3-E8CD-4DB1-96E7-FBCAF984B709)"))) {
+                R"(0x83|0fc63daf-8483-4772-8e79-3d69d8477de4|44479540-f297-41b2-9af7-d131d5f0458a|4f68bce3-e8cd-4db1-96e7-fbcaf984b709|ca7d7ccb-63ed-4c53-861c-1742536059cc)"))) {
             validPartitions << part_info;
         }
     }
