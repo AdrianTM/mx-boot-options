@@ -25,9 +25,11 @@ CONFIG(release, debug|release) {
     DEFINES += NDEBUG
     QMAKE_CXXFLAGS += -flto=auto
     QMAKE_LFLAGS += -flto=auto
+    QMAKE_CXXFLAGS_RELEASE = -O3
 }
 
-QMAKE_CXXFLAGS += -Wpedantic -pedantic  -Werror=return-type -Werror=switch -Werror=uninitialized -Werror=return-local-addr -Werror
+QMAKE_CXXFLAGS += -Wpedantic -pedantic -Werror=return-type -Werror=switch
+QMAKE_CXXFLAGS += -Werror=uninitialized -Werror=return-local-addr -Werror
 
 TARGET = mx-boot-options
 TEMPLATE = app
