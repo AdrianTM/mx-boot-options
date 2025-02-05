@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en_US">
+<TS version="2.1" language="hi">
 <context>
     <name>CustomDialog</name>
     <message>
         <location filename="../dialog.cpp" line="16"/>
         <source>Live environment detected. Please select the root partition of the
  system you want to modify (only Linux partitions are displayed)</source>
-        <translation type="unfinished"></translation>
+        <translation>लाइव वातावरण की पहचान सफल। परिवर्तन हेतु इच्छित सिस्टम का
+रुट विभाजन चुनें (केवल लिनक्स विभाजन ही प्रदर्शित हैं)</translation>
     </message>
     <message>
         <location filename="../dialog.cpp" line="22"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>ठीक है</translation>
     </message>
     <message>
         <location filename="../dialog.cpp" line="23"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>रद्द करें</translation>
     </message>
 </context>
 <context>
@@ -25,52 +26,52 @@
     <message>
         <location filename="../mainwindow.ui" line="33"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>विकल्प</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="39"/>
         <source>Use simplified menu structure without submenus</source>
-        <translation type="unfinished"></translation>
+        <translation>उप-मेन्यू रहित सरल मेन्यू उपयोग करें</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="42"/>
         <source>Use flat menus (no submenus)</source>
-        <translation type="unfinished"></translation>
+        <translation>सपाट मेन्यू उपयोग करें (उप-मेन्यू निष्क्रिय)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="55"/>
         <source>Boot to</source>
-        <translation type="unfinished"></translation>
+        <translation>इसमें बूट करें</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="78"/>
         <source>Set to &apos;0&apos; to boot immediately without displaying the menu, or to &apos;-1&apos; to wait indefinitely</source>
-        <translation type="unfinished"></translation>
+        <translation>बिना मेन्यू प्रदर्शित करें तुरंत बूट हेतु मापदंड &apos;0&apos; सेट करें या सदैव प्रतीक्षा करने हेतु &apos;-1&apos; सेट करें</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="81"/>
         <source>Menu timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>मेन्यू प्रदर्शन समय</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="104"/>
         <source>Kernel parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>कर्नेल मापदंड</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="117"/>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>सेकंड</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="124"/>
         <source>With this option enabled whatever entry you select from the grub boot menu will be saved as the new default for future boots</source>
-        <translation type="unfinished"></translation>
+        <translation>यह विकल्प सक्रिय होने पर आप द्वारा Grub बूट मेन्यू से चयनित प्रविष्टि आगामी बूट हेतु नवीन डिफ़ॉल्ट के रूप में संचित होगी</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="127"/>
         <source>Enable saving last boot choice</source>
-        <translation type="unfinished"></translation>
+        <translation>अंतिम चयनित बूट संचय सक्रिय</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="134"/>
@@ -80,108 +81,108 @@
     <message>
         <location filename="../mainwindow.ui" line="150"/>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation>बैकग्राउंड</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="168"/>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>चित्र</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="181"/>
         <location filename="../mainwindow.ui" line="283"/>
         <source>Enable theme</source>
-        <translation type="unfinished"></translation>
+        <translation>थीम सक्रिय</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="261"/>
         <source>Splash</source>
-        <translation type="unfinished"></translation>
+        <translation>स्प्लैश चिन्ह</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="296"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>अवलोकन</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="319"/>
         <source>Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>संदेश</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="325"/>
         <source>Very detailed</source>
-        <translation type="unfinished"></translation>
+        <translation>अत्यधिक विवरण युक्त</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="332"/>
         <source>Detailed (default setting)</source>
-        <translation type="unfinished"></translation>
+        <translation>विवरण युक्त (डिफ़ॉल्ट सेटिंग)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="342"/>
         <source>Limited</source>
-        <translation type="unfinished"></translation>
+        <translation>सीमित</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="358"/>
         <source>Display log</source>
-        <translation type="unfinished"></translation>
+        <translation>लॉग प्रदर्शित करें</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="411"/>
         <source>Display help </source>
-        <translation type="unfinished"></translation>
+        <translation>सहायता देखें</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="414"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>सहायता</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="421"/>
         <source>Alt+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+H</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="453"/>
         <source>About this application</source>
-        <translation type="unfinished"></translation>
+        <translation>इस अनुप्रयोग के बारे में</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="456"/>
         <source>About...</source>
-        <translation type="unfinished"></translation>
+        <translation>बारे में...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="463"/>
         <source>Alt+B</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+B</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="498"/>
         <source>Quit application</source>
-        <translation type="unfinished"></translation>
+        <translation>अनुप्रयोग बंद करें</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="501"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>बंद करें</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="508"/>
         <source>Alt+N</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+N</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="549"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>लागू करें</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="85"/>
         <source>Still running</source>
-        <translation type="unfinished"></translation>
+        <translation>अभी भी कार्यरत है</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="240"/>
@@ -238,7 +239,7 @@
         <location filename="../mainwindow.cpp" line="633"/>
         <location filename="../mainwindow.cpp" line="713"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>त्रुटि</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="373"/>
@@ -263,17 +264,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="464"/>
         <source>Installing bootsplash, please wait</source>
-        <translation type="unfinished"></translation>
+        <translation>बूट स्प्लैश चिन्ह इंस्टॉल जारी, प्रतीक्षा करें</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="471"/>
         <source>Updating sources</source>
-        <translation type="unfinished"></translation>
+        <translation>स्रोत अपडेट जारी</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="483"/>
         <source>Could not install the bootsplash.</source>
-        <translation type="unfinished"></translation>
+        <translation>बूट स्प्लैश चिन्ह इंस्टॉल करना विफल।</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="573"/>
@@ -283,17 +284,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="633"/>
         <source>Could not create a temporary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>अस्थायी फोल्डर बनाना विफल</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="655"/>
         <source>Cannot continue</source>
-        <translation type="unfinished"></translation>
+        <translation>प्रक्रिया जारी रखना संभव नहीं है</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="656"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
-        <translation type="unfinished"></translation>
+        <translation>Chroot वातावरण बनाना विफल, बूट विकल्प परिवर्तन विफल। बंद करना जारी...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="713"/>
@@ -304,87 +305,89 @@
         <location filename="../mainwindow.cpp" line="959"/>
         <location filename="../mainwindow.cpp" line="1431"/>
         <source>Updating configuration, please wait</source>
-        <translation type="unfinished"></translation>
+        <translation>विन्यास अपडेट करना जारी, प्रतीक्षा करें</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1029"/>
         <source>Updating initramfs...</source>
-        <translation type="unfinished"></translation>
+        <translation>Initramfs अपडेट करना जारी...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1043"/>
         <location filename="../mainwindow.cpp" line="1446"/>
         <source>Updating grub...</source>
-        <translation type="unfinished"></translation>
+        <translation>Grub अपडेट करना जारी...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1068"/>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 के बारे में</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1069"/>
         <source>Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>संस्करण :</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1071"/>
         <source>Program for selecting common start-up choices</source>
-        <translation type="unfinished"></translation>
+        <translation>सामान्य सिस्टम आरंभ विकल्प चयन हेतु प्रोग्राम</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1073"/>
         <source>Copyright (c) MX Linux</source>
-        <translation type="unfinished"></translation>
+        <translation>कॉपीराइट (c) एमएक्स लिनक्स</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1074"/>
         <source>%1 License</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 लाइसेंस</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1095"/>
         <source>%1 Help</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 सहायता</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1105"/>
         <location filename="../mainwindow.cpp" line="1408"/>
         <source>Running in a Virtual Machine</source>
-        <translation type="unfinished"></translation>
+        <translation>वर्चुअल मशीन में कार्यरत</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1106"/>
         <location filename="../mainwindow.cpp" line="1409"/>
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
-        <translation type="unfinished"></translation>
+        <translation>आपका वर्तमान सिस्टम में वर्चुअल मशीन में कार्यरत है।
+प्लाईमाउथ बूट स्प्लैश की कार्यक्षमता सीमित है, आप द्वारा थीम का पूर्वावलोकन संभव नहीं है</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1114"/>
         <source>Plymouth packages not installed</source>
-        <translation type="unfinished"></translation>
+        <translation> प्लाईमाउथ पैकेज इंस्टॉल नहीं हैं</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1115"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
-        <translation type="unfinished"></translation>
+        <translation>प्लाईमाउथ पैकेज इंस्टॉल नहीं हैं।
+क्या आप उन्हें इंस्टॉल करना चाहते हैं?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1141"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
-        <translation type="unfinished"></translation>
+        <translation>चित्र (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1279"/>
         <source>Log not found</source>
-        <translation type="unfinished"></translation>
+        <translation>लॉग प्राप्ति विफल</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1279"/>
         <source>Could not find log at </source>
-        <translation type="unfinished"></translation>
+        <translation>यहाँ पर लॉग प्राप्ति विफल</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1286"/>
@@ -418,7 +421,7 @@ OK to go ahead and install them?</source>
         <location filename="../mainwindow.cpp" line="1268"/>
         <location filename="../mainwindow.cpp" line="1303"/>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>बंद करें (&amp;C)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="86"/>
@@ -458,7 +461,7 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="489"/>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>सफल</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="489"/>
@@ -488,7 +491,7 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="1140"/>
         <source>Select image to display in bootloader</source>
-        <translation type="unfinished"></translation>
+        <translation>बूट लोड साधन हेतु चित्र चयन</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1260"/>
@@ -534,22 +537,22 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="1397"/>
         <source>Needs reboot</source>
-        <translation type="unfinished"></translation>
+        <translation>सिस्टम पुनः आरंभ करना आवश्यक</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1398"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
-        <translation type="unfinished"></translation>
+        <translation>प्लाईमाउथ अभी इंस्टॉल किया गया, पूर्वावलोकन प्रदर्शित करने हेतु पुनः आरंभ आवश्यक है</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1467"/>
         <source>Click to select theme</source>
-        <translation type="unfinished"></translation>
+        <translation>थीम चयन हेतु क्लिक करें</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1478"/>
         <source>Select GRUB theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Grub थीम चयन</translation>
     </message>
 </context>
 <context>
@@ -557,7 +560,7 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../main.cpp" line="56"/>
         <source>Program for selecting common start-up choices</source>
-        <translation type="unfinished"></translation>
+        <translation>सामान्य सिस्टम आरंभ विकल्प चयन हेतु प्रोग्राम</translation>
     </message>
 </context>
 <context>
@@ -565,34 +568,34 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../about.cpp" line="55"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>लाइसेंस</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="56"/>
         <location filename="../about.cpp" line="65"/>
         <source>Changelog</source>
-        <translation type="unfinished"></translation>
+        <translation>बदलाव सूची</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="57"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>रद्द करें</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="76"/>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>बंद करें (&amp;C)</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="84"/>
         <location filename="../main.cpp" line="93"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>त्रुटि</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="85"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation type="unfinished"></translation>
+        <translation>प्रतीत होता है कि आप रुट के रूप में लॉगिन हैं, प्रोग्राम उपयोग करने हेतु लॉगआउट कर सामान्य उपयोक्ता के रूप में लॉगिन करें।</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="94"/>

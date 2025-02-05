@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en_US">
+<TS version="2.1" language="ko">
 <context>
     <name>CustomDialog</name>
     <message>
         <location filename="../dialog.cpp" line="16"/>
         <source>Live environment detected. Please select the root partition of the
  system you want to modify (only Linux partitions are displayed)</source>
-        <translation type="unfinished"></translation>
+        <translation>Live 환경이 감지되었습니다. 수정하려는 시스템의 루트 파티션을
+선택해 주세요. (리눅스 파티션만 표시됩니다.)</translation>
     </message>
     <message>
         <location filename="../dialog.cpp" line="22"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>확인</translation>
     </message>
     <message>
         <location filename="../dialog.cpp" line="23"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>취소</translation>
     </message>
 </context>
 <context>
@@ -25,17 +26,17 @@
     <message>
         <location filename="../mainwindow.ui" line="33"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>옵션</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="39"/>
         <source>Use simplified menu structure without submenus</source>
-        <translation type="unfinished"></translation>
+        <translation>하위 메뉴가 없는 간소화된 메뉴 구조 사용</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="42"/>
         <source>Use flat menus (no submenus)</source>
-        <translation type="unfinished"></translation>
+        <translation>플랫 메뉴 사용(하위 메뉴 없이)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="55"/>
@@ -45,7 +46,7 @@
     <message>
         <location filename="../mainwindow.ui" line="78"/>
         <source>Set to &apos;0&apos; to boot immediately without displaying the menu, or to &apos;-1&apos; to wait indefinitely</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;0&apos;으로 설정하면 메뉴를 보여주지 않고 바로 부팅하고, &apos;-1&apos;로 설정하면 사용자가 직접 선택할 때까지 기다립니다.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="81"/>
@@ -60,12 +61,12 @@
     <message>
         <location filename="../mainwindow.ui" line="117"/>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>초</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="124"/>
         <source>With this option enabled whatever entry you select from the grub boot menu will be saved as the new default for future boots</source>
-        <translation type="unfinished"></translation>
+        <translation>이 옵션을 활성화하면 마지막으로 선택한 부트 메뉴가 이후 부팅 시 새 기본값으로 설정됩니다.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="127"/>
@@ -91,7 +92,7 @@
         <location filename="../mainwindow.ui" line="181"/>
         <location filename="../mainwindow.ui" line="283"/>
         <source>Enable theme</source>
-        <translation type="unfinished"></translation>
+        <translation>테마 활성화</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="261"/>
@@ -131,12 +132,12 @@
     <message>
         <location filename="../mainwindow.ui" line="411"/>
         <source>Display help </source>
-        <translation type="unfinished"></translation>
+        <translation>도움말 표시</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="414"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>도움말</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="421"/>
@@ -161,12 +162,12 @@
     <message>
         <location filename="../mainwindow.ui" line="498"/>
         <source>Quit application</source>
-        <translation type="unfinished"></translation>
+        <translation>종료</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="501"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>닫기</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="508"/>
@@ -217,7 +218,8 @@
         <location filename="../mainwindow.cpp" line="271"/>
         <source>Are you sure you want to delete this boot entry?
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>이 부트 항목을 정말 삭제하시겠습니까?
+%1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="361"/>
@@ -238,12 +240,12 @@
         <location filename="../mainwindow.cpp" line="633"/>
         <location filename="../mainwindow.cpp" line="713"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>에러</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <source>Could not find the source mountpoint for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 의 마운트 포인트를 찾을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="378"/>
@@ -253,17 +255,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="378"/>
         <source>Enter the name for the UEFI menu item:</source>
-        <translation type="unfinished"></translation>
+        <translation>UEFI 메뉴 항목의 이름 입력:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="388"/>
         <source>Something went wrong, could not add entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>에러가 발생하여 항목을 추가하지 못했습니다.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="464"/>
         <source>Installing bootsplash, please wait</source>
-        <translation type="unfinished"></translation>
+        <translation>bootsplash를 설치하고 있습니다. 잠시 기다려 주세요.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="471"/>
@@ -273,7 +275,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="483"/>
         <source>Could not install the bootsplash.</source>
-        <translation type="unfinished"></translation>
+        <translation>bootsplash를 설치하지 못했습니다.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="573"/>
@@ -283,7 +285,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="633"/>
         <source>Could not create a temporary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>임시 폴더를 생성할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="655"/>
@@ -298,13 +300,13 @@
     <message>
         <location filename="../mainwindow.cpp" line="713"/>
         <source>Something went wrong, could not save boot order.</source>
-        <translation type="unfinished"></translation>
+        <translation>에러가 발생하여 부트 순서를 저장하지 못했습니다.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="959"/>
         <location filename="../mainwindow.cpp" line="1431"/>
         <source>Updating configuration, please wait</source>
-        <translation type="unfinished"></translation>
+        <translation>구성 항목을 업데이트 하고 있습니다. 잠시 기다려 주세요.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1029"/>
@@ -358,18 +360,20 @@
         <location filename="../mainwindow.cpp" line="1409"/>
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
-        <translation type="unfinished"></translation>
+        <translation>현재 시스템이 가상 머신에서 실행중입니다.
+Plymouth bootsplash 는 제한된 방식으로 작동되기 때문에 테마 미리 보기가 불가능할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1114"/>
         <source>Plymouth packages not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Plymouth 패키지가 설치되지 않았습니다.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1115"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
-        <translation type="unfinished"></translation>
+        <translation>현재 Plymouth 패키지가 설치되어 있지 않습니다.
+패키지를 설치하고 진행하시겠습니까?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1141"/>
@@ -396,7 +400,9 @@ OK to go ahead and install them?</source>
         <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
 - Items are listed in the boot order.
 - Grayed out lines are inactive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Up/Down 버튼을 사용하거나, 마우스로 항목을 드래그 하여 부트 순서를 변경할 수 있습니다.
+- 항목들은 부트 순서에 나열됩니다.
+- 흐려진 라인들은 비활성화 상태입니다.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1300"/>
@@ -458,7 +464,7 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="489"/>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>성공</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="489"/>
@@ -539,7 +545,7 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="1398"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
-        <translation type="unfinished"></translation>
+        <translation>Plymouth 설치가 완료되었습니다. 미리 보기 하려면 재부팅이 필요할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1467"/>
@@ -576,7 +582,7 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../about.cpp" line="57"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>취소</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="76"/>
@@ -587,17 +593,17 @@ OK to go ahead and install them?</source>
         <location filename="../main.cpp" line="84"/>
         <location filename="../main.cpp" line="93"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>에러</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="85"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation type="unfinished"></translation>
+        <translation>루트 권한으로 로그인한 상태로 보입니다. 이 프로그램을 사용하시려면 로그아웃 후 일반 사용자로 로그인해 주세요.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="94"/>
         <source>You must run this program with admin access.</source>
-        <translation type="unfinished"></translation>
+        <translation>어드민 권한으로 이 프로그램을 실행해야 합니다.</translation>
     </message>
 </context>
 </TS>

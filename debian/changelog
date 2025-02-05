@@ -1,3 +1,9 @@
+mx-boot-options (25.2) mx; urgency=medium
+
+  * Fix translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 05 Feb 2025 11:35:31 -0500
+
 mx-boot-options (25.1) mx; urgency=medium
 
   * Colorize the log (translate terminal control codes to Qt colors)

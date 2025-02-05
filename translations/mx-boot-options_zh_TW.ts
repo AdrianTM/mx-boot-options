@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en_US">
+<TS version="2.1" language="zh_TW">
 <context>
     <name>CustomDialog</name>
     <message>
@@ -12,12 +12,12 @@
     <message>
         <location filename="../dialog.cpp" line="22"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>確定</translation>
     </message>
     <message>
         <location filename="../dialog.cpp" line="23"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>取消</translation>
     </message>
 </context>
 <context>
@@ -25,7 +25,7 @@
     <message>
         <location filename="../mainwindow.ui" line="33"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>選項</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="39"/>
@@ -60,7 +60,7 @@
     <message>
         <location filename="../mainwindow.ui" line="117"/>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>秒</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="124"/>
@@ -101,7 +101,7 @@
     <message>
         <location filename="../mainwindow.ui" line="296"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>預覽</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="319"/>
@@ -131,52 +131,52 @@
     <message>
         <location filename="../mainwindow.ui" line="411"/>
         <source>Display help </source>
-        <translation type="unfinished"></translation>
+        <translation>顯示說明</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="414"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>說明</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="421"/>
         <source>Alt+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+H</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="453"/>
         <source>About this application</source>
-        <translation type="unfinished"></translation>
+        <translation>關於本程式</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="456"/>
         <source>About...</source>
-        <translation type="unfinished"></translation>
+        <translation>關於……</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="463"/>
         <source>Alt+B</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+B</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="498"/>
         <source>Quit application</source>
-        <translation type="unfinished"></translation>
+        <translation>退出程式</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="501"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>關閉</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="508"/>
         <source>Alt+N</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+N</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="549"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>使用</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="85"/>
@@ -238,7 +238,7 @@
         <location filename="../mainwindow.cpp" line="633"/>
         <location filename="../mainwindow.cpp" line="713"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>錯誤</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="373"/>
@@ -320,12 +320,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="1068"/>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>大約 %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1069"/>
         <source>Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>版本：</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1071"/>
@@ -335,17 +335,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="1073"/>
         <source>Copyright (c) MX Linux</source>
-        <translation type="unfinished"></translation>
+        <translation>版權所有 (c) MX Linux</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1074"/>
         <source>%1 License</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 許可</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1095"/>
         <source>%1 Help</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 幫助</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1105"/>
@@ -418,7 +418,7 @@ OK to go ahead and install them?</source>
         <location filename="../mainwindow.cpp" line="1268"/>
         <location filename="../mainwindow.cpp" line="1303"/>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>關閉（&amp;C）</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="86"/>
@@ -458,7 +458,7 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="489"/>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>成功</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="489"/>
@@ -565,39 +565,39 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../about.cpp" line="55"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>授權條款</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="56"/>
         <location filename="../about.cpp" line="65"/>
         <source>Changelog</source>
-        <translation type="unfinished"></translation>
+        <translation>變更紀錄</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="57"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="76"/>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>關閉（&amp;C）</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="84"/>
         <location filename="../main.cpp" line="93"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>錯誤</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="85"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation type="unfinished"></translation>
+        <translation>您似乎是以 root 身份登錄，請登出並以一般使用者身份登錄以使用此程式。</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="94"/>
         <source>You must run this program with admin access.</source>
-        <translation type="unfinished"></translation>
+        <translation>您必須以系統管理員權限執行此程式。</translation>
     </message>
 </context>
 </TS>

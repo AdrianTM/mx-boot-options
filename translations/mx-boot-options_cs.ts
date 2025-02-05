@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en_US">
+<TS version="2.1" language="cs">
 <context>
     <name>CustomDialog</name>
     <message>
         <location filename="../dialog.cpp" line="16"/>
         <source>Live environment detected. Please select the root partition of the
  system you want to modify (only Linux partitions are displayed)</source>
-        <translation type="unfinished"></translation>
+        <translation>Byl detekován Live systém. Prosím zvolte root oddíl systému, který chcete upravit (zobrazeny jsou pouze Linux oddíly)</translation>
     </message>
     <message>
         <location filename="../dialog.cpp" line="22"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../dialog.cpp" line="23"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrušit</translation>
     </message>
 </context>
 <context>
@@ -25,180 +25,180 @@
     <message>
         <location filename="../mainwindow.ui" line="33"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Možnosti</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="39"/>
         <source>Use simplified menu structure without submenus</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít zjednodušenou strukturu menu, bez podmenu.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="42"/>
         <source>Use flat menus (no submenus)</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít ploché menu (bez submenu)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="55"/>
         <source>Boot to</source>
-        <translation type="unfinished"></translation>
+        <translation>Nabootovat do</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="78"/>
         <source>Set to &apos;0&apos; to boot immediately without displaying the menu, or to &apos;-1&apos; to wait indefinitely</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro vypnutí zobrazení bootovacího menu nastavte &apos;0&apos;, pro zrušení odpočtu zadejte &apos;-1&apos;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="81"/>
         <source>Menu timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Odpočet</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="104"/>
         <source>Kernel parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Parametry jádra</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="117"/>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>vteřiny</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="124"/>
         <source>With this option enabled whatever entry you select from the grub boot menu will be saved as the new default for future boots</source>
-        <translation type="unfinished"></translation>
+        <translation>Při této možnosti cokoliv co si vyberete v grub menu bude uloženo jako předvolená volba pro další přihlášení </translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="127"/>
         <source>Enable saving last boot choice</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapnout ukládání poslední zvolené položky</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="134"/>
         <source>Manage UEFI Boot Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Ovládat UEFI Možnosti </translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="150"/>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Pozadí</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="168"/>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrázek</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="181"/>
         <location filename="../mainwindow.ui" line="283"/>
         <source>Enable theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Povolit motivy</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="261"/>
         <source>Splash</source>
-        <translation type="unfinished"></translation>
+        <translation>Splash</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="296"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Náhled</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="319"/>
         <source>Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Zprávy</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="325"/>
         <source>Very detailed</source>
-        <translation type="unfinished"></translation>
+        <translation>Velice detailní</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="332"/>
         <source>Detailed (default setting)</source>
-        <translation type="unfinished"></translation>
+        <translation>Detailní (předvolené)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="342"/>
         <source>Limited</source>
-        <translation type="unfinished"></translation>
+        <translation>Omezené</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="358"/>
         <source>Display log</source>
-        <translation type="unfinished"></translation>
+        <translation>Display log</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="411"/>
         <source>Display help </source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit nápovědu</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="414"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Nápověda</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="421"/>
         <source>Alt+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+H</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="453"/>
         <source>About this application</source>
-        <translation type="unfinished"></translation>
+        <translation>O této aplikaci</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="456"/>
         <source>About...</source>
-        <translation type="unfinished"></translation>
+        <translation>O programu</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="463"/>
         <source>Alt+B</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+B</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="498"/>
         <source>Quit application</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukončit aplikaci</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="501"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřít</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="508"/>
         <source>Alt+N</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+N</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="549"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="85"/>
         <source>Still running</source>
-        <translation type="unfinished"></translation>
+        <translation>Stále běží</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="240"/>
         <source>Set timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit odpočet</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="240"/>
         <source>Timeout in seconds:</source>
-        <translation type="unfinished"></translation>
+        <translation>Odpočet ve vteřínách:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="244"/>
         <location filename="../mainwindow.cpp" line="569"/>
         <location filename="../mainwindow.cpp" line="1313"/>
         <source>Timeout: %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Odpočet: %1 sekund</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="256"/>
@@ -206,28 +206,29 @@
         <location filename="../mainwindow.cpp" line="1312"/>
         <location filename="../mainwindow.cpp" line="1320"/>
         <source>Boot Next: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Boot Next: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="270"/>
         <source>Removal confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Potvrzení odstranění </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="271"/>
         <source>Are you sure you want to delete this boot entry?
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Jste si jistí, že chcete vymazat tuto volbu?
+%1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="361"/>
         <source>Select EFI file</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat soubor EFI</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="361"/>
         <source>EFI files (*.efi *.EFI)</source>
-        <translation type="unfinished"></translation>
+        <translation>EFI soubory (*.efi *.EFI)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="373"/>
@@ -238,187 +239,191 @@
         <location filename="../mainwindow.cpp" line="633"/>
         <location filename="../mainwindow.cpp" line="713"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <source>Could not find the source mountpoint for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepovedlo se nalézt zdrojový bod připojení pro %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="378"/>
         <source>Set name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit jméno</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="378"/>
         <source>Enter the name for the UEFI menu item:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte jméno pro UEFI položku v menu:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="388"/>
         <source>Something went wrong, could not add entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Něco se pokazilo, nepovedlo se přidat položku.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="464"/>
         <source>Installing bootsplash, please wait</source>
-        <translation type="unfinished"></translation>
+        <translation>Instaluje se bootsplash, prosím vyčkejte</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="471"/>
         <source>Updating sources</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualizace zdrojů</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="483"/>
         <source>Could not install the bootsplash.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bootsplash se nepovedlo nainstalovat.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="573"/>
         <source>Boot Current: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Boot Current: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="633"/>
         <source>Could not create a temporary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Selhalo vytvoření dočasné složky</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="655"/>
         <source>Cannot continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze pokračovat</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="656"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze vytvořit chroot prostředí, nelze změnit možnosti bootování. Odchod...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="713"/>
         <source>Something went wrong, could not save boot order.</source>
-        <translation type="unfinished"></translation>
+        <translation>Něco se pokazilo, nepovedlo se uložit pořadí bootování.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="959"/>
         <location filename="../mainwindow.cpp" line="1431"/>
         <source>Updating configuration, please wait</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualizace nastavení, prosím vydržte</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1029"/>
         <source>Updating initramfs...</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualizace initramfs...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1043"/>
         <location filename="../mainwindow.cpp" line="1446"/>
         <source>Updating grub...</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualizace grub...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1068"/>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>O programu %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1069"/>
         <source>Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Verze:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1071"/>
         <source>Program for selecting common start-up choices</source>
-        <translation type="unfinished"></translation>
+        <translation>Program pro výběr možností zavedení systému.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1073"/>
         <source>Copyright (c) MX Linux</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnická práva (c) MX Linux</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1074"/>
         <source>%1 License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licence %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1095"/>
         <source>%1 Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Nápověda %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1105"/>
         <location filename="../mainwindow.cpp" line="1408"/>
         <source>Running in a Virtual Machine</source>
-        <translation type="unfinished"></translation>
+        <translation>Běh pod Virtual Machine</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1106"/>
         <location filename="../mainwindow.cpp" line="1409"/>
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Systém jste spustili pod Virtual Machine,
+Plymouth bootsplash  bude fungovat jenom omezeně, nebude možné motivy prohlížet</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1114"/>
         <source>Plymouth packages not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Plymouth není nainstalován</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1115"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Plymouth zatím není nainstalován.
+Chcete pokračovat k instalaci?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1141"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrázky (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1279"/>
         <source>Log not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Log nenalezen</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1279"/>
         <source>Could not find log at </source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se najít log v</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1286"/>
         <source>Edit UEFI Boot Entries</source>
-        <translation type="unfinished"></translation>
+        <translation>Editovat UEFI Položky Bootování</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1289"/>
         <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
 - Items are listed in the boot order.
 - Grayed out lines are inactive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro změnu v pořadí můžete použít tlačítka, nebo popotáhnout položky .
+- Položky jsou zobrazené v pořadí jak bodu nabootovány.
+- Zašeděné řádky jsou neaktivní.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1300"/>
         <location filename="../mainwindow.cpp" line="1347"/>
         <source>Set ac&amp;tive</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaviit jako &amp;aktivní</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1301"/>
         <source>&amp;Add entry</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Přidat záznam</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1302"/>
         <source>Boot &amp;next</source>
-        <translation type="unfinished"></translation>
+        <translation>Bootovat &amp;další</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1268"/>
         <location filename="../mainwindow.cpp" line="1303"/>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zavřít</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="86"/>
@@ -458,7 +463,7 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="489"/>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>Úspěch!</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="489"/>
@@ -488,7 +493,7 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="1140"/>
         <source>Select image to display in bootloader</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat obrázek, který se zobrazí v pozadí</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1260"/>
@@ -498,58 +503,58 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="1304"/>
         <source>Move &amp;down</source>
-        <translation type="unfinished"></translation>
+        <translation>Posunout  &amp;dolů</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1305"/>
         <source>&amp;Remove entry</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Odstranit záznam</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1306"/>
         <source>Re&amp;set next</source>
-        <translation type="unfinished"></translation>
+        <translation>Re&amp;set další</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1307"/>
         <source>Change &amp;timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Změnit  &amp;timeout</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1308"/>
         <source>Move &amp;up</source>
-        <translation type="unfinished"></translation>
+        <translation>Posunout  &amp;nahoru</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1312"/>
         <location filename="../mainwindow.cpp" line="1320"/>
         <source>not set, will boot using list order</source>
-        <translation type="unfinished"></translation>
+        <translation>nenastaveno, pro start se použije pořadí v seznamu</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1344"/>
         <source>Set &amp;inactive</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaviit jako &amp;neaktivní</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1397"/>
         <source>Needs reboot</source>
-        <translation type="unfinished"></translation>
+        <translation>Potřebuje Restart</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1398"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
-        <translation type="unfinished"></translation>
+        <translation>Plymouth lyl právě nainstalován, pro zobrazení náhledů bude možná nutný restart </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1467"/>
         <source>Click to select theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknout pro výběr motivu</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1478"/>
         <source>Select GRUB theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat motiv GRUBu</translation>
     </message>
 </context>
 <context>
@@ -557,7 +562,7 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../main.cpp" line="56"/>
         <source>Program for selecting common start-up choices</source>
-        <translation type="unfinished"></translation>
+        <translation>Program pro výběr možností zavedení systému.</translation>
     </message>
 </context>
 <context>
@@ -565,34 +570,34 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../about.cpp" line="55"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licence</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="56"/>
         <location filename="../about.cpp" line="65"/>
         <source>Changelog</source>
-        <translation type="unfinished"></translation>
+        <translation>Protokol změn</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="57"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrušit</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="76"/>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zavřít</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="84"/>
         <location filename="../main.cpp" line="93"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="85"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spuštěno pod účtem root-a, odhlašte se a přihlašte jako bězný uživatel.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="94"/>

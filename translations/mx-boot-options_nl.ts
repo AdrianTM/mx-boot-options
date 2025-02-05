@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en_US">
+<TS version="2.1" language="nl">
 <context>
     <name>CustomDialog</name>
     <message>
         <location filename="../dialog.cpp" line="16"/>
         <source>Live environment detected. Please select the root partition of the
  system you want to modify (only Linux partitions are displayed)</source>
-        <translation type="unfinished"></translation>
+        <translation>Live omgeving gedetecteerd. Selecteer aub de root partitie van het
+systeem dat u wilt wijzigen (alleen Linux partities worden weergegeven)</translation>
     </message>
     <message>
         <location filename="../dialog.cpp" line="22"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../dialog.cpp" line="23"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongedaan maken</translation>
     </message>
 </context>
 <context>
@@ -25,52 +26,52 @@
     <message>
         <location filename="../mainwindow.ui" line="33"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opties</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="39"/>
         <source>Use simplified menu structure without submenus</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik een vereenvoudigde menustructuur zonder submenu&apos;s</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="42"/>
         <source>Use flat menus (no submenus)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik platte menu&apos;s (geen submenu&apos;s)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="55"/>
         <source>Boot to</source>
-        <translation type="unfinished"></translation>
+        <translation>Start op naar</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="78"/>
         <source>Set to &apos;0&apos; to boot immediately without displaying the menu, or to &apos;-1&apos; to wait indefinitely</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet op &apos;0&apos; om onmiddellijk op te starten zonder het menu te laten zien, of op -1 om onbepaalde tijd te wachten</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="81"/>
         <source>Menu timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu timeout</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="104"/>
         <source>Kernel parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Kernel parameters</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="117"/>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>seconden</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="124"/>
         <source>With this option enabled whatever entry you select from the grub boot menu will be saved as the new default for future boots</source>
-        <translation type="unfinished"></translation>
+        <translation>Als deze optie is ingeschakeld, wordt elk item dat u selecteert in het grub startmenu opgeslagen als de nieuwe standaard voor toekomstige opstarts</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="127"/>
         <source>Enable saving last boot choice</source>
-        <translation type="unfinished"></translation>
+        <translation>Inschakelen van laatste opstartkeuze opslaan</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="134"/>
@@ -80,108 +81,108 @@
     <message>
         <location filename="../mainwindow.ui" line="150"/>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Achtergrond</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="168"/>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeelding</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="181"/>
         <location filename="../mainwindow.ui" line="283"/>
         <source>Enable theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Thema inschakelen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="261"/>
         <source>Splash</source>
-        <translation type="unfinished"></translation>
+        <translation>Splash</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="296"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Voorbeeld</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="319"/>
         <source>Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Berichten</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="325"/>
         <source>Very detailed</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeer gedetailleerd</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="332"/>
         <source>Detailed (default setting)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gedetailleerd (standaard instelling)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="342"/>
         <source>Limited</source>
-        <translation type="unfinished"></translation>
+        <translation>Beperkt</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="358"/>
         <source>Display log</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat log zien</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="411"/>
         <source>Display help </source>
-        <translation type="unfinished"></translation>
+        <translation>Toon help</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="414"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Hulp</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="421"/>
         <source>Alt+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+H</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="453"/>
         <source>About this application</source>
-        <translation type="unfinished"></translation>
+        <translation>Over deze toepassing</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="456"/>
         <source>About...</source>
-        <translation type="unfinished"></translation>
+        <translation>Over...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="463"/>
         <source>Alt+B</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+B</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="498"/>
         <source>Quit application</source>
-        <translation type="unfinished"></translation>
+        <translation>Verlaat de applicatie</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="501"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Sluiten</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="508"/>
         <source>Alt+N</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+N</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="549"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Toepassen</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="85"/>
         <source>Still running</source>
-        <translation type="unfinished"></translation>
+        <translation>Loopt nog</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="240"/>
@@ -238,7 +239,7 @@
         <location filename="../mainwindow.cpp" line="633"/>
         <location filename="../mainwindow.cpp" line="713"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="373"/>
@@ -263,17 +264,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="464"/>
         <source>Installing bootsplash, please wait</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeren opstart splash, wachten a.u.b.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="471"/>
         <source>Updating sources</source>
-        <translation type="unfinished"></translation>
+        <translation>Bronnen opwaarderen</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="483"/>
         <source>Could not install the bootsplash.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kon opstart splash niet installeren</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="573"/>
@@ -283,17 +284,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="633"/>
         <source>Could not create a temporary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Kon tijdelijke folder niet creëren</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="655"/>
         <source>Cannot continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan niet doorgaan</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="656"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen chroot omgeving creëeren, kan geen opstart opties wijzigen. Stoppen...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="713"/>
@@ -304,87 +305,89 @@
         <location filename="../mainwindow.cpp" line="959"/>
         <location filename="../mainwindow.cpp" line="1431"/>
         <source>Updating configuration, please wait</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuratie opwaarderen, wachten a.u.b.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1029"/>
         <source>Updating initramfs...</source>
-        <translation type="unfinished"></translation>
+        <translation>initramfs opwaarderen...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1043"/>
         <location filename="../mainwindow.cpp" line="1446"/>
         <source>Updating grub...</source>
-        <translation type="unfinished"></translation>
+        <translation>Grub opwaarderen...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1068"/>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Over %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1069"/>
         <source>Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Versie:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1071"/>
         <source>Program for selecting common start-up choices</source>
-        <translation type="unfinished"></translation>
+        <translation>Programma voor het selecteren van veel voorkomende opstart keuzes</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1073"/>
         <source>Copyright (c) MX Linux</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1074"/>
         <source>%1 License</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Licentie</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1095"/>
         <source>%1 Help</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Help</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1105"/>
         <location filename="../mainwindow.cpp" line="1408"/>
         <source>Running in a Virtual Machine</source>
-        <translation type="unfinished"></translation>
+        <translation>Lopend in een Virtuele Machine</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1106"/>
         <location filename="../mainwindow.cpp" line="1409"/>
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Uw huidige systeem draait in een Virtuele Machine,
+Plymouth opstart splash werkt in een beperkte mate, u zult ook niet in staat zijn om het thema van tevoor te bekijken</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1114"/>
         <source>Plymouth packages not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Plymouth pakketten niet geïnstalleerd</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1115"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Plymouth pakketten zijn momenteel niet geïnstalleerd.
+OK om door te gaan en te installeren?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1141"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeeldingen (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1279"/>
         <source>Log not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Log niet gevonden</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1279"/>
         <source>Could not find log at </source>
-        <translation type="unfinished"></translation>
+        <translation>Kon log niet vinden bij</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1286"/>
@@ -418,7 +421,7 @@ OK to go ahead and install them?</source>
         <location filename="../mainwindow.cpp" line="1268"/>
         <location filename="../mainwindow.cpp" line="1303"/>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sluiten</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="86"/>
@@ -458,7 +461,7 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="489"/>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>Gelukt</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="489"/>
@@ -488,7 +491,7 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="1140"/>
         <source>Select image to display in bootloader</source>
-        <translation type="unfinished"></translation>
+        <translation>Select afbeelding om weer te geven in de opstartlader</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1260"/>
@@ -534,22 +537,22 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="1397"/>
         <source>Needs reboot</source>
-        <translation type="unfinished"></translation>
+        <translation>Opnieuw opstarten vereist</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1398"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
-        <translation type="unfinished"></translation>
+        <translation>Plymouth was net geïnstalleerd, misschien moet u herstarten voordat u voorafbeeldingen kunt weergeven</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1467"/>
         <source>Click to select theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik om thema te selecteren</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1478"/>
         <source>Select GRUB theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer GRUB thema</translation>
     </message>
 </context>
 <context>
@@ -557,7 +560,7 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../main.cpp" line="56"/>
         <source>Program for selecting common start-up choices</source>
-        <translation type="unfinished"></translation>
+        <translation>Programma voor het selecteren van veel voorkomende opstart keuzes</translation>
     </message>
 </context>
 <context>
@@ -565,39 +568,39 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../about.cpp" line="55"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licentie</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="56"/>
         <location filename="../about.cpp" line="65"/>
         <source>Changelog</source>
-        <translation type="unfinished"></translation>
+        <translation>Changelog</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="57"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongedaan maken</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="76"/>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sluiten</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="84"/>
         <location filename="../main.cpp" line="93"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="85"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation type="unfinished"></translation>
+        <translation>U lijkt ingelogd te zijn als root, gelieve uit te loggen en in te loggen als normale gebruiker om dit programma te gebruiken.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="94"/>
         <source>You must run this program with admin access.</source>
-        <translation type="unfinished"></translation>
+        <translation>Je moet dit programma uitvoeren met admin-toegang.</translation>
     </message>
 </context>
 </TS>

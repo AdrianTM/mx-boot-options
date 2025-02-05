@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en_US">
+<TS version="2.1" language="he_IL">
 <context>
     <name>CustomDialog</name>
     <message>
@@ -12,12 +12,12 @@
     <message>
         <location filename="../dialog.cpp" line="22"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>אישור</translation>
     </message>
     <message>
         <location filename="../dialog.cpp" line="23"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>ביטול</translation>
     </message>
 </context>
 <context>
@@ -25,7 +25,7 @@
     <message>
         <location filename="../mainwindow.ui" line="33"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>אפשרויות</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="39"/>
@@ -60,7 +60,7 @@
     <message>
         <location filename="../mainwindow.ui" line="117"/>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>שניות</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="124"/>
@@ -85,7 +85,7 @@
     <message>
         <location filename="../mainwindow.ui" line="168"/>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>תמונה</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="181"/>
@@ -96,17 +96,17 @@
     <message>
         <location filename="../mainwindow.ui" line="261"/>
         <source>Splash</source>
-        <translation type="unfinished"></translation>
+        <translation>מסך פתיחה</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="296"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>תצוגה מקדימה</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="319"/>
         <source>Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>הודעות</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="325"/>
@@ -131,52 +131,52 @@
     <message>
         <location filename="../mainwindow.ui" line="411"/>
         <source>Display help </source>
-        <translation type="unfinished"></translation>
+        <translation>הצגת עזרה</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="414"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>עזרה</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="421"/>
         <source>Alt+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+H</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="453"/>
         <source>About this application</source>
-        <translation type="unfinished"></translation>
+        <translation>על אודות יישום זה</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="456"/>
         <source>About...</source>
-        <translation type="unfinished"></translation>
+        <translation>על אודות...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="463"/>
         <source>Alt+B</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+B</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="498"/>
         <source>Quit application</source>
-        <translation type="unfinished"></translation>
+        <translation>יציאה מהתוכנה</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="501"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>סגירה</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="508"/>
         <source>Alt+N</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+N</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="549"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>אשר</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="85"/>
@@ -238,7 +238,7 @@
         <location filename="../mainwindow.cpp" line="633"/>
         <location filename="../mainwindow.cpp" line="713"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>שגיאה</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="373"/>
@@ -268,7 +268,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="471"/>
         <source>Updating sources</source>
-        <translation type="unfinished"></translation>
+        <translation>המקורות מתעדכנים</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="483"/>
@@ -283,12 +283,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="633"/>
         <source>Could not create a temporary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן ליצור תיקיית זמניים</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="655"/>
         <source>Cannot continue</source>
-        <translation type="unfinished"></translation>
+        <translation>אי אפשר להמשיך</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="656"/>
@@ -315,17 +315,17 @@
         <location filename="../mainwindow.cpp" line="1043"/>
         <location filename="../mainwindow.cpp" line="1446"/>
         <source>Updating grub...</source>
-        <translation type="unfinished"></translation>
+        <translation>‏grub מתעדכן...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1068"/>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>על אודות %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1069"/>
         <source>Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>גירסה:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1071"/>
@@ -335,17 +335,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="1073"/>
         <source>Copyright (c) MX Linux</source>
-        <translation type="unfinished"></translation>
+        <translation>זכויות היוצרים (c) שמורות ל־MX Linux</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1074"/>
         <source>%1 License</source>
-        <translation type="unfinished"></translation>
+        <translation>רישיון של %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1095"/>
         <source>%1 Help</source>
-        <translation type="unfinished"></translation>
+        <translation>עזרה עבור %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1105"/>
@@ -374,7 +374,7 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="1141"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
-        <translation type="unfinished"></translation>
+        <translation>תמונות (‎*.png‏ ‎*.jpg‏ ‎*.jpeg‏ ‎*.tga)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1279"/>
@@ -418,7 +418,7 @@ OK to go ahead and install them?</source>
         <location filename="../mainwindow.cpp" line="1268"/>
         <location filename="../mainwindow.cpp" line="1303"/>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;סגירה</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="86"/>
@@ -458,7 +458,7 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="489"/>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>הצלחה</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="489"/>
@@ -534,12 +534,12 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="1397"/>
         <source>Needs reboot</source>
-        <translation type="unfinished"></translation>
+        <translation>יש צורך באתחול</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1398"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Plymouth הותקן הרגע, יש להפעיל את המחשב מחדש לפני שתהיה אפשרות לתצוגות מקדימות</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1467"/>
@@ -549,7 +549,7 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="1478"/>
         <source>Select GRUB theme</source>
-        <translation type="unfinished"></translation>
+        <translation>בחירת ערכת נושא ל־GRUB</translation>
     </message>
 </context>
 <context>
@@ -565,34 +565,34 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../about.cpp" line="55"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>רישיון</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="56"/>
         <location filename="../about.cpp" line="65"/>
         <source>Changelog</source>
-        <translation type="unfinished"></translation>
+        <translation>יומן שינויים</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="57"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>ביטול</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="76"/>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;סגירה</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="84"/>
         <location filename="../main.cpp" line="93"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>שגיאה</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="85"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation type="unfinished"></translation>
+        <translation>כנראה שנכנסת למערכת בתור משתמש על (root), נא לצאת ולהיכנס כמשתמש רגיל כדי להשתמש בתוכנית הזאת.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="94"/>
