@@ -135,7 +135,8 @@ private:
                          QStringList *bootorder);
     void readDefaultGrub();
     void readGrubCfg();
-    void replaceSyslinuxArg(const QString &args);
+    void replaceSyslinuxArgs(const QString &args);
+    void replaceLiveGrubArgs(const QString &args);
     void setupUiElements();
     void saveBootOrder(const QListWidget *list);
     void setGeneralConnections();
