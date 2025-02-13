@@ -197,15 +197,15 @@
     <message>
         <location filename="../mainwindow.cpp" line="290"/>
         <location filename="../mainwindow.cpp" line="618"/>
-        <location filename="../mainwindow.cpp" line="1417"/>
+        <location filename="../mainwindow.cpp" line="1423"/>
         <source>Timeout: %1 seconds</source>
         <translation>Aikakatkaisu: %1 sekuntia</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="303"/>
         <location filename="../mainwindow.cpp" line="620"/>
-        <location filename="../mainwindow.cpp" line="1416"/>
-        <location filename="../mainwindow.cpp" line="1424"/>
+        <location filename="../mainwindow.cpp" line="1422"/>
+        <location filename="../mainwindow.cpp" line="1430"/>
         <source>Boot Next: %1</source>
         <translation>Seuraava käynnistys: %1</translation>
     </message>
@@ -240,9 +240,9 @@
         <location filename="../mainwindow.cpp" line="603"/>
         <location filename="../mainwindow.cpp" line="703"/>
         <location filename="../mainwindow.cpp" line="792"/>
-        <location filename="../mainwindow.cpp" line="1617"/>
-        <location filename="../mainwindow.cpp" line="1630"/>
+        <location filename="../mainwindow.cpp" line="1623"/>
         <location filename="../mainwindow.cpp" line="1636"/>
+        <location filename="../mainwindow.cpp" line="1642"/>
         <source>Error</source>
         <translation>Virhe</translation>
     </message>
@@ -318,100 +318,100 @@
         <translation>Jotain meni väärin, käynnistysjärjestystä ei voitu tallentaa.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1060"/>
-        <location filename="../mainwindow.cpp" line="1537"/>
+        <location filename="../mainwindow.cpp" line="1065"/>
+        <location filename="../mainwindow.cpp" line="1543"/>
         <source>Updating configuration, please wait</source>
         <translation>Asetuksia päivitetään, odota</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1130"/>
+        <location filename="../mainwindow.cpp" line="1136"/>
         <source>Updating initramfs...</source>
         <translation>Päivitetään initramfs...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1144"/>
-        <location filename="../mainwindow.cpp" line="1552"/>
+        <location filename="../mainwindow.cpp" line="1150"/>
+        <location filename="../mainwindow.cpp" line="1558"/>
         <source>Updating grub...</source>
         <translation>Päivitetään grub...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1169"/>
+        <location filename="../mainwindow.cpp" line="1175"/>
         <source>About %1</source>
         <translation>%1 lisätietoja</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1170"/>
+        <location filename="../mainwindow.cpp" line="1176"/>
         <source>Version: </source>
         <translation>Versio: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1172"/>
+        <location filename="../mainwindow.cpp" line="1178"/>
         <source>Program for selecting common start-up choices</source>
         <translation>Ohjelma yleisille aloitusvalinnoille</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1174"/>
+        <location filename="../mainwindow.cpp" line="1180"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1175"/>
+        <location filename="../mainwindow.cpp" line="1181"/>
         <source>%1 License</source>
         <translation>%1 lisenssi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1196"/>
+        <location filename="../mainwindow.cpp" line="1202"/>
         <source>%1 Help</source>
         <translation>%1 Apuopas</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1206"/>
-        <location filename="../mainwindow.cpp" line="1514"/>
+        <location filename="../mainwindow.cpp" line="1212"/>
+        <location filename="../mainwindow.cpp" line="1520"/>
         <source>Running in a Virtual Machine</source>
         <translation>Ajettuna virtuaalikoneessa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1207"/>
-        <location filename="../mainwindow.cpp" line="1515"/>
+        <location filename="../mainwindow.cpp" line="1213"/>
+        <location filename="../mainwindow.cpp" line="1521"/>
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
         <translation>Järjestelmäsi on ajossa virtuaalikoneessa,
 Käynnistyksen Plymouth-animaatio toimii täten rajatulla tavalla, et myöskään voi esikatsella teemaa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1214"/>
+        <location filename="../mainwindow.cpp" line="1220"/>
         <source>Plymouth packages not installed</source>
         <translation>Plymouth-paketteja ei asennettu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1215"/>
+        <location filename="../mainwindow.cpp" line="1221"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
         <translation>Plymouth-paketteja ei ole tällä hetkellä asennettuna.
 Voidaanko jatkaa ja asentaa ne?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1241"/>
+        <location filename="../mainwindow.cpp" line="1247"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
         <translation>Kuvat (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1383"/>
+        <location filename="../mainwindow.cpp" line="1389"/>
         <source>Log not found</source>
         <translation>Lokitiedostoa ei löytynyt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1383"/>
+        <location filename="../mainwindow.cpp" line="1389"/>
         <source>Could not find log at </source>
         <translation>Lokitietoja ei löydetty kohteessa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1390"/>
+        <location filename="../mainwindow.cpp" line="1396"/>
         <source>Edit UEFI Boot Entries</source>
         <translation>Muokkaa UEFI Boot kohteita</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1393"/>
+        <location filename="../mainwindow.cpp" line="1399"/>
         <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
 - Items are listed in the boot order.
 - Grayed out lines are inactive.</source>
@@ -420,44 +420,44 @@ Voidaanko jatkaa ja asentaa ne?</translation>
 - Harmaat rivit eivät ole aktiivisia.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1404"/>
-        <location filename="../mainwindow.cpp" line="1452"/>
+        <location filename="../mainwindow.cpp" line="1410"/>
+        <location filename="../mainwindow.cpp" line="1458"/>
         <source>Set ac&amp;tive</source>
         <translation>Aseta ak&amp;tiiviseksi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1405"/>
+        <location filename="../mainwindow.cpp" line="1411"/>
         <source>&amp;Add entry</source>
         <translation>&amp;Lisää merkintä</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1406"/>
+        <location filename="../mainwindow.cpp" line="1412"/>
         <source>Boot &amp;next</source>
         <translation>Käynnistä &amp;seuraava</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1617"/>
+        <location filename="../mainwindow.cpp" line="1623"/>
         <source>Could not retrieve UUID for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1625"/>
+        <location filename="../mainwindow.cpp" line="1631"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
         <translation>Syötä salasana avataksesi %1 salauksella varustetun osion:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1630"/>
+        <location filename="../mainwindow.cpp" line="1636"/>
         <source>Password entry cancelled or empty for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1636"/>
+        <location filename="../mainwindow.cpp" line="1642"/>
         <source>Could not open %1 LUKS container</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1372"/>
-        <location filename="../mainwindow.cpp" line="1407"/>
+        <location filename="../mainwindow.cpp" line="1378"/>
+        <location filename="../mainwindow.cpp" line="1413"/>
         <source>&amp;Close</source>
         <translation>&amp;Sulje</translation>
     </message>
@@ -512,83 +512,83 @@ Voidaanko jatkaa ja asentaa ne?</translation>
         <translation>Väliaikaisen tiedoston luominen epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1152"/>
+        <location filename="../mainwindow.cpp" line="1158"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
         <translation>Käytät tällä hetkellä live-tilan toram-asetusta. Muista tallentaa pysyvä tiedosto tai remaster, muuten tehdyt muutokset menetetään.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1154"/>
+        <location filename="../mainwindow.cpp" line="1160"/>
         <source>Your changes have been successfully applied.</source>
         <translation>Muutokset on otettu käyttöön.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1155"/>
+        <location filename="../mainwindow.cpp" line="1161"/>
         <source>Operation Complete</source>
         <translation>Tehtävä valmis</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1240"/>
+        <location filename="../mainwindow.cpp" line="1246"/>
         <source>Select image to display in bootloader</source>
         <translation>Valitse käynnistyslataajassa näytettävä kuva</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1364"/>
+        <location filename="../mainwindow.cpp" line="1370"/>
         <source>Boot Log</source>
         <translation>Boot-loki</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1408"/>
+        <location filename="../mainwindow.cpp" line="1414"/>
         <source>Move &amp;down</source>
         <translation>Siirrä &amp;alas</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1409"/>
+        <location filename="../mainwindow.cpp" line="1415"/>
         <source>&amp;Remove entry</source>
         <translation>&amp;Poista merkintä</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1410"/>
+        <location filename="../mainwindow.cpp" line="1416"/>
         <source>Re&amp;set next</source>
         <translation>Re&amp;setoi seuraava</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1411"/>
+        <location filename="../mainwindow.cpp" line="1417"/>
         <source>Change &amp;timeout</source>
         <translation>Muuta &amp;aikakatkaisu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1412"/>
+        <location filename="../mainwindow.cpp" line="1418"/>
         <source>Move &amp;up</source>
         <translation>Siirrä &amp;ylös</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1416"/>
-        <location filename="../mainwindow.cpp" line="1424"/>
+        <location filename="../mainwindow.cpp" line="1422"/>
+        <location filename="../mainwindow.cpp" line="1430"/>
         <source>not set, will boot using list order</source>
         <translation>ei asetettu, käynnistyy listan mukaan</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1449"/>
+        <location filename="../mainwindow.cpp" line="1455"/>
         <source>Set &amp;inactive</source>
         <translation>Aseta &amp;passiiviseksi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1503"/>
+        <location filename="../mainwindow.cpp" line="1509"/>
         <source>Needs reboot</source>
         <translation>Käynnistä uudelleen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1504"/>
+        <location filename="../mainwindow.cpp" line="1510"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
         <translation>Plymouth asennettiin juuri, järjestelmä on luultavasti käynnistettävä uudelleen ennen katselua</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1573"/>
+        <location filename="../mainwindow.cpp" line="1579"/>
         <source>Click to select theme</source>
         <translation>Klikkaa valitaksesi teema</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1584"/>
+        <location filename="../mainwindow.cpp" line="1590"/>
         <source>Select GRUB theme</source>
         <translation>Valitse GRUB:in teema</translation>
     </message>
