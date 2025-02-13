@@ -812,6 +812,11 @@ bool MainWindow::replaceGrubArg(const QString &key, const QString &item)
     return replaced;        // Return whether a replacement occurred
 }
 
+void MainWindow::replaceLiveBootArgs(const QString &args) {
+    cmd.procAsRoot("live-grubsave", {"-r"});
+    cmd.procAsRoot("live-grubsave", {args});
+}
+
 void MainWindow::replaceSyslinuxArg(const QString &args)
 {
     const QStringList configFiles
@@ -1068,6 +1073,7 @@ void MainWindow::pushApplyClicked()
     if (kernelOptionsChanged) {
         replaceGrubArg("GRUB_CMDLINE_LINUX_DEFAULT", "\"" + ui->textKernel->text() + "\"");
         if (live) {
+            replaceLiveBootArgs(ui->textKernel->text());
             replaceSyslinuxArg(ui->textKernel->text());
         }
     }
