@@ -197,15 +197,15 @@
     <message>
         <location filename="../mainwindow.cpp" line="290"/>
         <location filename="../mainwindow.cpp" line="618"/>
-        <location filename="../mainwindow.cpp" line="1423"/>
+        <location filename="../mainwindow.cpp" line="1436"/>
         <source>Timeout: %1 seconds</source>
         <translation>Χρονική διάρκεια: %1 δευτερόλεπτα</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="303"/>
         <location filename="../mainwindow.cpp" line="620"/>
-        <location filename="../mainwindow.cpp" line="1422"/>
-        <location filename="../mainwindow.cpp" line="1430"/>
+        <location filename="../mainwindow.cpp" line="1435"/>
+        <location filename="../mainwindow.cpp" line="1443"/>
         <source>Boot Next: %1</source>
         <translation>Επόμενη εκκίνηση: %1</translation>
     </message>
@@ -240,9 +240,9 @@
         <location filename="../mainwindow.cpp" line="603"/>
         <location filename="../mainwindow.cpp" line="703"/>
         <location filename="../mainwindow.cpp" line="792"/>
-        <location filename="../mainwindow.cpp" line="1623"/>
         <location filename="../mainwindow.cpp" line="1636"/>
-        <location filename="../mainwindow.cpp" line="1642"/>
+        <location filename="../mainwindow.cpp" line="1649"/>
+        <location filename="../mainwindow.cpp" line="1655"/>
         <source>Error</source>
         <translation>Σφάλμα</translation>
     </message>
@@ -318,100 +318,100 @@
         <translation>Κάτι πήγε λάθος, δεν αποθηκεύτηκε η σειρά εκκίνησης.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1065"/>
-        <location filename="../mainwindow.cpp" line="1543"/>
+        <location filename="../mainwindow.cpp" line="1078"/>
+        <location filename="../mainwindow.cpp" line="1556"/>
         <source>Updating configuration, please wait</source>
         <translation>Ενημέρωση ρυθμίσεων, παρακαλώ περιμένετε</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1136"/>
+        <location filename="../mainwindow.cpp" line="1149"/>
         <source>Updating initramfs...</source>
         <translation>Ενημέρωση initramfs...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1150"/>
-        <location filename="../mainwindow.cpp" line="1558"/>
+        <location filename="../mainwindow.cpp" line="1163"/>
+        <location filename="../mainwindow.cpp" line="1571"/>
         <source>Updating grub...</source>
         <translation>Ενημέρωση του grub...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1175"/>
+        <location filename="../mainwindow.cpp" line="1188"/>
         <source>About %1</source>
         <translation>Περί του %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1176"/>
+        <location filename="../mainwindow.cpp" line="1189"/>
         <source>Version: </source>
         <translation>Έκδοση: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1178"/>
+        <location filename="../mainwindow.cpp" line="1191"/>
         <source>Program for selecting common start-up choices</source>
         <translation>Πρόγραμμα για τις επιλογές εκκίνησης</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1180"/>
+        <location filename="../mainwindow.cpp" line="1193"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Πνευματικά δικαιώματα (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1181"/>
+        <location filename="../mainwindow.cpp" line="1194"/>
         <source>%1 License</source>
         <translation>Άδεια %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1202"/>
+        <location filename="../mainwindow.cpp" line="1215"/>
         <source>%1 Help</source>
         <translation>Βοήθεια %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1212"/>
-        <location filename="../mainwindow.cpp" line="1520"/>
+        <location filename="../mainwindow.cpp" line="1225"/>
+        <location filename="../mainwindow.cpp" line="1533"/>
         <source>Running in a Virtual Machine</source>
         <translation>Εκτέλεση σε εικονική μηχανή</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1213"/>
-        <location filename="../mainwindow.cpp" line="1521"/>
+        <location filename="../mainwindow.cpp" line="1226"/>
+        <location filename="../mainwindow.cpp" line="1534"/>
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
         <translation>Το τρέχον σύστημα εκτελείται σε εικονική μηχανή,
 Η αρχική οθόνη εκκίνησης του plymouth θα λειτουργήσει με περιορισμένο τρόπο, και δεν θα μπορείτε να κάνετε προεπισκόπηση  θέματος</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1220"/>
+        <location filename="../mainwindow.cpp" line="1233"/>
         <source>Plymouth packages not installed</source>
         <translation>Τα πακέτα του plymouth δεν έχουν εγκατασταθεί</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1221"/>
+        <location filename="../mainwindow.cpp" line="1234"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
         <translation>Τα πακέτα του plymouth δεν είναι εγκατεστημένα.
 Θέλετε να προχωρήσετε και να τα εγκαταστήσετε;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1247"/>
+        <location filename="../mainwindow.cpp" line="1260"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
         <translation>Εικόνες (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1389"/>
+        <location filename="../mainwindow.cpp" line="1402"/>
         <source>Log not found</source>
         <translation>Δεν βρέθηκε αρχείο αλλαγών</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1389"/>
+        <location filename="../mainwindow.cpp" line="1402"/>
         <source>Could not find log at </source>
         <translation>Δεν ήταν δυνατή η εύρεση του αρχείου αλλαγών σε </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1396"/>
+        <location filename="../mainwindow.cpp" line="1409"/>
         <source>Edit UEFI Boot Entries</source>
         <translation>Επεξεργασία καταχωρήσεων εκκίνησης UEFI</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1399"/>
+        <location filename="../mainwindow.cpp" line="1412"/>
         <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
 - Items are listed in the boot order.
 - Grayed out lines are inactive.</source>
@@ -420,44 +420,44 @@ OK to go ahead and install them?</source>
 - Οι γραμμές με γκρίζο χρώμα είναι ανενεργές.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1410"/>
-        <location filename="../mainwindow.cpp" line="1458"/>
+        <location filename="../mainwindow.cpp" line="1423"/>
+        <location filename="../mainwindow.cpp" line="1471"/>
         <source>Set ac&amp;tive</source>
         <translation>Ορισμός ε&amp;νεργού</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1411"/>
+        <location filename="../mainwindow.cpp" line="1424"/>
         <source>&amp;Add entry</source>
         <translation>Προσ&amp;θήκη καταχώρησης</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1412"/>
+        <location filename="../mainwindow.cpp" line="1425"/>
         <source>Boot &amp;next</source>
         <translation>Εκκίνηση ε&amp;πόμενου</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1623"/>
+        <location filename="../mainwindow.cpp" line="1636"/>
         <source>Could not retrieve UUID for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1631"/>
+        <location filename="../mainwindow.cpp" line="1644"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
         <translation>Εισάγετε κωδικό πρόσβασης για να ξεκλειδώσετε τη κρυπτογραφημένη κατάτμηση %1:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1636"/>
+        <location filename="../mainwindow.cpp" line="1649"/>
         <source>Password entry cancelled or empty for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1642"/>
+        <location filename="../mainwindow.cpp" line="1655"/>
         <source>Could not open %1 LUKS container</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1378"/>
-        <location filename="../mainwindow.cpp" line="1413"/>
+        <location filename="../mainwindow.cpp" line="1391"/>
+        <location filename="../mainwindow.cpp" line="1426"/>
         <source>&amp;Close</source>
         <translation>&amp;Κλείσιμο</translation>
     </message>
@@ -512,83 +512,83 @@ OK to go ahead and install them?</source>
         <translation>Απέτυχε η δημιουργία του προσωρινού αρχείου.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1158"/>
+        <location filename="../mainwindow.cpp" line="1171"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
         <translation>Αυτή τη στιγμή βρίσκεστε σε λειτουργία live με την επιλογή &apos;toram&apos;. Παρακαλώ θυμηθείτε να αποθηκεύσετε το αρχείο persistence ή το remaster, διαφορετικά οι αλλαγές που θα γίνουν θα χαθούν.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1160"/>
+        <location filename="../mainwindow.cpp" line="1173"/>
         <source>Your changes have been successfully applied.</source>
         <translation>Οι αλλαγές σας εφαρμόστηκαν με επιτυχία.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1161"/>
+        <location filename="../mainwindow.cpp" line="1174"/>
         <source>Operation Complete</source>
         <translation>Η διαδικασία ολοκληρώθηκε</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1246"/>
+        <location filename="../mainwindow.cpp" line="1259"/>
         <source>Select image to display in bootloader</source>
         <translation>Επιλέξτε την εικόνα που θα εμφανίζει ο φορτωτής εκκίνησης</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1370"/>
+        <location filename="../mainwindow.cpp" line="1383"/>
         <source>Boot Log</source>
         <translation>Αρχείο εκκίνησης</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1414"/>
+        <location filename="../mainwindow.cpp" line="1427"/>
         <source>Move &amp;down</source>
         <translation>Μετακίνηση &amp;κάτω</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1415"/>
+        <location filename="../mainwindow.cpp" line="1428"/>
         <source>&amp;Remove entry</source>
         <translation>Α&amp;φαίρεση καταχώρησης</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1416"/>
+        <location filename="../mainwindow.cpp" line="1429"/>
         <source>Re&amp;set next</source>
         <translation>Επαναφο&amp;ρά επόμενου</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1417"/>
+        <location filename="../mainwindow.cpp" line="1430"/>
         <source>Change &amp;timeout</source>
         <translation>Αλλαγή &amp;χρονικής διάρκειας</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1418"/>
+        <location filename="../mainwindow.cpp" line="1431"/>
         <source>Move &amp;up</source>
         <translation>Μετακίνηση &amp;επάνω</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1422"/>
-        <location filename="../mainwindow.cpp" line="1430"/>
+        <location filename="../mainwindow.cpp" line="1435"/>
+        <location filename="../mainwindow.cpp" line="1443"/>
         <source>not set, will boot using list order</source>
         <translation>δεν ορίστηκε, θα εκκινήσει με τη σειρά της λίστας</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1455"/>
+        <location filename="../mainwindow.cpp" line="1468"/>
         <source>Set &amp;inactive</source>
         <translation>Ορισμός ανενε&amp;ργού</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1509"/>
+        <location filename="../mainwindow.cpp" line="1522"/>
         <source>Needs reboot</source>
         <translation>Χρειάζεται επανεκκίνηση</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1510"/>
+        <location filename="../mainwindow.cpp" line="1523"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
         <translation>Το plymouth μόλις εγκαταστάθηκε, ίσως χρειαστεί να επανεκκινήσετε για να έχετε τη δυνατότητα προεπισκοπήσεων</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1579"/>
+        <location filename="../mainwindow.cpp" line="1592"/>
         <source>Click to select theme</source>
         <translation>Κάντε κλικ για να επιλέξετε θέμα</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1590"/>
+        <location filename="../mainwindow.cpp" line="1603"/>
         <source>Select GRUB theme</source>
         <translation>Επιλέξτε θέμα του GRUB</translation>
     </message>

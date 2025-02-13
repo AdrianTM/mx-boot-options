@@ -197,15 +197,15 @@
     <message>
         <location filename="../mainwindow.cpp" line="290"/>
         <location filename="../mainwindow.cpp" line="618"/>
-        <location filename="../mainwindow.cpp" line="1423"/>
+        <location filename="../mainwindow.cpp" line="1436"/>
         <source>Timeout: %1 seconds</source>
         <translation>Időtúllépés: %1 másodperc</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="303"/>
         <location filename="../mainwindow.cpp" line="620"/>
-        <location filename="../mainwindow.cpp" line="1422"/>
-        <location filename="../mainwindow.cpp" line="1430"/>
+        <location filename="../mainwindow.cpp" line="1435"/>
+        <location filename="../mainwindow.cpp" line="1443"/>
         <source>Boot Next: %1</source>
         <translation>Következő Indítása: %1</translation>
     </message>
@@ -240,9 +240,9 @@
         <location filename="../mainwindow.cpp" line="603"/>
         <location filename="../mainwindow.cpp" line="703"/>
         <location filename="../mainwindow.cpp" line="792"/>
-        <location filename="../mainwindow.cpp" line="1623"/>
         <location filename="../mainwindow.cpp" line="1636"/>
-        <location filename="../mainwindow.cpp" line="1642"/>
+        <location filename="../mainwindow.cpp" line="1649"/>
+        <location filename="../mainwindow.cpp" line="1655"/>
         <source>Error</source>
         <translation>Hiba</translation>
     </message>
@@ -318,100 +318,100 @@
         <translation>Hiba történt, nem sikerült az indítási sorrend mentése.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1065"/>
-        <location filename="../mainwindow.cpp" line="1543"/>
+        <location filename="../mainwindow.cpp" line="1078"/>
+        <location filename="../mainwindow.cpp" line="1556"/>
         <source>Updating configuration, please wait</source>
         <translation>Beállítások frissítése, kérjük várjon</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1136"/>
+        <location filename="../mainwindow.cpp" line="1149"/>
         <source>Updating initramfs...</source>
         <translation>Az initramfs frissítése...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1150"/>
-        <location filename="../mainwindow.cpp" line="1558"/>
+        <location filename="../mainwindow.cpp" line="1163"/>
+        <location filename="../mainwindow.cpp" line="1571"/>
         <source>Updating grub...</source>
         <translation>A GRUB frissítése...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1175"/>
+        <location filename="../mainwindow.cpp" line="1188"/>
         <source>About %1</source>
         <translation>%1 névjegye</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1176"/>
+        <location filename="../mainwindow.cpp" line="1189"/>
         <source>Version: </source>
         <translation>Verzió:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1178"/>
+        <location filename="../mainwindow.cpp" line="1191"/>
         <source>Program for selecting common start-up choices</source>
         <translation>Egy program az általános indítási opciók kiválasztásához</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1180"/>
+        <location filename="../mainwindow.cpp" line="1193"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1181"/>
+        <location filename="../mainwindow.cpp" line="1194"/>
         <source>%1 License</source>
         <translation>%1 Licenc</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1202"/>
+        <location filename="../mainwindow.cpp" line="1215"/>
         <source>%1 Help</source>
         <translation>%1 súgó</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1212"/>
-        <location filename="../mainwindow.cpp" line="1520"/>
+        <location filename="../mainwindow.cpp" line="1225"/>
+        <location filename="../mainwindow.cpp" line="1533"/>
         <source>Running in a Virtual Machine</source>
         <translation>Egy virtuális gépben fut</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1213"/>
-        <location filename="../mainwindow.cpp" line="1521"/>
+        <location filename="../mainwindow.cpp" line="1226"/>
+        <location filename="../mainwindow.cpp" line="1534"/>
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
         <translation>A jelenlegi rendszer egy virtuális gépben fut,
 a Pymouth indítókép korlátozott módon fog működni és nem lehetséges a téma előnézetét megjeleníteni</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1220"/>
+        <location filename="../mainwindow.cpp" line="1233"/>
         <source>Plymouth packages not installed</source>
         <translation>A Pymouth csomag nincs telepítve</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1221"/>
+        <location filename="../mainwindow.cpp" line="1234"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
         <translation>A Pymouth csomagok jelenleg nincsenek telepítve.
 Indulhat a telepítésük?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1247"/>
+        <location filename="../mainwindow.cpp" line="1260"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
         <translation>Képek (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1389"/>
+        <location filename="../mainwindow.cpp" line="1402"/>
         <source>Log not found</source>
         <translation>Napló nem található</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1389"/>
+        <location filename="../mainwindow.cpp" line="1402"/>
         <source>Could not find log at </source>
         <translation>Nem található a napló:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1396"/>
+        <location filename="../mainwindow.cpp" line="1409"/>
         <source>Edit UEFI Boot Entries</source>
         <translation>UEFI indítási elemek szerkesztése</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1399"/>
+        <location filename="../mainwindow.cpp" line="1412"/>
         <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
 - Items are listed in the boot order.
 - Grayed out lines are inactive.</source>
@@ -420,44 +420,44 @@ Indulhat a telepítésük?</translation>
 - A szürke elemek nem aktívak.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1410"/>
-        <location filename="../mainwindow.cpp" line="1458"/>
+        <location filename="../mainwindow.cpp" line="1423"/>
+        <location filename="../mainwindow.cpp" line="1471"/>
         <source>Set ac&amp;tive</source>
         <translation>Aktívvá tétel</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1411"/>
+        <location filename="../mainwindow.cpp" line="1424"/>
         <source>&amp;Add entry</source>
         <translation>Elem hozzáadása</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1412"/>
+        <location filename="../mainwindow.cpp" line="1425"/>
         <source>Boot &amp;next</source>
         <translation>Következő indítása</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1623"/>
+        <location filename="../mainwindow.cpp" line="1636"/>
         <source>Could not retrieve UUID for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1631"/>
+        <location filename="../mainwindow.cpp" line="1644"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
         <translation>Adja meg a jelszót a %1 titkosított partíció feloldásához:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1636"/>
+        <location filename="../mainwindow.cpp" line="1649"/>
         <source>Password entry cancelled or empty for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1642"/>
+        <location filename="../mainwindow.cpp" line="1655"/>
         <source>Could not open %1 LUKS container</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1378"/>
-        <location filename="../mainwindow.cpp" line="1413"/>
+        <location filename="../mainwindow.cpp" line="1391"/>
+        <location filename="../mainwindow.cpp" line="1426"/>
         <source>&amp;Close</source>
         <translation>Bezárás</translation>
     </message>
@@ -512,83 +512,83 @@ Indulhat a telepítésük?</translation>
         <translation>Átmeneti fájl létrehozása nem sikerült.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1158"/>
+        <location filename="../mainwindow.cpp" line="1171"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
         <translation>Jelenleg a Live rendszert &apos;toram&apos; (memóriában) módban futtatja. Ne felejtse el az adatmegőrzés mentésének futtatását vagy a lemezképbe rögzítést elvégezni., különben a változtatások elvesznek.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1160"/>
+        <location filename="../mainwindow.cpp" line="1173"/>
         <source>Your changes have been successfully applied.</source>
         <translation>A változtatások sikeresen alkalmazva.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1161"/>
+        <location filename="../mainwindow.cpp" line="1174"/>
         <source>Operation Complete</source>
         <translation>Művelet befejeződött</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1246"/>
+        <location filename="../mainwindow.cpp" line="1259"/>
         <source>Select image to display in bootloader</source>
         <translation>Válassza ki a rendszerindításkor megjelenő képet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1370"/>
+        <location filename="../mainwindow.cpp" line="1383"/>
         <source>Boot Log</source>
         <translation>Rendszerindítási napló</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1414"/>
+        <location filename="../mainwindow.cpp" line="1427"/>
         <source>Move &amp;down</source>
         <translation>Mozgatás le</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1415"/>
+        <location filename="../mainwindow.cpp" line="1428"/>
         <source>&amp;Remove entry</source>
         <translation>Elem eltávolítása</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1416"/>
+        <location filename="../mainwindow.cpp" line="1429"/>
         <source>Re&amp;set next</source>
         <translation>Következő visszaállítása</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1417"/>
+        <location filename="../mainwindow.cpp" line="1430"/>
         <source>Change &amp;timeout</source>
         <translation>Időtúllépés megváltoztatása</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1418"/>
+        <location filename="../mainwindow.cpp" line="1431"/>
         <source>Move &amp;up</source>
         <translation>Mozgatás fel</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1422"/>
-        <location filename="../mainwindow.cpp" line="1430"/>
+        <location filename="../mainwindow.cpp" line="1435"/>
+        <location filename="../mainwindow.cpp" line="1443"/>
         <source>not set, will boot using list order</source>
         <translation>nincs megadva, a lista sorrendjében indul</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1455"/>
+        <location filename="../mainwindow.cpp" line="1468"/>
         <source>Set &amp;inactive</source>
         <translation>Inaktívvá tétel</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1509"/>
+        <location filename="../mainwindow.cpp" line="1522"/>
         <source>Needs reboot</source>
         <translation>Újraindítás szükséges</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1510"/>
+        <location filename="../mainwindow.cpp" line="1523"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
         <translation>A Plymouth most került telepítésre. Újraindításra lehet szükség, hogy az előnézeti kép megjeleníthető legyen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1579"/>
+        <location filename="../mainwindow.cpp" line="1592"/>
         <source>Click to select theme</source>
         <translation>Kattintson a téma kiválasztásához</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1590"/>
+        <location filename="../mainwindow.cpp" line="1603"/>
         <source>Select GRUB theme</source>
         <translation>GRUB téma kiválasztása</translation>
     </message>
