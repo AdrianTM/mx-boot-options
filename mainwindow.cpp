@@ -825,31 +825,37 @@ void MainWindow::replaceSyslinuxArg(const QString &args)
         }
 
         QStringList new_list;
+        bool inLiveSection = false;
         bool replaced = false;
 
         while (!file.atEnd()) {
             QString line = file.readLine().trimmed();
-            if (!kernelOptions.isEmpty() && line.contains(kernelOptions)) {
-                line.replace(kernelOptions, args);
-                replaced = true;
-            } else if (kernelOptions.isEmpty() && line.startsWith("APPEND") && !replaced) {
-                QStringList parts = line.split(' ', Qt::SkipEmptyParts);
-                if (parts.size() > 1) {
-                    parts[1] = args;
-                } else {
-                    parts.append(args);
-                }
-                line = parts.join(' ');
+
+            if (line.startsWith("LABEL live")) {
+                inLiveSection = true;
+            } else if (line.startsWith("LABEL") && inLiveSection) {
+                inLiveSection = false;
+            }
+
+            if (inLiveSection && line.trimmed().startsWith("APPEND")) {
+                QString filteredArgs = args;
+                filteredArgs.remove(QRegularExpression("BOOT_IMAGE=[^ ]*"));
+                line = line.left(line.indexOf("APPEND") + 7) + filteredArgs.trimmed();
                 replaced = true;
             }
+
+            if (inLiveSection && line.trimmed().startsWith("KERNEL")) {
+                QString bootImage = args.section("BOOT_IMAGE=", 1, 1).section(' ', 0, 0);
+                line = line.left(line.indexOf("KERNEL") + 7) + bootImage;
+            }
+
             new_list << line;
         }
 
         file.close();
 
         if (!replaced) {
-            qWarning() << "No" << (kernelOptions.isEmpty() ? "APPEND line" : kernelOptions) << "found to replace in"
-                       << configFile << ".";
+            qWarning() << "No APPEND line found in LABEL live section in" << configFile;
             continue;
         }
 
@@ -869,7 +875,7 @@ void MainWindow::replaceSyslinuxArg(const QString &args)
         // Move the temporary file to the original file
         QString tempFilePath = tempFile.fileName();
         if (!cmd.procAsRoot("mv", {tempFilePath, configFile})) {
-            qWarning() << "Failed to move" << tempFilePath << "to" << configFile << ".";
+            qWarning() << "Failed to move" << tempFilePath << "to" << configFile;
         }
     }
 }
