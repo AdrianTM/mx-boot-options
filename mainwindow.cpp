@@ -812,9 +812,22 @@ bool MainWindow::replaceGrubArg(const QString &key, const QString &item)
     return replaced;        // Return whether a replacement occurred
 }
 
-void MainWindow::replaceLiveGrubArgs(const QString &args) {
-    cmd.procAsRoot("live-grubsave", {"-r"});
-    cmd.procAsRoot("live-grubsave", {args});
+void MainWindow::replaceLiveGrubArgs(const QString &args)
+{
+    if (!cmd.procAsRoot("live-grubsave", {"-r"})) {
+        qWarning() << "Failed to reset live-grub settings";
+        return;
+    }
+
+    QString filteredArgs = args;
+    filteredArgs.remove(QRegularExpression("BOOT_IMAGE=[^ ]*"));
+    filteredArgs = filteredArgs.trimmed();
+
+    if (!filteredArgs.isEmpty()) {
+        if (!cmd.procAsRoot("live-grubsave", {filteredArgs})) {
+            qWarning() << "Failed to save new live-grub arguments:" << filteredArgs;
+        }
+    }
 }
 
 void MainWindow::replaceSyslinuxArgs(const QString &args)
