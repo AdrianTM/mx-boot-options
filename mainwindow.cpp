@@ -814,7 +814,7 @@ bool MainWindow::replaceGrubArg(const QString &key, const QString &item)
 
 void MainWindow::replaceLiveGrubArgs(const QString &args)
 {
-    if (!cmd.procAsRoot("live-grubsave", {"-r"})) {
+    if (!cmd.procAsRoot("/usr/local/bin/live-grubsave", {"-r"})) {
         qWarning() << "Failed to reset live-grub settings";
         return;
     }
@@ -824,7 +824,7 @@ void MainWindow::replaceLiveGrubArgs(const QString &args)
     filteredArgs = filteredArgs.trimmed();
 
     if (!filteredArgs.isEmpty()) {
-        if (!cmd.procAsRoot("live-grubsave", {filteredArgs})) {
+        if (!cmd.procAsRoot("/usr/local/bin/live-grubsave", {filteredArgs})) {
             qWarning() << "Failed to save new live-grub arguments:" << filteredArgs;
         }
     }
