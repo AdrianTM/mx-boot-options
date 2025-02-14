@@ -684,10 +684,10 @@ QString MainWindow::selectPartition(const QStringList &list)
 
     if (dialog->exec() == QDialog::Accepted) {
         QString selectedText = dialog->comboBox()->currentText().section(' ', 0, 0);
-        qDebug() << "exec true" << selectedText;
+        qDebug() << "Dialog accepted:" << selectedText;
         return selectedText;
     } else {
-        qDebug() << "exec false" << dialog->comboBox()->currentText().section(' ', 0, 0);
+        qDebug() << "Dialog rejected:" << dialog->comboBox()->currentText().section(' ', 0, 0);
         return {};
     }
 }
