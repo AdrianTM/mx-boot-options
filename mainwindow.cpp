@@ -1085,7 +1085,7 @@ void MainWindow::pushApplyClicked()
 
     if (kernelOptionsChanged) {
         replaceGrubArg("GRUB_CMDLINE_LINUX_DEFAULT", "\"" + ui->textKernel->text() + "\"");
-        if (live) {
+        if (live && !installedMode) {
             replaceLiveGrubArgs(ui->textKernel->text());
             replaceSyslinuxArgs(ui->textKernel->text());
         }
@@ -1623,7 +1623,7 @@ void MainWindow::lineEditKernelTextEdited()
 bool MainWindow::isLuks(const QString &part)
 {
     if (!cmd.procAsRoot("cryptsetup", {"isLuks", part})) {
-        qWarning() << "Error: Failed to check if partition is LUKS:" << part;
+        qDebug() << "Not a LUKS partion:" << part;
         return false;
     }
     return true;
