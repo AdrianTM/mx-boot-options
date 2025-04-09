@@ -35,7 +35,9 @@
 #include <QTimer>
 
 #include "about.h"
+
 #include <chrono>
+#include <unistd.h>
 
 using namespace std::chrono_literals;
 extern const QString starting_home;
@@ -62,7 +64,12 @@ void MainWindow::loadPlymouthThemes()
     ui->comboTheme->clear();
 
     const QString plymouthCmd = "/sbin/plymouth-set-default-theme";
-    QString output = cmd.getOutAsRoot(chroot + plymouthCmd + " -l");
+    QString output;
+    if (chroot.isEmpty()) {
+        output = cmd.getOut(plymouthCmd + " -l");
+    } else {
+        output = cmd.getOutAsRoot(chroot + plymouthCmd + " -l");
+    }
     if (cmd.exitCode() != 0) {
         qWarning() << "Failed to get Plymouth themes list.";
         return;
@@ -70,8 +77,8 @@ void MainWindow::loadPlymouthThemes()
     if (!output.isEmpty()) {
         const QStringList themes = output.split('\n', Qt::SkipEmptyParts);
         ui->comboTheme->addItems(themes);
-
-        const QString currentTheme = cmd.getOutAsRoot(chroot + plymouthCmd).trimmed();
+        const QString currentTheme
+            = chroot.isEmpty() ? cmd.getOut(plymouthCmd).trimmed() : cmd.getOutAsRoot(chroot + plymouthCmd).trimmed();
         if (cmd.exitCode() == 0 && !currentTheme.isEmpty()) {
             const int index = ui->comboTheme->findText(currentTheme);
             if (index != -1) {
@@ -110,8 +117,14 @@ void MainWindow::setup()
     bar = nullptr;
     optionsChanged = false;
     splashChanged = false;
-    user = cmd.getOut("logname", true);
-    if (cmd.exitCode() != 0 || user.isEmpty()) {
+    user = QString::fromUtf8(getlogin());
+    if (user.isEmpty()) {
+        QProcess proc;
+        proc.start("logname", {}, QIODevice::ReadOnly);
+        proc.waitForFinished();
+        user = QString::fromUtf8(proc.readAllStandardOutput().trimmed());
+    }
+    if (user.isEmpty()) {
         qWarning() << "Error: Failed to get the username.";
         user = "unknown";
     }
@@ -900,9 +913,8 @@ void MainWindow::replaceSyslinuxArgs(const QString &args)
 
 void MainWindow::readGrubCfg()
 {
-    QStringList content;
     QString grubFilePath = chroot.isEmpty() ? "/boot/grub/grub.cfg" : chroot.section(' ', 1, 1) + "/boot/grub/grub.cfg";
-    content = cmd.getOutAsRoot("cat " + grubFilePath, true).split('\n', Qt::SkipEmptyParts);
+    QStringList content = cmd.getOutAsRoot("cat " + grubFilePath, true).split('\n', Qt::SkipEmptyParts);
 
     if (content.isEmpty()) {
         qDebug() << "Could not read grub.cfg file";

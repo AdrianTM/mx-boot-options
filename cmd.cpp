@@ -4,6 +4,8 @@
 #include <QDebug>
 #include <QEventLoop>
 #include <QFile>
+#include <QMessageBox>
+#include <QTimer>
 
 #include <unistd.h>
 
@@ -72,7 +74,15 @@ bool Cmd::run(const QString &cmd, QString *output, const QByteArray *input, bool
         qDebug().noquote() << cmd;
     }
     if (elevate && getuid() != 0) {
-        return proc(asRoot, {helper, cmd}, output, input, true);
+        bool result = proc(asRoot, {helper, cmd}, output, input, true);
+        if (exitCode() == 126 || exitCode() == 127) {
+            QMessageBox::critical(nullptr, tr("Administrator Access Required"),
+                                  tr("This operation requires administrator privileges. Please restart the application "
+                                     "and enter your password when prompted."));
+            QTimer::singleShot(0, qApp, &QApplication::quit);
+            exit(EXIT_FAILURE);
+        }
+        return result;
     } else {
         return proc("/bin/bash", {"-c", cmd}, output, input, true);
     }
