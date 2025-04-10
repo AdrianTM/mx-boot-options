@@ -185,7 +185,8 @@ void MainWindow::handleLiveSystem()
 
 void MainWindow::setupGrubSettings()
 {
-    grubInstalled = cmd.run("dpkg -s grub-common | grep -q 'Status: install ok installed'", nullptr, nullptr, true);
+    grubInstalled
+        = cmd.run("dpkg -s grub-common | grep -q 'Status: install ok installed'", nullptr, nullptr, QuietMode::Yes);
     ui->groupBoxOptions->setHidden(!grubInstalled);
     ui->groupBoxBackground->setHidden(!grubInstalled);
 
@@ -376,8 +377,8 @@ void MainWindow::toggleUefiActive(QListWidget *listEntries)
 bool MainWindow::isInstalled(const QString &package)
 {
     QString cmdStr = QString("dpkg -s %1 | grep -q 'Status: install ok installed'").arg(package);
-    return chroot.isEmpty() ? Cmd().run(cmdStr, nullptr, nullptr, true)
-                            : Cmd().runAsRoot(chroot + cmdStr, nullptr, nullptr, true);
+    return chroot.isEmpty() ? Cmd().run(cmdStr, nullptr, nullptr, QuietMode::Yes)
+                            : Cmd().runAsRoot(chroot + cmdStr, nullptr, nullptr, QuietMode::Yes);
 }
 
 // Checks if a list of packages is installed, return false if one of them is not
@@ -551,7 +552,7 @@ bool MainWindow::inVirtualMachine()
 {
     // "lspci -d 15ad:" for VMWare detection
     // -- plymouth seems to work in VMWare, might work in VM depending on driver setup
-    QString out = cmd.getOut("lspci -d 80ee:beef;lspci -d 80ee:cafe", true);
+    QString out = cmd.getOut("lspci -d 80ee:beef;lspci -d 80ee:cafe", QuietMode::Yes);
     return (!out.isEmpty());
 }
 
@@ -566,8 +567,8 @@ void MainWindow::writeDefaultGrub()
     cmd.procAsRoot("cp", {backupFilePath, backupFilePath + ".0"});
     cmd.procAsRoot("rm", {backupFilePath});
     cmd.procAsRoot("cp", {grubFilePath, backupFilePath});
-    cmd.procAsRoot("chown", {"root:", backupFilePath}, nullptr, nullptr, true);
-    cmd.procAsRoot("chmod", {"644", backupFilePath}, nullptr, nullptr, true);
+    cmd.procAsRoot("chown", {"root:", backupFilePath}, nullptr, nullptr, QuietMode::Yes);
+    cmd.procAsRoot("chmod", {"644", backupFilePath}, nullptr, nullptr, QuietMode::Yes);
 
     QTemporaryFile tmpFile;
     if (!tmpFile.open()) {
@@ -583,8 +584,8 @@ void MainWindow::writeDefaultGrub()
     tmpFile.close();
 
     cmd.procAsRoot("mv", {tmpFile.fileName(), grubFilePath});
-    cmd.procAsRoot("chown", {"root:", grubFilePath}, nullptr, nullptr, true);
-    cmd.procAsRoot("chmod", {"644", grubFilePath}, nullptr, nullptr, true);
+    cmd.procAsRoot("chown", {"root:", grubFilePath}, nullptr, nullptr, QuietMode::Yes);
+    cmd.procAsRoot("chmod", {"644", grubFilePath}, nullptr, nullptr, QuietMode::Yes);
 }
 
 QStringList MainWindow::getLinuxPartitions()
@@ -597,7 +598,8 @@ QStringList MainWindow::getLinuxPartitions()
     validPartitions.reserve(partitions.size());
     for (const QString &part_info : partitions) {
         QString partName = part_info.section(' ', 0, 0);
-        QString partType = cmd.getOutAsRoot("lsblk -ln -o PARTTYPE /dev/" + partName, true).trimmed().toLower();
+        QString partType
+            = cmd.getOutAsRoot("lsblk -ln -o PARTTYPE /dev/" + partName, QuietMode::Yes).trimmed().toLower();
 
         if (partType.contains(QRegularExpression(
                 R"(0x83|0fc63daf-8483-4772-8e79-3d69d8477de4|44479540-f297-41b2-9af7-d131d5f0458a|4f68bce3-e8cd-4db1-96e7-fbcaf984b709|ca7d7ccb-63ed-4c53-861c-1742536059cc)"))) {
@@ -914,7 +916,7 @@ void MainWindow::replaceSyslinuxArgs(const QString &args)
 void MainWindow::readGrubCfg()
 {
     QString grubFilePath = chroot.isEmpty() ? "/boot/grub/grub.cfg" : chroot.section(' ', 1, 1) + "/boot/grub/grub.cfg";
-    QStringList content = cmd.getOutAsRoot("cat " + grubFilePath, true).split('\n', Qt::SkipEmptyParts);
+    QStringList content = cmd.getOutAsRoot("cat " + grubFilePath, QuietMode::Yes).split('\n', Qt::SkipEmptyParts);
 
     if (content.isEmpty()) {
         qDebug() << "Could not read grub.cfg file";
