@@ -7,6 +7,8 @@
 #include <QMessageBox>
 #include <QTimer>
 
+#include "mainwindow.h"
+
 #include <unistd.h>
 
 Cmd::Cmd(QObject *parent)
@@ -75,17 +77,20 @@ bool Cmd::run(const QString &cmd, QString *output, const QByteArray *input, bool
     }
     if (elevate && getuid() != 0) {
         bool result = proc(asRoot, {helper, cmd}, output, input, true);
-        if (exitCode() == 126 || exitCode() == 127) {
-            QMessageBox::critical(nullptr, tr("Administrator Access Required"),
-                                  tr("This operation requires administrator privileges. Please restart the application "
-                                     "and enter your password when prompted."));
+        // Command-not-found is returned when password is entered incorrectly
+        if (exitCode() == EXIT_CODE_PERMISSION_DENIED || exitCode() == EXIT_CODE_COMMAND_NOT_FOUND) {
+            if (qobject_cast<MainWindow *>(qApp->activeWindow())) {
+                QMessageBox::critical(
+                    nullptr, tr("Administrator Access Required"),
+                    tr("This operation requires administrator privileges. Please restart the application "
+                       "and enter your password when prompted."));
+            }
             QTimer::singleShot(0, qApp, &QApplication::quit);
             exit(EXIT_FAILURE);
         }
         return result;
-    } else {
-        return proc("/bin/bash", {"-c", cmd}, output, input, true);
     }
+    return proc("/bin/bash", {"-c", cmd}, output, input, true);
 }
 
 bool Cmd::runAsRoot(const QString &cmd, QString *output, const QByteArray *input, bool quiet)
