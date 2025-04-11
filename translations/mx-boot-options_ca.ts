@@ -6,12 +6,12 @@
     <message>
         <location filename="../cmd.cpp" line="141"/>
         <source>Administrator Access Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Cal accés com a Administrador</translation>
     </message>
     <message>
         <location filename="../cmd.cpp" line="142"/>
         <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Per aquesta operació cal tenir privilegis d&apos;administrador: Si us plau, torneu a arrencar l&apos;aplicació i entreu la vostra contrasenya us la demani.</translation>
     </message>
 </context>
 <context>
@@ -199,279 +199,248 @@ particions Linux)</translation>
         <translation>Encara executant-se</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="300"/>
         <source>Set timeout</source>
-        <translation>Defineix el temps d&apos;espera</translation>
+        <translation type="vanished">Defineix el temps d&apos;espera</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="300"/>
         <source>Timeout in seconds:</source>
-        <translation>Temps d&apos;espera en segons</translation>
+        <translation type="vanished">Temps d&apos;espera en segons</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="304"/>
-        <location filename="../mainwindow.cpp" line="633"/>
-        <location filename="../mainwindow.cpp" line="1450"/>
         <source>Timeout: %1 seconds</source>
-        <translation>Temps d&apos;espera %1 segons</translation>
+        <translation type="vanished">Temps d&apos;espera %1 segons</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="317"/>
-        <location filename="../mainwindow.cpp" line="635"/>
-        <location filename="../mainwindow.cpp" line="1449"/>
-        <location filename="../mainwindow.cpp" line="1457"/>
         <source>Boot Next: %1</source>
-        <translation>Propera arrencada %1</translation>
+        <translation type="vanished">Propera arrencada %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="331"/>
         <source>Removal confirmation</source>
-        <translation>Elimina la confirmació</translation>
+        <translation type="vanished">Elimina la confirmació</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="332"/>
         <source>Are you sure you want to delete this boot entry?
 %1</source>
-        <translation>Esteu segur d&apos;esborrar aquesta entrada de l&apos;arrencada?
+        <translation type="vanished">Esteu segur d&apos;esborrar aquesta entrada de l&apos;arrencada?
 %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="420"/>
         <source>Select EFI file</source>
-        <translation>Trieu el fitxer EFI</translation>
+        <translation type="vanished">Trieu el fitxer EFI</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="420"/>
         <source>EFI files (*.efi *.EFI)</source>
-        <translation>Fitxers EFI (*.efi *.EFI)</translation>
+        <translation type="vanished">Fitxers EFI (*.efi *.EFI)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="432"/>
-        <location filename="../mainwindow.cpp" line="447"/>
-        <location filename="../mainwindow.cpp" line="533"/>
-        <location filename="../mainwindow.cpp" line="541"/>
-        <location filename="../mainwindow.cpp" line="575"/>
-        <location filename="../mainwindow.cpp" line="618"/>
-        <location filename="../mainwindow.cpp" line="718"/>
-        <location filename="../mainwindow.cpp" line="807"/>
-        <location filename="../mainwindow.cpp" line="1650"/>
-        <location filename="../mainwindow.cpp" line="1663"/>
-        <location filename="../mainwindow.cpp" line="1669"/>
+        <location filename="../mainwindow.cpp" line="373"/>
+        <location filename="../mainwindow.cpp" line="381"/>
+        <location filename="../mainwindow.cpp" line="415"/>
+        <location filename="../mainwindow.cpp" line="526"/>
+        <location filename="../mainwindow.cpp" line="1341"/>
+        <location filename="../mainwindow.cpp" line="1354"/>
+        <location filename="../mainwindow.cpp" line="1360"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="432"/>
         <source>Could not find the source mountpoint for %1</source>
-        <translation>No he trobat el punt de muntatge origen per %1 </translation>
+        <translation type="vanished">No he trobat el punt de muntatge origen per %1 </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="437"/>
         <source>Set name</source>
-        <translation>Estableix el nom</translation>
+        <translation type="vanished">Estableix el nom</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="437"/>
         <source>Enter the name for the UEFI menu item:</source>
-        <translation>Entreu el nom per a l&apos;ítem del menú UEFI: </translation>
+        <translation type="vanished">Entreu el nom per a l&apos;ítem del menú UEFI: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="447"/>
         <source>Something went wrong, could not add entry.</source>
-        <translation>Alguna cosa ha fallat, no puc afegir l&apos;entrada.</translation>
+        <translation type="vanished">Alguna cosa ha fallat, no puc afegir l&apos;entrada.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="522"/>
+        <location filename="../mainwindow.cpp" line="362"/>
         <source>Installing bootsplash, please wait</source>
         <translation>Instal·lant la pantalla de presentació, espereu si us plau</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="529"/>
+        <location filename="../mainwindow.cpp" line="369"/>
         <source>Updating sources</source>
         <translation>Actualitzant les fonts</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="541"/>
+        <location filename="../mainwindow.cpp" line="381"/>
         <source>Could not install the bootsplash.</source>
         <translation>No he pogut instal·lar la pantalla de presentació.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="618"/>
         <source>Failed to get UEFI boot entries.</source>
-        <translation>Ha fallat en obtenir les entrades d&apos;arrencada UEFI</translation>
+        <translation type="vanished">Ha fallat en obtenir les entrades d&apos;arrencada UEFI</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="637"/>
         <source>Boot Current: %1</source>
-        <translation>Arrenca l&apos;actual: %1</translation>
+        <translation type="vanished">Arrenca l&apos;actual: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="718"/>
+        <location filename="../mainwindow.cpp" line="526"/>
         <source>Could not create a temporary folder</source>
         <translation>No s&apos;ha pogut crear un directori temporal</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="727"/>
-        <location filename="../mainwindow.cpp" line="747"/>
+        <location filename="../mainwindow.cpp" line="535"/>
+        <location filename="../mainwindow.cpp" line="555"/>
         <source>Cannot continue</source>
         <translation>No puc continuar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="727"/>
+        <location filename="../mainwindow.cpp" line="535"/>
         <source>Cannot open LUKS device. Exiting...</source>
         <translation>No puc obrir el dispositiu LUKS. Sortint...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="748"/>
+        <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>No puc crear entorn chroot, no es poden canviar les opcions d&apos;arrencada. Sortint...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="807"/>
         <source>Something went wrong, could not save boot order.</source>
-        <translation>Alguna cosa ha fallat, no puc desar l&apos;ordre d&apos;arrencada.</translation>
+        <translation type="vanished">Alguna cosa ha fallat, no puc desar l&apos;ordre d&apos;arrencada.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1092"/>
-        <location filename="../mainwindow.cpp" line="1570"/>
+        <location filename="../mainwindow.cpp" line="882"/>
+        <location filename="../mainwindow.cpp" line="1261"/>
         <source>Updating configuration, please wait</source>
         <translation>Actualitzant la configuració, espereu si us plau</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1163"/>
+        <location filename="../mainwindow.cpp" line="953"/>
         <source>Updating initramfs...</source>
         <translation>Actualitzant initramfs...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1177"/>
-        <location filename="../mainwindow.cpp" line="1585"/>
+        <location filename="../mainwindow.cpp" line="967"/>
+        <location filename="../mainwindow.cpp" line="1276"/>
         <source>Updating grub...</source>
         <translation>Actualitzant GRUB...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1202"/>
+        <location filename="../mainwindow.cpp" line="992"/>
         <source>About %1</source>
         <translation>Quant a %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1203"/>
+        <location filename="../mainwindow.cpp" line="993"/>
         <source>Version: </source>
         <translation>Versió: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1205"/>
+        <location filename="../mainwindow.cpp" line="995"/>
         <source>Program for selecting common start-up choices</source>
         <translation>Programa per seleccionar les opcions d&apos;arrencada usuals</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1207"/>
+        <location filename="../mainwindow.cpp" line="997"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1208"/>
+        <location filename="../mainwindow.cpp" line="998"/>
         <source>%1 License</source>
         <translation>Llicència de %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1229"/>
+        <location filename="../mainwindow.cpp" line="1019"/>
         <source>%1 Help</source>
         <translation>Ajuda de %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1239"/>
-        <location filename="../mainwindow.cpp" line="1547"/>
+        <location filename="../mainwindow.cpp" line="1029"/>
+        <location filename="../mainwindow.cpp" line="1238"/>
         <source>Running in a Virtual Machine</source>
         <translation>Executant-se en Màquina Virtual</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1240"/>
-        <location filename="../mainwindow.cpp" line="1548"/>
+        <location filename="../mainwindow.cpp" line="1030"/>
+        <location filename="../mainwindow.cpp" line="1239"/>
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
         <translation>El vostre sistema actual s&apos;executa en una Màquina Virtual.
 La pantalla de presentació Plymouth funcionarà de forma limitada, i tampoc podreu tenir vista prèvia del tema.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1247"/>
+        <location filename="../mainwindow.cpp" line="1037"/>
         <source>Plymouth packages not installed</source>
         <translation>No s&apos;han instal·lat els paquets de Plymouth</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1248"/>
+        <location filename="../mainwindow.cpp" line="1038"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
         <translation>Els paquets de Plymouth no estan instal·lats.
 Voleu continuar i instal·lar-los?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1274"/>
+        <location filename="../mainwindow.cpp" line="1064"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
         <translation>Imatges (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1416"/>
+        <location filename="../mainwindow.cpp" line="1206"/>
         <source>Log not found</source>
         <translation>No he trobat el registre</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1416"/>
+        <location filename="../mainwindow.cpp" line="1206"/>
         <source>Could not find log at </source>
         <translation>No he trobat el registre a </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1423"/>
         <source>Edit UEFI Boot Entries</source>
-        <translation>Edita les entrades d&apos;arrencada UEFI</translation>
+        <translation type="vanished">Edita les entrades d&apos;arrencada UEFI</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1426"/>
         <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
 - Items are listed in the boot order.
 - Grayed out lines are inactive.</source>
-        <translation>Podeu usar els botons Amunt/Avall, o arrossegar i deixar ítems per canviar l&apos;ordre d&apos;arrencada.
+        <translation type="vanished">Podeu usar els botons Amunt/Avall, o arrossegar i deixar ítems per canviar l&apos;ordre d&apos;arrencada.
 - Els ítems es llisten en l&apos;ordre d&apos;arrencada.
 - Les línies en gris són inactives.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1437"/>
-        <location filename="../mainwindow.cpp" line="1485"/>
         <source>Set ac&amp;tive</source>
-        <translation>Defineix ac&amp;tiu</translation>
+        <translation type="vanished">Defineix ac&amp;tiu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1438"/>
         <source>&amp;Add entry</source>
-        <translation>&amp;Afegeix entrada</translation>
+        <translation type="vanished">&amp;Afegeix entrada</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1439"/>
         <source>Boot &amp;next</source>
-        <translation>Arrenca el &amp;següent</translation>
+        <translation type="vanished">Arrenca el &amp;següent</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1650"/>
+        <location filename="../mainwindow.cpp" line="1341"/>
         <source>Could not retrieve UUID for %1</source>
         <translation>No puc recuperar l&apos;UUID per %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1658"/>
+        <location filename="../mainwindow.cpp" line="1349"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
         <translation>Entreu la contrasenya per desbloquejar la partició encriptada %1:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1663"/>
+        <location filename="../mainwindow.cpp" line="1354"/>
         <source>Password entry cancelled or empty for %1</source>
         <translation>L&apos;entrada de contrasenya cancel·lada o buida per %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1669"/>
+        <location filename="../mainwindow.cpp" line="1360"/>
         <source>Could not open %1 LUKS container</source>
         <translation>No puc obrir el contenidor LUKS %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1405"/>
-        <location filename="../mainwindow.cpp" line="1440"/>
+        <location filename="../mainwindow.cpp" line="1195"/>
         <source>&amp;Close</source>
         <translation>Tan&amp;ca </translation>
     </message>
@@ -501,108 +470,100 @@ Voleu continuar i instal·lar-los?</translation>
         <translation>Sistema Instal·lat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="533"/>
+        <location filename="../mainwindow.cpp" line="373"/>
         <source>Failed to update package sources.</source>
         <translation>Ha fallat en actualitzar les fonts dels paquets.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="537"/>
+        <location filename="../mainwindow.cpp" line="377"/>
         <source>Installing packages:</source>
         <translation>Instal·lant paquets:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="547"/>
+        <location filename="../mainwindow.cpp" line="387"/>
         <source>Success</source>
         <translation>Èxit</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="547"/>
+        <location filename="../mainwindow.cpp" line="387"/>
         <source>Bootsplash installed successfully.</source>
         <translation>Pantalla de presentació instal·lada amb èxit.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="575"/>
+        <location filename="../mainwindow.cpp" line="415"/>
         <source>Failed to create temporary file.</source>
         <translation>Ha fallat en crear un fitxer temporal.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1185"/>
+        <location filename="../mainwindow.cpp" line="975"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
         <translation>Ara esteu executant en mode autònom amb l&apos;opció &apos;toram&apos;. Si us plau, recordeu-vos de desar el fitxer de persistència o remaster, altrament es perdran els canvis.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1187"/>
+        <location filename="../mainwindow.cpp" line="977"/>
         <source>Your changes have been successfully applied.</source>
         <translation>S&apos;han aplicat els canvis amb èxit.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1188"/>
+        <location filename="../mainwindow.cpp" line="978"/>
         <source>Operation Complete</source>
         <translation>Operació completa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1273"/>
+        <location filename="../mainwindow.cpp" line="1063"/>
         <source>Select image to display in bootloader</source>
         <translation>Trieu la imatge que es mostrarà a l&apos;arrencada</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1397"/>
+        <location filename="../mainwindow.cpp" line="1187"/>
         <source>Boot Log</source>
         <translation>Registre d&apos;arrencada</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1441"/>
         <source>Move &amp;down</source>
-        <translation>Mou a&amp;vall</translation>
+        <translation type="vanished">Mou a&amp;vall</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1442"/>
         <source>&amp;Remove entry</source>
-        <translation>T&amp;reu l&apos;entrada</translation>
+        <translation type="vanished">T&amp;reu l&apos;entrada</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1443"/>
         <source>Re&amp;set next</source>
-        <translation>Re&amp;inicia el proper</translation>
+        <translation type="vanished">Re&amp;inicia el proper</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1444"/>
         <source>Change &amp;timeout</source>
-        <translation>Canvia el &amp;temps d&apos;espera</translation>
+        <translation type="vanished">Canvia el &amp;temps d&apos;espera</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1445"/>
         <source>Move &amp;up</source>
-        <translation>Mou am&amp;unt</translation>
+        <translation type="vanished">Mou am&amp;unt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1449"/>
-        <location filename="../mainwindow.cpp" line="1457"/>
         <source>not set, will boot using list order</source>
-        <translation>no determinat, arrencarà usant l&apos;ordre de la llista</translation>
+        <translation type="vanished">no determinat, arrencarà usant l&apos;ordre de la llista</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1482"/>
         <source>Set &amp;inactive</source>
-        <translation>Defineix &amp;inactiu</translation>
+        <translation type="vanished">Defineix &amp;inactiu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1536"/>
+        <location filename="../mainwindow.cpp" line="1227"/>
         <source>Needs reboot</source>
         <translation>Cal reiniciar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1537"/>
+        <location filename="../mainwindow.cpp" line="1228"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
         <translation>S&apos;acaba d&apos;instal·lar Plymouth, cal reiniciar abans de poder mostrar la vista prèvia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1606"/>
+        <location filename="../mainwindow.cpp" line="1297"/>
         <source>Click to select theme</source>
         <translation>Cliqueu per triar el tema</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1617"/>
+        <location filename="../mainwindow.cpp" line="1308"/>
         <source>Select GRUB theme</source>
         <translation>Trieu el tema del GRUB</translation>
     </message>
@@ -610,7 +571,7 @@ Voleu continuar i instal·lar-los?</translation>
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../main.cpp" line="53"/>
+        <location filename="../main.cpp" line="54"/>
         <source>Program for selecting common start-up choices</source>
         <translation>Programa per seleccionar les opcions d&apos;arrencada usuals</translation>
     </message>
@@ -639,20 +600,18 @@ Voleu continuar i instal·lar-los?</translation>
         <translation>Tan&amp;ca </translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="81"/>
-        <location filename="../main.cpp" line="90"/>
+        <location filename="../main.cpp" line="82"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="82"/>
+        <location filename="../main.cpp" line="83"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Sembla que esteu connectat com a administrador, si us plau sortiu i connecteu-vos com a usuari normal per a usar aquest programa.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="91"/>
         <source>You must run this program with admin access.</source>
-        <translation>Cal executar aquest programa com a administrador.</translation>
+        <translation type="vanished">Cal executar aquest programa com a administrador.</translation>
     </message>
 </context>
 </TS>
