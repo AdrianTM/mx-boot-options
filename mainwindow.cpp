@@ -690,7 +690,7 @@ void MainWindow::replaceSyslinuxArgs(const QString &args)
         }
 
         QTextStream stream(&tempFile);
-        stream.setCodec("UTF-8");
+        stream.setEncoding(QStringConverter::Utf8);
         stream << new_list.join('\n') << '\n';
         tempFile.flush();
         tempFile.close();
