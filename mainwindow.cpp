@@ -212,7 +212,7 @@ void MainWindow::handleSpecialFilesystems()
 
 void MainWindow::unmountAndClean(const QStringList &mountList)
 {
-    for (const auto &mountPoint : qAsConst(mountList)) {
+    for (const auto &mountPoint : std::as_const(mountList)) {
         // Skip if mount point is already mounted at /boot/efi
         if (QProcess::execute("findmnt", {"-n", mountPoint, "/boot/efi"}) != 0) {
             // Extract partition name from mount point path
@@ -569,7 +569,7 @@ void MainWindow::enableGrubLine(const QString &item)
     QStringList new_list;
     bool isItemFound = false;
 
-    for (const QString &line : qAsConst(defaultGrub)) {
+    for (const QString &line : std::as_const(defaultGrub)) {
         if (line == item || line.startsWith("#" + item)) {
             isItemFound = true;
             new_list << item; // Add the item as enabled
@@ -592,7 +592,7 @@ void MainWindow::disableGrubLine(const QString &item)
 {
     QStringList new_list;
     new_list.reserve(defaultGrub.size());
-    for (const QString &line : qAsConst(defaultGrub)) {
+    for (const QString &line : std::as_const(defaultGrub)) {
         new_list << (line.startsWith(item) ? "#" + line : line);
     }
     defaultGrub = new_list;
@@ -604,7 +604,7 @@ bool MainWindow::replaceGrubArg(const QString &key, const QString &item)
     QStringList new_list;
     bool replaced = false;
 
-    for (const QString &line : qAsConst(defaultGrub)) {
+    for (const QString &line : std::as_const(defaultGrub)) {
         if (line.startsWith(key + "=")) {
             new_list << key + "=" + item; // Replace the entire line with the new argument
             replaced = true;
