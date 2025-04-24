@@ -198,40 +198,6 @@ systemet du vil endre (viser kun Linux-partisjoner)</translation>
         <translation>Kjører fortsatt</translation>
     </message>
     <message>
-        <source>Set timeout</source>
-        <translation type="vanished">Velg tidsavbrudd</translation>
-    </message>
-    <message>
-        <source>Timeout in seconds:</source>
-        <translation type="vanished">Tidsavbrudd i sekunder:</translation>
-    </message>
-    <message>
-        <source>Timeout: %1 seconds</source>
-        <translation type="vanished">Tidsavbrudd: %1 sekunder</translation>
-    </message>
-    <message>
-        <source>Boot Next: %1</source>
-        <translation type="vanished">Neste oppstart: %1</translation>
-    </message>
-    <message>
-        <source>Removal confirmation</source>
-        <translation type="vanished">Bekreft fjerning</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete this boot entry?
-%1</source>
-        <translation type="vanished">Vil du virkelig slette denne oppføringen?
-%1</translation>
-    </message>
-    <message>
-        <source>Select EFI file</source>
-        <translation type="vanished">Velg EFI-fil</translation>
-    </message>
-    <message>
-        <source>EFI files (*.efi *.EFI)</source>
-        <translation type="vanished">EFI-filer (*.efi *.EFI)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <location filename="../mainwindow.cpp" line="381"/>
         <location filename="../mainwindow.cpp" line="415"/>
@@ -241,22 +207,6 @@ systemet du vil endre (viser kun Linux-partisjoner)</translation>
         <location filename="../mainwindow.cpp" line="1360"/>
         <source>Error</source>
         <translation>Feil</translation>
-    </message>
-    <message>
-        <source>Could not find the source mountpoint for %1</source>
-        <translation type="vanished">Fant ikke monteringspunkt på kilden for %1</translation>
-    </message>
-    <message>
-        <source>Set name</source>
-        <translation type="vanished">Velg navn</translation>
-    </message>
-    <message>
-        <source>Enter the name for the UEFI menu item:</source>
-        <translation type="vanished">Velg navn for UEFI-element i menyen:</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not add entry.</source>
-        <translation type="vanished">Noe gikk galt, klarte ikke legge til element.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="362"/>
@@ -272,14 +222,6 @@ systemet du vil endre (viser kun Linux-partisjoner)</translation>
         <location filename="../mainwindow.cpp" line="381"/>
         <source>Could not install the bootsplash.</source>
         <translation>Klarte ikke installere oppstartsbilde.</translation>
-    </message>
-    <message>
-        <source>Failed to get UEFI boot entries.</source>
-        <translation type="vanished">Klarte ikke hente oppstartsoppføringer fra UEFI.</translation>
-    </message>
-    <message>
-        <source>Boot Current: %1</source>
-        <translation type="vanished">Gjeldende oppstart: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="526"/>
@@ -301,10 +243,6 @@ systemet du vil endre (viser kun Linux-partisjoner)</translation>
         <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>Klarte ikke opprette chroot-miljø og kan derfor ikke endre oppstartsalternativer. Avslutter …</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not save boot order.</source>
-        <translation type="vanished">Noe gikk galt, klarte ikke lagre oppstartsrekkefølge.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="882"/>
@@ -393,30 +331,6 @@ Vil du installere dem nå?</translation>
         <location filename="../mainwindow.cpp" line="1206"/>
         <source>Could not find log at </source>
         <translation>Fant ikke loggen på</translation>
-    </message>
-    <message>
-        <source>Edit UEFI Boot Entries</source>
-        <translation type="vanished">Rediger UEFI-elementer</translation>
-    </message>
-    <message>
-        <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
-- Items are listed in the boot order.
-- Grayed out lines are inactive.</source>
-        <translation type="vanished">Bruk piltastene Opp/Ned eller dra og slipp for å endre oppstartsrekkefølgen.
-- Elementene er listet opp i oppstartsrekkefølge.
-- Grå linjer er ikke aktive.</translation>
-    </message>
-    <message>
-        <source>Set ac&amp;tive</source>
-        <translation type="vanished">Velg ak&amp;tiv</translation>
-    </message>
-    <message>
-        <source>&amp;Add entry</source>
-        <translation type="vanished">Legg til oppf&amp;øring</translation>
-    </message>
-    <message>
-        <source>Boot &amp;next</source>
-        <translation type="vanished">&amp;Neste oppstart</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1341"/>
@@ -519,34 +433,6 @@ Vil du installere dem nå?</translation>
         <translation>Oppstartslogg</translation>
     </message>
     <message>
-        <source>Move &amp;down</source>
-        <translation type="vanished">Flytt ne&amp;d</translation>
-    </message>
-    <message>
-        <source>&amp;Remove entry</source>
-        <translation type="vanished">Fje&amp;rn oppføring</translation>
-    </message>
-    <message>
-        <source>Re&amp;set next</source>
-        <translation type="vanished">Tilbake&amp;still neste</translation>
-    </message>
-    <message>
-        <source>Change &amp;timeout</source>
-        <translation type="vanished">Endre &amp;tidsavbrudd</translation>
-    </message>
-    <message>
-        <source>Move &amp;up</source>
-        <translation type="vanished">Fl&amp;ytt opp</translation>
-    </message>
-    <message>
-        <source>not set, will boot using list order</source>
-        <translation type="vanished">ikke valgt, vil starte med rekkefølge som i lista</translation>
-    </message>
-    <message>
-        <source>Set &amp;inactive</source>
-        <translation type="vanished">Velg &amp;inaktiv</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1227"/>
         <source>Needs reboot</source>
         <translation>Omstart kreves</translation>
@@ -607,10 +493,6 @@ Vil du installere dem nå?</translation>
         <location filename="../main.cpp" line="83"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Du er innlogget som root. Vennligst logg ut, og logg inn igjen som en vanlig bruker for å bruke dette programmet.</translation>
-    </message>
-    <message>
-        <source>You must run this program with admin access.</source>
-        <translation type="vanished">Dette programmet må kjøres med administratorrettigheter.</translation>
     </message>
 </context>
 </TS>

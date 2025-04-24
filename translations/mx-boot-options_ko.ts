@@ -198,12 +198,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Are you sure you want to delete this boot entry?
-%1</source>
-        <translation type="vanished">이 부트 항목을 정말 삭제하시겠습니까?
-%1</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <location filename="../mainwindow.cpp" line="381"/>
         <location filename="../mainwindow.cpp" line="415"/>
@@ -213,18 +207,6 @@
         <location filename="../mainwindow.cpp" line="1360"/>
         <source>Error</source>
         <translation>에러</translation>
-    </message>
-    <message>
-        <source>Could not find the source mountpoint for %1</source>
-        <translation type="vanished">%1 의 마운트 포인트를 찾을 수 없습니다.</translation>
-    </message>
-    <message>
-        <source>Enter the name for the UEFI menu item:</source>
-        <translation type="vanished">UEFI 메뉴 항목의 이름 입력:</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not add entry.</source>
-        <translation type="vanished">에러가 발생하여 항목을 추가하지 못했습니다.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="362"/>
@@ -261,10 +243,6 @@
         <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not save boot order.</source>
-        <translation type="vanished">에러가 발생하여 부트 순서를 저장하지 못했습니다.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="882"/>
@@ -353,14 +331,6 @@ OK to go ahead and install them?</source>
         <location filename="../mainwindow.cpp" line="1206"/>
         <source>Could not find log at </source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
-- Items are listed in the boot order.
-- Grayed out lines are inactive.</source>
-        <translation type="vanished">Up/Down 버튼을 사용하거나, 마우스로 항목을 드래그 하여 부트 순서를 변경할 수 있습니다.
-- 항목들은 부트 순서에 나열됩니다.
-- 흐려진 라인들은 비활성화 상태입니다.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1341"/>
@@ -523,10 +493,6 @@ OK to go ahead and install them?</source>
         <location filename="../main.cpp" line="83"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>루트 권한으로 로그인한 상태로 보입니다. 이 프로그램을 사용하시려면 로그아웃 후 일반 사용자로 로그인해 주세요.</translation>
-    </message>
-    <message>
-        <source>You must run this program with admin access.</source>
-        <translation type="vanished">어드민 권한으로 이 프로그램을 실행해야 합니다.</translation>
     </message>
 </context>
 </TS>

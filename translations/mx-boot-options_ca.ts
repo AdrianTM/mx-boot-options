@@ -199,40 +199,6 @@ particions Linux)</translation>
         <translation>Encara executant-se</translation>
     </message>
     <message>
-        <source>Set timeout</source>
-        <translation type="vanished">Defineix el temps d&apos;espera</translation>
-    </message>
-    <message>
-        <source>Timeout in seconds:</source>
-        <translation type="vanished">Temps d&apos;espera en segons</translation>
-    </message>
-    <message>
-        <source>Timeout: %1 seconds</source>
-        <translation type="vanished">Temps d&apos;espera %1 segons</translation>
-    </message>
-    <message>
-        <source>Boot Next: %1</source>
-        <translation type="vanished">Propera arrencada %1</translation>
-    </message>
-    <message>
-        <source>Removal confirmation</source>
-        <translation type="vanished">Elimina la confirmació</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete this boot entry?
-%1</source>
-        <translation type="vanished">Esteu segur d&apos;esborrar aquesta entrada de l&apos;arrencada?
-%1</translation>
-    </message>
-    <message>
-        <source>Select EFI file</source>
-        <translation type="vanished">Trieu el fitxer EFI</translation>
-    </message>
-    <message>
-        <source>EFI files (*.efi *.EFI)</source>
-        <translation type="vanished">Fitxers EFI (*.efi *.EFI)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <location filename="../mainwindow.cpp" line="381"/>
         <location filename="../mainwindow.cpp" line="415"/>
@@ -242,22 +208,6 @@ particions Linux)</translation>
         <location filename="../mainwindow.cpp" line="1360"/>
         <source>Error</source>
         <translation>Error</translation>
-    </message>
-    <message>
-        <source>Could not find the source mountpoint for %1</source>
-        <translation type="vanished">No he trobat el punt de muntatge origen per %1 </translation>
-    </message>
-    <message>
-        <source>Set name</source>
-        <translation type="vanished">Estableix el nom</translation>
-    </message>
-    <message>
-        <source>Enter the name for the UEFI menu item:</source>
-        <translation type="vanished">Entreu el nom per a l&apos;ítem del menú UEFI: </translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not add entry.</source>
-        <translation type="vanished">Alguna cosa ha fallat, no puc afegir l&apos;entrada.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="362"/>
@@ -273,14 +223,6 @@ particions Linux)</translation>
         <location filename="../mainwindow.cpp" line="381"/>
         <source>Could not install the bootsplash.</source>
         <translation>No he pogut instal·lar la pantalla de presentació.</translation>
-    </message>
-    <message>
-        <source>Failed to get UEFI boot entries.</source>
-        <translation type="vanished">Ha fallat en obtenir les entrades d&apos;arrencada UEFI</translation>
-    </message>
-    <message>
-        <source>Boot Current: %1</source>
-        <translation type="vanished">Arrenca l&apos;actual: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="526"/>
@@ -302,10 +244,6 @@ particions Linux)</translation>
         <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>No puc crear entorn chroot, no es poden canviar les opcions d&apos;arrencada. Sortint...</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not save boot order.</source>
-        <translation type="vanished">Alguna cosa ha fallat, no puc desar l&apos;ordre d&apos;arrencada.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="882"/>
@@ -394,30 +332,6 @@ Voleu continuar i instal·lar-los?</translation>
         <location filename="../mainwindow.cpp" line="1206"/>
         <source>Could not find log at </source>
         <translation>No he trobat el registre a </translation>
-    </message>
-    <message>
-        <source>Edit UEFI Boot Entries</source>
-        <translation type="vanished">Edita les entrades d&apos;arrencada UEFI</translation>
-    </message>
-    <message>
-        <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
-- Items are listed in the boot order.
-- Grayed out lines are inactive.</source>
-        <translation type="vanished">Podeu usar els botons Amunt/Avall, o arrossegar i deixar ítems per canviar l&apos;ordre d&apos;arrencada.
-- Els ítems es llisten en l&apos;ordre d&apos;arrencada.
-- Les línies en gris són inactives.</translation>
-    </message>
-    <message>
-        <source>Set ac&amp;tive</source>
-        <translation type="vanished">Defineix ac&amp;tiu</translation>
-    </message>
-    <message>
-        <source>&amp;Add entry</source>
-        <translation type="vanished">&amp;Afegeix entrada</translation>
-    </message>
-    <message>
-        <source>Boot &amp;next</source>
-        <translation type="vanished">Arrenca el &amp;següent</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1341"/>
@@ -520,34 +434,6 @@ Voleu continuar i instal·lar-los?</translation>
         <translation>Registre d&apos;arrencada</translation>
     </message>
     <message>
-        <source>Move &amp;down</source>
-        <translation type="vanished">Mou a&amp;vall</translation>
-    </message>
-    <message>
-        <source>&amp;Remove entry</source>
-        <translation type="vanished">T&amp;reu l&apos;entrada</translation>
-    </message>
-    <message>
-        <source>Re&amp;set next</source>
-        <translation type="vanished">Re&amp;inicia el proper</translation>
-    </message>
-    <message>
-        <source>Change &amp;timeout</source>
-        <translation type="vanished">Canvia el &amp;temps d&apos;espera</translation>
-    </message>
-    <message>
-        <source>Move &amp;up</source>
-        <translation type="vanished">Mou am&amp;unt</translation>
-    </message>
-    <message>
-        <source>not set, will boot using list order</source>
-        <translation type="vanished">no determinat, arrencarà usant l&apos;ordre de la llista</translation>
-    </message>
-    <message>
-        <source>Set &amp;inactive</source>
-        <translation type="vanished">Defineix &amp;inactiu</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1227"/>
         <source>Needs reboot</source>
         <translation>Cal reiniciar</translation>
@@ -608,10 +494,6 @@ Voleu continuar i instal·lar-los?</translation>
         <location filename="../main.cpp" line="83"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Sembla que esteu connectat com a administrador, si us plau sortiu i connecteu-vos com a usuari normal per a usar aquest programa.</translation>
-    </message>
-    <message>
-        <source>You must run this program with admin access.</source>
-        <translation type="vanished">Cal executar aquest programa com a administrador.</translation>
     </message>
 </context>
 </TS>

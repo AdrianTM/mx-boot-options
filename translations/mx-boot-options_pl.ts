@@ -198,40 +198,6 @@
         <translation>Ciągle uruchomiony</translation>
     </message>
     <message>
-        <source>Set timeout</source>
-        <translation type="vanished">Ustaw limit czasu</translation>
-    </message>
-    <message>
-        <source>Timeout in seconds:</source>
-        <translation type="vanished">Limit czasu w sekundach:</translation>
-    </message>
-    <message>
-        <source>Timeout: %1 seconds</source>
-        <translation type="vanished">Limit czasu: %1 sekund</translation>
-    </message>
-    <message>
-        <source>Boot Next: %1</source>
-        <translation type="vanished">Uruchom następny: %1</translation>
-    </message>
-    <message>
-        <source>Removal confirmation</source>
-        <translation type="vanished">Potwierdzenie usunięcia</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete this boot entry?
-%1</source>
-        <translation type="vanished">Czy na pewno chcesz usunąć ten wpis rozruchowy?
-%1</translation>
-    </message>
-    <message>
-        <source>Select EFI file</source>
-        <translation type="vanished">Wybierz plik EFI</translation>
-    </message>
-    <message>
-        <source>EFI files (*.efi *.EFI)</source>
-        <translation type="vanished">Pliki EFI (*.efi *.EFI)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <location filename="../mainwindow.cpp" line="381"/>
         <location filename="../mainwindow.cpp" line="415"/>
@@ -241,22 +207,6 @@
         <location filename="../mainwindow.cpp" line="1360"/>
         <source>Error</source>
         <translation>Błąd</translation>
-    </message>
-    <message>
-        <source>Could not find the source mountpoint for %1</source>
-        <translation type="vanished">Nie można znaleźć źródłowego punktu montowania dla %1</translation>
-    </message>
-    <message>
-        <source>Set name</source>
-        <translation type="vanished">Ustaw nazwę</translation>
-    </message>
-    <message>
-        <source>Enter the name for the UEFI menu item:</source>
-        <translation type="vanished">Wprowadź nazwę elementu menu UEFI:</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not add entry.</source>
-        <translation type="vanished">Coś poszło nie tak, nie można dodać wpisu.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="362"/>
@@ -272,14 +222,6 @@
         <location filename="../mainwindow.cpp" line="381"/>
         <source>Could not install the bootsplash.</source>
         <translation>Nie można zainstalować ekranu powitalnego.</translation>
-    </message>
-    <message>
-        <source>Failed to get UEFI boot entries.</source>
-        <translation type="vanished">Nie udało się uzyskać wpisów rozruchowych UEFI.</translation>
-    </message>
-    <message>
-        <source>Boot Current: %1</source>
-        <translation type="vanished">Uruchom bieżący: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="526"/>
@@ -301,10 +243,6 @@
         <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>Nie można utworzyć środowiska chroot, nie można zmienić opcji uruchamiania. Wychodzenie...</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not save boot order.</source>
-        <translation type="vanished">Coś poszło nie tak, nie udało się zapisać kolejności rozruchu.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="882"/>
@@ -393,30 +331,6 @@ Czy kontynuować i zainstalować je?</translation>
         <location filename="../mainwindow.cpp" line="1206"/>
         <source>Could not find log at </source>
         <translation>Nie można znaleźć dziennika w</translation>
-    </message>
-    <message>
-        <source>Edit UEFI Boot Entries</source>
-        <translation type="vanished">Edytuj wpisy rozruchowe UEFI</translation>
-    </message>
-    <message>
-        <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
-- Items are listed in the boot order.
-- Grayed out lines are inactive.</source>
-        <translation type="vanished">Możesz użyć przycisków w górę/w dół lub przeciągnąć i upuścić elementy, aby zmienić kolejność rozruchu.
-- Elementy są wymienione w kolejności rozruchu.
-- Linie wyszarzone są nieaktywne.</translation>
-    </message>
-    <message>
-        <source>Set ac&amp;tive</source>
-        <translation type="vanished">Ustaw ak&amp;tywny</translation>
-    </message>
-    <message>
-        <source>&amp;Add entry</source>
-        <translation type="vanished">Dodaj &amp;wpis</translation>
-    </message>
-    <message>
-        <source>Boot &amp;next</source>
-        <translation type="vanished">Uruchom &amp;następny</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1341"/>
@@ -519,34 +433,6 @@ Czy kontynuować i zainstalować je?</translation>
         <translation>Dziennik rozruchowy</translation>
     </message>
     <message>
-        <source>Move &amp;down</source>
-        <translation type="vanished">Przesuń w &amp;dół</translation>
-    </message>
-    <message>
-        <source>&amp;Remove entry</source>
-        <translation type="vanished">&amp;Usuń wpis</translation>
-    </message>
-    <message>
-        <source>Re&amp;set next</source>
-        <translation type="vanished">&amp;Zresetuj następny</translation>
-    </message>
-    <message>
-        <source>Change &amp;timeout</source>
-        <translation type="vanished">Zmień &amp;limitu czasu</translation>
-    </message>
-    <message>
-        <source>Move &amp;up</source>
-        <translation type="vanished">Przesuń w &amp;górę</translation>
-    </message>
-    <message>
-        <source>not set, will boot using list order</source>
-        <translation type="vanished">nie ustawione, uruchomi się używając kolejności na liście</translation>
-    </message>
-    <message>
-        <source>Set &amp;inactive</source>
-        <translation type="vanished">Ustaw ni&amp;eaktywny</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1227"/>
         <source>Needs reboot</source>
         <translation>Konieczne ponowne uruchomienie</translation>
@@ -607,10 +493,6 @@ Czy kontynuować i zainstalować je?</translation>
         <location filename="../main.cpp" line="83"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Wygląda na to, że jesteś zalogowany jako root, wyloguj się i zaloguj jako zwykły użytkownik, aby korzystać z tego programu.</translation>
-    </message>
-    <message>
-        <source>You must run this program with admin access.</source>
-        <translation type="vanished">Musisz uruchomić ten program z uprawnieniami administratora.</translation>
     </message>
 </context>
 </TS>

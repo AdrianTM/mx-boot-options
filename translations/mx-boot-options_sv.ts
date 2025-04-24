@@ -198,40 +198,6 @@ system du vill modifiera (enbart Linux-partitioner visas)</translation>
         <translation>Kör fortfarande</translation>
     </message>
     <message>
-        <source>Set timeout</source>
-        <translation type="vanished">Ställ in timeout</translation>
-    </message>
-    <message>
-        <source>Timeout in seconds:</source>
-        <translation type="vanished">Timeout i sekunder:</translation>
-    </message>
-    <message>
-        <source>Timeout: %1 seconds</source>
-        <translation type="vanished">Timeout: %1 sekunder</translation>
-    </message>
-    <message>
-        <source>Boot Next: %1</source>
-        <translation type="vanished">Nästa Boot: %1</translation>
-    </message>
-    <message>
-        <source>Removal confirmation</source>
-        <translation type="vanished">Konfirmering av borttagande</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete this boot entry?
-%1</source>
-        <translation type="vanished">Är det säkert att du vill ta bort  denna boot post?
-%1</translation>
-    </message>
-    <message>
-        <source>Select EFI file</source>
-        <translation type="vanished">Välj EFI fil</translation>
-    </message>
-    <message>
-        <source>EFI files (*.efi *.EFI)</source>
-        <translation type="vanished">EFI filer (*.efi *.EFI)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <location filename="../mainwindow.cpp" line="381"/>
         <location filename="../mainwindow.cpp" line="415"/>
@@ -241,22 +207,6 @@ system du vill modifiera (enbart Linux-partitioner visas)</translation>
         <location filename="../mainwindow.cpp" line="1360"/>
         <source>Error</source>
         <translation>Fel</translation>
-    </message>
-    <message>
-        <source>Could not find the source mountpoint for %1</source>
-        <translation type="vanished">Kunde inte hitta källa till monteringspunkt för %1</translation>
-    </message>
-    <message>
-        <source>Set name</source>
-        <translation type="vanished">Ställ in namn</translation>
-    </message>
-    <message>
-        <source>Enter the name for the UEFI menu item:</source>
-        <translation type="vanished">Skriv in namnet för UEFI-meny posten:</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not add entry.</source>
-        <translation type="vanished">Något blev fel, kunde inte lägga till posten.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="362"/>
@@ -272,14 +222,6 @@ system du vill modifiera (enbart Linux-partitioner visas)</translation>
         <location filename="../mainwindow.cpp" line="381"/>
         <source>Could not install the bootsplash.</source>
         <translation>Kunde inte installera bootsplash.</translation>
-    </message>
-    <message>
-        <source>Failed to get UEFI boot entries.</source>
-        <translation type="vanished">Misslyckades med att få fram UEFI boot poster.</translation>
-    </message>
-    <message>
-        <source>Boot Current: %1</source>
-        <translation type="vanished">Boot Nuvarande: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="526"/>
@@ -301,10 +243,6 @@ system du vill modifiera (enbart Linux-partitioner visas)</translation>
         <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>Kan inte skapa chroot-miljö, kan inte ändra startalternativ. Avslutar...</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not save boot order.</source>
-        <translation type="vanished">Något blev fel, kunde inte spara boot-ordning.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="882"/>
@@ -393,30 +331,6 @@ OK att fortsätta och installera dem?</translation>
         <location filename="../mainwindow.cpp" line="1206"/>
         <source>Could not find log at </source>
         <translation>Kunde inte hitta logg vid</translation>
-    </message>
-    <message>
-        <source>Edit UEFI Boot Entries</source>
-        <translation type="vanished">Redigera UEFI Boot Poster</translation>
-    </message>
-    <message>
-        <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
-- Items are listed in the boot order.
-- Grayed out lines are inactive.</source>
-        <translation type="vanished">Du kan använda Upp/Ner knapparna, eller drag &amp; släpp poster för att ändra boot ordning.
-- Poster är listade i boot ordning.
-- Grå rader är inaktiva.</translation>
-    </message>
-    <message>
-        <source>Set ac&amp;tive</source>
-        <translation type="vanished">Gör ak&amp;tiv</translation>
-    </message>
-    <message>
-        <source>&amp;Add entry</source>
-        <translation type="vanished">&amp;Lägg till post</translation>
-    </message>
-    <message>
-        <source>Boot &amp;next</source>
-        <translation type="vanished">&amp;Nästa Boot </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1341"/>
@@ -519,34 +433,6 @@ OK att fortsätta och installera dem?</translation>
         <translation>Bootlogg</translation>
     </message>
     <message>
-        <source>Move &amp;down</source>
-        <translation type="vanished">Flytta ne&amp;r</translation>
-    </message>
-    <message>
-        <source>&amp;Remove entry</source>
-        <translation type="vanished">Ta &amp;bort post</translation>
-    </message>
-    <message>
-        <source>Re&amp;set next</source>
-        <translation type="vanished">&amp;Återställ nästa</translation>
-    </message>
-    <message>
-        <source>Change &amp;timeout</source>
-        <translation type="vanished">Ändra ti&amp;meout</translation>
-    </message>
-    <message>
-        <source>Move &amp;up</source>
-        <translation type="vanished">Flytta &amp;upp</translation>
-    </message>
-    <message>
-        <source>not set, will boot using list order</source>
-        <translation type="vanished">ej inställd, startar i listordning</translation>
-    </message>
-    <message>
-        <source>Set &amp;inactive</source>
-        <translation type="vanished">Gör &amp;inaktiv</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1227"/>
         <source>Needs reboot</source>
         <translation>Behöver omstart</translation>
@@ -607,10 +493,6 @@ OK att fortsätta och installera dem?</translation>
         <location filename="../main.cpp" line="83"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Du verkar vara inloggad som root, var vänlig logga ut och logga in som vanlig användare för att använda detta program.</translation>
-    </message>
-    <message>
-        <source>You must run this program with admin access.</source>
-        <translation type="vanished">Du måste köra detta program med administratörsrättigheter.</translation>
     </message>
 </context>
 </TS>

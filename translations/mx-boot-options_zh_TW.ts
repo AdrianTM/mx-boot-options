@@ -491,9 +491,5 @@ OK to go ahead and install them?</source>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>您似乎是以 root 身份登錄，請登出並以一般使用者身份登錄以使用此程式。</translation>
     </message>
-    <message>
-        <source>You must run this program with admin access.</source>
-        <translation type="vanished">您必須以系統管理員權限執行此程式。</translation>
-    </message>
 </context>
 </TS>

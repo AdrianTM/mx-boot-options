@@ -198,40 +198,6 @@
         <translation>Ακόμα τρέχει</translation>
     </message>
     <message>
-        <source>Set timeout</source>
-        <translation type="vanished">Ορισμός χρονικής διάρκειας</translation>
-    </message>
-    <message>
-        <source>Timeout in seconds:</source>
-        <translation type="vanished">Χρονική διάρκεια σε δευτερόλεπτα:</translation>
-    </message>
-    <message>
-        <source>Timeout: %1 seconds</source>
-        <translation type="vanished">Χρονική διάρκεια: %1 δευτερόλεπτα</translation>
-    </message>
-    <message>
-        <source>Boot Next: %1</source>
-        <translation type="vanished">Επόμενη εκκίνηση: %1</translation>
-    </message>
-    <message>
-        <source>Removal confirmation</source>
-        <translation type="vanished">Επιβεβαίωση αφαίρεσης</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete this boot entry?
-%1</source>
-        <translation type="vanished">Θέλετε σίγουρα να διαγράψετε την καταχώρηση εκκίνησης;
-%1</translation>
-    </message>
-    <message>
-        <source>Select EFI file</source>
-        <translation type="vanished">Επιλογή αρχείου EFI</translation>
-    </message>
-    <message>
-        <source>EFI files (*.efi *.EFI)</source>
-        <translation type="vanished">Αρχεία EFI (*.efi *.EFI)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <location filename="../mainwindow.cpp" line="381"/>
         <location filename="../mainwindow.cpp" line="415"/>
@@ -241,22 +207,6 @@
         <location filename="../mainwindow.cpp" line="1360"/>
         <source>Error</source>
         <translation>Σφάλμα</translation>
-    </message>
-    <message>
-        <source>Could not find the source mountpoint for %1</source>
-        <translation type="vanished">Δεν βρέθηκε σημείο προσάρτησης για το %1</translation>
-    </message>
-    <message>
-        <source>Set name</source>
-        <translation type="vanished">Ορισμός ονόματος</translation>
-    </message>
-    <message>
-        <source>Enter the name for the UEFI menu item:</source>
-        <translation type="vanished">Εισαγωγή ονόματος για το μενού UEFI:</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not add entry.</source>
-        <translation type="vanished">Κάτι πήγε λάθος, δεν προστέθηκε η καταχώρηση.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="362"/>
@@ -272,10 +222,6 @@
         <location filename="../mainwindow.cpp" line="381"/>
         <source>Could not install the bootsplash.</source>
         <translation>Δεν ήταν δυνατή η εγκατάσταση της αρχικής οθόνης εκκίνησης.</translation>
-    </message>
-    <message>
-        <source>Boot Current: %1</source>
-        <translation type="vanished">Τρέχουσα εκκίνηση: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="526"/>
@@ -297,10 +243,6 @@
         <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>Δεν μπορεί να δημιουργηθεί περιβάλλον chroot, δεν μπορεί να γίνει αλλαγή στις επιλογές εκκίνησης. Έξοδος...</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not save boot order.</source>
-        <translation type="vanished">Κάτι πήγε λάθος, δεν αποθηκεύτηκε η σειρά εκκίνησης.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="882"/>
@@ -389,30 +331,6 @@ OK to go ahead and install them?</source>
         <location filename="../mainwindow.cpp" line="1206"/>
         <source>Could not find log at </source>
         <translation>Δεν ήταν δυνατή η εύρεση του αρχείου αλλαγών σε </translation>
-    </message>
-    <message>
-        <source>Edit UEFI Boot Entries</source>
-        <translation type="vanished">Επεξεργασία καταχωρήσεων εκκίνησης UEFI</translation>
-    </message>
-    <message>
-        <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
-- Items are listed in the boot order.
-- Grayed out lines are inactive.</source>
-        <translation type="vanished">Για να αλλάξετε τη σειρά εκκίνησης μπορείτε να χρησιμοποιήσετε τα κουμπιά Επάνω/Κάτω ή να σύρετε και να αποθέσετε τις καταχωρήσεις.
-- Οι καταχωρήσεις εμφανίζονται με τη σειρά εκκίνησης.
-- Οι γραμμές με γκρίζο χρώμα είναι ανενεργές.</translation>
-    </message>
-    <message>
-        <source>Set ac&amp;tive</source>
-        <translation type="vanished">Ορισμός ε&amp;νεργού</translation>
-    </message>
-    <message>
-        <source>&amp;Add entry</source>
-        <translation type="vanished">Προσ&amp;θήκη καταχώρησης</translation>
-    </message>
-    <message>
-        <source>Boot &amp;next</source>
-        <translation type="vanished">Εκκίνηση ε&amp;πόμενου</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1341"/>
@@ -515,34 +433,6 @@ OK to go ahead and install them?</source>
         <translation>Αρχείο εκκίνησης</translation>
     </message>
     <message>
-        <source>Move &amp;down</source>
-        <translation type="vanished">Μετακίνηση &amp;κάτω</translation>
-    </message>
-    <message>
-        <source>&amp;Remove entry</source>
-        <translation type="vanished">Α&amp;φαίρεση καταχώρησης</translation>
-    </message>
-    <message>
-        <source>Re&amp;set next</source>
-        <translation type="vanished">Επαναφο&amp;ρά επόμενου</translation>
-    </message>
-    <message>
-        <source>Change &amp;timeout</source>
-        <translation type="vanished">Αλλαγή &amp;χρονικής διάρκειας</translation>
-    </message>
-    <message>
-        <source>Move &amp;up</source>
-        <translation type="vanished">Μετακίνηση &amp;επάνω</translation>
-    </message>
-    <message>
-        <source>not set, will boot using list order</source>
-        <translation type="vanished">δεν ορίστηκε, θα εκκινήσει με τη σειρά της λίστας</translation>
-    </message>
-    <message>
-        <source>Set &amp;inactive</source>
-        <translation type="vanished">Ορισμός ανενε&amp;ργού</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1227"/>
         <source>Needs reboot</source>
         <translation>Χρειάζεται επανεκκίνηση</translation>
@@ -603,10 +493,6 @@ OK to go ahead and install them?</source>
         <location filename="../main.cpp" line="83"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Φαίνεται ότι έχετε συνδεθεί ως root, αποσυνδεθείτε και συνδεθείτε ως κανονικός χρήστης για να χρησιμοποιήσετε αυτό το πρόγραμμα.</translation>
-    </message>
-    <message>
-        <source>You must run this program with admin access.</source>
-        <translation type="vanished">Πρέπει να εκτελέσετε αυτό το πρόγραμμα με πρόσβαση διαχειριστή.</translation>
     </message>
 </context>
 </TS>

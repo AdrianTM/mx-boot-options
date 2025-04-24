@@ -6,12 +6,12 @@
     <message>
         <location filename="../cmd.cpp" line="141"/>
         <source>Administrator Access Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Accès administrateur•rice nécessaire</translation>
     </message>
     <message>
         <location filename="../cmd.cpp" line="142"/>
         <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette opération nécessite des privilèges d’administrateur•rice. Veuillez redémarrer l’application et saisir votre mot de passe lorsque vous y êtes invité.</translation>
     </message>
 </context>
 <context>
@@ -197,40 +197,6 @@
         <translation>Opération toujours en cours</translation>
     </message>
     <message>
-        <source>Set timeout</source>
-        <translation type="vanished">Définir un délai d’attente</translation>
-    </message>
-    <message>
-        <source>Timeout in seconds:</source>
-        <translation type="vanished">Délai d’attente en secondes:</translation>
-    </message>
-    <message>
-        <source>Timeout: %1 seconds</source>
-        <translation type="vanished">Délai d’attente: %1 secondes</translation>
-    </message>
-    <message>
-        <source>Boot Next: %1</source>
-        <translation type="vanished">Élément sélectionné sera le paramètre par défaut, une seule fois pour le prochain démarrage: %1</translation>
-    </message>
-    <message>
-        <source>Removal confirmation</source>
-        <translation type="vanished">Confirmer l’éjection</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete this boot entry?
-%1</source>
-        <translation type="vanished">Êtes-vous sûr•e de vouloir supprimer cette entrée de démarrage?
-%1</translation>
-    </message>
-    <message>
-        <source>Select EFI file</source>
-        <translation type="vanished">Choisir le fichier EFI</translation>
-    </message>
-    <message>
-        <source>EFI files (*.efi *.EFI)</source>
-        <translation type="vanished">Fichiers EFI (*.efi *.EFI)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <location filename="../mainwindow.cpp" line="381"/>
         <location filename="../mainwindow.cpp" line="415"/>
@@ -240,22 +206,6 @@
         <location filename="../mainwindow.cpp" line="1360"/>
         <source>Error</source>
         <translation>Erreur</translation>
-    </message>
-    <message>
-        <source>Could not find the source mountpoint for %1</source>
-        <translation type="vanished">Impossible de trouver la source du point de montage pour %1</translation>
-    </message>
-    <message>
-        <source>Set name</source>
-        <translation type="vanished">Définir le nom</translation>
-    </message>
-    <message>
-        <source>Enter the name for the UEFI menu item:</source>
-        <translation type="vanished">Entrez le nom de l’entrée du menu UEFI:</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not add entry.</source>
-        <translation type="vanished">Un problème est survenu, il n’a pas été possible d’ajouter l’entrée.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="362"/>
@@ -271,14 +221,6 @@
         <location filename="../mainwindow.cpp" line="381"/>
         <source>Could not install the bootsplash.</source>
         <translation>L’écran d’amorçage n’a pas pu être installé.</translation>
-    </message>
-    <message>
-        <source>Failed to get UEFI boot entries.</source>
-        <translation type="vanished">Impossible d’obtenir les entrées de démarrage de l’UEFI.</translation>
-    </message>
-    <message>
-        <source>Boot Current: %1</source>
-        <translation type="vanished">Démarrage en cours: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="526"/>
@@ -300,10 +242,6 @@
         <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>Impossible de créer environnement chroot, impossible de modifier les options de démarrage. Sortie ...</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not save boot order.</source>
-        <translation type="vanished">Un problème est survenu, impossible de sauvegarder l’ordre de démarrage.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="882"/>
@@ -392,30 +330,6 @@ Voulez-vous les installer?</translation>
         <location filename="../mainwindow.cpp" line="1206"/>
         <source>Could not find log at </source>
         <translation>Impossible de trouver le journal dans </translation>
-    </message>
-    <message>
-        <source>Edit UEFI Boot Entries</source>
-        <translation type="vanished">Éditer les entrées de démarrage UEFI</translation>
-    </message>
-    <message>
-        <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
-- Items are listed in the boot order.
-- Grayed out lines are inactive.</source>
-        <translation type="vanished">Vous pouvez utiliser les boutons Haut/Bas, ou faire glisser et déposer les éléments pour changer l’ordre de démarrage.
-- Les éléments sont listés dans l’ordre de démarrage.
-- Les lignes grisées sont inactives.</translation>
-    </message>
-    <message>
-        <source>Set ac&amp;tive</source>
-        <translation type="vanished">Ac&amp;tiver</translation>
-    </message>
-    <message>
-        <source>&amp;Add entry</source>
-        <translation type="vanished">&amp;Ajouter une entrée</translation>
-    </message>
-    <message>
-        <source>Boot &amp;next</source>
-        <translation type="vanished">Éléme&amp;nt sélectionné sera le paramètre par défaut, une seule fois pour le prochain démarrage</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1341"/>
@@ -518,34 +432,6 @@ Voulez-vous les installer?</translation>
         <translation>Journal de démarrage</translation>
     </message>
     <message>
-        <source>Move &amp;down</source>
-        <translation type="vanished">Descen&amp;dre</translation>
-    </message>
-    <message>
-        <source>&amp;Remove entry</source>
-        <translation type="vanished">&amp;Supprimer l’entrée</translation>
-    </message>
-    <message>
-        <source>Re&amp;set next</source>
-        <translation type="vanished">Ré&amp;initialiser l’entrée par défaut en cours pour le prochain démarrage</translation>
-    </message>
-    <message>
-        <source>Change &amp;timeout</source>
-        <translation type="vanished">M&amp;odifier le délai d’attente</translation>
-    </message>
-    <message>
-        <source>Move &amp;up</source>
-        <translation type="vanished">Mont&amp;er</translation>
-    </message>
-    <message>
-        <source>not set, will boot using list order</source>
-        <translation type="vanished">non défini, le démarrage se fera dans l’ordre de la liste</translation>
-    </message>
-    <message>
-        <source>Set &amp;inactive</source>
-        <translation type="vanished">Désa&amp;ctiver</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1227"/>
         <source>Needs reboot</source>
         <translation>Redémarrage requis</translation>
@@ -606,10 +492,6 @@ Voulez-vous les installer?</translation>
         <location filename="../main.cpp" line="83"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Vous êtes apparemment connecté en tant que root, veuillez vous déconnecter et vous connecter en tant qu’utilisateur•rice normal•e pour utiliser ce programme.</translation>
-    </message>
-    <message>
-        <source>You must run this program with admin access.</source>
-        <translation type="vanished">Vous devez exécuter ce programme avec un accès administrateur•rice.</translation>
     </message>
 </context>
 </TS>

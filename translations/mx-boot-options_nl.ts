@@ -494,9 +494,5 @@ OK om door te gaan en te installeren?</translation>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>U lijkt ingelogd te zijn als root, gelieve uit te loggen en in te loggen als normale gebruiker om dit programma te gebruiken.</translation>
     </message>
-    <message>
-        <source>You must run this program with admin access.</source>
-        <translation type="vanished">Je moet dit programma uitvoeren met admin-toegang.</translation>
-    </message>
 </context>
 </TS>

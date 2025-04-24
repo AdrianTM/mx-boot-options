@@ -6,12 +6,12 @@
     <message>
         <location filename="../cmd.cpp" line="141"/>
         <source>Administrator Access Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Järjestelmänvalvojan oikeudet vaaditaan</translation>
     </message>
     <message>
         <location filename="../cmd.cpp" line="142"/>
         <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toiminto vaatii järjestelmänvalvojan oikeudet. Käynnistä sovellus uudelleen ja anna salasanasi pyydettäessä.</translation>
     </message>
 </context>
 <context>
@@ -198,40 +198,6 @@
         <translation>Edelleen käynnissä</translation>
     </message>
     <message>
-        <source>Set timeout</source>
-        <translation type="vanished">Aseta aikakatkaisu</translation>
-    </message>
-    <message>
-        <source>Timeout in seconds:</source>
-        <translation type="vanished">Aikakatkaisu sekunneissa:</translation>
-    </message>
-    <message>
-        <source>Timeout: %1 seconds</source>
-        <translation type="vanished">Aikakatkaisu: %1 sekuntia</translation>
-    </message>
-    <message>
-        <source>Boot Next: %1</source>
-        <translation type="vanished">Seuraava käynnistys: %1</translation>
-    </message>
-    <message>
-        <source>Removal confirmation</source>
-        <translation type="vanished">Poiston vahvistus</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete this boot entry?
-%1</source>
-        <translation type="vanished">Haluatko poistaa tämän käynnistyksen?
-%1</translation>
-    </message>
-    <message>
-        <source>Select EFI file</source>
-        <translation type="vanished">Valitse EFI-tiedosto</translation>
-    </message>
-    <message>
-        <source>EFI files (*.efi *.EFI)</source>
-        <translation type="vanished">EFI tiedostot (*.efi *.EFI)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <location filename="../mainwindow.cpp" line="381"/>
         <location filename="../mainwindow.cpp" line="415"/>
@@ -241,22 +207,6 @@
         <location filename="../mainwindow.cpp" line="1360"/>
         <source>Error</source>
         <translation>Virhe</translation>
-    </message>
-    <message>
-        <source>Could not find the source mountpoint for %1</source>
-        <translation type="vanished">Ei löytynyt lähteen liitospistettä %1</translation>
-    </message>
-    <message>
-        <source>Set name</source>
-        <translation type="vanished">Aseta nimi</translation>
-    </message>
-    <message>
-        <source>Enter the name for the UEFI menu item:</source>
-        <translation type="vanished">Anna valikolle UEFI nimi:</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not add entry.</source>
-        <translation type="vanished">Jotain meni väärin, merkintää ei voitu lisätä.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="362"/>
@@ -272,14 +222,6 @@
         <location filename="../mainwindow.cpp" line="381"/>
         <source>Could not install the bootsplash.</source>
         <translation>Käynnistyksen splash-kuvaa ei voitu asentaa.</translation>
-    </message>
-    <message>
-        <source>Failed to get UEFI boot entries.</source>
-        <translation type="vanished">UEFI-käynnistyskohteet, haku epäonnistui.</translation>
-    </message>
-    <message>
-        <source>Boot Current: %1</source>
-        <translation type="vanished">Käynnistys viimeisin: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="526"/>
@@ -301,10 +243,6 @@
         <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>Chroot-ympäristöä ei voitu luoda, käynnistysvaihtoehtoja ei voitu muuttaa. Poistutaan...</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not save boot order.</source>
-        <translation type="vanished">Jotain meni väärin, käynnistysjärjestystä ei voitu tallentaa.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="882"/>
@@ -393,30 +331,6 @@ Voidaanko jatkaa ja asentaa ne?</translation>
         <location filename="../mainwindow.cpp" line="1206"/>
         <source>Could not find log at </source>
         <translation>Lokitietoja ei löydetty kohteessa</translation>
-    </message>
-    <message>
-        <source>Edit UEFI Boot Entries</source>
-        <translation type="vanished">Muokkaa UEFI Boot kohteita</translation>
-    </message>
-    <message>
-        <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
-- Items are listed in the boot order.
-- Grayed out lines are inactive.</source>
-        <translation type="vanished">Muuta käynnistysjärjestystä nuolinäppäimillä tai vedä ja pudota kohteet.
-- Kohteet luetellaan käynnistysjärjestyksessä.
-- Harmaat rivit eivät ole aktiivisia.</translation>
-    </message>
-    <message>
-        <source>Set ac&amp;tive</source>
-        <translation type="vanished">Aseta ak&amp;tiiviseksi</translation>
-    </message>
-    <message>
-        <source>&amp;Add entry</source>
-        <translation type="vanished">&amp;Lisää merkintä</translation>
-    </message>
-    <message>
-        <source>Boot &amp;next</source>
-        <translation type="vanished">Käynnistä &amp;seuraava</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1341"/>
@@ -519,34 +433,6 @@ Voidaanko jatkaa ja asentaa ne?</translation>
         <translation>Boot-loki</translation>
     </message>
     <message>
-        <source>Move &amp;down</source>
-        <translation type="vanished">Siirrä &amp;alas</translation>
-    </message>
-    <message>
-        <source>&amp;Remove entry</source>
-        <translation type="vanished">&amp;Poista merkintä</translation>
-    </message>
-    <message>
-        <source>Re&amp;set next</source>
-        <translation type="vanished">Re&amp;setoi seuraava</translation>
-    </message>
-    <message>
-        <source>Change &amp;timeout</source>
-        <translation type="vanished">Muuta &amp;aikakatkaisu</translation>
-    </message>
-    <message>
-        <source>Move &amp;up</source>
-        <translation type="vanished">Siirrä &amp;ylös</translation>
-    </message>
-    <message>
-        <source>not set, will boot using list order</source>
-        <translation type="vanished">ei asetettu, käynnistyy listan mukaan</translation>
-    </message>
-    <message>
-        <source>Set &amp;inactive</source>
-        <translation type="vanished">Aseta &amp;passiiviseksi</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1227"/>
         <source>Needs reboot</source>
         <translation>Käynnistä uudelleen</translation>
@@ -607,10 +493,6 @@ Voidaanko jatkaa ja asentaa ne?</translation>
         <location filename="../main.cpp" line="83"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Olet kirjautunut sisään pääkäyttäjänä. Kirjaudu sisään normaalina käyttäjänä käyttääksesi tätä ohjelmaa.</translation>
-    </message>
-    <message>
-        <source>You must run this program with admin access.</source>
-        <translation type="vanished">Tämä ohjelma on suoritettava järjestelmänvalvojan oikeuksilla.</translation>
     </message>
 </context>
 </TS>

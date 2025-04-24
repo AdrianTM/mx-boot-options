@@ -198,40 +198,6 @@
         <translation>Ende në punë</translation>
     </message>
     <message>
-        <source>Set timeout</source>
-        <translation type="vanished">Ujdisni mbarim kohe</translation>
-    </message>
-    <message>
-        <source>Timeout in seconds:</source>
-        <translation type="vanished">Mbarim kohe, në sekonda:</translation>
-    </message>
-    <message>
-        <source>Timeout: %1 seconds</source>
-        <translation type="vanished">Mbarim kohe: %1 sekonda</translation>
-    </message>
-    <message>
-        <source>Boot Next: %1</source>
-        <translation type="vanished">Nisja Pasuese: %1</translation>
-    </message>
-    <message>
-        <source>Removal confirmation</source>
-        <translation type="vanished">Ripohim heqjeje</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete this boot entry?
-%1</source>
-        <translation type="vanished">Jeni i sigurt se doni të fshihet ky zë nisjeje?
-%1</translation>
-    </message>
-    <message>
-        <source>Select EFI file</source>
-        <translation type="vanished">Përzgjidhni kartelë EFI</translation>
-    </message>
-    <message>
-        <source>EFI files (*.efi *.EFI)</source>
-        <translation type="vanished">Kartela EFI (*.efi *.EFI)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <location filename="../mainwindow.cpp" line="381"/>
         <location filename="../mainwindow.cpp" line="415"/>
@@ -241,22 +207,6 @@
         <location filename="../mainwindow.cpp" line="1360"/>
         <source>Error</source>
         <translation>Gabim</translation>
-    </message>
-    <message>
-        <source>Could not find the source mountpoint for %1</source>
-        <translation type="vanished">S’u gjet dot pikë montimi burimi për %1</translation>
-    </message>
-    <message>
-        <source>Set name</source>
-        <translation type="vanished">I vini emër</translation>
-    </message>
-    <message>
-        <source>Enter the name for the UEFI menu item:</source>
-        <translation type="vanished">Jepni emrin për zërin e menusë UEFI:</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not add entry.</source>
-        <translation type="vanished">Diç shkoi ters, s’u shtua dot zëri.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="362"/>
@@ -272,14 +222,6 @@
         <location filename="../mainwindow.cpp" line="381"/>
         <source>Could not install the bootsplash.</source>
         <translation>S’u instalua dot sigla.</translation>
-    </message>
-    <message>
-        <source>Failed to get UEFI boot entries.</source>
-        <translation type="vanished">S’u arrit të merren zëra nisjeje UEFI.</translation>
-    </message>
-    <message>
-        <source>Boot Current: %1</source>
-        <translation type="vanished">Nis të Tanishmin: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="526"/>
@@ -301,10 +243,6 @@
         <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>S’krijohet dot mjedis chroot, s’ndryshohen dot mundësi nisjeje. Po dilet…</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not save boot order.</source>
-        <translation type="vanished">Diç shkoi ters, s’u ruajt dot rend nisjeje.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="882"/>
@@ -393,30 +331,6 @@ OK të ecet përpara dhe të instalohen?</translation>
         <location filename="../mainwindow.cpp" line="1206"/>
         <source>Could not find log at </source>
         <translation>S’u gjet dot regjistër te</translation>
-    </message>
-    <message>
-        <source>Edit UEFI Boot Entries</source>
-        <translation type="vanished">Përpunoni Zëra Nisjeje UEFI</translation>
-    </message>
-    <message>
-        <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
-- Items are listed in the boot order.
-- Grayed out lines are inactive.</source>
-        <translation type="vanished">Që të ndryshoni rendin e nisjes, mund të përdorni butonat Sipër/Poshtë, ose të merrni &amp; lini zëra.
-- Zërat paraqiten te rendi i nisjes.
-- Rreshtat e paraqitur me gri janë joaktivë.</translation>
-    </message>
-    <message>
-        <source>Set ac&amp;tive</source>
-        <translation type="vanished">Kaloje ak&amp;tiv</translation>
-    </message>
-    <message>
-        <source>&amp;Add entry</source>
-        <translation type="vanished">Shtoni &amp;zë</translation>
-    </message>
-    <message>
-        <source>Boot &amp;next</source>
-        <translation type="vanished">Nis &amp;pasuesin</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1341"/>
@@ -519,30 +433,6 @@ OK të ecet përpara dhe të instalohen?</translation>
         <translation>Regjistër Nisjesh</translation>
     </message>
     <message>
-        <source>Move &amp;down</source>
-        <translation type="vanished">Ule p&amp;oshtë</translation>
-    </message>
-    <message>
-        <source>&amp;Remove entry</source>
-        <translation type="vanished">&amp;Hiqe zërin</translation>
-    </message>
-    <message>
-        <source>Change &amp;timeout</source>
-        <translation type="vanished">Ndryshoni &amp;mbarim kohe</translation>
-    </message>
-    <message>
-        <source>Move &amp;up</source>
-        <translation type="vanished">Ngjite &amp;sipër</translation>
-    </message>
-    <message>
-        <source>not set, will boot using list order</source>
-        <translation type="vanished">e pacaktuar, do të bëhet nisje duke përdorur radhën në listë</translation>
-    </message>
-    <message>
-        <source>Set &amp;inactive</source>
-        <translation type="vanished">Kaloje &amp;joaktiv  </translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1227"/>
         <source>Needs reboot</source>
         <translation>Lyp rinisje</translation>
@@ -603,10 +493,6 @@ OK të ecet përpara dhe të instalohen?</translation>
         <location filename="../main.cpp" line="83"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Duket të keni hyrë si rrënjë, ju lutemi, që të përdorni këtë program, dilni dhe bëni hyrjen si përdorues normal.</translation>
-    </message>
-    <message>
-        <source>You must run this program with admin access.</source>
-        <translation type="vanished">Këtë program duhet ta xhironi me leje përgjegjësi.</translation>
     </message>
 </context>
 </TS>

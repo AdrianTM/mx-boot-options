@@ -197,40 +197,6 @@
         <translation>Aínda executándose</translation>
     </message>
     <message>
-        <source>Set timeout</source>
-        <translation type="vanished">Establecer tempo de espera</translation>
-    </message>
-    <message>
-        <source>Timeout in seconds:</source>
-        <translation type="vanished">Tempo de espera en segundos:</translation>
-    </message>
-    <message>
-        <source>Timeout: %1 seconds</source>
-        <translation type="vanished">Tempo de espera: %1 segundos</translation>
-    </message>
-    <message>
-        <source>Boot Next: %1</source>
-        <translation type="vanished">Arranque seguinte: %1</translation>
-    </message>
-    <message>
-        <source>Removal confirmation</source>
-        <translation type="vanished">Confirmación de eliminación</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete this boot entry?
-%1</source>
-        <translation type="vanished">Estás seguro de que queres eliminar esta entrada de arranque?
-%1</translation>
-    </message>
-    <message>
-        <source>Select EFI file</source>
-        <translation type="vanished">Seleccionar ficheiro EFI</translation>
-    </message>
-    <message>
-        <source>EFI files (*.efi *.EFI)</source>
-        <translation type="vanished">Ficheiros EFI (*.efi *.EFI)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <location filename="../mainwindow.cpp" line="381"/>
         <location filename="../mainwindow.cpp" line="415"/>
@@ -240,22 +206,6 @@
         <location filename="../mainwindow.cpp" line="1360"/>
         <source>Error</source>
         <translation>Erro</translation>
-    </message>
-    <message>
-        <source>Could not find the source mountpoint for %1</source>
-        <translation type="vanished">Non se puido atopar o punto de montaxe da fonte para %1</translation>
-    </message>
-    <message>
-        <source>Set name</source>
-        <translation type="vanished">Establecer nome</translation>
-    </message>
-    <message>
-        <source>Enter the name for the UEFI menu item:</source>
-        <translation type="vanished">Introduza o nome para o item do menu UEFI:</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not add entry.</source>
-        <translation type="vanished">Algo saiu mal, non se puido engadir a entrada.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="362"/>
@@ -271,10 +221,6 @@
         <location filename="../mainwindow.cpp" line="381"/>
         <source>Could not install the bootsplash.</source>
         <translation>A máscara non foi instalada.</translation>
-    </message>
-    <message>
-        <source>Boot Current: %1</source>
-        <translation type="vanished">Arranque actual: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="526"/>
@@ -296,10 +242,6 @@
         <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>Non é posible crear un ambiente chroot. Non é posible cambiar as opcións de arranque. Saíndo...</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not save boot order.</source>
-        <translation type="vanished">Algo saiu mal, non se puido gardar a orde de arranque.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="882"/>
@@ -388,30 +330,6 @@ Continuar e instalar estes paquetes?</translation>
         <location filename="../mainwindow.cpp" line="1206"/>
         <source>Could not find log at </source>
         <translation>Non foi atopado rexistro en</translation>
-    </message>
-    <message>
-        <source>Edit UEFI Boot Entries</source>
-        <translation type="vanished">Editar entradas de arranque UEFI</translation>
-    </message>
-    <message>
-        <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
-- Items are listed in the boot order.
-- Grayed out lines are inactive.</source>
-        <translation type="vanished">Pode usar os botóns Arriba/Abaixo ou arrastrar e soltar elementos para cambiar a orde de arranque.
-- Os elementos están listados na orde de arranque.
-- As liñas grisadas están inactivas.</translation>
-    </message>
-    <message>
-        <source>Set ac&amp;tive</source>
-        <translation type="vanished">Configurar como ac&amp;tivo</translation>
-    </message>
-    <message>
-        <source>&amp;Add entry</source>
-        <translation type="vanished">Eng&amp;adir entrada</translation>
-    </message>
-    <message>
-        <source>Boot &amp;next</source>
-        <translation type="vanished">Arra&amp;nque seguinte</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1341"/>
@@ -514,34 +432,6 @@ Continuar e instalar estes paquetes?</translation>
         <translation>Rexistro de arranque</translation>
     </message>
     <message>
-        <source>Move &amp;down</source>
-        <translation type="vanished">Mover abaixo</translation>
-    </message>
-    <message>
-        <source>&amp;Remove entry</source>
-        <translation type="vanished">Elimina&amp;r entrada</translation>
-    </message>
-    <message>
-        <source>Re&amp;set next</source>
-        <translation type="vanished">Repor &amp;seguinte</translation>
-    </message>
-    <message>
-        <source>Change &amp;timeout</source>
-        <translation type="vanished">Cambiar &amp;tempo de espera</translation>
-    </message>
-    <message>
-        <source>Move &amp;up</source>
-        <translation type="vanished">Mover arriba</translation>
-    </message>
-    <message>
-        <source>not set, will boot using list order</source>
-        <translation type="vanished">non configurado, arrincará usando a orde da lista</translation>
-    </message>
-    <message>
-        <source>Set &amp;inactive</source>
-        <translation type="vanished">Configurar como &amp;inactivo</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1227"/>
         <source>Needs reboot</source>
         <translation>É necesario reiniciar</translation>
@@ -602,10 +492,6 @@ Continuar e instalar estes paquetes?</translation>
         <location filename="../main.cpp" line="83"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>O usuario parece ser root; para usar este programa, pechar a sesión e iniciar sesión como usuario normal.</translation>
-    </message>
-    <message>
-        <source>You must run this program with admin access.</source>
-        <translation type="vanished">Debes executar este programa con acceso de administrador.</translation>
     </message>
 </context>
 </TS>

@@ -198,40 +198,6 @@ kök bölümünü seçin (yalnızca linux bölümleri görüntülenir)</translat
         <translation>Hala çalışıyor</translation>
     </message>
     <message>
-        <source>Set timeout</source>
-        <translation type="vanished">Zaman aşımını ayarlayın</translation>
-    </message>
-    <message>
-        <source>Timeout in seconds:</source>
-        <translation type="vanished">Saniye olarak zaman aşımı:</translation>
-    </message>
-    <message>
-        <source>Timeout: %1 seconds</source>
-        <translation type="vanished">Zaman aşımı: %1 saniye</translation>
-    </message>
-    <message>
-        <source>Boot Next: %1</source>
-        <translation type="vanished">Sonraki Önyükleme: %1</translation>
-    </message>
-    <message>
-        <source>Removal confirmation</source>
-        <translation type="vanished">Kaldırma onayı</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete this boot entry?
-%1</source>
-        <translation type="vanished">Bu önyükleme girdisini silmek istediğinizden emin misiniz?
-%1</translation>
-    </message>
-    <message>
-        <source>Select EFI file</source>
-        <translation type="vanished">EFİ dosyasını seçin</translation>
-    </message>
-    <message>
-        <source>EFI files (*.efi *.EFI)</source>
-        <translation type="vanished">EFI dosyaları (*.efi *.EFI)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <location filename="../mainwindow.cpp" line="381"/>
         <location filename="../mainwindow.cpp" line="415"/>
@@ -241,22 +207,6 @@ kök bölümünü seçin (yalnızca linux bölümleri görüntülenir)</translat
         <location filename="../mainwindow.cpp" line="1360"/>
         <source>Error</source>
         <translation>Hata</translation>
-    </message>
-    <message>
-        <source>Could not find the source mountpoint for %1</source>
-        <translation type="vanished">%1 için kaynak bağlama noktası bulunamadı</translation>
-    </message>
-    <message>
-        <source>Set name</source>
-        <translation type="vanished">Adı ayarlayın</translation>
-    </message>
-    <message>
-        <source>Enter the name for the UEFI menu item:</source>
-        <translation type="vanished">UEFI menü öğesi için ad girin:</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not add entry.</source>
-        <translation type="vanished">Bir şeyler ters gitti, girdi ekle nemedi.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="362"/>
@@ -272,14 +222,6 @@ kök bölümünü seçin (yalnızca linux bölümleri görüntülenir)</translat
         <location filename="../mainwindow.cpp" line="381"/>
         <source>Could not install the bootsplash.</source>
         <translation>bootsplash kurulamadı</translation>
-    </message>
-    <message>
-        <source>Failed to get UEFI boot entries.</source>
-        <translation type="vanished">UEFI önyükleme girdileri alınamadı.</translation>
-    </message>
-    <message>
-        <source>Boot Current: %1</source>
-        <translation type="vanished">Şimdiki Önyükleme: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="526"/>
@@ -301,10 +243,6 @@ kök bölümünü seçin (yalnızca linux bölümleri görüntülenir)</translat
         <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>Chroot ortamı oluşturulamıyor, önyükleme seçenekleri değiştirilemiyor. Çıkılıyor...</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not save boot order.</source>
-        <translation type="vanished">Bir şeyler ters gitti, önyükleme sırası kaydedilemedi.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="882"/>
@@ -393,30 +331,6 @@ Onları kurmak için devam etmeye hazır mısın?</translation>
         <location filename="../mainwindow.cpp" line="1206"/>
         <source>Could not find log at </source>
         <translation>Şurada günlük bulunamadı</translation>
-    </message>
-    <message>
-        <source>Edit UEFI Boot Entries</source>
-        <translation type="vanished">UEFI Önyükleme Girdilerini Düzenle</translation>
-    </message>
-    <message>
-        <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
-- Items are listed in the boot order.
-- Grayed out lines are inactive.</source>
-        <translation type="vanished">Önyükleme sırasını değiştirmek için Yukarı/Aşağı düğmelerini kullanabilir veya öğeleri sürükleyip bırakabilirsiniz.
-- Öğeler önyükleme sırasıyla listelenir.
-- Gri çizgililer etkin değil.</translation>
-    </message>
-    <message>
-        <source>Set ac&amp;tive</source>
-        <translation type="vanished">&amp;Aktif olarak ayarla</translation>
-    </message>
-    <message>
-        <source>&amp;Add entry</source>
-        <translation type="vanished">&amp;Girdi ekle</translation>
-    </message>
-    <message>
-        <source>Boot &amp;next</source>
-        <translation type="vanished">&amp;Sonraki önyükleme</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1341"/>
@@ -519,34 +433,6 @@ Onları kurmak için devam etmeye hazır mısın?</translation>
         <translation>Önyükleme Günlüğü</translation>
     </message>
     <message>
-        <source>Move &amp;down</source>
-        <translation type="vanished">&amp;Aşağı taşı</translation>
-    </message>
-    <message>
-        <source>&amp;Remove entry</source>
-        <translation type="vanished">Girdi &amp;sil</translation>
-    </message>
-    <message>
-        <source>Re&amp;set next</source>
-        <translation type="vanished">Son&amp;rakini sıfırla</translation>
-    </message>
-    <message>
-        <source>Change &amp;timeout</source>
-        <translation type="vanished">&amp;Zaman aşımını değiştir</translation>
-    </message>
-    <message>
-        <source>Move &amp;up</source>
-        <translation type="vanished">&amp;Yukarı taşı</translation>
-    </message>
-    <message>
-        <source>not set, will boot using list order</source>
-        <translation type="vanished">ayarlanmadı, listedeki sırayla önyüklenecek</translation>
-    </message>
-    <message>
-        <source>Set &amp;inactive</source>
-        <translation type="vanished">&amp;Pasif yap</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1227"/>
         <source>Needs reboot</source>
         <translation>Yeniden başlatma gerekli</translation>
@@ -607,10 +493,6 @@ Onları kurmak için devam etmeye hazır mısın?</translation>
         <location filename="../main.cpp" line="83"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Görünüşe göre root olarak girmişsiniz, lütfen çıkın ve bu programı kullanmak için normal kullanıcı olarak girin. </translation>
-    </message>
-    <message>
-        <source>You must run this program with admin access.</source>
-        <translation type="vanished">Bu programı yönetici erişimiyle çalıştırmalısınız.</translation>
     </message>
 </context>
 </TS>

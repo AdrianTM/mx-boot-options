@@ -198,40 +198,6 @@
         <translation>Läuft noch</translation>
     </message>
     <message>
-        <source>Set timeout</source>
-        <translation type="vanished">Timeout einstellen</translation>
-    </message>
-    <message>
-        <source>Timeout in seconds:</source>
-        <translation type="vanished">Timeout in Sekunden:</translation>
-    </message>
-    <message>
-        <source>Timeout: %1 seconds</source>
-        <translation type="vanished">Timeout: %1 Sekunden</translation>
-    </message>
-    <message>
-        <source>Boot Next: %1</source>
-        <translation type="vanished">Boote nächstes: %1</translation>
-    </message>
-    <message>
-        <source>Removal confirmation</source>
-        <translation type="vanished">Entfernen bestätigen</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete this boot entry?
-%1</source>
-        <translation type="vanished">Sind Sie sicher, dass Sie diesen Booteintrag löschen wollen??
-%1</translation>
-    </message>
-    <message>
-        <source>Select EFI file</source>
-        <translation type="vanished">EFI-Datei auswählen</translation>
-    </message>
-    <message>
-        <source>EFI files (*.efi *.EFI)</source>
-        <translation type="vanished">EFI-Dateien (*.efi *.EFI)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <location filename="../mainwindow.cpp" line="381"/>
         <location filename="../mainwindow.cpp" line="415"/>
@@ -241,22 +207,6 @@
         <location filename="../mainwindow.cpp" line="1360"/>
         <source>Error</source>
         <translation>Fehler</translation>
-    </message>
-    <message>
-        <source>Could not find the source mountpoint for %1</source>
-        <translation type="vanished">Konnte den Quell-Einhängepunkt für %1 nicht finden</translation>
-    </message>
-    <message>
-        <source>Set name</source>
-        <translation type="vanished">Name festlegen</translation>
-    </message>
-    <message>
-        <source>Enter the name for the UEFI menu item:</source>
-        <translation type="vanished">Name des UEFI-Menüpunkts eingeben</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not add entry.</source>
-        <translation type="vanished">Etwas lief schief, Eintrag konnte nicht erstellt werden</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="362"/>
@@ -272,10 +222,6 @@
         <location filename="../mainwindow.cpp" line="381"/>
         <source>Could not install the bootsplash.</source>
         <translation>Bootsplash konnte nicht installiert werden</translation>
-    </message>
-    <message>
-        <source>Boot Current: %1</source>
-        <translation type="vanished">Boote aktuelles: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="526"/>
@@ -297,10 +243,6 @@
         <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>Chroot-Umgebung konnte nicht erzeugt und Bootoptionen nicht geändert werden. Abbruch...</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not save boot order.</source>
-        <translation type="vanished">Etwas lief schief, Boot-Reihenfolge konnte nicht gespeichert werden.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="882"/>
@@ -388,30 +330,6 @@ OK für das Weitermachen und der Installierung dieser Pakete ?</translation>
         <location filename="../mainwindow.cpp" line="1206"/>
         <source>Could not find log at </source>
         <translation>Das Protokoll konnte nicht gefunden werden unter</translation>
-    </message>
-    <message>
-        <source>Edit UEFI Boot Entries</source>
-        <translation type="vanished">UEFI-Boot-Einträge bearbeiten</translation>
-    </message>
-    <message>
-        <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
-- Items are listed in the boot order.
-- Grayed out lines are inactive.</source>
-        <translation type="vanished">Mit den Schaltflächen Auf/Ab oder durch Ziehen und Ablegen von Elementen können Sie die Boot-Reihenfolge ändern.
-- Die Elemente werden in der Startreihenfolge aufgelistet.
-- Ausgegraute Zeilen sind inaktiv.</translation>
-    </message>
-    <message>
-        <source>Set ac&amp;tive</source>
-        <translation type="vanished">Auf ak&amp;tiv setzen</translation>
-    </message>
-    <message>
-        <source>&amp;Add entry</source>
-        <translation type="vanished">&amp;Eintrag hinzufügen</translation>
-    </message>
-    <message>
-        <source>Boot &amp;next</source>
-        <translation type="vanished">Boote &amp;nächstes</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1341"/>
@@ -514,34 +432,6 @@ OK für das Weitermachen und der Installierung dieser Pakete ?</translation>
         <translation>Boot-Protokoll</translation>
     </message>
     <message>
-        <source>Move &amp;down</source>
-        <translation type="vanished">&amp;Verschieben abwärts</translation>
-    </message>
-    <message>
-        <source>&amp;Remove entry</source>
-        <translation type="vanished">&amp;Eintrag entfernen</translation>
-    </message>
-    <message>
-        <source>Re&amp;set next</source>
-        <translation type="vanished">Näch&amp;stes zurücksetzen</translation>
-    </message>
-    <message>
-        <source>Change &amp;timeout</source>
-        <translation type="vanished">Ändern &amp;Timeout</translation>
-    </message>
-    <message>
-        <source>Move &amp;up</source>
-        <translation type="vanished">&amp;Verschieben aufwärts</translation>
-    </message>
-    <message>
-        <source>not set, will boot using list order</source>
-        <translation type="vanished">nicht gesetzt, boote mit Reihenfolge in Liste</translation>
-    </message>
-    <message>
-        <source>Set &amp;inactive</source>
-        <translation type="vanished">Auf &amp;inaktiv setzen</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1227"/>
         <source>Needs reboot</source>
         <translation>Neustart erforderlich</translation>
@@ -602,10 +492,6 @@ OK für das Weitermachen und der Installierung dieser Pakete ?</translation>
         <location filename="../main.cpp" line="83"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Sie sind als Administrator am System angemeldet. Bitte melden Sie sich ab und dann als normaler Benutzer wieder an, um dieses Programm zu verwenden.</translation>
-    </message>
-    <message>
-        <source>You must run this program with admin access.</source>
-        <translation type="vanished">Diese Anwendung muss mit Administratorrechten ausgeführt werden.</translation>
     </message>
 </context>
 </TS>

@@ -197,40 +197,6 @@
         <translation>まだ実行中です</translation>
     </message>
     <message>
-        <source>Set timeout</source>
-        <translation type="vanished">タイムアウトの設定</translation>
-    </message>
-    <message>
-        <source>Timeout in seconds:</source>
-        <translation type="vanished">タイムアウトの秒数:</translation>
-    </message>
-    <message>
-        <source>Timeout: %1 seconds</source>
-        <translation type="vanished">タイムアウト: %1 秒</translation>
-    </message>
-    <message>
-        <source>Boot Next: %1</source>
-        <translation type="vanished">次回以降の既定の起動: %1</translation>
-    </message>
-    <message>
-        <source>Removal confirmation</source>
-        <translation type="vanished">削除の確認</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete this boot entry?
-%1</source>
-        <translation type="vanished">本当にこの起動のエントリーを削除しても良いのですか？
-%1</translation>
-    </message>
-    <message>
-        <source>Select EFI file</source>
-        <translation type="vanished">EFI ファイルの選択</translation>
-    </message>
-    <message>
-        <source>EFI files (*.efi *.EFI)</source>
-        <translation type="vanished">EFI ファイル (*.efi *.EFI)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <location filename="../mainwindow.cpp" line="381"/>
         <location filename="../mainwindow.cpp" line="415"/>
@@ -240,22 +206,6 @@
         <location filename="../mainwindow.cpp" line="1360"/>
         <source>Error</source>
         <translation>エラー</translation>
-    </message>
-    <message>
-        <source>Could not find the source mountpoint for %1</source>
-        <translation type="vanished">%1 のソース・マウントポイントが見つかりません</translation>
-    </message>
-    <message>
-        <source>Set name</source>
-        <translation type="vanished">名前の設定</translation>
-    </message>
-    <message>
-        <source>Enter the name for the UEFI menu item:</source>
-        <translation type="vanished">UEFI メニューの項目名を入力します。</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not add entry.</source>
-        <translation type="vanished">問題が発生したため、項目を追加できませんでした。</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="362"/>
@@ -271,10 +221,6 @@
         <location filename="../mainwindow.cpp" line="381"/>
         <source>Could not install the bootsplash.</source>
         <translation>bootsplash をインストールできません。</translation>
-    </message>
-    <message>
-        <source>Boot Current: %1</source>
-        <translation type="vanished">現在の起動設定: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="526"/>
@@ -296,10 +242,6 @@
         <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>chroot 環境を作成できず、起動オプションを変更できません。終了中...</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not save boot order.</source>
-        <translation type="vanished">問題が発生したので、起動順序を保存できませんでした。</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="882"/>
@@ -388,30 +330,6 @@ OK to go ahead and install them?</source>
         <location filename="../mainwindow.cpp" line="1206"/>
         <source>Could not find log at </source>
         <translation>ログが見つかりません</translation>
-    </message>
-    <message>
-        <source>Edit UEFI Boot Entries</source>
-        <translation type="vanished">UEFI の起動エントリを編集</translation>
-    </message>
-    <message>
-        <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
-- Items are listed in the boot order.
-- Grayed out lines are inactive.</source>
-        <translation type="vanished">Up/Down ボタン、または項目のドラッグ＆ドロップで起動順序を変更できます。
-- 項目は起動順に表示します。
-- 灰色になっている行は有効ではありません。</translation>
-    </message>
-    <message>
-        <source>Set ac&amp;tive</source>
-        <translation type="vanished">アクティブにする(&amp;T)</translation>
-    </message>
-    <message>
-        <source>&amp;Add entry</source>
-        <translation type="vanished">エントリの追加(&amp;A)</translation>
-    </message>
-    <message>
-        <source>Boot &amp;next</source>
-        <translation type="vanished">次回の起動(&amp;N)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1341"/>
@@ -514,34 +432,6 @@ OK to go ahead and install them?</source>
         <translation>起動ログ</translation>
     </message>
     <message>
-        <source>Move &amp;down</source>
-        <translation type="vanished">下へ移動(&amp;D)</translation>
-    </message>
-    <message>
-        <source>&amp;Remove entry</source>
-        <translation type="vanished">エントリの削除(&amp;R)</translation>
-    </message>
-    <message>
-        <source>Re&amp;set next</source>
-        <translation type="vanished">次回リセット(&amp;S)</translation>
-    </message>
-    <message>
-        <source>Change &amp;timeout</source>
-        <translation type="vanished">タイムアウトの時間変更(&amp;T)</translation>
-    </message>
-    <message>
-        <source>Move &amp;up</source>
-        <translation type="vanished">上へ移動(&amp;U)</translation>
-    </message>
-    <message>
-        <source>not set, will boot using list order</source>
-        <translation type="vanished">設定せず、リスト順に起動</translation>
-    </message>
-    <message>
-        <source>Set &amp;inactive</source>
-        <translation type="vanished">非アクティブにする(&amp;I)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1227"/>
         <source>Needs reboot</source>
         <translation>再起動が必要です</translation>
@@ -602,10 +492,6 @@ OK to go ahead and install them?</source>
         <location filename="../main.cpp" line="83"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>root としてログインしているようです。このプログラムを使用するには、一度ログアウトして通常のユーザとしてログインしてください。</translation>
-    </message>
-    <message>
-        <source>You must run this program with admin access.</source>
-        <translation type="vanished">このプログラムは管理者権限で実行してください。</translation>
     </message>
 </context>
 </TS>

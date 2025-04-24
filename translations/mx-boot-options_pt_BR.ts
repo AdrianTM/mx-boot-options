@@ -200,40 +200,6 @@ apenas as partições do GNU/Linux são exibidas</translation>
         <translation>Ainda está executando</translation>
     </message>
     <message>
-        <source>Set timeout</source>
-        <translation type="vanished">Configuração do tempo limite</translation>
-    </message>
-    <message>
-        <source>Timeout in seconds:</source>
-        <translation type="vanished">Tempo limite em segundos:</translation>
-    </message>
-    <message>
-        <source>Timeout: %1 seconds</source>
-        <translation type="vanished">Tempo limite em %1 segundos</translation>
-    </message>
-    <message>
-        <source>Boot Next: %1</source>
-        <translation type="vanished">Inicializar em seguida %1</translation>
-    </message>
-    <message>
-        <source>Removal confirmation</source>
-        <translation type="vanished">Confirmação de remoção</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete this boot entry?
-%1</source>
-        <translation type="vanished">Você tem certeza de que quer excluir esta entrada da inicialização?
-%1</translation>
-    </message>
-    <message>
-        <source>Select EFI file</source>
-        <translation type="vanished">Selecionar o arquivo EFI</translation>
-    </message>
-    <message>
-        <source>EFI files (*.efi *.EFI)</source>
-        <translation type="vanished">Arquivos EFI (*.efi ou *.EFI)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <location filename="../mainwindow.cpp" line="381"/>
         <location filename="../mainwindow.cpp" line="415"/>
@@ -243,22 +209,6 @@ apenas as partições do GNU/Linux são exibidas</translation>
         <location filename="../mainwindow.cpp" line="1360"/>
         <source>Error</source>
         <translation>Ocorreu um Erro</translation>
-    </message>
-    <message>
-        <source>Could not find the source mountpoint for %1</source>
-        <translation type="vanished">Não foi possível encontrar o ponto de montagem da origem para % 1</translation>
-    </message>
-    <message>
-        <source>Set name</source>
-        <translation type="vanished">Nome do conjunto</translation>
-    </message>
-    <message>
-        <source>Enter the name for the UEFI menu item:</source>
-        <translation type="vanished">Digite o nome do item do menu UEFI:</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not add entry.</source>
-        <translation type="vanished">Ocorreu um erro, não foi possível adicionar a entrada.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="362"/>
@@ -274,14 +224,6 @@ apenas as partições do GNU/Linux são exibidas</translation>
         <location filename="../mainwindow.cpp" line="381"/>
         <source>Could not install the bootsplash.</source>
         <translation>Não foi possível instalar a tela de inicialização</translation>
-    </message>
-    <message>
-        <source>Failed to get UEFI boot entries.</source>
-        <translation type="vanished">Ocorreu uma falha ao tentar obter as entradas de inicialização do UEFI.</translation>
-    </message>
-    <message>
-        <source>Boot Current: %1</source>
-        <translation type="vanished">Inicialização Atual % 1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="526"/>
@@ -303,10 +245,6 @@ apenas as partições do GNU/Linux são exibidas</translation>
         <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>Não é possível criar o ambiente ‘chroot’, não é possível alterar as opções de inicialização. Saindo do programa...</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not save boot order.</source>
-        <translation type="vanished">Ocorreu um erro, não foi possível salvar a ordem de inicialização.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="882"/>
@@ -397,30 +335,6 @@ Você quer continuar e instalar os pacotes do ‘Plymouth’?</translation>
         <location filename="../mainwindow.cpp" line="1206"/>
         <source>Could not find log at </source>
         <translation>Não foi possível encontrar o relatório das alterações em</translation>
-    </message>
-    <message>
-        <source>Edit UEFI Boot Entries</source>
-        <translation type="vanished">Editar as Entradas de Inicialização do UEFI</translation>
-    </message>
-    <message>
-        <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
-- Items are listed in the boot order.
-- Grayed out lines are inactive.</source>
-        <translation type="vanished">Você pode utilizar os botões Para Cima/Para Baixo ou arrastar e soltar os itens para alterar a ordem de inicialização.
-- Os itens são listados na ordem de inicialização.
-- As linhas acinzentadas estão inativas.</translation>
-    </message>
-    <message>
-        <source>Set ac&amp;tive</source>
-        <translation type="vanished">A&amp;tivar</translation>
-    </message>
-    <message>
-        <source>&amp;Add entry</source>
-        <translation type="vanished">&amp;Adicionar uma entrada</translation>
-    </message>
-    <message>
-        <source>Boot &amp;next</source>
-        <translation type="vanished">I&amp;nicializar em seguida</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1341"/>
@@ -523,34 +437,6 @@ Você quer continuar e instalar os pacotes do ‘Plymouth’?</translation>
         <translation>Relatório das alterações da inicialização</translation>
     </message>
     <message>
-        <source>Move &amp;down</source>
-        <translation type="vanished">Mover para &amp;baixo</translation>
-    </message>
-    <message>
-        <source>&amp;Remove entry</source>
-        <translation type="vanished">&amp;Remover uma entrada</translation>
-    </message>
-    <message>
-        <source>Re&amp;set next</source>
-        <translation type="vanished">Re&amp;stabelecer o próximo</translation>
-    </message>
-    <message>
-        <source>Change &amp;timeout</source>
-        <translation type="vanished">Alterar o &amp;tempo limite</translation>
-    </message>
-    <message>
-        <source>Move &amp;up</source>
-        <translation type="vanished">Mover para &amp;cima</translation>
-    </message>
-    <message>
-        <source>not set, will boot using list order</source>
-        <translation type="vanished">Não foi definido, inicializará utilizando a ordem da lista</translation>
-    </message>
-    <message>
-        <source>Set &amp;inactive</source>
-        <translation type="vanished">Definir como &amp;inativo</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1227"/>
         <source>Needs reboot</source>
         <translation>É necessário reinicializar</translation>
@@ -611,10 +497,6 @@ Você quer continuar e instalar os pacotes do ‘Plymouth’?</translation>
         <location filename="../main.cpp" line="83"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Ao que parece, você está conectado como usuário ‘root’ (administrador). Por favor, saia da sessão e entre novamente com o usuário normal para utilizar este programa.</translation>
-    </message>
-    <message>
-        <source>You must run this program with admin access.</source>
-        <translation type="vanished">Você deve executar este programa com o usuário administrador.</translation>
     </message>
 </context>
 </TS>

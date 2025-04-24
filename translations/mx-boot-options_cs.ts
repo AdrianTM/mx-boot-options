@@ -197,40 +197,6 @@
         <translation>Stále běží</translation>
     </message>
     <message>
-        <source>Set timeout</source>
-        <translation type="vanished">Nastavit odpočet</translation>
-    </message>
-    <message>
-        <source>Timeout in seconds:</source>
-        <translation type="vanished">Odpočet ve vteřínách:</translation>
-    </message>
-    <message>
-        <source>Timeout: %1 seconds</source>
-        <translation type="vanished">Odpočet: %1 sekund</translation>
-    </message>
-    <message>
-        <source>Boot Next: %1</source>
-        <translation type="vanished">Boot Next: %1</translation>
-    </message>
-    <message>
-        <source>Removal confirmation</source>
-        <translation type="vanished">Potvrzení odstranění </translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete this boot entry?
-%1</source>
-        <translation type="vanished">Jste si jistí, že chcete vymazat tuto volbu?
-%1</translation>
-    </message>
-    <message>
-        <source>Select EFI file</source>
-        <translation type="vanished">Vybrat soubor EFI</translation>
-    </message>
-    <message>
-        <source>EFI files (*.efi *.EFI)</source>
-        <translation type="vanished">EFI soubory (*.efi *.EFI)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <location filename="../mainwindow.cpp" line="381"/>
         <location filename="../mainwindow.cpp" line="415"/>
@@ -240,22 +206,6 @@
         <location filename="../mainwindow.cpp" line="1360"/>
         <source>Error</source>
         <translation>Chyba</translation>
-    </message>
-    <message>
-        <source>Could not find the source mountpoint for %1</source>
-        <translation type="vanished">Nepovedlo se nalézt zdrojový bod připojení pro %1</translation>
-    </message>
-    <message>
-        <source>Set name</source>
-        <translation type="vanished">Nastavit jméno</translation>
-    </message>
-    <message>
-        <source>Enter the name for the UEFI menu item:</source>
-        <translation type="vanished">Zadejte jméno pro UEFI položku v menu:</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not add entry.</source>
-        <translation type="vanished">Něco se pokazilo, nepovedlo se přidat položku.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="362"/>
@@ -271,10 +221,6 @@
         <location filename="../mainwindow.cpp" line="381"/>
         <source>Could not install the bootsplash.</source>
         <translation>Bootsplash se nepovedlo nainstalovat.</translation>
-    </message>
-    <message>
-        <source>Boot Current: %1</source>
-        <translation type="vanished">Boot Current: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="526"/>
@@ -296,10 +242,6 @@
         <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>Nelze vytvořit chroot prostředí, nelze změnit možnosti bootování. Odchod...</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not save boot order.</source>
-        <translation type="vanished">Něco se pokazilo, nepovedlo se uložit pořadí bootování.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="882"/>
@@ -388,30 +330,6 @@ Chcete pokračovat k instalaci?</translation>
         <location filename="../mainwindow.cpp" line="1206"/>
         <source>Could not find log at </source>
         <translation>Nepodařilo se najít log v</translation>
-    </message>
-    <message>
-        <source>Edit UEFI Boot Entries</source>
-        <translation type="vanished">Editovat UEFI Položky Bootování</translation>
-    </message>
-    <message>
-        <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
-- Items are listed in the boot order.
-- Grayed out lines are inactive.</source>
-        <translation type="vanished">Pro změnu v pořadí můžete použít tlačítka, nebo popotáhnout položky .
-- Položky jsou zobrazené v pořadí jak bodu nabootovány.
-- Zašeděné řádky jsou neaktivní.</translation>
-    </message>
-    <message>
-        <source>Set ac&amp;tive</source>
-        <translation type="vanished">Nastaviit jako &amp;aktivní</translation>
-    </message>
-    <message>
-        <source>&amp;Add entry</source>
-        <translation type="vanished">&amp;Přidat záznam</translation>
-    </message>
-    <message>
-        <source>Boot &amp;next</source>
-        <translation type="vanished">Bootovat &amp;další</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1341"/>
@@ -514,34 +432,6 @@ Chcete pokračovat k instalaci?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Move &amp;down</source>
-        <translation type="vanished">Posunout  &amp;dolů</translation>
-    </message>
-    <message>
-        <source>&amp;Remove entry</source>
-        <translation type="vanished">&amp;Odstranit záznam</translation>
-    </message>
-    <message>
-        <source>Re&amp;set next</source>
-        <translation type="vanished">Re&amp;set další</translation>
-    </message>
-    <message>
-        <source>Change &amp;timeout</source>
-        <translation type="vanished">Změnit  &amp;timeout</translation>
-    </message>
-    <message>
-        <source>Move &amp;up</source>
-        <translation type="vanished">Posunout  &amp;nahoru</translation>
-    </message>
-    <message>
-        <source>not set, will boot using list order</source>
-        <translation type="vanished">nenastaveno, pro start se použije pořadí v seznamu</translation>
-    </message>
-    <message>
-        <source>Set &amp;inactive</source>
-        <translation type="vanished">Nastaviit jako &amp;neaktivní</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1227"/>
         <source>Needs reboot</source>
         <translation>Potřebuje Restart</translation>
@@ -602,10 +492,6 @@ Chcete pokračovat k instalaci?</translation>
         <location filename="../main.cpp" line="83"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Spuštěno pod účtem root-a, odhlašte se a přihlašte jako bězný uživatel.</translation>
-    </message>
-    <message>
-        <source>You must run this program with admin access.</source>
-        <translation type="vanished">Tento program musíte spustit s oprávněním správce.</translation>
     </message>
 </context>
 </TS>
