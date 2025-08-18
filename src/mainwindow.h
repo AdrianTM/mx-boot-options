@@ -28,8 +28,8 @@
 #include <QTextEdit>
 #include <QTimer>
 
-#include <cmd.h>
-#include <dialog.h>
+#include "cmd.h"
+#include "dialog.h"
 
 namespace Ui
 {
