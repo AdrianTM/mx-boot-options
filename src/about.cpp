@@ -10,7 +10,6 @@
 #include <QVBoxLayout>
 
 #include "common.h"
-#include "version.h"
 #include <unistd.h>
 
 // Display doc as nomal user when run as root
