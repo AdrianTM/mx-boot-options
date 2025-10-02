@@ -1302,7 +1302,11 @@ void MainWindow::comboSaveDefaultClicked()
 
 void MainWindow::comboThemeCurrentIndexChanged(int index)
 {
-    ui->pushPreview->setDisabled(ui->comboTheme->itemText(index) == QLatin1String("details") || !isSplashEnabled());
+    const QString themeName = ui->comboTheme->itemText(index);
+    const bool isNonPreviewableTheme = (themeName == QLatin1String("details")
+                                        || themeName == QLatin1String("text")
+                                        || themeName == QLatin1String("tribar"));
+    ui->pushPreview->setDisabled(isNonPreviewableTheme || !isSplashEnabled());
 }
 
 void MainWindow::comboGrubThemeToggled(bool checked)
