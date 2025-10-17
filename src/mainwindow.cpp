@@ -834,8 +834,9 @@ void MainWindow::processKernelCommandLine(QString line)
 
     bool hasHush = cmdline.contains("hush");
     bool hasQuiet = cmdline.contains("quiet");
-    ui->radioLimitedMsg->setChecked(hasHush);
+
     ui->radioDetailedMsg->setChecked(hasQuiet);
+    ui->radioLimitedMsg->setChecked(hasHush);
     ui->radioVeryDetailedMsg->setChecked(!hasHush && !hasQuiet);
 
     ui->checkBootsplash->setChecked(cmdline.contains("splash") && isInstalled(requiredPackages));
