@@ -24,9 +24,9 @@ msgstr ""
 #. The desktop entry name will be displayed within the menu.
 #: desktop-in/mx-boot-options.desktop.in:5
 msgid "MX Boot Options"
-msgstr "MX-tietokoneen käynnistyminen"
+msgstr "MX Käynnistysvalikon asetukset"
 
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/mx-boot-options.desktop.in:7
 msgid "Common start-up choices"
-msgstr "Vaihtoehtoja käynnistysvalikkoon"
+msgstr "Käynnistysvalikon ulkoasu ja lisäasetukset"
