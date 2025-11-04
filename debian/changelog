@@ -1,3 +1,10 @@
+mx-boot-options (25.11.1) mx; urgency=medium
+
+  * Fix: Use regular expressions for whole words to recognize and
+    replace kernel boot parameters 'hush', 'quiet', and 'splash'
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 04 Nov 2025 16:37:12 -0500
+
 mx-boot-options (25.10.2) mx; urgency=medium
 
   * Added Wayland session detection so the preview button stays disabled

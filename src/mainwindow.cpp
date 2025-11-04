@@ -852,14 +852,15 @@ void MainWindow::processKernelCommandLine(QString line)
     const QString cmdline = line.remove("GRUB_CMDLINE_LINUX_DEFAULT=").remove(QRegularExpression("[\"']"));
     ui->textKernel->setText(live && !installedMode ? kernelOptions : cmdline);
 
-    bool hasHush = cmdline.contains("hush");
-    bool hasQuiet = cmdline.contains("quiet");
+    bool hasHush = cmdline.contains(QRegularExpression(R"RX((^|\s+)hush(\s+|$))RX"));
+    bool hasQuiet = cmdline.contains(QRegularExpression(R"RX((^|\s+)quiet(\s+|$))RX"));
+    bool hasSplash = cmdline.contains(QRegularExpression(R"RX((^|\s+)splash(\s+|$))RX"));
 
     ui->radioDetailedMsg->setChecked(hasQuiet);
     ui->radioLimitedMsg->setChecked(hasHush);
     ui->radioVeryDetailedMsg->setChecked(!hasHush && !hasQuiet);
 
-    ui->checkBootsplash->setChecked(cmdline.contains("splash") && isInstalled(requiredPackages));
+    ui->checkBootsplash->setChecked(hasSplash && isInstalled(requiredPackages));
 }
 
 // Read kernel line and options from /proc/cmdline
@@ -1116,11 +1117,11 @@ void MainWindow::radioDetailedMsgToggled(bool checked)
         ui->pushApply->setEnabled(true);
 
         QString line = ui->textKernel->text();
-        if (!line.contains(QLatin1String("quiet"))) {
+        if (!line.contains(QRegularExpression(R"RX((^|\s+)quiet(\s+|$))RX"))) {
             line.append(line.isEmpty() ? "quiet" : " quiet");
         }
 
-        line.remove(QRegularExpression("\\s*hush"));
+        line.replace(QRegularExpression(R"RX((^|\s+)hush(\s+|$))RX"), " ");
         ui->textKernel->setText(line.trimmed());
     }
 }
@@ -1132,7 +1133,8 @@ void MainWindow::radioVeryDetailedMsgToggled(bool checked)
         ui->pushApply->setEnabled(true);
 
         QString line = ui->textKernel->text();
-        line.remove(QRegularExpression("\\s*quiet|\\s*hush"));
+        line.replace(QRegularExpression(R"RX((^|\s+)hush(\s+|$))RX"), " ");
+        line.replace(QRegularExpression(R"RX((^|\s+)quiet(\s+|$))RX"), " ");
         ui->textKernel->setText(line.trimmed());
     }
 }
@@ -1146,10 +1148,10 @@ void MainWindow::radioLimitedMsgToggled(bool checked)
         QString line = ui->textKernel->text();
         QStringList options;
 
-        if (!line.contains(QLatin1String("quiet"))) {
+        if (!line.contains(QRegularExpression(R"RX((^|\s+)quiet(\s+|$))RX"))) {
             options << "quiet";
         }
-        if (!line.contains(QLatin1String("hush"))) {
+        if (!line.contains(QRegularExpression(R"RX((^|\s+)hush(\s+|$))RX"))) {
             options << "hush";
         }
 
@@ -1197,13 +1199,13 @@ void MainWindow::comboBootsplashToggled(bool checked)
     QString line = ui->textKernel->text();
     if (checked) {
         loadPlymouthThemes();
-        if (!line.contains(QLatin1String("splash"))) {
+        if (!line.contains(QRegularExpression(R"RX((^|\s+)splash(\s+|$))RX"))) {
             line.append(line.isEmpty() ? "splash" : " splash");
         }
     } else {
         ui->comboTheme->clear();
         ui->pushPreview->setDisabled(true);
-        line.remove(QRegularExpression("\\s*splash"));
+        line.replace(QRegularExpression(R"RX((^|\s+)splash(\s+|$))RX"), " ");
     }
 
     ui->textKernel->setText(line.trimmed());
@@ -1215,8 +1217,10 @@ void MainWindow::pushLogClicked()
     // Determine base path based on chroot status
     QString location = chroot.isEmpty() ? QString() : tempDir.path();
 
+    bool hasHush = kernelOptions.contains(QRegularExpression(R"RX((^|\s+)hush(\s+|$))RX"));
+
     // Primary log location based on kernel options
-    location += kernelOptions.contains("hush") ? "/run/rc.log" : "/var/log/boot.log";
+    location += hasHush ? "/run/rc.log" : "/var/log/boot.log";
 
     // Fallback to alternate log location if primary doesn't exist
     if (!QFile::exists(location)) {
