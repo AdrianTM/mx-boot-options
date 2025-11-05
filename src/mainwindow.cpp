@@ -30,6 +30,7 @@
 #include <QKeyEvent>
 #include <QListWidget>
 #include <QProgressDialog>
+#include <QRegularExpression>
 #include <QScreen>
 #include <QStandardPaths>
 #include <QTemporaryFile>
@@ -42,6 +43,15 @@
 
 using namespace std::chrono_literals;
 extern const QString starting_home;
+
+namespace
+{
+// Matches kernel command line tokens that are isolated or separated by whitespace
+const QRegularExpression hushTokenRx(QStringLiteral(R"((^|\s+)hush(\s+|$))"));
+const QRegularExpression quietTokenRx(QStringLiteral(R"((^|\s+)quiet(\s+|$))"));
+const QRegularExpression splashTokenRx(QStringLiteral(R"((^|\s+)splash(\s+|$))"));
+const QRegularExpression noSplashTokenRx(QStringLiteral(R"((^|\s+)nosplash(\s+|$))"));
+} // namespace
 
 MainWindow::MainWindow(QWidget *parent)
     : QDialog(parent),
@@ -850,11 +860,12 @@ void MainWindow::processGrubTheme(const QString &line)
 void MainWindow::processKernelCommandLine(QString line)
 {
     const QString cmdline = line.remove("GRUB_CMDLINE_LINUX_DEFAULT=").remove(QRegularExpression("[\"']"));
-    ui->textKernel->setText(live && !installedMode ? kernelOptions : cmdline);
+    const QString effectiveCmdline = live && !installedMode ? kernelOptions : cmdline;
+    ui->textKernel->setText(effectiveCmdline);
 
-    bool hasHush = cmdline.contains(QRegularExpression(R"RX((^|\s+)hush(\s+|$))RX"));
-    bool hasQuiet = cmdline.contains(QRegularExpression(R"RX((^|\s+)quiet(\s+|$))RX"));
-    bool hasSplash = cmdline.contains(QRegularExpression(R"RX((^|\s+)splash(\s+|$))RX"));
+    bool hasHush = effectiveCmdline.contains(hushTokenRx);
+    bool hasQuiet = effectiveCmdline.contains(quietTokenRx);
+    bool hasSplash = effectiveCmdline.contains(splashTokenRx) && !effectiveCmdline.contains(noSplashTokenRx);
 
     ui->radioDetailedMsg->setChecked(hasQuiet);
     ui->radioLimitedMsg->setChecked(hasHush);
@@ -1117,11 +1128,11 @@ void MainWindow::radioDetailedMsgToggled(bool checked)
         ui->pushApply->setEnabled(true);
 
         QString line = ui->textKernel->text();
-        if (!line.contains(QRegularExpression(R"RX((^|\s+)quiet(\s+|$))RX"))) {
+        if (!line.contains(quietTokenRx)) {
             line.append(line.isEmpty() ? "quiet" : " quiet");
         }
 
-        line.replace(QRegularExpression(R"RX((^|\s+)hush(\s+|$))RX"), " ");
+        line.replace(hushTokenRx, " ");
         ui->textKernel->setText(line.trimmed());
     }
 }
@@ -1133,8 +1144,8 @@ void MainWindow::radioVeryDetailedMsgToggled(bool checked)
         ui->pushApply->setEnabled(true);
 
         QString line = ui->textKernel->text();
-        line.replace(QRegularExpression(R"RX((^|\s+)hush(\s+|$))RX"), " ");
-        line.replace(QRegularExpression(R"RX((^|\s+)quiet(\s+|$))RX"), " ");
+        line.replace(hushTokenRx, " ");
+        line.replace(quietTokenRx, " ");
         ui->textKernel->setText(line.trimmed());
     }
 }
@@ -1148,10 +1159,10 @@ void MainWindow::radioLimitedMsgToggled(bool checked)
         QString line = ui->textKernel->text();
         QStringList options;
 
-        if (!line.contains(QRegularExpression(R"RX((^|\s+)quiet(\s+|$))RX"))) {
+        if (!line.contains(quietTokenRx)) {
             options << "quiet";
         }
-        if (!line.contains(QRegularExpression(R"RX((^|\s+)hush(\s+|$))RX"))) {
+        if (!line.contains(hushTokenRx)) {
             options << "hush";
         }
 
@@ -1199,13 +1210,14 @@ void MainWindow::comboBootsplashToggled(bool checked)
     QString line = ui->textKernel->text();
     if (checked) {
         loadPlymouthThemes();
-        if (!line.contains(QRegularExpression(R"RX((^|\s+)splash(\s+|$))RX"))) {
+        line.replace(noSplashTokenRx, " ");
+        if (!line.contains(splashTokenRx)) {
             line.append(line.isEmpty() ? "splash" : " splash");
         }
     } else {
         ui->comboTheme->clear();
         ui->pushPreview->setDisabled(true);
-        line.replace(QRegularExpression(R"RX((^|\s+)splash(\s+|$))RX"), " ");
+        line.replace(splashTokenRx, " ");
     }
 
     ui->textKernel->setText(line.trimmed());
@@ -1217,7 +1229,7 @@ void MainWindow::pushLogClicked()
     // Determine base path based on chroot status
     QString location = chroot.isEmpty() ? QString() : tempDir.path();
 
-    bool hasHush = kernelOptions.contains(QRegularExpression(R"RX((^|\s+)hush(\s+|$))RX"));
+    bool hasHush = kernelOptions.contains(hushTokenRx);
 
     // Primary log location based on kernel options
     location += hasHush ? "/run/rc.log" : "/var/log/boot.log";
