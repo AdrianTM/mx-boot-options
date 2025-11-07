@@ -1,4 +1,4 @@
-mx-boot-options (25.11.2) mx; urgency=medium
+mx-boot-options (25.11.3) mx; urgency=medium
 
   * Detect systemd and use systemctl -b to display the boot log which is
     more reliable than relying on /var/log/boot.log
