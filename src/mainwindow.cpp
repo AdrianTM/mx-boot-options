@@ -211,8 +211,8 @@ void MainWindow::handleLiveSystem()
 
 void MainWindow::setupGrubSettings()
 {
-    grubInstalled
-        = cmd.run("dpkg -s grub-common | grep -q 'Status: install ok installed'", nullptr, nullptr, QuietMode::Yes);
+    const QString grubPackage = grubPackageName();
+    grubInstalled = !grubPackage.isEmpty() && isInstalled(grubPackage);
     ui->groupBoxOptions->setHidden(!grubInstalled);
     ui->groupBoxBackground->setHidden(!grubInstalled);
 
@@ -297,7 +297,18 @@ void MainWindow::setGeneralConnections()
 
 bool MainWindow::isInstalled(const QString &package)
 {
-    QString cmdStr = QString("dpkg -s %1 | grep -q 'Status: install ok installed'").arg(package);
+    QString cmdStr;
+    switch (detectPackageManager()) {
+    case PackageManager::Pacman:
+        cmdStr = QString("pacman -Q %1").arg(package);
+        break;
+    case PackageManager::Apt:
+        cmdStr = QString("dpkg -s %1 | grep -q 'Status: install ok installed'").arg(package);
+        break;
+    default:
+        return false;
+    }
+
     return chroot.isEmpty() ? Cmd().run(cmdStr, nullptr, nullptr, QuietMode::Yes)
                             : Cmd().runAsRoot(chroot + cmdStr, nullptr, nullptr, QuietMode::Yes);
 }
@@ -333,6 +344,127 @@ bool MainWindow::isWaylandSession()
     }
 
     return !qgetenv("WAYLAND_DISPLAY").isEmpty();
+}
+
+QString MainWindow::targetRootPath() const
+{
+    return chroot.isEmpty() ? QString() : chroot.section(' ', 1, 1);
+}
+
+MainWindow::PackageManager MainWindow::detectPackageManager() const
+{
+    const QString rootPath = targetRootPath();
+    if (QFile::exists(rootPath + "/usr/bin/pacman")) {
+        return PackageManager::Pacman;
+    }
+    if (QFile::exists(rootPath + "/usr/bin/apt-get")) {
+        return PackageManager::Apt;
+    }
+    return PackageManager::Unknown;
+}
+
+QString MainWindow::grubPackageName() const
+{
+    switch (detectPackageManager()) {
+    case PackageManager::Pacman:
+        return QStringLiteral("grub");
+    case PackageManager::Apt:
+        return QStringLiteral("grub-common");
+    default:
+        return {};
+    }
+}
+
+QStringList MainWindow::requiredPlymouthPackages() const
+{
+    if (detectPackageManager() == PackageManager::Pacman) {
+        return {QStringLiteral("plymouth")};
+    }
+    return {QStringLiteral("plymouth"), QStringLiteral("plymouth-x11"), QStringLiteral("plymouth-themes"),
+            QStringLiteral("plymouth-themes-mx")};
+}
+
+bool MainWindow::runPackageUpdate()
+{
+    switch (detectPackageManager()) {
+    case PackageManager::Pacman:
+        return cmd.runAsRoot(chroot + "pacman -Sy --noconfirm");
+    case PackageManager::Apt:
+        return cmd.runAsRoot(chroot + "apt-get update");
+    default:
+        qWarning() << "No supported package manager found for update.";
+        return false;
+    }
+}
+
+bool MainWindow::installPackages(const QStringList &packages)
+{
+    if (packages.isEmpty()) {
+        return true;
+    }
+
+    switch (detectPackageManager()) {
+    case PackageManager::Pacman:
+        return cmd.runAsRoot(chroot + "pacman -S --noconfirm --needed " + packages.join(' '));
+    case PackageManager::Apt:
+        return cmd.runAsRoot(chroot + "apt-get install -y " + packages.join(' '));
+    default:
+        qWarning() << "No supported package manager found for install.";
+        return false;
+    }
+}
+
+bool MainWindow::runUpdateGrub()
+{
+    const QString rootPath = targetRootPath();
+    if (detectPackageManager() == PackageManager::Pacman) {
+        return cmd.runAsRoot(chroot + "grub-mkconfig -o /boot/grub/grub.cfg");
+    }
+
+    if (QFile::exists(rootPath + "/usr/bin/update-grub") || QFile::exists(rootPath + "/sbin/update-grub")) {
+        return cmd.runAsRoot(chroot + "update-grub");
+    }
+
+    if (QFile::exists(rootPath + "/usr/bin/grub-mkconfig")) {
+        return cmd.runAsRoot(chroot + "grub-mkconfig -o /boot/grub/grub.cfg");
+    }
+
+    qWarning() << "No GRUB update command found.";
+    return false;
+}
+
+bool MainWindow::runUpdateInitramfs()
+{
+    const QString rootPath = targetRootPath();
+    if (detectPackageManager() == PackageManager::Pacman) {
+        return cmd.runAsRoot(chroot + "mkinitcpio -P");
+    }
+
+    if (QFile::exists(rootPath + "/usr/bin/update-initramfs") || QFile::exists(rootPath + "/sbin/update-initramfs")) {
+        return cmd.runAsRoot(chroot + "update-initramfs -u -k all");
+    }
+
+    if (QFile::exists(rootPath + "/usr/bin/mkinitcpio")) {
+        return cmd.runAsRoot(chroot + "mkinitcpio -P");
+    }
+
+    qWarning() << "No initramfs update command found.";
+    return false;
+}
+
+void MainWindow::toggleBootlogd(bool enable)
+{
+    const QString rootPath = targetRootPath();
+    if (detectPackageManager() == PackageManager::Pacman) {
+        return;
+    }
+
+    if (QFile::exists(rootPath + "/usr/bin/update-rc.d") || QFile::exists(rootPath + "/sbin/update-rc.d")) {
+        cmd.runAsRoot(chroot + QString("update-rc.d bootlogd %1").arg(enable ? "enable" : "disable"));
+        return;
+    }
+
+    qWarning() << "update-rc.d not found; skipping bootlogd toggle.";
 }
 
 bool MainWindow::isSystemdEnvironment() const
@@ -432,15 +564,16 @@ void MainWindow::installSplash()
     setConnections();
     progress->setLabelText(tr("Updating sources"));
 
-    if (!cmd.runAsRoot(chroot + "apt-get update")) {
+    if (!runPackageUpdate()) {
         progress->close();
         QMessageBox::critical(this, tr("Error"), tr("Failed to update package sources."));
         return;
     }
 
-    progress->setLabelText(tr("Installing packages:") + " " + requiredPackages.join(", "));
+    const QStringList packages = requiredPlymouthPackages();
+    progress->setLabelText(tr("Installing packages:") + " " + packages.join(", "));
 
-    if (!cmd.runAsRoot(chroot + "apt-get install -y " + requiredPackages.join(' '))) {
+    if (!installPackages(packages)) {
         progress->close();
         QMessageBox::critical(this, tr("Error"), tr("Could not install the bootsplash."));
         ui->checkBootsplash->setChecked(false);
@@ -896,7 +1029,7 @@ void MainWindow::processKernelCommandLine(QString line)
     ui->radioLimitedMsg->setChecked(hasHush);
     ui->radioVeryDetailedMsg->setChecked(!hasHush && !hasQuiet);
 
-    ui->checkBootsplash->setChecked(hasSplash && isInstalled(requiredPackages));
+    ui->checkBootsplash->setChecked(hasSplash && isInstalled(requiredPlymouthPackages()));
 }
 
 // Read kernel line and options from /proc/cmdline
@@ -1018,26 +1151,35 @@ void MainWindow::pushApplyClicked()
             if (!ui->comboTheme->currentText().isEmpty()) {
                 cmd.runAsRoot(chroot + "/sbin/plymouth-set-default-theme " + ui->comboTheme->currentText());
             }
-            cmd.runAsRoot(chroot + "update-rc.d bootlogd disable");
+            toggleBootlogd(false);
         } else {
-            cmd.runAsRoot(chroot + "update-rc.d bootlogd enable");
+            toggleBootlogd(true);
         }
         progress->setLabelText(tr("Updating initramfs..."));
-        cmd.runAsRoot(chroot + "update-initramfs -u -k all");
+        if (!runUpdateInitramfs()) {
+            qWarning() << "Failed to update initramfs.";
+        }
     }
 
     if (messagesChanged && ui->radioLimitedMsg->isChecked()) {
-        cmd.runAsRoot(chroot
-                      + "grep -q hush /etc/default/rcS || echo \"\n# hush boot-log into /run/rc.log\n"
-                        "[ \\\"\\$init\\\" ] && grep -qw hush /proc/cmdline && exec >> /run/rc.log 2>&1 || true \" >> "
-                        "/etc/default/rcS");
+        const QString rootPath = targetRootPath();
+        if (QFile::exists(rootPath + "/etc/default/rcS")) {
+            cmd.runAsRoot(chroot
+                          + "grep -q hush /etc/default/rcS || echo \"\n# hush boot-log into /run/rc.log\n"
+                            "[ \\\"\\$init\\\" ] && grep -qw hush /proc/cmdline && exec >> /run/rc.log 2>&1 || true \" >> "
+                            "/etc/default/rcS");
+        } else {
+            qWarning() << "Skipping hush configuration: /etc/default/rcS not found.";
+        }
     }
 
     if (optionsChanged || splashChanged || messagesChanged) {
         if (grubInstalled) {
             writeDefaultGrub();
             progress->setLabelText(tr("Updating grub..."));
-            cmd.runAsRoot(chroot + "update-grub");
+            if (!runUpdateGrub()) {
+                qWarning() << "Failed to update GRUB configuration.";
+            }
             if (live) {
                 cmd.procAsRoot("cp", {"/boot/grub/grub.cfg", bootLocation + "/boot/grub/grub.cfg"});
             }
@@ -1104,7 +1246,7 @@ void MainWindow::comboBootsplashClicked(bool checked)
             // ui->pushPreview->setDisabled(true);
         }
 
-        if (!isInstalled(requiredPackages)) {
+        if (!isInstalled(requiredPlymouthPackages())) {
             int response
                 = QMessageBox::question(this, tr("Plymouth packages not installed"),
                                         tr("Plymouth packages are not currently installed.\nOK to go ahead and "
@@ -1405,7 +1547,9 @@ void MainWindow::comboEnableFlatmenusClicked(bool checked)
     writeDefaultGrub();
     progress->setLabelText(tr("Updating grub..."));
     setConnections();
-    cmd.runAsRoot(chroot + "update-grub");
+    if (!runUpdateGrub()) {
+        qWarning() << "Failed to update GRUB configuration.";
+    }
     readGrubCfg();
     progress->close();
 }
