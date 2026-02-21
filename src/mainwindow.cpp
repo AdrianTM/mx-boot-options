@@ -205,7 +205,13 @@ void MainWindow::handleLiveSystem()
         }
     } else if (msgBox.clickedButton() == liveButton) {
         installedMode = false;
-        bootLocation = QFileInfo::exists("/live/config/did-toram") ? "/live/to-ram" : "/live/boot-dev";
+        if (QFile::exists("/run/archiso/bootmnt")) {
+            bootLocation = "/run/archiso/bootmnt";
+        } else if (QFileInfo::exists("/live/config/did-toram")) {
+            bootLocation = "/live/to-ram";
+        } else {
+            bootLocation = "/live/boot-dev";
+        }
     }
 }
 
@@ -322,7 +328,8 @@ bool MainWindow::isInstalled(const QStringList &packages)
 // Check if running from a live environment
 bool MainWindow::isLive()
 {
-    return QProcess::execute("mountpoint", {"-q", "/live/aufs"}) == 0;
+    return QProcess::execute("mountpoint", {"-q", "/live/aufs"}) == 0
+           || QFile::exists("/run/archiso/bootmnt");
 }
 
 bool MainWindow::isUefi()
@@ -688,11 +695,18 @@ QString MainWindow::selectPartition(const QStringList &list)
 {
     auto *dialog = new CustomDialog(list);
 
-    // Guess MX install by finding the first partition with a rootMX* label
+    // Guess installed system by finding a partition with a known root label or /etc/os-release
     auto it = std::find_if(list.cbegin(), list.cend(), [&](const QString &part_info) {
-        QString label = part_info.section(' ', 0, 0);
-        QString command = QString("lsblk -ln -o LABEL /dev/%1 | grep -q rootMX").arg(label);
-        return cmd.run(command);
+        QString partName = part_info.section(' ', 0, 0);
+        // Check for MX Linux label
+        if (cmd.run(QString("lsblk -ln -o LABEL /dev/%1 | grep -q rootMX").arg(partName))) {
+            return true;
+        }
+        // Check for Arch Linux label
+        if (cmd.run(QString("lsblk -ln -o LABEL /dev/%1 | grep -qi arch").arg(partName))) {
+            return true;
+        }
+        return false;
     });
 
     if (it != list.cend()) {
@@ -821,6 +835,11 @@ void MainWindow::replaceLiveGrubArgs(const QString &args)
         liveGrubsavePath = "/usr/bin/live-grubsave";
     }
 
+    if (!QFile::exists(liveGrubsavePath)) {
+        qDebug() << "live-grubsave not found, skipping live GRUB args update.";
+        return;
+    }
+
     if (!cmd.procAsRoot(liveGrubsavePath, {"-r"})) {
         qWarning() << "Failed to reset live-grub settings";
         return;
@@ -841,6 +860,13 @@ void MainWindow::replaceSyslinuxArgs(const QString &args)
 {
     const QStringList configFiles
         = {bootLocation + "/boot/syslinux/syslinux.cfg", bootLocation + "/boot/isolinux/isolinux.cfg"};
+
+    const bool anyExist = std::any_of(configFiles.cbegin(), configFiles.cend(),
+                                      [](const QString &f) { return QFile::exists(f); });
+    if (!anyExist) {
+        qDebug() << "No syslinux/isolinux config files found, skipping.";
+        return;
+    }
 
     for (const QString &configFile : configFiles) {
         QFile file(configFile);
@@ -1272,8 +1298,14 @@ void MainWindow::comboBootsplashClicked(bool checked)
 
 void MainWindow::btnBgFileClicked()
 {
-    QString initialPath = chroot.isEmpty() ? "/usr/share/backgrounds/MXLinux/grub"
-                                           : chroot.section(' ', 1, 1) + "/usr/share/backgrounds/MXLinux/grub";
+    const QString rootPath = chroot.isEmpty() ? QString() : chroot.section(' ', 1, 1);
+    QString initialPath = rootPath + "/usr/share/backgrounds/MXLinux/grub";
+    if (!QDir(initialPath).exists()) {
+        initialPath = rootPath + "/usr/share/backgrounds";
+    }
+    if (!QDir(initialPath).exists()) {
+        initialPath = rootPath + "/usr/share";
+    }
     QString selected = QFileDialog::getOpenFileName(this, tr("Select image to display in bootloader"), initialPath,
                                                     tr("Images (*.png *.jpg *.jpeg *.tga)"));
 
