@@ -1,15 +1,15 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="da">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="en_US">
 <context>
     <name>Cmd</name>
     <message>
         <location filename="../src/cmd.cpp" line="141"/>
         <source>Administrator Access Required</source>
-        <translation type="unfinished"/>
+        <translation>Administrator Access Required</translation>
     </message>
     <message>
         <location filename="../src/cmd.cpp" line="142"/>
         <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
-        <translation type="unfinished"/>
+        <translation>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</translation>
     </message>
 </context>
 <context>
@@ -18,8 +18,8 @@
         <location filename="../src/dialog.cpp" line="16"/>
         <source>Live environment detected. Please select the root partition of the
  system you want to modify (only Linux partitions are displayed)</source>
-        <translation>Livemiljø registreret. Vælg venligst rodpartitionen på
- det system du vil ændre (der vises kun Linux-partitioner)</translation>
+        <translation>Live environment detected. Please select the root partition of the
+ system you want to modify (only Linux partitions are displayed)</translation>
     </message>
     <message>
         <location filename="../src/dialog.cpp" line="22"/>
@@ -29,7 +29,7 @@
     <message>
         <location filename="../src/dialog.cpp" line="23"/>
         <source>Cancel</source>
-        <translation>Annuller</translation>
+        <translation>Cancel</translation>
     </message>
 </context>
 <context>
@@ -37,118 +37,118 @@
     <message>
         <location filename="../src/mainwindow.ui" line="33"/>
         <source>Options</source>
-        <translation>Valgmuligheder</translation>
+        <translation>Options</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="39"/>
         <source>Use simplified menu structure without submenus</source>
-        <translation>Brug forenklet menustruktur uden undermenuer</translation>
+        <translation>Use simplified menu structure without submenus</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="42"/>
         <source>Use flat menus (no submenus)</source>
-        <translation>Brug flade menuer (ingen undermenuer)</translation>
+        <translation>Use flat menus (no submenus)</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="55"/>
         <source>Boot to</source>
-        <translation>Opstart til</translation>
+        <translation>Boot to</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="78"/>
         <source>Set to &apos;0&apos; to boot immediately without displaying the menu, or to &apos;-1&apos; to wait indefinitely</source>
-        <translation>Indstil til &apos;0&apos; for at opstarte med det samme uden at vise menuen, eller til &apos;-1&apos; for at vente uendeligt</translation>
+        <translation>Set to &apos;0&apos; to boot immediately without displaying the menu, or to &apos;-1&apos; to wait indefinitely</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="81"/>
         <source>Menu timeout</source>
-        <translation>Timeout for menu</translation>
+        <translation>Menu timeout</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="104"/>
         <source>Kernel parameters</source>
-        <translation>Kerneparametre</translation>
+        <translation>Kernel parameters</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="117"/>
         <source>seconds</source>
-        <translation>sekunder</translation>
+        <translation>seconds</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="124"/>
         <source>With this option enabled whatever entry you select from the grub boot menu will be saved as the new default for future boots</source>
-        <translation>Når valgmuligheden er aktiveret, så gemmes det du vælger fra grub-opstartsmenuen som den nye standard til fremtidige opstarter</translation>
+        <translation>With this option enabled whatever entry you select from the grub boot menu will be saved as the new default for future boots</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="127"/>
         <source>Enable saving last boot choice</source>
-        <translation>Aktivér husk sidst valgte opstart</translation>
+        <translation>Enable saving last boot choice</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="134"/>
         <source>Manage UEFI Boot Options</source>
-        <translation type="unfinished"/>
+        <translation>Manage UEFI Boot Options</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="150"/>
         <source>Background</source>
-        <translation>Baggrund</translation>
+        <translation>Background</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="168"/>
         <source>Image</source>
-        <translation>Billede</translation>
+        <translation>Image</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="181"/>
         <location filename="../src/mainwindow.ui" line="283"/>
         <source>Enable theme</source>
-        <translation>Aktivér tema</translation>
+        <translation>Enable theme</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="261"/>
         <source>Splash</source>
-        <translation>Billede</translation>
+        <translation>Splash</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="296"/>
         <source>Preview</source>
-        <translation>Forhåndsvis</translation>
+        <translation>Preview</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="319"/>
         <source>Messages</source>
-        <translation>Meddelelser</translation>
+        <translation>Messages</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="325"/>
         <source>Very detailed</source>
-        <translation>Meget detaljeret</translation>
+        <translation>Very detailed</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="332"/>
         <source>Detailed (default setting)</source>
-        <translation>Detaljeret (standardindstilling)</translation>
+        <translation>Detailed (default setting)</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="342"/>
         <source>Limited</source>
-        <translation>Begrænset</translation>
+        <translation>Limited</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="358"/>
         <source>Display log</source>
-        <translation>Vis log</translation>
+        <translation>Display log</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="411"/>
         <source>Display help </source>
-        <translation>Vis hjælp</translation>
+        <translation>Display help </translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="414"/>
         <source>Help</source>
-        <translation>Hjælp</translation>
+        <translation>Help</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="421"/>
@@ -158,12 +158,12 @@
     <message>
         <location filename="../src/mainwindow.ui" line="453"/>
         <source>About this application</source>
-        <translation>Om programmet</translation>
+        <translation>About this application</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="456"/>
         <source>About...</source>
-        <translation>Om...</translation>
+        <translation>About...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="463"/>
@@ -173,12 +173,12 @@
     <message>
         <location filename="../src/mainwindow.ui" line="498"/>
         <source>Quit application</source>
-        <translation>Afslut programmet</translation>
+        <translation>Quit application</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="501"/>
         <source>Close</source>
-        <translation>Luk</translation>
+        <translation>Close</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="508"/>
@@ -188,12 +188,12 @@
     <message>
         <location filename="../src/mainwindow.ui" line="549"/>
         <source>Apply</source>
-        <translation>Anvend</translation>
+        <translation>Apply</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="112"/>
         <source>Still running</source>
-        <translation>Kører stadig</translation>
+        <translation>Still running</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="437"/>
@@ -204,77 +204,77 @@
         <location filename="../src/mainwindow.cpp" line="1488"/>
         <location filename="../src/mainwindow.cpp" line="1494"/>
         <source>Error</source>
-        <translation>Fejl</translation>
+        <translation>Current kernel doesn&apos;t support selected compression algorithm, please edit the configuration file and select a different algorithm.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="426"/>
         <source>Installing bootsplash, please wait</source>
-        <translation>Installer opstartsbillede, vent venligst</translation>
+        <translation>Installing bootsplash, please wait</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="169"/>
         <location filename="../src/mainwindow.cpp" line="1226"/>
         <source>Preview is disabled because &apos;splash&apos; parameter is not present in kernel command line. To enable preview, add &apos;splash&apos; to boot parameters and reboot.</source>
-        <translation type="unfinished"/>
+        <translation>Preview is disabled because &apos;splash&apos; parameter is not present in kernel command line. To enable preview, add &apos;splash&apos; to boot parameters and reboot.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="173"/>
         <location filename="../src/mainwindow.cpp" line="1229"/>
         <source>Preview is disabled while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
-        <translation type="unfinished"/>
+        <translation>Preview is disabled while running under Wayland. Please start an X11 session to preview Plymouth themes.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="433"/>
         <source>Updating sources</source>
-        <translation>Opdaterer kilder</translation>
+        <translation>Updating sources</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="445"/>
         <source>Could not install the bootsplash.</source>
-        <translation>Kunne ikke installere opstartsbilledet.</translation>
+        <translation>Could not install the bootsplash.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="590"/>
         <source>Could not create a temporary folder</source>
-        <translation type="unfinished"/>
+        <translation>Could not create a temporary folder</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="599"/>
         <location filename="../src/mainwindow.cpp" line="619"/>
         <source>Cannot continue</source>
-        <translation>Kan ikke fortsætte</translation>
+        <translation>Cannot continue</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="599"/>
         <source>Cannot open LUKS device. Exiting...</source>
-        <translation type="unfinished"/>
+        <translation>Cannot open LUKS device. Exiting...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="620"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
-        <translation>Kan ikke oprette chroot-miljø, kan ikke ændre opstartsvalgmuligheder. Afslutter...</translation>
+        <translation>Cannot create chroot environment, cannot change boot options. Exiting...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="954"/>
         <location filename="../src/mainwindow.cpp" line="1391"/>
         <source>Updating configuration, please wait</source>
-        <translation>Opdaterer konfiguration, vent venligst</translation>
+        <translation>Updating configuration, please wait</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1025"/>
         <source>Updating initramfs...</source>
-        <translation>Opdaterer initramfs...</translation>
+        <translation>Updating initramfs...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1039"/>
         <location filename="../src/mainwindow.cpp" line="1406"/>
         <source>Updating grub...</source>
-        <translation>Opdaterer grub...</translation>
+        <translation>Updating grub...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1064"/>
         <source>About %1</source>
-        <translation>Om %1</translation>
+        <translation>About %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1065"/>
@@ -284,213 +284,213 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="1067"/>
         <source>Program for selecting common start-up choices</source>
-        <translation>Program til at være almindelige opstartsvalg</translation>
+        <translation>Program for selecting common start-up choices</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1069"/>
         <source>Copyright (c) MX Linux</source>
-        <translation>Ophavsret (c) MX Linux</translation>
+        <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1070"/>
         <source>%1 License</source>
-        <translation>%1-licens</translation>
+        <translation>%1 License</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1091"/>
         <source>%1 Help</source>
-        <translation>%1-hjælp</translation>
+        <translation>%1 Help</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1101"/>
         <location filename="../src/mainwindow.cpp" line="1368"/>
         <source>Running in a Virtual Machine</source>
-        <translation>Kører i en virtuel maskine</translation>
+        <translation>Running in a Virtual Machine</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1102"/>
         <location filename="../src/mainwindow.cpp" line="1369"/>
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
-        <translation>Dit nuværende system kører i en virtuel maskine,
-Plymouth-opstartsbillede virker på en begrænset måde og du vil heller ikke være i stand til at forhåndsvise temaet</translation>
+        <translation>You current system is running in a Virtual Machine,
+Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1109"/>
         <source>Plymouth packages not installed</source>
-        <translation>Plymouth-pakker ikke installeret</translation>
+        <translation>Plymouth packages not installed</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1110"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
-        <translation>Plymouth-pakker er ikke installeret.
-Er det OK at fortsætte og installere dem?</translation>
+        <translation>Plymouth packages are not currently installed.
+OK to go ahead and install them?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1136"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
-        <translation>Billeder (*.png *.jpg *.jpeg *.tga)</translation>
+        <translation>Images (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1301"/>
         <source>Could not read the systemd boot logs.</source>
-        <translation type="unfinished"/>
+        <translation>Could not read the systemd boot logs.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1302"/>
         <source>Could not read the systemd boot logs%1 or the fallback log at %2.</source>
-        <translation type="unfinished"/>
+        <translation>Could not read the systemd boot logs%1 or the fallback log at %2.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1303"/>
         <source> from %1</source>
-        <translation type="unfinished"/>
+        <translation> from %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1306"/>
         <source>Could not find any boot logs.</source>
-        <translation type="unfinished"/>
+        <translation>Could not find any boot logs.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1307"/>
         <source>Could not find log at %1</source>
-        <translation type="unfinished"/>
+        <translation>Could not find log at %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1309"/>
         <source>Log not found</source>
-        <translation>Log ikke fundet</translation>
+        <translation>Log not found</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1350"/>
         <source>Preview Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Preview Unavailable</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1351"/>
         <source>Preview is not available while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
-        <translation type="unfinished"/>
+        <translation>Preview is not available while running under Wayland. Please start an X11 session to preview Plymouth themes.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1475"/>
         <source>Could not retrieve UUID for %1</source>
-        <translation type="unfinished"/>
+        <translation>Could not retrieve UUID for %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1483"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
-        <translation>Indtast adgangskode for at låse op for %1-krypteret partition:</translation>
+        <translation>Enter password to unlock %1 encrypted partition:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1488"/>
         <source>Password entry cancelled or empty for %1</source>
-        <translation type="unfinished"/>
+        <translation>Password entry cancelled or empty for %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1494"/>
         <source>Could not open %1 LUKS container</source>
-        <translation type="unfinished"/>
+        <translation>Could not open %1 LUKS container</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1321"/>
         <source>&amp;Close</source>
-        <translation>&amp;Luk</translation>
+        <translation>&amp;Close</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="113"/>
         <source>A process is still running. Do you really want to quit?</source>
-        <translation type="unfinished"/>
+        <translation>A process is still running. Do you really want to quit?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="193"/>
         <source>Live System Detected</source>
-        <translation type="unfinished"/>
+        <translation>Live System Detected</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="195"/>
         <source>You are currently running a live system. Would you like to modify the boot options for the live system or for an installed system?</source>
-        <translation type="unfinished"/>
+        <translation>You are currently running a live system. Would you like to modify the boot options for the live system or for an installed system?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="197"/>
         <source>Live System</source>
-        <translation type="unfinished"/>
+        <translation>Live System</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="198"/>
         <source>Installed System</source>
-        <translation type="unfinished"/>
+        <translation>Installed System</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="437"/>
         <source>Failed to update package sources.</source>
-        <translation type="unfinished"/>
+        <translation>Failed to update package sources.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="441"/>
         <source>Installing packages:</source>
-        <translation type="unfinished"/>
+        <translation>Installing packages:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="451"/>
         <source>Success</source>
-        <translation>Det lykkedes</translation>
+        <translation>Success</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="451"/>
         <source>Bootsplash installed successfully.</source>
-        <translation type="unfinished"/>
+        <translation>Bootsplash installed successfully.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="479"/>
         <source>Failed to create temporary file.</source>
-        <translation type="unfinished"/>
+        <translation>Failed to create temporary file.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1047"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
-        <translation type="unfinished"/>
+        <translation>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1049"/>
         <source>Your changes have been successfully applied.</source>
-        <translation type="unfinished"/>
+        <translation>Your changes have been successfully applied.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1050"/>
         <source>Operation Complete</source>
-        <translation type="unfinished"/>
+        <translation>Operation Complete</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1135"/>
         <source>Select image to display in bootloader</source>
-        <translation>Vælg billede som skal vises i opstartsindlæser</translation>
+        <translation>Select image to display in bootloader</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1314"/>
         <source>Boot Log</source>
-        <translation type="unfinished"/>
+        <translation>Boot Log</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1357"/>
         <source>Needs reboot</source>
-        <translation>Behøver genstart</translation>
+        <translation>Needs reboot</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1358"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
-        <translation>Plymouth blev lige installeret, det kan være nødvendigt at genstarte inden du kan vise forhåndsvisninger</translation>
+        <translation>Plymouth was just installed, you might need to reboot before being able to display previews</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1431"/>
         <source>Click to select theme</source>
-        <translation>Klik for at vælge tema</translation>
+        <translation>Click to select theme</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1442"/>
         <source>Select GRUB theme</source>
-        <translation>Vælg GRUB-tema</translation>
+        <translation>Select GRUB theme</translation>
     </message>
 </context>
 <context>
@@ -498,7 +498,7 @@ Er det OK at fortsætte og installere dem?</translation>
     <message>
         <location filename="../src/main.cpp" line="64"/>
         <source>Program for selecting common start-up choices</source>
-        <translation>Program til at være almindelige opstartsvalg</translation>
+        <translation>Program for selecting common start-up choices</translation>
     </message>
 </context>
 <context>
@@ -506,33 +506,33 @@ Er det OK at fortsætte og installere dem?</translation>
     <message>
         <location filename="../src/about.cpp" line="54"/>
         <source>License</source>
-        <translation>Licens</translation>
+        <translation>License</translation>
     </message>
     <message>
         <location filename="../src/about.cpp" line="55"/>
         <location filename="../src/about.cpp" line="64"/>
         <source>Changelog</source>
-        <translation>Ændringslog</translation>
+        <translation>Changelog</translation>
     </message>
     <message>
         <location filename="../src/about.cpp" line="56"/>
         <source>Cancel</source>
-        <translation>Annuller</translation>
+        <translation>Cancel</translation>
     </message>
     <message>
         <location filename="../src/about.cpp" line="75"/>
         <source>&amp;Close</source>
-        <translation>&amp;Luk</translation>
+        <translation>&amp;Close</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="92"/>
         <source>Error</source>
-        <translation>Fejl</translation>
+        <translation>Current kernel doesn&apos;t support selected compression algorithm, please edit the configuration file and select a different algorithm.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="93"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation type="unfinished"/>
+        <translation>You seem to be logged in as root, please log out and log in as normal user to use this program.</translation>
     </message>
 </context>
 </TS>
