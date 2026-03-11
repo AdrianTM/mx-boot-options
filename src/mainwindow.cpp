@@ -77,11 +77,12 @@ void MainWindow::loadPlymouthThemes()
     ui->comboTheme->clear();
 
     const QString plymouthCmd = "/sbin/plymouth-set-default-theme";
+    const QString rootPath = targetRootPath();
     QString output;
-    if (chroot.isEmpty()) {
+    if (rootPath.isEmpty()) {
         output = cmd.getOut(plymouthCmd + " -l");
     } else {
-        output = cmd.getOutAsRoot(chroot + plymouthCmd + " -l");
+        output = cmd.getOutAsRootInTarget(rootPath, "plymouth-set-default-theme", {"-l"});
     }
     if (cmd.exitCode() != 0) {
         qWarning() << "Failed to get Plymouth themes list.";
@@ -90,8 +91,8 @@ void MainWindow::loadPlymouthThemes()
     if (!output.isEmpty()) {
         const QStringList themes = output.split('\n', Qt::SkipEmptyParts);
         ui->comboTheme->addItems(themes);
-        const QString currentTheme
-            = chroot.isEmpty() ? cmd.getOut(plymouthCmd).trimmed() : cmd.getOutAsRoot(chroot + plymouthCmd).trimmed();
+        const QString currentTheme = rootPath.isEmpty() ? cmd.getOut(plymouthCmd).trimmed()
+                                                        : cmd.getOutAsRootInTarget(rootPath, "plymouth-set-default-theme").trimmed();
         if (cmd.exitCode() == 0 && !currentTheme.isEmpty()) {
             const int index = ui->comboTheme->findText(currentTheme);
             if (index != -1) {
@@ -303,20 +304,27 @@ void MainWindow::setGeneralConnections()
 
 bool MainWindow::isInstalled(const QString &package)
 {
-    QString cmdStr;
-    switch (detectPackageManager()) {
+    const PackageManager manager = detectPackageManager();
+    const QString rootPath = targetRootPath();
+
+    switch (manager) {
     case PackageManager::Pacman:
-        cmdStr = QString("pacman -Q %1").arg(package);
-        break;
-    case PackageManager::Apt:
-        cmdStr = QString("dpkg -s %1 | grep -q 'Status: install ok installed'").arg(package);
-        break;
+        return rootPath.isEmpty() ? QProcess::execute("pacman", {"-Q", package}) == 0
+                                  : cmd.isPackageInstalledAsRoot("pacman", package, rootPath, QuietMode::Yes);
+    case PackageManager::Apt: {
+        if (!rootPath.isEmpty()) {
+            return cmd.isPackageInstalledAsRoot("apt", package, rootPath, QuietMode::Yes);
+        }
+
+        QProcess proc;
+        proc.start("dpkg-query", {"--show", "--showformat=${db:Status-Abbrev}", package});
+        proc.waitForFinished();
+        return proc.exitStatus() == QProcess::NormalExit && proc.exitCode() == 0
+            && QString::fromUtf8(proc.readAllStandardOutput()).trimmed().startsWith("ii");
+    }
     default:
         return false;
     }
-
-    return chroot.isEmpty() ? Cmd().run(cmdStr, nullptr, nullptr, QuietMode::Yes)
-                            : Cmd().runAsRoot(chroot + cmdStr, nullptr, nullptr, QuietMode::Yes);
 }
 
 // Checks if a list of packages is installed, return false if one of them is not
@@ -393,11 +401,14 @@ QStringList MainWindow::requiredPlymouthPackages() const
 
 bool MainWindow::runPackageUpdate()
 {
+    const QString rootPath = targetRootPath();
     switch (detectPackageManager()) {
     case PackageManager::Pacman:
-        return cmd.runAsRoot(chroot + "pacman -Sy --noconfirm");
+        return rootPath.isEmpty() ? cmd.procAsRoot("pacman", {"-Sy", "--noconfirm"})
+                                  : cmd.procAsRootInTarget(rootPath, "pacman", {"-Sy", "--noconfirm"});
     case PackageManager::Apt:
-        return cmd.runAsRoot(chroot + "apt-get update");
+        return rootPath.isEmpty() ? cmd.procAsRoot("apt-get", {"update"})
+                                  : cmd.procAsRootInTarget(rootPath, "apt-get", {"update"});
     default:
         qWarning() << "No supported package manager found for update.";
         return false;
@@ -410,11 +421,19 @@ bool MainWindow::installPackages(const QStringList &packages)
         return true;
     }
 
+    const QString rootPath = targetRootPath();
+    QStringList packageArgs;
     switch (detectPackageManager()) {
     case PackageManager::Pacman:
-        return cmd.runAsRoot(chroot + "pacman -S --noconfirm --needed " + packages.join(' '));
+        packageArgs = {"-S", "--noconfirm", "--needed"};
+        packageArgs += packages;
+        return rootPath.isEmpty() ? cmd.procAsRoot("pacman", packageArgs)
+                                  : cmd.procAsRootInTarget(rootPath, "pacman", packageArgs);
     case PackageManager::Apt:
-        return cmd.runAsRoot(chroot + "apt-get install -y " + packages.join(' '));
+        packageArgs = {"install", "-y"};
+        packageArgs += packages;
+        return rootPath.isEmpty() ? cmd.procAsRoot("apt-get", packageArgs)
+                                  : cmd.procAsRootInTarget(rootPath, "apt-get", packageArgs);
     default:
         qWarning() << "No supported package manager found for install.";
         return false;
@@ -425,15 +444,17 @@ bool MainWindow::runUpdateGrub()
 {
     const QString rootPath = targetRootPath();
     if (detectPackageManager() == PackageManager::Pacman) {
-        return cmd.runAsRoot(chroot + "grub-mkconfig -o /boot/grub/grub.cfg");
+        return rootPath.isEmpty() ? cmd.procAsRoot("grub-mkconfig", {"-o", "/boot/grub/grub.cfg"})
+                                  : cmd.procAsRootInTarget(rootPath, "grub-mkconfig", {"-o", "/boot/grub/grub.cfg"});
     }
 
     if (QFile::exists(rootPath + "/usr/bin/update-grub") || QFile::exists(rootPath + "/sbin/update-grub")) {
-        return cmd.runAsRoot(chroot + "update-grub");
+        return rootPath.isEmpty() ? cmd.procAsRoot("update-grub") : cmd.procAsRootInTarget(rootPath, "update-grub");
     }
 
     if (QFile::exists(rootPath + "/usr/bin/grub-mkconfig")) {
-        return cmd.runAsRoot(chroot + "grub-mkconfig -o /boot/grub/grub.cfg");
+        return rootPath.isEmpty() ? cmd.procAsRoot("grub-mkconfig", {"-o", "/boot/grub/grub.cfg"})
+                                  : cmd.procAsRootInTarget(rootPath, "grub-mkconfig", {"-o", "/boot/grub/grub.cfg"});
     }
 
     qWarning() << "No GRUB update command found.";
@@ -444,15 +465,16 @@ bool MainWindow::runUpdateInitramfs()
 {
     const QString rootPath = targetRootPath();
     if (detectPackageManager() == PackageManager::Pacman) {
-        return cmd.runAsRoot(chroot + "mkinitcpio -P");
+        return rootPath.isEmpty() ? cmd.procAsRoot("mkinitcpio", {"-P"}) : cmd.procAsRootInTarget(rootPath, "mkinitcpio", {"-P"});
     }
 
     if (QFile::exists(rootPath + "/usr/bin/update-initramfs") || QFile::exists(rootPath + "/sbin/update-initramfs")) {
-        return cmd.runAsRoot(chroot + "update-initramfs -u -k all");
+        return rootPath.isEmpty() ? cmd.procAsRoot("update-initramfs", {"-u", "-k", "all"})
+                                  : cmd.procAsRootInTarget(rootPath, "update-initramfs", {"-u", "-k", "all"});
     }
 
     if (QFile::exists(rootPath + "/usr/bin/mkinitcpio")) {
-        return cmd.runAsRoot(chroot + "mkinitcpio -P");
+        return rootPath.isEmpty() ? cmd.procAsRoot("mkinitcpio", {"-P"}) : cmd.procAsRootInTarget(rootPath, "mkinitcpio", {"-P"});
     }
 
     qWarning() << "No initramfs update command found.";
@@ -467,7 +489,12 @@ void MainWindow::toggleBootlogd(bool enable)
     }
 
     if (QFile::exists(rootPath + "/usr/bin/update-rc.d") || QFile::exists(rootPath + "/sbin/update-rc.d")) {
-        cmd.runAsRoot(chroot + QString("update-rc.d bootlogd %1").arg(enable ? "enable" : "disable"));
+        const QString action = enable ? QStringLiteral("enable") : QStringLiteral("disable");
+        if (rootPath.isEmpty()) {
+            cmd.procAsRoot("update-rc.d", {"bootlogd", action});
+        } else {
+            cmd.procAsRootInTarget(rootPath, "update-rc.d", {"bootlogd", action});
+        }
         return;
     }
 
@@ -634,16 +661,21 @@ void MainWindow::writeDefaultGrub()
 
 QStringList MainWindow::getLinuxPartitions()
 {
+    const QRegularExpression partitionNameRx(
+        QStringLiteral(R"(^(x?[hsv]d[a-z][0-9]+|mmcblk[0-9]+p[0-9]+|nvme[0-9]+n[0-9]+p[0-9]+)\b)"));
     const QStringList partitions
-        = cmd.getOutAsRoot("lsblk -ln -o NAME,SIZE,FSTYPE,MOUNTPOINT,LABEL -e 2,11 -x NAME | "
-                           "grep -E '^x?[h,s,v].[a-z][0-9]|^mmcblk[0-9]+p|^nvme[0-9]+n[0-9]+p'")
+        = cmd.getOutAsRoot("lsblk", {"-ln", "-o", "NAME,SIZE,FSTYPE,MOUNTPOINT,LABEL", "-e", "2,11", "-x", "NAME"},
+                           QuietMode::Yes)
               .split('\n', Qt::SkipEmptyParts);
     QStringList validPartitions;
     validPartitions.reserve(partitions.size());
     for (const QString &part_info : partitions) {
         QString partName = part_info.section(' ', 0, 0);
+        if (!partitionNameRx.match(partName).hasMatch()) {
+            continue;
+        }
         QString partType
-            = cmd.getOutAsRoot("lsblk -ln -o PARTTYPE /dev/" + partName, QuietMode::Yes).trimmed().toLower();
+            = cmd.getOutAsRoot("lsblk", {"-ln", "-o", "PARTTYPE", "/dev/" + partName}, QuietMode::Yes).trimmed().toLower();
 
         if (partType.contains(QRegularExpression(
                 R"(0x83|0fc63daf-8483-4772-8e79-3d69d8477de4|44479540-f297-41b2-9af7-d131d5f0458a|4f68bce3-e8cd-4db1-96e7-fbcaf984b709|ca7d7ccb-63ed-4c53-861c-1742536059cc)"))) {
@@ -698,12 +730,13 @@ QString MainWindow::selectPartition(const QStringList &list)
     // Guess installed system by finding a partition with a known root label or /etc/os-release
     auto it = std::find_if(list.cbegin(), list.cend(), [&](const QString &part_info) {
         QString partName = part_info.section(' ', 0, 0);
+        const QString label = cmd.getOut(QString("lsblk -ln -o LABEL /dev/%1").arg(partName), QuietMode::Yes).trimmed();
         // Check for MX Linux label
-        if (cmd.run(QString("lsblk -ln -o LABEL /dev/%1 | grep -q rootMX").arg(partName))) {
+        if (label.contains(QLatin1String("rootMX"))) {
             return true;
         }
         // Check for Arch Linux label
-        if (cmd.run(QString("lsblk -ln -o LABEL /dev/%1 | grep -qi arch").arg(partName))) {
+        if (label.contains(QLatin1String("arch"), Qt::CaseInsensitive)) {
             return true;
         }
         return false;
@@ -738,36 +771,36 @@ void MainWindow::createChrootEnv(const QString &root)
         exit(EXIT_FAILURE);
     }
 
-    // Build mount commands
-    QStringList mountCommands;
-
     if (isLuks("/dev/" + root)) {
         if (!openLuks("/dev/" + root, tempDir.path())) {
             QMessageBox::critical(this, tr("Cannot continue"), tr("Cannot open LUKS device. Exiting..."));
             cleanup();
             exit(EXIT_FAILURE);
         }
-    } else {
-        mountCommands << QString("mount /dev/%1 %2").arg(root, tempDir.path());
+    } else if (!cmd.procAsRoot("mount", {"/dev/" + root, tempDir.path()})) {
+        QMessageBox::critical(this, tr("Cannot continue"),
+                              tr("Cannot create chroot environment, cannot change boot options. Exiting..."));
+        cleanup();
+        exit(EXIT_FAILURE);
     }
 
-    // Add remaining mount commands
-    mountCommands << QString("mkdir -p %1/{dev,sys,proc,run}").arg(tempDir.path())
-                  << QString("mount --rbind --make-rslave /dev %1/dev").arg(tempDir.path())
-                  << QString("mount --rbind --make-rslave /sys %1/sys").arg(tempDir.path())
-                  << QString("mount --rbind /proc %1/proc").arg(tempDir.path())
-                  << QString("mount -t tmpfs -o size=100m,nodev,mode=755 tmpfs %1/run").arg(tempDir.path())
-                  << QString("mkdir -p %1/run/udev").arg(tempDir.path())
-                  << QString("mount --rbind /run/udev %1/run/udev").arg(tempDir.path());
-
-    // Execute mount commands
-    for (const QString &command : mountCommands) {
-        if (!cmd.runAsRoot(command)) {
-            QMessageBox::critical(this, tr("Cannot continue"),
-                                  tr("Cannot create chroot environment, cannot change boot options. Exiting..."));
-            cleanup();
-            exit(EXIT_FAILURE);
-        }
+    const QStringList chrootDirs = {tempDir.path() + "/dev", tempDir.path() + "/sys", tempDir.path() + "/proc",
+                                    tempDir.path() + "/run"};
+    QStringList mkdirArgs {"-p"};
+    mkdirArgs += chrootDirs;
+    if (!cmd.procAsRoot("mkdir", mkdirArgs)
+        || !cmd.procAsRoot("mount", {"--rbind", "/dev", tempDir.path() + "/dev"})
+        || !cmd.procAsRoot("mount", {"--make-rslave", tempDir.path() + "/dev"})
+        || !cmd.procAsRoot("mount", {"--rbind", "/sys", tempDir.path() + "/sys"})
+        || !cmd.procAsRoot("mount", {"--make-rslave", tempDir.path() + "/sys"})
+        || !cmd.procAsRoot("mount", {"--rbind", "/proc", tempDir.path() + "/proc"})
+        || !cmd.procAsRoot("mount", {"-t", "tmpfs", "-o", "size=100m,nodev,mode=755", "tmpfs", tempDir.path() + "/run"})
+        || !cmd.procAsRoot("mkdir", {"-p", tempDir.path() + "/run/udev"})
+        || !cmd.procAsRoot("mount", {"--rbind", "/run/udev", tempDir.path() + "/run/udev"})) {
+        QMessageBox::critical(this, tr("Cannot continue"),
+                              tr("Cannot create chroot environment, cannot change boot options. Exiting..."));
+        cleanup();
+        exit(EXIT_FAILURE);
     }
 
     chroot = "chroot " + tempDir.path() + " ";
@@ -830,17 +863,12 @@ bool MainWindow::replaceGrubArg(const QString &key, const QString &item)
 
 void MainWindow::replaceLiveGrubArgs(const QString &args)
 {
-    QString liveGrubsavePath = "/usr/local/bin/live-grubsave";
-    if (!QFile::exists(liveGrubsavePath)) {
-        liveGrubsavePath = "/usr/bin/live-grubsave";
-    }
-
-    if (!QFile::exists(liveGrubsavePath)) {
+    if (!QFile::exists("/usr/local/bin/live-grubsave") && !QFile::exists("/usr/bin/live-grubsave")) {
         qDebug() << "live-grubsave not found, skipping live GRUB args update.";
         return;
     }
 
-    if (!cmd.procAsRoot(liveGrubsavePath, {"-r"})) {
+    if (!cmd.procAsRoot("live-grubsave", {"-r"})) {
         qWarning() << "Failed to reset live-grub settings";
         return;
     }
@@ -850,7 +878,7 @@ void MainWindow::replaceLiveGrubArgs(const QString &args)
     filteredArgs = filteredArgs.trimmed();
 
     if (!filteredArgs.isEmpty()) {
-        if (!cmd.procAsRoot(liveGrubsavePath, {filteredArgs})) {
+        if (!cmd.procAsRoot("live-grubsave", {filteredArgs})) {
             qWarning() << "Failed to save new live-grub arguments:" << filteredArgs;
         }
     }
@@ -933,8 +961,9 @@ void MainWindow::replaceSyslinuxArgs(const QString &args)
 
 void MainWindow::readGrubCfg()
 {
-    QString grubFilePath = chroot.isEmpty() ? "/boot/grub/grub.cfg" : chroot.section(' ', 1, 1) + "/boot/grub/grub.cfg";
-    QStringList content = cmd.getOutAsRoot("cat " + grubFilePath, QuietMode::Yes).split('\n', Qt::SkipEmptyParts);
+    const QString rootPath = targetRootPath();
+    const QString grubFilePath = "/boot/grub/grub.cfg";
+    QStringList content = cmd.readFileAsRoot(grubFilePath, QuietMode::Yes, rootPath).split('\n', Qt::SkipEmptyParts);
 
     if (content.isEmpty()) {
         qDebug() << "Could not read grub.cfg file";
@@ -1117,6 +1146,7 @@ void MainWindow::pushApplyClicked()
     progress->show();
 
     setConnections();
+    const QString rootPath = targetRootPath();
 
     if (kernelOptionsChanged) {
         replaceGrubArg("GRUB_CMDLINE_LINUX_DEFAULT", "\"" + ui->textKernel->text() + "\"");
@@ -1127,7 +1157,7 @@ void MainWindow::pushApplyClicked()
     }
 
     if (optionsChanged) {
-        cmd.runAsRoot("grub-editenv /boot/grub/grubenv unset next_entry"); // unset the saved entry from grubenv
+        cmd.procAsRoot("grub-editenv", {"/boot/grub/grubenv", "unset", "next_entry"});
 
         const QString bgFilePath = ui->pushBgFile->property("file").toString();
         const QString themeFilePath = ui->pushThemeFile->property("file").toString();
@@ -1154,7 +1184,11 @@ void MainWindow::pushApplyClicked()
 
         if (ui->comboMenuEntry->currentText().contains(QLatin1String("memtest"))) {
             ui->spinBoxTimeout->setValue(5);
-            cmd.runAsRoot(chroot + "grub-reboot \"" + ui->comboMenuEntry->currentText() + '"');
+            if (rootPath.isEmpty()) {
+                cmd.procAsRoot("grub-reboot", {ui->comboMenuEntry->currentText()});
+            } else {
+                cmd.procAsRootInTarget(rootPath, "grub-reboot", {ui->comboMenuEntry->currentText()});
+            }
         } else {
             replaceGrubArg("GRUB_DEFAULT", "\"" + grub_entry + '"');
         }
@@ -1162,7 +1196,11 @@ void MainWindow::pushApplyClicked()
         if (ui->checkSaveDefault->isChecked()) {
             replaceGrubArg("GRUB_DEFAULT", "saved");
             enableGrubLine("GRUB_SAVEDEFAULT=true");
-            cmd.runAsRoot(chroot + "grub-set-default \"" + grub_entry + '"');
+            if (rootPath.isEmpty()) {
+                cmd.procAsRoot("grub-set-default", {grub_entry});
+            } else {
+                cmd.procAsRootInTarget(rootPath, "grub-set-default", {grub_entry});
+            }
         } else {
             disableGrubLine("GRUB_SAVEDEFAULT=true");
         }
@@ -1175,7 +1213,11 @@ void MainWindow::pushApplyClicked()
     if (splashChanged) {
         if (ui->checkBootsplash->isChecked()) {
             if (!ui->comboTheme->currentText().isEmpty()) {
-                cmd.runAsRoot(chroot + "/sbin/plymouth-set-default-theme " + ui->comboTheme->currentText());
+                if (rootPath.isEmpty()) {
+                    cmd.procAsRoot("plymouth-set-default-theme", {ui->comboTheme->currentText()});
+                } else {
+                    cmd.procAsRootInTarget(rootPath, "plymouth-set-default-theme", {ui->comboTheme->currentText()});
+                }
             }
             toggleBootlogd(false);
         } else {
@@ -1188,12 +1230,12 @@ void MainWindow::pushApplyClicked()
     }
 
     if (messagesChanged && ui->radioLimitedMsg->isChecked()) {
-        const QString rootPath = targetRootPath();
         if (QFile::exists(rootPath + "/etc/default/rcS")) {
-            cmd.runAsRoot(chroot
-                          + "grep -q hush /etc/default/rcS || echo \"\n# hush boot-log into /run/rc.log\n"
-                            "[ \\\"\\$init\\\" ] && grep -qw hush /proc/cmdline && exec >> /run/rc.log 2>&1 || true \" >> "
-                            "/etc/default/rcS");
+            const QString hushSnippet = QStringLiteral(
+                "\n# hush boot-log into /run/rc.log\n"
+                "[ \"$init\" ] && grep -qw hush /proc/cmdline && exec >> /run/rc.log 2>&1 || true ");
+            cmd.appendToFileAsRootIfMissing("/etc/default/rcS", "hush boot-log into /run/rc.log", hushSnippet,
+                                            QuietMode::Yes, rootPath);
         } else {
             qWarning() << "Skipping hush configuration: /etc/default/rcS not found.";
         }
@@ -1428,43 +1470,43 @@ void MainWindow::pushLogClicked()
     QString logContent;
     QString fallbackLocation;
     QString offlineJournalDir;
+    const QString rootPath = targetRootPath();
 
     const bool systemdEnv = isSystemdEnvironment();
     if (systemdEnv) {
-        QString journalctlCmd;
-        if (chroot.isEmpty()) {
-            journalctlCmd = QStringLiteral("journalctl -b --no-pager");
+        if (rootPath.isEmpty()) {
+            logContent = cmd.getOutAsRoot("journalctl", {"-b", "--no-pager"}, QuietMode::Yes);
         } else {
-            const QString rootPath = tempDir.path();
-            QString journalDir = rootPath + QStringLiteral("/var/log/journal");
+            const QString journalRootPath = tempDir.path();
+            QString journalDir = journalRootPath + QStringLiteral("/var/log/journal");
             if (!QDir(journalDir).exists()) {
-                journalDir = rootPath + QStringLiteral("/run/log/journal");
+                journalDir = journalRootPath + QStringLiteral("/run/log/journal");
             }
             if (QDir(journalDir).exists()) {
                 offlineJournalDir = journalDir;
-                journalctlCmd = QStringLiteral("journalctl --directory=%1 -b --no-pager --root=%2")
-                                    .arg(journalDir, rootPath);
+                logContent = cmd.getOutAsRoot("journalctl",
+                                              {QStringLiteral("--directory=%1").arg(journalDir), "-b", "--no-pager",
+                                               QStringLiteral("--root=%1").arg(journalRootPath)},
+                                              QuietMode::Yes);
             }
-        }
-
-        if (!journalctlCmd.isEmpty()) {
-            logContent = cmd.getOutAsRoot(journalctlCmd, QuietMode::Yes);
         }
     }
 
     if (logContent.isEmpty()) {
-        QString location = chroot.isEmpty() ? QString() : tempDir.path();
+        QString location = rootPath.isEmpty() ? QString() : tempDir.path();
         const bool hasHush = kernelOptions.contains(hushTokenRx);
         location += hasHush ? "/run/rc.log" : "/var/log/boot.log";
 
         if (!QFile::exists(location)) {
-            location = chroot.isEmpty() ? "/var/log/boot" : tempDir.path() + "/var/log/boot";
+            location = rootPath.isEmpty() ? "/var/log/boot" : tempDir.path() + "/var/log/boot";
         }
 
         fallbackLocation = location;
 
         if (QFile::exists(location)) {
-            logContent = cmd.getOutAsRoot("cat " + location);
+            const QString helperPath
+                = rootPath.isEmpty() ? location : location.mid(tempDir.path().size());
+            logContent = cmd.readFileAsRoot(helperPath, QuietMode::Yes, rootPath);
         }
     }
 
@@ -1532,7 +1574,9 @@ void MainWindow::pushPreviewClicked()
             tr("Plymouth was just installed, you might need to reboot before being able to display previews"));
     }
 
-    QString current_theme = cmd.getOutAsRoot(chroot + "/sbin/plymouth-set-default-theme");
+    const QString rootPath = targetRootPath();
+    QString current_theme = rootPath.isEmpty() ? cmd.getOutAsRoot("plymouth-set-default-theme").trimmed()
+                                               : cmd.getOutAsRootInTarget(rootPath, "plymouth-set-default-theme").trimmed();
     if (ui->comboTheme->currentText() == "details") {
         return;
     }
@@ -1543,14 +1587,21 @@ void MainWindow::pushPreviewClicked()
             tr("You current system is running in a Virtual Machine,\n"
                "Plymouth bootsplash will work in a limited way, you also won't be able to preview the theme"));
     }
-    cmd.procAsRoot(chroot + "/sbin/plymouth-set-default-theme", {ui->comboTheme->currentText()});
+    if (rootPath.isEmpty()) {
+        cmd.procAsRoot("plymouth-set-default-theme", {ui->comboTheme->currentText()});
+    } else {
+        cmd.procAsRootInTarget(rootPath, "plymouth-set-default-theme", {ui->comboTheme->currentText()});
+    }
 
     QTimer tick;
     tick.start(100ms);
     connect(&tick, &QTimer::timeout, this, &MainWindow::sendMouseEvents);
-    cmd.runAsRoot("plymouthd; plymouth --show-splash; for ((i=0; i<4; i++)); do plymouth --update=test$i; sleep 1; "
-                  "done; plymouth quit");
-    cmd.procAsRoot(chroot + "/sbin/plymouth-set-default-theme", {current_theme}); // return to current theme
+    cmd.previewPlymouthAsRoot();
+    if (rootPath.isEmpty()) {
+        cmd.procAsRoot("plymouth-set-default-theme", {current_theme});
+    } else {
+        cmd.procAsRootInTarget(rootPath, "plymouth-set-default-theme", {current_theme});
+    }
 }
 
 void MainWindow::comboEnableFlatmenusClicked(bool checked)

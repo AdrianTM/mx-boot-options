@@ -39,9 +39,9 @@ package() {
     install -dm755 "${pkgdir}/usr/share/mx-boot-options/locale"
     install -Dm644 build/*.qm "${pkgdir}/usr/share/mx-boot-options/locale/" 2>/dev/null || true
 
-    # Install helper scripts
+    # Install helper binary
     install -dm755 "${pkgdir}/usr/lib/mx-boot-options"
-    install -Dm755 scripts/helper "${pkgdir}/usr/lib/mx-boot-options/helper"
+    install -Dm755 build/helper "${pkgdir}/usr/lib/mx-boot-options/helper"
 
     # Install PolicyKit policy
     install -Dm644 scripts/org.mxlinux.pkexec.mxbo-helper.policy \
