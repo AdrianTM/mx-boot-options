@@ -34,7 +34,6 @@
 #include <QProgressDialog>
 #include <QRegularExpression>
 #include <QScreen>
-#include <QStandardPaths>
 #include <QTemporaryFile>
 #include <QTimer>
 
@@ -1283,22 +1282,7 @@ void MainWindow::pushAboutClicked()
 
 void MainWindow::pushHelpClicked()
 {
-    QString url = "https://mxlinux.org/wiki/help-files/help-mx-boot-options/";
-
-    // If curl exists use it to test if url is accessible, otherwise fallback
-    QString executablePath = QStandardPaths::findExecutable("curl");
-    if (!executablePath.isEmpty()) {
-        const int timeout = 2000; // ms
-        QProcess proc;
-        proc.start("curl", {"-fsI", "-m2", url, "-o", "/dev/null"});
-        proc.waitForFinished(timeout);
-        proc.terminate();
-        proc.waitForFinished(timeout);
-        if (proc.exitCode() != 0) {
-            url = "/usr/share/doc/mx-boot-options/mx-boot-options.html";
-        }
-    }
-    displayDoc(url, tr("%1 Help").arg(this->windowTitle()));
+    displayHelpDoc("/usr/share/doc/mx-boot-options/mx-boot-options.html", tr("%1 Help").arg(this->windowTitle()));
 }
 
 void MainWindow::comboBootsplashClicked(bool checked)
