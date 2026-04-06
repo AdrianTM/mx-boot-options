@@ -877,7 +877,8 @@ void MainWindow::replaceLiveGrubArgs(const QString &args)
     filteredArgs = filteredArgs.trimmed();
 
     if (!filteredArgs.isEmpty()) {
-        if (!cmd.procAsRoot("live-grubsave", {filteredArgs})) {
+        const QStringList argList = filteredArgs.split(' ', Qt::SkipEmptyParts);
+        if (!cmd.procAsRoot("live-grubsave", argList)) {
             qWarning() << "Failed to save new live-grub arguments:" << filteredArgs;
         }
     }
