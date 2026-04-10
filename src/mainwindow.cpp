@@ -223,9 +223,16 @@ void MainWindow::setupGrubSettings()
     ui->groupBoxBackground->setHidden(!grubInstalled);
 
     if (grubInstalled) {
-        readGrubCfg();
-        readDefaultGrub();
+        reloadGrubSettings();
     }
+}
+
+void MainWindow::reloadGrubSettings()
+{
+    defaultGrub.clear();
+    grubCfg.clear();
+    readGrubCfg();
+    readDefaultGrub();
 }
 
 void MainWindow::handleSpecialFilesystems()
@@ -1245,11 +1252,15 @@ void MainWindow::pushApplyClicked()
         if (grubInstalled) {
             writeDefaultGrub();
             progress->setLabelText(tr("Updating grub..."));
-            if (!runUpdateGrub()) {
+            const bool grubUpdated = runUpdateGrub();
+            if (!grubUpdated) {
                 qWarning() << "Failed to update GRUB configuration.";
             }
             if (live) {
                 cmd.procAsRoot("cp", {"/boot/grub/grub.cfg", bootLocation + "/boot/grub/grub.cfg"});
+            }
+            if (grubUpdated) {
+                reloadGrubSettings();
             }
         }
         progress->close();

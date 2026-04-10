@@ -1,3 +1,10 @@
+mx-boot-options (26.04.1) mx; urgency=medium
+
+  * Reload grub settings after Apply so the "boot to" menu reflects
+    regenerated grub entries without restarting the application.
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 10 Apr 2026 12:00:00 -0400
+
 mx-boot-options (26.04) mx; urgency=medium
 
   * Pass live-grubsave boot parameters as separate arguments so grubenv
