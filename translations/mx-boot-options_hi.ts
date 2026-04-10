@@ -200,9 +200,9 @@
         <location filename="../src/mainwindow.cpp" line="611"/>
         <location filename="../src/mainwindow.cpp" line="645"/>
         <location filename="../src/mainwindow.cpp" line="769"/>
-        <location filename="../src/mainwindow.cpp" line="1686"/>
-        <location filename="../src/mainwindow.cpp" line="1699"/>
-        <location filename="../src/mainwindow.cpp" line="1705"/>
+        <location filename="../src/mainwindow.cpp" line="1687"/>
+        <location filename="../src/mainwindow.cpp" line="1700"/>
+        <location filename="../src/mainwindow.cpp" line="1706"/>
         <source>Error</source>
         <translation>त्रुटि</translation>
     </message>
@@ -213,13 +213,13 @@
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="169"/>
-        <location filename="../src/mainwindow.cpp" line="1426"/>
+        <location filename="../src/mainwindow.cpp" line="1427"/>
         <source>Preview is disabled because &apos;splash&apos; parameter is not present in kernel command line. To enable preview, add &apos;splash&apos; to boot parameters and reboot.</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="173"/>
-        <location filename="../src/mainwindow.cpp" line="1429"/>
+        <location filename="../src/mainwindow.cpp" line="1430"/>
         <source>Preview is disabled while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
         <translation type="unfinished"/>
     </message>
@@ -257,145 +257,145 @@
         <translation>Chroot वातावरण बनाना विफल, बूट विकल्प परिवर्तन विफल। बंद करना जारी...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1141"/>
-        <location filename="../src/mainwindow.cpp" line="1600"/>
+        <location filename="../src/mainwindow.cpp" line="1142"/>
+        <location filename="../src/mainwindow.cpp" line="1601"/>
         <source>Updating configuration, please wait</source>
         <translation>विन्यास अपडेट करना जारी, प्रतीक्षा करें</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1225"/>
+        <location filename="../src/mainwindow.cpp" line="1226"/>
         <source>Updating initramfs...</source>
         <translation>Initramfs अपडेट करना जारी...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1246"/>
-        <location filename="../src/mainwindow.cpp" line="1615"/>
+        <location filename="../src/mainwindow.cpp" line="1247"/>
+        <location filename="../src/mainwindow.cpp" line="1616"/>
         <source>Updating grub...</source>
         <translation>Grub अपडेट करना जारी...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1273"/>
+        <location filename="../src/mainwindow.cpp" line="1274"/>
         <source>About %1</source>
         <translation>%1 के बारे में</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1274"/>
+        <location filename="../src/mainwindow.cpp" line="1275"/>
         <source>Version: </source>
         <translation>संस्करण :</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1276"/>
+        <location filename="../src/mainwindow.cpp" line="1277"/>
         <source>Program for selecting common start-up choices</source>
         <translation>सामान्य सिस्टम आरंभ विकल्प चयन हेतु प्रोग्राम</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1278"/>
+        <location filename="../src/mainwindow.cpp" line="1279"/>
         <source>Copyright (c) MX Linux</source>
         <translation>कॉपीराइट (c) एमएक्स लिनक्स</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1279"/>
+        <location filename="../src/mainwindow.cpp" line="1280"/>
         <source>%1 License</source>
         <translation>%1 लाइसेंस</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1285"/>
+        <location filename="../src/mainwindow.cpp" line="1286"/>
         <source>%1 Help</source>
         <translation>%1 सहायता</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1295"/>
-        <location filename="../src/mainwindow.cpp" line="1570"/>
+        <location filename="../src/mainwindow.cpp" line="1296"/>
+        <location filename="../src/mainwindow.cpp" line="1571"/>
         <source>Running in a Virtual Machine</source>
         <translation>वर्चुअल मशीन में कार्यरत</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1296"/>
-        <location filename="../src/mainwindow.cpp" line="1571"/>
+        <location filename="../src/mainwindow.cpp" line="1297"/>
+        <location filename="../src/mainwindow.cpp" line="1572"/>
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
         <translation>आपका वर्तमान सिस्टम में वर्चुअल मशीन में कार्यरत है।
 प्लाईमाउथ बूट स्प्लैश की कार्यक्षमता सीमित है, आप द्वारा थीम का पूर्वावलोकन संभव नहीं है</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1303"/>
+        <location filename="../src/mainwindow.cpp" line="1304"/>
         <source>Plymouth packages not installed</source>
         <translation> प्लाईमाउथ पैकेज इंस्टॉल नहीं हैं</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1304"/>
+        <location filename="../src/mainwindow.cpp" line="1305"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
         <translation>प्लाईमाउथ पैकेज इंस्टॉल नहीं हैं।
 क्या आप उन्हें इंस्टॉल करना चाहते हैं?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1336"/>
+        <location filename="../src/mainwindow.cpp" line="1337"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
         <translation>चित्र (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1501"/>
+        <location filename="../src/mainwindow.cpp" line="1502"/>
         <source>Could not read the systemd boot logs.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1502"/>
+        <location filename="../src/mainwindow.cpp" line="1503"/>
         <source>Could not read the systemd boot logs%1 or the fallback log at %2.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1503"/>
+        <location filename="../src/mainwindow.cpp" line="1504"/>
         <source> from %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1506"/>
+        <location filename="../src/mainwindow.cpp" line="1507"/>
         <source>Could not find any boot logs.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1507"/>
+        <location filename="../src/mainwindow.cpp" line="1508"/>
         <source>Could not find log at %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1509"/>
+        <location filename="../src/mainwindow.cpp" line="1510"/>
         <source>Log not found</source>
         <translation>लॉग प्राप्ति विफल</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1550"/>
+        <location filename="../src/mainwindow.cpp" line="1551"/>
         <source>Preview Unavailable</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1551"/>
+        <location filename="../src/mainwindow.cpp" line="1552"/>
         <source>Preview is not available while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1686"/>
+        <location filename="../src/mainwindow.cpp" line="1687"/>
         <source>Could not retrieve UUID for %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1694"/>
+        <location filename="../src/mainwindow.cpp" line="1695"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
         <translation>%1 एन्क्रिप्टेड विभाजन अभिगम हेतु कूटशब्द दर्ज करें :</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1699"/>
+        <location filename="../src/mainwindow.cpp" line="1700"/>
         <source>Password entry cancelled or empty for %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1705"/>
+        <location filename="../src/mainwindow.cpp" line="1706"/>
         <source>Could not open %1 LUKS container</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1521"/>
+        <location filename="../src/mainwindow.cpp" line="1522"/>
         <source>&amp;Close</source>
         <translation>बंद करें (&amp;C)</translation>
     </message>
@@ -450,47 +450,47 @@ OK to go ahead and install them?</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1256"/>
+        <location filename="../src/mainwindow.cpp" line="1257"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1258"/>
+        <location filename="../src/mainwindow.cpp" line="1259"/>
         <source>Your changes have been successfully applied.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1259"/>
+        <location filename="../src/mainwindow.cpp" line="1260"/>
         <source>Operation Complete</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1335"/>
+        <location filename="../src/mainwindow.cpp" line="1336"/>
         <source>Select image to display in bootloader</source>
         <translation>बूट लोड साधन हेतु चित्र चयन</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1514"/>
+        <location filename="../src/mainwindow.cpp" line="1515"/>
         <source>Boot Log</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1557"/>
+        <location filename="../src/mainwindow.cpp" line="1558"/>
         <source>Needs reboot</source>
         <translation>सिस्टम पुनः आरंभ करना आवश्यक</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1558"/>
+        <location filename="../src/mainwindow.cpp" line="1559"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
         <translation>प्लाईमाउथ अभी इंस्टॉल किया गया, पूर्वावलोकन प्रदर्शित करने हेतु पुनः आरंभ आवश्यक है</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1642"/>
+        <location filename="../src/mainwindow.cpp" line="1643"/>
         <source>Click to select theme</source>
         <translation>थीम चयन हेतु क्लिक करें</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1653"/>
+        <location filename="../src/mainwindow.cpp" line="1654"/>
         <source>Select GRUB theme</source>
         <translation>Grub थीम चयन</translation>
     </message>
