@@ -237,12 +237,13 @@ void MainWindow::reloadGrubSettings()
 
 void MainWindow::handleSpecialFilesystems()
 {
-    const QString fstype
-        = cmd.getOut("df --output=fstype " + (chroot.isEmpty() ? "/boot" : tempDir.path()) + " | tail -n1");
-    if (cmd.exitCode() != 0 || fstype.isEmpty()) {
+    const QString dfOut = cmd.getOut("df --output=fstype " + (chroot.isEmpty() ? "/boot" : tempDir.path()));
+    if (cmd.exitCode() != 0 || dfOut.isEmpty()) {
         qWarning() << "Failed to get filesystem type.";
         return;
     }
+    const QStringList dfLines = dfOut.split('\n', Qt::SkipEmptyParts);
+    const QString fstype = dfLines.isEmpty() ? QString() : dfLines.last().trimmed();
     if (fstype == "btrfs") {
         ui->checkSaveDefault->setChecked(false);
         ui->checkSaveDefault->setDisabled(true);
