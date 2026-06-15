@@ -196,206 +196,206 @@ systemet du vil endre (viser kun Linux-partisjoner)</translation>
         <translation>Kjører fortsatt</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="602"/>
-        <location filename="../src/mainwindow.cpp" line="611"/>
-        <location filename="../src/mainwindow.cpp" line="645"/>
-        <location filename="../src/mainwindow.cpp" line="769"/>
-        <location filename="../src/mainwindow.cpp" line="1687"/>
-        <location filename="../src/mainwindow.cpp" line="1700"/>
-        <location filename="../src/mainwindow.cpp" line="1706"/>
+        <location filename="../src/mainwindow.cpp" line="609"/>
+        <location filename="../src/mainwindow.cpp" line="618"/>
+        <location filename="../src/mainwindow.cpp" line="652"/>
+        <location filename="../src/mainwindow.cpp" line="776"/>
+        <location filename="../src/mainwindow.cpp" line="1698"/>
+        <location filename="../src/mainwindow.cpp" line="1711"/>
+        <location filename="../src/mainwindow.cpp" line="1717"/>
         <source>Error</source>
         <translation>Feil</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="591"/>
+        <location filename="../src/mainwindow.cpp" line="598"/>
         <source>Installing bootsplash, please wait</source>
         <translation>Installerer oppstartsbilde, vennligst vent</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="169"/>
-        <location filename="../src/mainwindow.cpp" line="1427"/>
+        <location filename="../src/mainwindow.cpp" line="1438"/>
         <source>Preview is disabled because &apos;splash&apos; parameter is not present in kernel command line. To enable preview, add &apos;splash&apos; to boot parameters and reboot.</source>
         <translation>Forhåndsvisning er slått av fordi parameteren «splash» mangler fra kjernens oppstartsparametre. Legg til «splash» for å slå på forhåndsvisning ved neste omstart.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="173"/>
-        <location filename="../src/mainwindow.cpp" line="1430"/>
+        <location filename="../src/mainwindow.cpp" line="1441"/>
         <source>Preview is disabled while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="598"/>
+        <location filename="../src/mainwindow.cpp" line="605"/>
         <source>Updating sources</source>
         <translation>Oppdaterer kilder</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="611"/>
+        <location filename="../src/mainwindow.cpp" line="618"/>
         <source>Could not install the bootsplash.</source>
         <translation>Klarte ikke installere oppstartsbilde.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="769"/>
+        <location filename="../src/mainwindow.cpp" line="776"/>
         <source>Could not create a temporary folder</source>
         <translation>Klarte ikke å opprette midlertidig mappe</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="775"/>
-        <location filename="../src/mainwindow.cpp" line="780"/>
-        <location filename="../src/mainwindow.cpp" line="799"/>
+        <location filename="../src/mainwindow.cpp" line="782"/>
+        <location filename="../src/mainwindow.cpp" line="787"/>
+        <location filename="../src/mainwindow.cpp" line="806"/>
         <source>Cannot continue</source>
         <translation>Kan ikke fortsette</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="775"/>
+        <location filename="../src/mainwindow.cpp" line="782"/>
         <source>Cannot open LUKS device. Exiting...</source>
         <translation>Klarte ikke åpne LUKS-enhet. Avslutter …</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="781"/>
-        <location filename="../src/mainwindow.cpp" line="800"/>
+        <location filename="../src/mainwindow.cpp" line="788"/>
+        <location filename="../src/mainwindow.cpp" line="807"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>Klarte ikke opprette chroot-miljø og kan derfor ikke endre oppstartsalternativer. Avslutter …</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1142"/>
-        <location filename="../src/mainwindow.cpp" line="1601"/>
+        <location filename="../src/mainwindow.cpp" line="1149"/>
+        <location filename="../src/mainwindow.cpp" line="1612"/>
         <source>Updating configuration, please wait</source>
         <translation>Oppdaterer oppsett – vennligst vent</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1226"/>
+        <location filename="../src/mainwindow.cpp" line="1233"/>
         <source>Updating initramfs...</source>
         <translation>Oppdaterer initramfs …</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1247"/>
-        <location filename="../src/mainwindow.cpp" line="1616"/>
+        <location filename="../src/mainwindow.cpp" line="1254"/>
+        <location filename="../src/mainwindow.cpp" line="1627"/>
         <source>Updating grub...</source>
         <translation>Oppdaterer grub …</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1274"/>
+        <location filename="../src/mainwindow.cpp" line="1285"/>
         <source>About %1</source>
         <translation>Om %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1275"/>
+        <location filename="../src/mainwindow.cpp" line="1286"/>
         <source>Version: </source>
         <translation>Versjon:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1277"/>
+        <location filename="../src/mainwindow.cpp" line="1288"/>
         <source>Program for selecting common start-up choices</source>
         <translation>Program for valg av vanlige oppstartsalternativer</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1279"/>
+        <location filename="../src/mainwindow.cpp" line="1290"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Opphavsrett (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1280"/>
+        <location filename="../src/mainwindow.cpp" line="1291"/>
         <source>%1 License</source>
         <translation>Lisens for %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1286"/>
+        <location filename="../src/mainwindow.cpp" line="1297"/>
         <source>%1 Help</source>
         <translation>Hjelpetekst for %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1296"/>
-        <location filename="../src/mainwindow.cpp" line="1571"/>
+        <location filename="../src/mainwindow.cpp" line="1307"/>
+        <location filename="../src/mainwindow.cpp" line="1582"/>
         <source>Running in a Virtual Machine</source>
         <translation>Kjører i en virtuell maskin</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1297"/>
-        <location filename="../src/mainwindow.cpp" line="1572"/>
+        <location filename="../src/mainwindow.cpp" line="1308"/>
+        <location filename="../src/mainwindow.cpp" line="1583"/>
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
         <translation>Systemet kjører i en virtuell maskin.
 «Plymouth» oppstartsbilde har derfor begrenset virkeområde, og temaet kan ikke forhåndsvises.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1304"/>
+        <location filename="../src/mainwindow.cpp" line="1315"/>
         <source>Plymouth packages not installed</source>
         <translation>Plymouth-pakkene er ikke installerte</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1305"/>
+        <location filename="../src/mainwindow.cpp" line="1316"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
         <translation>Plymouth-pakkene er ikke installerte.
 Vil du installere dem nå?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1337"/>
+        <location filename="../src/mainwindow.cpp" line="1348"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
         <translation>Bilder (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1502"/>
+        <location filename="../src/mainwindow.cpp" line="1513"/>
         <source>Could not read the systemd boot logs.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1503"/>
+        <location filename="../src/mainwindow.cpp" line="1514"/>
         <source>Could not read the systemd boot logs%1 or the fallback log at %2.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1504"/>
+        <location filename="../src/mainwindow.cpp" line="1515"/>
         <source> from %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1507"/>
+        <location filename="../src/mainwindow.cpp" line="1518"/>
         <source>Could not find any boot logs.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1508"/>
+        <location filename="../src/mainwindow.cpp" line="1519"/>
         <source>Could not find log at %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1510"/>
+        <location filename="../src/mainwindow.cpp" line="1521"/>
         <source>Log not found</source>
         <translation>Fant ikke logg</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1551"/>
+        <location filename="../src/mainwindow.cpp" line="1562"/>
         <source>Preview Unavailable</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1552"/>
+        <location filename="../src/mainwindow.cpp" line="1563"/>
         <source>Preview is not available while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1687"/>
+        <location filename="../src/mainwindow.cpp" line="1698"/>
         <source>Could not retrieve UUID for %1</source>
         <translation>Klarte ikke hente UUID for %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1695"/>
+        <location filename="../src/mainwindow.cpp" line="1706"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
         <translation>Angi passord for å låse opp den krypterte partisjonen %1:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1700"/>
+        <location filename="../src/mainwindow.cpp" line="1711"/>
         <source>Password entry cancelled or empty for %1</source>
         <translation>Skriving av passord ble avbrutt eller er tom for %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1706"/>
+        <location filename="../src/mainwindow.cpp" line="1717"/>
         <source>Could not open %1 LUKS container</source>
         <translation>Klarte ikke åpne %1 LUKS-partisjon</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1522"/>
+        <location filename="../src/mainwindow.cpp" line="1533"/>
         <source>&amp;Close</source>
         <translation>&amp;Lukk</translation>
     </message>
@@ -425,72 +425,72 @@ Vil du installere dem nå?</translation>
         <translation>Installert system</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="602"/>
+        <location filename="../src/mainwindow.cpp" line="609"/>
         <source>Failed to update package sources.</source>
         <translation>Klarte ikke oppdatere pakkekilder.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="607"/>
+        <location filename="../src/mainwindow.cpp" line="614"/>
         <source>Installing packages:</source>
         <translation>Installerer pakker:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="617"/>
+        <location filename="../src/mainwindow.cpp" line="624"/>
         <source>Success</source>
         <translation>Vellykket</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="617"/>
+        <location filename="../src/mainwindow.cpp" line="624"/>
         <source>Bootsplash installed successfully.</source>
         <translation>Installerte Bootsplash.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="645"/>
+        <location filename="../src/mainwindow.cpp" line="652"/>
         <source>Failed to create temporary file.</source>
         <translation>Klarte ikke opprette midlertidig fil.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1257"/>
+        <location filename="../src/mainwindow.cpp" line="1268"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
         <translation>Du kjører i livemodus med valget «toram». Husk å lagre minnefila eller å remastre, ellers vil alle endringer bli tapt.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1259"/>
+        <location filename="../src/mainwindow.cpp" line="1270"/>
         <source>Your changes have been successfully applied.</source>
         <translation>Endringene er nå tatt i bruk.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1260"/>
+        <location filename="../src/mainwindow.cpp" line="1271"/>
         <source>Operation Complete</source>
         <translation>Handling fullført</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1336"/>
+        <location filename="../src/mainwindow.cpp" line="1347"/>
         <source>Select image to display in bootloader</source>
         <translation>Velg bilde som skal vises i oppstartslasteren</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1515"/>
+        <location filename="../src/mainwindow.cpp" line="1526"/>
         <source>Boot Log</source>
         <translation>Oppstartslogg</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1558"/>
+        <location filename="../src/mainwindow.cpp" line="1569"/>
         <source>Needs reboot</source>
         <translation>Omstart kreves</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1559"/>
+        <location filename="../src/mainwindow.cpp" line="1570"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
         <translation>Plymouth ble nettopp installert. Omstart kreves for å kunne forhåndsvise temaer.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1643"/>
+        <location filename="../src/mainwindow.cpp" line="1654"/>
         <source>Click to select theme</source>
         <translation>Klikk for å velge tema</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1654"/>
+        <location filename="../src/mainwindow.cpp" line="1665"/>
         <source>Select GRUB theme</source>
         <translation>Velg Grub-tema</translation>
     </message>

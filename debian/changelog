@@ -1,3 +1,15 @@
+mx-boot-options (26.06) mx; urgency=medium
+
+  * Boot options can now be adjusted on a running live system (such as a
+    live USB), including the boot menu countdown and the boot menu
+    background image.
+  * When running live, only the settings that actually apply are shown,
+    and the live boot menu wording is refreshed when changes are saved.
+  * Fixed the GRUB theme option not appearing on installed systems, and
+    fixed boot menu entries that could appear without a name.
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 14 Jun 2026 12:00:00 -0400
+
 mx-boot-options (26.04.1) mx; urgency=medium
 
   * Reload grub settings after Apply so the "boot to" menu reflects
