@@ -342,7 +342,11 @@ void MainWindow::reloadGrubSettings()
 
 void MainWindow::handleSpecialFilesystems()
 {
-    const QString dfOut = cmd.getOut("df --output=fstype " + (chroot.isEmpty() ? "/boot" : tempDir.path()));
+    const QString dfOut = [&] {
+        QString out;
+        cmd.proc("df", {"--output=fstype", chroot.isEmpty() ? "/boot" : tempDir.path()}, &out);
+        return out;
+    }();
     if (cmd.exitCode() != 0 || dfOut.isEmpty()) {
         qWarning() << "Failed to get filesystem type.";
         return;
@@ -908,7 +912,7 @@ bool MainWindow::isInstalled(const QStringList &packages)
 // Check if running from a live environment
 bool MainWindow::isLive()
 {
-    return QProcess::execute("mountpoint", {"-q", "/live/aufs"}) == 0
+    return QDir("/live/aufs").exists()
            || QFile::exists("/run/archiso/bootmnt");
 }
 
@@ -1239,6 +1243,16 @@ QStringList MainWindow::getLinuxPartitions()
         = cmd.getOutAsRoot("lsblk", {"-ln", "-o", "NAME,SIZE,FSTYPE,MOUNTPOINT,LABEL", "-e", "2,11", "-x", "NAME"},
                            QuietMode::Yes)
               .split('\n', Qt::SkipEmptyParts);
+    // Get PARTTYPE for all candidate partitions in one call instead of N per-partition calls
+    const QStringList partTypeLines
+        = cmd.getOutAsRoot("lsblk", {"-ln", "-o", "NAME,PARTTYPE"}, QuietMode::Yes)
+              .split('\n', Qt::SkipEmptyParts);
+    QHash<QString, QString> partTypes;
+    partTypes.reserve(partTypeLines.size());
+    for (const QString &line : partTypeLines) {
+        partTypes[line.section(' ', 0, 0)] = line.section(' ', 1, 1).toLower();
+    }
+
     QStringList validPartitions;
     validPartitions.reserve(partitions.size());
     for (const QString &part_info : partitions) {
@@ -1246,8 +1260,7 @@ QStringList MainWindow::getLinuxPartitions()
         if (!partitionNameRx.match(partName).hasMatch()) {
             continue;
         }
-        QString partType
-            = cmd.getOutAsRoot("lsblk", {"-ln", "-o", "PARTTYPE", "/dev/" + partName}, QuietMode::Yes).trimmed().toLower();
+        const QString partType = partTypes.value(partName);
 
         if (partType.contains(QRegularExpression(
                 R"(0x83|0fc63daf-8483-4772-8e79-3d69d8477de4|44479540-f297-41b2-9af7-d131d5f0458a|4f68bce3-e8cd-4db1-96e7-fbcaf984b709|ca7d7ccb-63ed-4c53-861c-1742536059cc)"))) {
@@ -1302,7 +1315,11 @@ QString MainWindow::selectPartition(const QStringList &list)
     // Guess installed system by finding a partition with a known root label or /etc/os-release
     auto it = std::find_if(list.cbegin(), list.cend(), [&](const QString &part_info) {
         QString partName = part_info.section(' ', 0, 0);
-        const QString label = cmd.getOut(QString("lsblk -ln -o LABEL /dev/%1").arg(partName), QuietMode::Yes).trimmed();
+        const QString label = [&] {
+            QString out;
+            cmd.proc("lsblk", {"-ln", "-o", "LABEL", "/dev/" + partName}, &out, nullptr, QuietMode::Yes);
+            return out.trimmed();
+        }();
         // Check for MX Linux label
         if (label.contains(QLatin1String("rootMX"))) {
             return true;

@@ -5,6 +5,7 @@
 #include <QEventLoop>
 #include <QFile>
 #include <QMessageBox>
+#include <QStandardPaths>
 #include <QStringList>
 #include <QTimer>
 
@@ -15,13 +16,10 @@
 Cmd::Cmd(QObject *parent)
     : QProcess(parent)
 {
-    // Determine the appropriate elevation command
-    const QStringList elevationCommands = {"/usr/bin/pkexec", "/usr/bin/gksu"};
-    for (const QString &command : elevationCommands) {
-        if (QFile::exists(command)) {
-            elevationCommand = command;
-            break;
-        }
+    // Determine the appropriate elevation command via PATH lookup
+    elevationCommand = QStandardPaths::findExecutable(QStringLiteral("pkexec"));
+    if (elevationCommand.isEmpty()) {
+        elevationCommand = QStandardPaths::findExecutable(QStringLiteral("gksu"));
     }
 
     if (elevationCommand.isEmpty()) {
