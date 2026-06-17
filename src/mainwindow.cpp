@@ -50,6 +50,27 @@ extern const QString starting_home;
 
 namespace
 {
+
+// RAII wrapper that zeroes sensitive data on scope exit
+struct SecureBuffer
+{
+    QByteArray *data;
+
+    explicit SecureBuffer(QByteArray *d)
+        : data(d) {}
+
+    SecureBuffer(const SecureBuffer &) = delete;
+    SecureBuffer &operator=(const SecureBuffer &) = delete;
+
+    ~SecureBuffer()
+    {
+        if (data && !data->isEmpty()) {
+            data->fill(static_cast<char>(0));
+            data->clear();
+        }
+    }
+};
+
 // Matches kernel command line tokens that are isolated or separated by whitespace
 const QRegularExpression hushTokenRx(QStringLiteral(R"((^|\s+)hush(\s+|$))"));
 const QRegularExpression quietTokenRx(QStringLiteral(R"((^|\s+)quiet(\s+|$))"));
@@ -2331,6 +2352,7 @@ bool MainWindow::openLuks(const QString &partition, const QString &path)
                                             tr("Enter password to unlock %1 encrypted partition:").arg(partition),
                                             QLineEdit::Password, QString(), &ok)
                           .toUtf8();
+    SecureBuffer _scrub(&pass); // zeroes pass on scope exit (all return paths)
 
     if (!ok || pass.isEmpty()) {
         QMessageBox::critical(this, tr("Error"), tr("Password entry cancelled or empty for %1").arg(partition));
@@ -2340,11 +2362,9 @@ bool MainWindow::openLuks(const QString &partition, const QString &path)
     // Try to open the LUKS container
     if (!cmd.procAsRoot("cryptsetup", {"open", "--allow-discards", partition, mapper, "-"}, nullptr, &pass)) {
         QMessageBox::critical(this, tr("Error"), tr("Could not open %1 LUKS container").arg(partition));
-        pass.fill(static_cast<char>(0xA5 & 0xFF));
         return false;
     }
     cmd.procAsRoot("mount", {"/dev/mapper/" + mapper, path});
-    pass.fill(static_cast<char>(0xA5 & 0xFF));
     if (!mountBoot(path)) {
         return false;
     }
