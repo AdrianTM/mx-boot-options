@@ -9,8 +9,6 @@
 #include <QStringList>
 #include <QTimer>
 
-#include "mainwindow.h"
-
 #include <unistd.h>
 
 Cmd::Cmd(QObject *parent)
@@ -144,7 +142,9 @@ bool Cmd::proc(const QString &cmd, const QStringList &args, QString *output, con
 
     outBuffer.clear();
 
-    // Check if process is already running
+    // Relay QProcess::finished to Cmd::done, disconnecting any previous
+    // relay to avoid accumulating duplicate signal-slot connections.
+    disconnect(this, &QProcess::finished, this, &Cmd::done);
     connect(this, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &Cmd::done);
     if (state() != QProcess::NotRunning) {
         qDebug() << "Process already running:" << program() << arguments();
@@ -198,8 +198,8 @@ bool Cmd::run(const QString &cmd, QString *output, const QByteArray *input, Quie
 
 void Cmd::handleElevationError()
 {
-    if (qobject_cast<MainWindow *>(qApp->activeWindow())) {
-        QMessageBox::critical(nullptr, tr("Administrator Access Required"),
+    if (qApp->activeWindow()) {
+        QMessageBox::critical(qApp->activeWindow(), tr("Administrator Access Required"),
                               tr("This operation requires administrator privileges. Please restart the application "
                                  "and enter your password when prompted."));
     }
