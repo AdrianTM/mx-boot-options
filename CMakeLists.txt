@@ -22,6 +22,8 @@
 
 cmake_minimum_required(VERSION 3.16)
 
+include(CheckCXXCompilerFlag)
+
 set(PROJECT_VERSION_FROM_CHANGELOG "")
 
 if(DEFINED PROJECT_VERSION_OVERRIDE AND NOT "${PROJECT_VERSION_OVERRIDE}" STREQUAL "")
@@ -156,7 +158,6 @@ target_link_libraries(helper
 # Set compiler flags
 target_compile_options(mx-boot-options PRIVATE
     -Wpedantic
-    -pedantic
     -Werror=return-type
     -Werror=switch
     -Werror=uninitialized
@@ -165,7 +166,6 @@ target_compile_options(mx-boot-options PRIVATE
 
 target_compile_options(helper PRIVATE
     -Wpedantic
-    -pedantic
     -Werror=return-type
     -Werror=switch
     -Werror=uninitialized
@@ -199,13 +199,25 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
     target_compile_definitions(mx-boot-options PRIVATE NDEBUG)
     target_compile_options(mx-boot-options PRIVATE -O3)
 
-    # Add LTO - different flags for different compilers
+    # Add LTO when the compiler supports it
     if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-        target_compile_options(mx-boot-options PRIVATE -flto=thin)
-        target_link_options(mx-boot-options PRIVATE -flto=thin)
+        check_cxx_compiler_flag(-flto=thin HAS_CLANG_LTO)
+        if(HAS_CLANG_LTO)
+            target_compile_options(mx-boot-options PRIVATE -flto=thin)
+            target_link_options(mx-boot-options PRIVATE -flto=thin)
+        endif()
     else()
-        target_compile_options(mx-boot-options PRIVATE -flto=auto)
-        target_link_options(mx-boot-options PRIVATE -flto=auto)
+        check_cxx_compiler_flag(-flto=auto HAS_GCC_LTO_AUTO)
+        if(HAS_GCC_LTO_AUTO)
+            target_compile_options(mx-boot-options PRIVATE -flto=auto)
+            target_link_options(mx-boot-options PRIVATE -flto=auto)
+        else()
+            check_cxx_compiler_flag(-flto HAS_GCC_LTO)
+            if(HAS_GCC_LTO)
+                target_compile_options(mx-boot-options PRIVATE -flto)
+                target_link_options(mx-boot-options PRIVATE -flto)
+            endif()
+        endif()
     endif()
 endif()
 
