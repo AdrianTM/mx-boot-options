@@ -1027,7 +1027,9 @@ bool MainWindow::installPackages(const QStringList &packages)
         return rootPath.isEmpty() ? cmd.procAsRoot("pacman", packageArgs)
                                   : cmd.procAsRootInTarget(rootPath, "pacman", packageArgs);
     case PackageManager::Apt:
-        packageArgs = {"install", "-y"};
+        packageArgs = {"install", "-y",
+                       "-o", "Dpkg::Options::=--force-confdef",
+                       "-o", "Dpkg::Options::=--force-confold"};
         packageArgs += packages;
         return rootPath.isEmpty() ? cmd.procAsRoot("apt-get", packageArgs)
                                   : cmd.procAsRootInTarget(rootPath, "apt-get", packageArgs);

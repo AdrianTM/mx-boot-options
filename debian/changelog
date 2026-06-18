@@ -1,3 +1,13 @@
+mx-boot-options (26.06.1) mx; urgency=medium
+
+  * Plymouth installation now handles modified configuration files
+    gracefully — your custom settings are preserved when prompted.
+  * Corrected the wording of the message shown when running in a virtual
+    machine.
+  * Various under-the-hood code improvements and fixes.
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 17 Jun 2026 21:30:00 -0400
+
 mx-boot-options (26.06) mx; urgency=medium
 
   * Boot options can now be adjusted on a running live system (such as a
