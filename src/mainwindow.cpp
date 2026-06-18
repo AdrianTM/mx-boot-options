@@ -1944,7 +1944,7 @@ void MainWindow::comboBootsplashClicked(bool checked)
         if (inVirtualMachine()) {
             QMessageBox::information(
                 this, tr("Running in a Virtual Machine"),
-                tr("You current system is running in a Virtual Machine,\n"
+                tr("Your current system is running in a Virtual Machine,\n"
                    "Plymouth bootsplash will work in a limited way, you also won't be able to preview the theme"));
             // ui->pushPreview->setDisabled(true);
         }
@@ -2219,7 +2219,7 @@ void MainWindow::pushPreviewClicked()
     if (inVirtualMachine()) {
         QMessageBox::information(
             this, tr("Running in a Virtual Machine"),
-            tr("You current system is running in a Virtual Machine,\n"
+            tr("Your current system is running in a Virtual Machine,\n"
                "Plymouth bootsplash will work in a limited way, you also won't be able to preview the theme"));
     }
     if (rootPath.isEmpty()) {
@@ -2331,7 +2331,7 @@ void MainWindow::lineEditKernelTextEdited()
 bool MainWindow::isLuks(const QString &part)
 {
     if (!cmd.procAsRoot("cryptsetup", {"isLuks", part})) {
-        qDebug() << "Not a LUKS partion:" << part;
+        qDebug() << "Not a LUKS partition:" << part;
         return false;
     }
     return true;
