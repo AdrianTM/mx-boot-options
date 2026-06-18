@@ -155,6 +155,22 @@ target_link_libraries(helper
     Qt6::Core
 )
 
+# Unit tests (optional, off by default)
+option(BUILD_TESTS "Build unit tests" OFF)
+if(BUILD_TESTS)
+    enable_testing()
+    add_executable(mx-boot-options-tests
+        tests/test_main.cpp
+        src/cmd.cpp
+    )
+    target_link_libraries(mx-boot-options-tests
+        Qt6::Core
+        Qt6::Widgets
+    )
+    target_include_directories(mx-boot-options-tests PRIVATE src)
+    add_test(NAME mx-boot-options-tests COMMAND mx-boot-options-tests)
+endif()
+
 # Set compiler flags
 target_compile_options(mx-boot-options PRIVATE
     -Wpedantic
