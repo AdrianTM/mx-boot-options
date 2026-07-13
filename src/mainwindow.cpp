@@ -1204,11 +1204,15 @@ bool MainWindow::runPackageUpdate()
     const QString rootPath = targetRootPath();
     switch (detectPackageManager()) {
     case PackageManager::Pacman:
-        return rootPath.isEmpty() ? cmd.procAsRoot("pacman", {"-Sy", "--noconfirm"})
-                                  : cmd.procAsRootInTarget(rootPath, "pacman", {"-Sy", "--noconfirm"});
+        return rootPath.isEmpty() ? cmd.procAsRoot("pacman", {"-Sy", "--noconfirm"}, nullptr, nullptr,
+                                                   QuietMode::No, Cmd::NoTimeoutMs)
+                                  : cmd.procAsRootInTarget(rootPath, "pacman", {"-Sy", "--noconfirm"}, nullptr,
+                                                            nullptr, QuietMode::No, Cmd::NoTimeoutMs);
     case PackageManager::Apt:
-        return rootPath.isEmpty() ? cmd.procAsRoot("apt-get", {"update"})
-                                  : cmd.procAsRootInTarget(rootPath, "apt-get", {"update"});
+        return rootPath.isEmpty() ? cmd.procAsRoot("apt-get", {"update"}, nullptr, nullptr, QuietMode::No,
+                                                   Cmd::NoTimeoutMs)
+                                  : cmd.procAsRootInTarget(rootPath, "apt-get", {"update"}, nullptr, nullptr,
+                                                            QuietMode::No, Cmd::NoTimeoutMs);
     default:
         qWarning() << "No supported package manager found for update.";
         return false;
@@ -1227,15 +1231,19 @@ bool MainWindow::installPackages(const QStringList &packages)
     case PackageManager::Pacman:
         packageArgs = {"-S", "--noconfirm", "--needed"};
         packageArgs += packages;
-        return rootPath.isEmpty() ? cmd.procAsRoot("pacman", packageArgs)
-                                  : cmd.procAsRootInTarget(rootPath, "pacman", packageArgs);
+        return rootPath.isEmpty() ? cmd.procAsRoot("pacman", packageArgs, nullptr, nullptr, QuietMode::No,
+                                                   Cmd::NoTimeoutMs)
+                                  : cmd.procAsRootInTarget(rootPath, "pacman", packageArgs, nullptr, nullptr,
+                                                            QuietMode::No, Cmd::NoTimeoutMs);
     case PackageManager::Apt:
         packageArgs = {"install", "-y",
                        "-o", "Dpkg::Options::=--force-confdef",
                        "-o", "Dpkg::Options::=--force-confold"};
         packageArgs += packages;
-        return rootPath.isEmpty() ? cmd.procAsRoot("apt-get", packageArgs)
-                                  : cmd.procAsRootInTarget(rootPath, "apt-get", packageArgs);
+        return rootPath.isEmpty() ? cmd.procAsRoot("apt-get", packageArgs, nullptr, nullptr, QuietMode::No,
+                                                   Cmd::NoTimeoutMs)
+                                  : cmd.procAsRootInTarget(rootPath, "apt-get", packageArgs, nullptr, nullptr,
+                                                            QuietMode::No, Cmd::NoTimeoutMs);
     default:
         qWarning() << "No supported package manager found for install.";
         return false;
@@ -1385,13 +1393,15 @@ void MainWindow::appendLogWithColors(QTextEdit *textEdit, const QString &logCont
 
 void MainWindow::installSplash()
 {
+    cmd.clearCancelRequest();
     auto *progress = new QProgressDialog(this);
     bar = new QProgressBar(progress);
 
     progress->setWindowModality(Qt::WindowModal);
     progress->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowSystemMenuHint
                              | Qt::WindowStaysOnTopHint);
-    progress->setCancelButton(nullptr);
+    progress->setCancelButtonText(tr("Cancel"));
+    connect(progress, &QProgressDialog::canceled, &cmd, &Cmd::cancel);
     progress->setWindowTitle(tr("Installing bootsplash, please wait"));
     progress->setBar(bar);
     bar->setTextVisible(false);
@@ -1402,6 +1412,7 @@ void MainWindow::installSplash()
     progress->setLabelText(tr("Updating sources"));
 
     if (!runPackageUpdate()) {
+        disconnect(progress, &QProgressDialog::canceled, &cmd, &Cmd::cancel);
         progress->close();
         bar = nullptr;
         progress->deleteLater();
@@ -1413,6 +1424,7 @@ void MainWindow::installSplash()
     progress->setLabelText(tr("Installing packages:") + " " + packages.join(", "));
 
     if (!installPackages(packages)) {
+        disconnect(progress, &QProgressDialog::canceled, &cmd, &Cmd::cancel);
         progress->close();
         bar = nullptr;
         progress->deleteLater();
@@ -1421,6 +1433,7 @@ void MainWindow::installSplash()
         return;
     }
 
+    disconnect(progress, &QProgressDialog::canceled, &cmd, &Cmd::cancel);
     progress->close();
     bar = nullptr;
     progress->deleteLater();
@@ -2066,6 +2079,7 @@ void MainWindow::pushApplyClicked()
 {
     ui->pushCancel->setDisabled(true);
     ui->pushApply->setDisabled(true);
+    cmd.clearCancelRequest();
 
     auto *progress = new QProgressDialog(this);
     bar = new QProgressBar(progress);
@@ -2073,7 +2087,8 @@ void MainWindow::pushApplyClicked()
     progress->setWindowModality(Qt::WindowModal);
     progress->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowSystemMenuHint
                              | Qt::WindowStaysOnTopHint);
-    progress->setCancelButton(nullptr);
+    progress->setCancelButtonText(tr("Cancel"));
+    connect(progress, &QProgressDialog::canceled, &cmd, &Cmd::cancel);
     progress->setWindowTitle(tr("Updating configuration, please wait"));
     progress->setBar(bar);
     bar->setTextVisible(false);
@@ -2094,13 +2109,15 @@ void MainWindow::pushApplyClicked()
         return ok;
     };
 
-    if (kernelOptionsChanged) {
+    if (!cmd.isCancelRequested() && kernelOptionsChanged) {
         replaceGrubArg("GRUB_CMDLINE_LINUX_DEFAULT", "\"" + ui->textKernel->text() + "\"");
         if (live && !installedMode) {
             recordStep(replaceLiveGrubArgs(ui->textKernel->text()),
                        tr("saving the kernel boot arguments to the live media"));
-            recordStep(replaceSyslinuxArgs(ui->textKernel->text()),
-                       tr("saving the kernel boot arguments to the syslinux configuration"));
+            if (!cmd.isCancelRequested()) {
+                recordStep(replaceSyslinuxArgs(ui->textKernel->text()),
+                           tr("saving the kernel boot arguments to the syslinux configuration"));
+            }
         }
     }
 
@@ -2108,13 +2125,13 @@ void MainWindow::pushApplyClicked()
     // grub.cfg / syslinux config and theme files. The remaining GRUB_* defaults only take effect through
     // /etc/default/grub + update-grub, which do not apply to live media, so the installed-system branch below
     // is skipped in live mode (and those controls are disabled/hidden in the UI).
-    if (optionsChanged && inLiveGrubMode) {
+    if (!cmd.isCancelRequested() && optionsChanged && inLiveGrubMode) {
         recordStep(applyLiveGrubTimeout(ui->spinBoxTimeout->value()), tr("saving the live boot menu timeout"));
         const QString liveBgPath = ui->pushBgFile->property("file").toString();
-        if (ui->pushBgFile->isEnabled() && QFile::exists(liveBgPath)) {
+        if (!cmd.isCancelRequested() && ui->pushBgFile->isEnabled() && QFile::exists(liveBgPath)) {
             recordStep(applyLiveGrubBackground(liveBgPath), tr("saving the live boot menu background image"));
         }
-    } else if (optionsChanged) {
+    } else if (!cmd.isCancelRequested() && optionsChanged) {
         recordStep(cmd.procAsRoot("grub-editenv", {"/boot/grub/grubenv", "unset", "next_entry"}),
                    tr("clearing the pending one-time boot entry"));
 
@@ -2143,7 +2160,7 @@ void MainWindow::pushApplyClicked()
                                  ? QString::number(ui->comboMenuEntry->currentIndex())
                                  : ui->comboMenuEntry->currentData().toString().section(' ', 1, 1);
 
-        if (ui->comboMenuEntry->currentText().contains(QLatin1String("memtest"))) {
+        if (!cmd.isCancelRequested() && ui->comboMenuEntry->currentText().contains(QLatin1String("memtest"))) {
             ui->spinBoxTimeout->setValue(5);
             if (rootPath.isEmpty()) {
                 recordStep(cmd.procAsRoot("grub-reboot", {ui->comboMenuEntry->currentText()}),
@@ -2156,7 +2173,7 @@ void MainWindow::pushApplyClicked()
             replaceGrubArg("GRUB_DEFAULT", "\"" + grub_entry + '"');
         }
 
-        if (ui->checkSaveDefault->isChecked()) {
+        if (!cmd.isCancelRequested() && ui->checkSaveDefault->isChecked()) {
             replaceGrubArg("GRUB_DEFAULT", "saved");
             enableGrubLine("GRUB_SAVEDEFAULT=true");
             if (rootPath.isEmpty()) {
@@ -2165,16 +2182,16 @@ void MainWindow::pushApplyClicked()
                 recordStep(cmd.procAsRootInTarget(rootPath, "grub-set-default", {grub_entry}),
                            tr("saving the default boot entry"));
             }
-        } else {
+        } else if (!cmd.isCancelRequested()) {
             disableGrubLine("GRUB_SAVEDEFAULT=true");
         }
 
-        if (!replaceGrubArg("GRUB_TIMEOUT", QString::number(ui->spinBoxTimeout->value()))) {
+        if (!cmd.isCancelRequested() && !replaceGrubArg("GRUB_TIMEOUT", QString::number(ui->spinBoxTimeout->value()))) {
             addGrubLine("GRUB_TIMEOUT=" + QString::number(ui->spinBoxTimeout->value()));
         }
     }
 
-    if (splashChanged) {
+    if (!cmd.isCancelRequested() && splashChanged) {
         if (ui->checkBootsplash->isChecked()) {
             if (!ui->comboTheme->currentText().isEmpty()) {
                 if (rootPath.isEmpty()) {
@@ -2186,17 +2203,19 @@ void MainWindow::pushApplyClicked()
                                tr("setting the boot splash theme"));
                 }
             }
-            recordStep(toggleBootlogd(false), tr("updating the boot log service state"));
+            if (!cmd.isCancelRequested()) {
+                recordStep(toggleBootlogd(false), tr("updating the boot log service state"));
+            }
         } else {
             recordStep(toggleBootlogd(true), tr("updating the boot log service state"));
         }
         progress->setLabelText(tr("Updating initramfs..."));
-        if (!recordStep(runUpdateInitramfs(), tr("updating the initramfs"))) {
+        if (!cmd.isCancelRequested() && !recordStep(runUpdateInitramfs(), tr("updating the initramfs"))) {
             qWarning() << "Failed to update initramfs.";
         }
     }
 
-    if (messagesChanged && ui->radioLimitedMsg->isChecked()) {
+    if (!cmd.isCancelRequested() && messagesChanged && ui->radioLimitedMsg->isChecked()) {
         if (QFile::exists(rootPath + "/etc/default/rcS")) {
             const QString hushSnippet = QStringLiteral(
                 "\n# hush boot-log into /run/rc.log\n"
@@ -2209,7 +2228,7 @@ void MainWindow::pushApplyClicked()
         }
     }
 
-    if (optionsChanged || splashChanged || messagesChanged || kernelOptionsChanged) {
+    if (!cmd.isCancelRequested() && (optionsChanged || splashChanged || messagesChanged || kernelOptionsChanged)) {
         if (grubInstalled) {
             // In pure live mode the on-disk /etc/default/grub is not read into defaultGrub, so it must not be
             // written back (that would truncate it) nor regenerated via update-grub. Live edits go straight to
@@ -2222,7 +2241,7 @@ void MainWindow::pushApplyClicked()
                     if (!grubUpdated) {
                         qWarning() << "Failed to update GRUB configuration.";
                     }
-                    if (live && !bootLocation.isEmpty()) {
+                    if (!cmd.isCancelRequested() && live && !bootLocation.isEmpty()) {
                         recordStep(cmd.procAsRoot("cp", {"/boot/grub/grub.cfg", bootLocation + "/boot/grub/grub.cfg"}),
                                    tr("copying the GRUB configuration to the boot media"));
                     }
@@ -2231,7 +2250,7 @@ void MainWindow::pushApplyClicked()
                 }
             }
             bool liveLabelsUpdated = false;
-            if (live && !installedMode) {
+            if (!cmd.isCancelRequested() && live && !installedMode) {
                 progress->setLabelText(tr("Refreshing live boot labels..."));
                 liveLabelsUpdated = recordStep(refreshLiveGrubTheme(), tr("refreshing the live boot menu labels"));
                 if (!liveLabelsUpdated) {
@@ -2266,6 +2285,19 @@ void MainWindow::pushApplyClicked()
         }
     }
 
+    if (cmd.isCancelRequested()) {
+        disconnect(progress, &QProgressDialog::canceled, &cmd, &Cmd::cancel);
+        progress->close();
+        bar = nullptr;
+        progress->deleteLater();
+        ui->pushApply->setEnabled(true);
+        ui->pushCancel->setEnabled(true);
+        QMessageBox::warning(this, tr("Operation Cancelled"),
+                             tr("The operation was cancelled. Changes already completed were kept; the remaining "
+                                "changes are still pending."));
+        return;
+    }
+
     // Reset change flags, unless an apply step failed and needs to be retried.
     if (!failedSteps.isEmpty()) {
         ui->pushApply->setEnabled(true);
@@ -2275,6 +2307,7 @@ void MainWindow::pushApplyClicked()
         messagesChanged = false;
         kernelOptionsChanged = false;
     }
+    disconnect(progress, &QProgressDialog::canceled, &cmd, &Cmd::cancel);
     ui->pushCancel->setEnabled(true);
 }
 
@@ -2608,13 +2641,16 @@ void MainWindow::comboEnableFlatmenusClicked(bool checked)
         return;
     }
 
+    cmd.clearCancelRequest();
+
     auto *progress = new QProgressDialog(this);
     bar = new QProgressBar(progress);
 
     progress->setWindowModality(Qt::WindowModal);
     progress->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowSystemMenuHint
                              | Qt::WindowStaysOnTopHint);
-    progress->setCancelButton(nullptr);
+    progress->setCancelButtonText(tr("Cancel"));
+    connect(progress, &QProgressDialog::canceled, &cmd, &Cmd::cancel);
     progress->setWindowTitle(tr("Updating configuration, please wait"));
     progress->setBar(bar);
     bar->setTextVisible(false);
@@ -2641,6 +2677,7 @@ void MainWindow::comboEnableFlatmenusClicked(bool checked)
         optionsChanged = true;
         ui->pushApply->setEnabled(true);
     }
+    disconnect(progress, &QProgressDialog::canceled, &cmd, &Cmd::cancel);
     progress->close();
     bar = nullptr;
     progress->deleteLater();

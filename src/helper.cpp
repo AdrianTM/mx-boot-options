@@ -44,6 +44,7 @@ namespace
 struct ProcessResult
 {
     bool started = false;
+    bool timedOut = false;
     int exitCode = 1;
     QProcess::ExitStatus exitStatus = QProcess::NormalExit;
     QByteArray standardOutput;
@@ -145,13 +146,26 @@ void printError(const QString &message)
     return {};
 }
 
-[[nodiscard]] ProcessResult runProcess(const QString &program, const QStringList &args, const QByteArray &input = {})
+[[nodiscard]] int commandTimeoutMs(const QString &command)
+{
+    if (command == QLatin1String("apt-get") || command == QLatin1String("pacman")) {
+        return -1;
+    }
+    if (command == QLatin1String("grub-mkconfig") || command == QLatin1String("update-grub")
+        || command == QLatin1String("mkinitcpio") || command == QLatin1String("update-initramfs")) {
+        return 10 * 60 * 1000;
+    }
+    return 60 * 1000;
+}
+
+[[nodiscard]] ProcessResult runProcess(const QString &program, const QStringList &args, int timeoutMs = 60 * 1000,
+                                       const QByteArray &input = {})
 {
     ProcessResult result;
 
     QProcess process;
     process.start(program, args, QIODevice::ReadWrite);
-    if (!process.waitForStarted()) {
+    if (!process.waitForStarted(30000)) {
         result.standardError = QString("Failed to start %1").arg(program).toUtf8();
         result.exitCode = 127;
         return result;
@@ -163,11 +177,28 @@ void printError(const QString &message)
     }
     process.closeWriteChannel();
 
-    process.waitForFinished(-1);
+    const bool finished = timeoutMs < 0 ? process.waitForFinished(-1) : process.waitForFinished(timeoutMs);
+    if (!finished) {
+        result.timedOut = true;
+        process.terminate();
+        if (!process.waitForFinished(5000)) {
+            process.kill();
+            process.waitForFinished(5000);
+        }
+        result.exitCode = 124;
+    }
     result.exitStatus = process.exitStatus();
-    result.exitCode = process.exitCode();
+    if (!result.timedOut) {
+        result.exitCode = process.exitCode();
+    }
     result.standardOutput = process.readAllStandardOutput();
     result.standardError = process.readAllStandardError();
+    if (result.timedOut) {
+        result.standardError += QString("Command timed out after %1 seconds: %2\n")
+                                    .arg(timeoutMs / 1000)
+                                    .arg(program)
+                                    .toUtf8();
+    }
     return result;
 }
 
@@ -176,6 +207,9 @@ void printError(const QString &message)
     writeAndFlush(stdout, result.standardOutput);
     writeAndFlush(stderr, result.standardError);
     if (!result.started) {
+        return result.exitCode;
+    }
+    if (result.timedOut) {
         return result.exitCode;
     }
     return result.exitStatus == QProcess::NormalExit ? result.exitCode : 1;
@@ -272,7 +306,7 @@ void printError(const QString &message)
     }
 
     if (rootPath.isEmpty()) {
-        return relayResult(runProcess(resolvedCommand, commandArgs, input));
+        return relayResult(runProcess(resolvedCommand, commandArgs, commandTimeoutMs(command), input));
     }
 
     const QString chrootBinary = resolveChrootBinary();
@@ -283,7 +317,7 @@ void printError(const QString &message)
 
     QStringList chrootArgs {rootPath, resolvedCommand};
     chrootArgs += commandArgs;
-    return relayResult(runProcess(chrootBinary, chrootArgs, input));
+    return relayResult(runProcess(chrootBinary, chrootArgs, commandTimeoutMs(command), input));
 }
 
 [[nodiscard]] int handleReadFile(const QString &rootPath, const QStringList &args)
