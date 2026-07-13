@@ -1,3 +1,12 @@
+mx-boot-options (26.07) mx; urgency=medium
+
+  * Add an option to turn off the GRUB boot menu background image.
+  * Show which configuration changes could not be applied and keep them
+    pending so they can be retried; allow long operations to be cancelled
+    safely.
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 13 Jul 2026 01:58:52 -0400
+
 mx-boot-options (26.06.1) mx; urgency=medium
 
   * Plymouth installation now handles modified configuration files

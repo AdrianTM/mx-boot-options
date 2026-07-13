@@ -2,12 +2,12 @@
 <context>
     <name>Cmd</name>
     <message>
-        <location filename="../src/cmd.cpp" line="204"/>
+        <location filename="../src/cmd.cpp" line="202"/>
         <source>Administrator Access Required</source>
         <translation>Järjestelmänvalvojan oikeudet vaaditaan</translation>
     </message>
     <message>
-        <location filename="../src/cmd.cpp" line="205"/>
+        <location filename="../src/cmd.cpp" line="203"/>
         <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
         <translation>Toiminto vaatii järjestelmänvalvojan oikeudet. Käynnistä sovellus uudelleen ja anna salasanasi pyydettäessä.</translation>
     </message>
@@ -191,316 +191,315 @@
         <translation>Hyväksy</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="188"/>
+        <location filename="../src/mainwindow.cpp" line="209"/>
         <source>Still running</source>
         <translation>Edelleen käynnissä</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1175"/>
-        <location filename="../src/mainwindow.cpp" line="1184"/>
-        <location filename="../src/mainwindow.cpp" line="1218"/>
-        <location filename="../src/mainwindow.cpp" line="1342"/>
-        <location filename="../src/mainwindow.cpp" line="2306"/>
-        <location filename="../src/mainwindow.cpp" line="2319"/>
-        <location filename="../src/mainwindow.cpp" line="2325"/>
+        <location filename="../src/mainwindow.cpp" line="1202"/>
+        <location filename="../src/mainwindow.cpp" line="1211"/>
+        <location filename="../src/mainwindow.cpp" line="1245"/>
+        <location filename="../src/mainwindow.cpp" line="1382"/>
+        <location filename="../src/mainwindow.cpp" line="2346"/>
+        <location filename="../src/mainwindow.cpp" line="2360"/>
+        <location filename="../src/mainwindow.cpp" line="2366"/>
         <source>Error</source>
         <translation>Virhe</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1164"/>
+        <location filename="../src/mainwindow.cpp" line="1191"/>
         <source>Installing bootsplash, please wait</source>
         <translation>Käynnistysanimaatiota asennetaan, odota</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="245"/>
-        <location filename="../src/mainwindow.cpp" line="2039"/>
+        <location filename="../src/mainwindow.cpp" line="266"/>
+        <location filename="../src/mainwindow.cpp" line="2079"/>
         <source>Preview is disabled because &apos;splash&apos; parameter is not present in kernel command line. To enable preview, add &apos;splash&apos; to boot parameters and reboot.</source>
         <translation>Esikatselu on poistettu käytöstä, koska &quot;splash&quot;-parametria ei ole kernelin komentorivillä. Saat esikatselun käyttöön lisäämällä &quot;splash&quot; käynnistysparametreihin ja käynnistämällä tietokoneen uudelleen.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="249"/>
-        <location filename="../src/mainwindow.cpp" line="2042"/>
+        <location filename="../src/mainwindow.cpp" line="270"/>
+        <location filename="../src/mainwindow.cpp" line="2082"/>
         <source>Preview is disabled while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
         <translation>Esikatselu on poistettu Waylandin aikana. Vaihda X11-istuntoon ja voit esikatsella Plymouth-teemoja.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="277"/>
+        <location filename="../src/mainwindow.cpp" line="298"/>
         <source>The live boot menu&apos;s default entry is controlled by the MX boot scripts and cannot be changed here.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1171"/>
+        <location filename="../src/mainwindow.cpp" line="1198"/>
         <source>Updating sources</source>
         <translation>Päivitetään lähteitä</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1184"/>
+        <location filename="../src/mainwindow.cpp" line="1211"/>
         <source>Could not install the bootsplash.</source>
         <translation>Käynnistyksen splash-kuvaa ei voitu asentaa.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1342"/>
+        <location filename="../src/mainwindow.cpp" line="1382"/>
         <source>Could not create a temporary folder</source>
         <translation>Ei voitu luoda väliaikaista kansiota</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1348"/>
-        <location filename="../src/mainwindow.cpp" line="1353"/>
-        <location filename="../src/mainwindow.cpp" line="1372"/>
+        <location filename="../src/mainwindow.cpp" line="1388"/>
+        <location filename="../src/mainwindow.cpp" line="1393"/>
+        <location filename="../src/mainwindow.cpp" line="1412"/>
         <source>Cannot continue</source>
         <translation>Ei voida jatkaa</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1348"/>
+        <location filename="../src/mainwindow.cpp" line="1388"/>
         <source>Cannot open LUKS device. Exiting...</source>
         <translation>Ei voi avata LUKS. Poistutaan...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1354"/>
-        <location filename="../src/mainwindow.cpp" line="1373"/>
+        <location filename="../src/mainwindow.cpp" line="1394"/>
+        <location filename="../src/mainwindow.cpp" line="1413"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>Chroot-ympäristöä ei voitu luoda, käynnistysvaihtoehtoja ei voitu muuttaa. Poistutaan...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1725"/>
-        <location filename="../src/mainwindow.cpp" line="2219"/>
+        <location filename="../src/mainwindow.cpp" line="1765"/>
+        <location filename="../src/mainwindow.cpp" line="2259"/>
         <source>Updating configuration, please wait</source>
         <translation>Asetuksia päivitetään, odota</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1820"/>
+        <location filename="../src/mainwindow.cpp" line="1860"/>
         <source>Updating initramfs...</source>
         <translation>Päivitetään initramfs...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1846"/>
-        <location filename="../src/mainwindow.cpp" line="2234"/>
+        <location filename="../src/mainwindow.cpp" line="1886"/>
+        <location filename="../src/mainwindow.cpp" line="2274"/>
         <source>Updating grub...</source>
         <translation>Päivitetään grub...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1857"/>
+        <location filename="../src/mainwindow.cpp" line="1897"/>
         <source>Refreshing live boot labels...</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1886"/>
+        <location filename="../src/mainwindow.cpp" line="1926"/>
         <source>About %1</source>
         <translation>%1 lisätietoja</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1887"/>
+        <location filename="../src/mainwindow.cpp" line="1927"/>
         <source>Version: </source>
         <translation>Versio: </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1889"/>
+        <location filename="../src/mainwindow.cpp" line="1929"/>
         <source>Program for selecting common start-up choices</source>
         <translation>Ohjelma tietokoneen käynnistyksen valinnoille</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1891"/>
+        <location filename="../src/mainwindow.cpp" line="1931"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1892"/>
+        <location filename="../src/mainwindow.cpp" line="1932"/>
         <source>%1 License</source>
         <translation>%1 lisenssi</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1898"/>
+        <location filename="../src/mainwindow.cpp" line="1938"/>
         <source>%1 Help</source>
         <translation>%1 Apuopas</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1908"/>
-        <location filename="../src/mainwindow.cpp" line="2183"/>
+        <location filename="../src/mainwindow.cpp" line="1948"/>
+        <location filename="../src/mainwindow.cpp" line="2223"/>
         <source>Running in a Virtual Machine</source>
         <translation>Ajettuna virtuaalikoneessa</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1909"/>
-        <location filename="../src/mainwindow.cpp" line="2184"/>
-        <source>You current system is running in a Virtual Machine,
-Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
-        <translation>Järjestelmäsi on ajossa virtuaalikoneessa,
-Käynnistyksen Plymouth-animaatio toimii täten rajatulla tavalla, et myöskään voi esikatsella teemaa</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="1916"/>
+        <location filename="../src/mainwindow.cpp" line="1956"/>
         <source>Plymouth packages not installed</source>
         <translation>Plymouth-paketteja ei asennettu</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1917"/>
+        <location filename="../src/mainwindow.cpp" line="1957"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
         <translation>Plymouth-paketteja ei ole tällä hetkellä asennettuna.
 Voidaanko jatkaa ja asentaa ne?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1949"/>
+        <location filename="../src/mainwindow.cpp" line="1989"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
         <translation>Kuvat (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2114"/>
+        <location filename="../src/mainwindow.cpp" line="2154"/>
         <source>Could not read the systemd boot logs.</source>
         <translation>Systemd-käynnistyslokin lukeminen epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2115"/>
+        <location filename="../src/mainwindow.cpp" line="2155"/>
         <source>Could not read the systemd boot logs%1 or the fallback log at %2.</source>
         <translation>Systemd-käynnistyslokin %1 tai varalokin %2 lukeminen epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2116"/>
+        <location filename="../src/mainwindow.cpp" line="2156"/>
         <source> from %1</source>
         <translation>kohteesta %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2119"/>
+        <location filename="../src/mainwindow.cpp" line="2159"/>
         <source>Could not find any boot logs.</source>
         <translation>Käynnistyslokia ei löytynyt.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2120"/>
+        <location filename="../src/mainwindow.cpp" line="2160"/>
         <source>Could not find log at %1</source>
         <translation>Lokia ei löytynyt %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2122"/>
+        <location filename="../src/mainwindow.cpp" line="2162"/>
         <source>Log not found</source>
         <translation>Lokitiedostoa ei löytynyt</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2163"/>
+        <location filename="../src/mainwindow.cpp" line="2203"/>
         <source>Preview Unavailable</source>
         <translation>Esikatselu poistettu</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2164"/>
+        <location filename="../src/mainwindow.cpp" line="2204"/>
         <source>Preview is not available while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
         <translation>Esikatselu on poistettu Waylandin aikana. Vaihda X11-istuntoon ja voit esikatsella Plymouth-teemoja.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2306"/>
+        <location filename="../src/mainwindow.cpp" line="2346"/>
         <source>Could not retrieve UUID for %1</source>
         <translation>Ei voi hakea UUID:tä kohteelle %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2314"/>
+        <location filename="../src/mainwindow.cpp" line="2354"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
         <translation>Syötä salasana avataksesi %1 salauksella varustetun osion:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2319"/>
+        <location filename="../src/mainwindow.cpp" line="2360"/>
         <source>Password entry cancelled or empty for %1</source>
         <translation>Salasana peruttu tai tyhjä kohteelle %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2325"/>
+        <location filename="../src/mainwindow.cpp" line="2366"/>
         <source>Could not open %1 LUKS container</source>
         <translation>Ei voi avata %1 LUKS-säilöstä</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2134"/>
+        <location filename="../src/mainwindow.cpp" line="2174"/>
         <source>&amp;Close</source>
         <translation>&amp;Sulje</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="189"/>
+        <location filename="../src/mainwindow.cpp" line="210"/>
         <source>A process is still running. Do you really want to quit?</source>
         <translation>Prosessi on yhä käynnissä. Haluatko varmasti lopettaa?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="288"/>
+        <location filename="../src/mainwindow.cpp" line="309"/>
         <source>Live System Detected</source>
         <translation>Live-tila tunnistettu</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="290"/>
+        <location filename="../src/mainwindow.cpp" line="311"/>
         <source>You are currently running a live system. Would you like to modify the boot options for the live system or for an installed system?</source>
         <translation>Käytät tällä hetkellä live-tilaa. Haluatko muokata käynnissä olevan järjestelmän tai asennetun tietokoneen käynnistysasetuksia?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="292"/>
+        <location filename="../src/mainwindow.cpp" line="313"/>
         <source>Live System</source>
         <translation>Live-tila</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="293"/>
+        <location filename="../src/mainwindow.cpp" line="314"/>
         <source>Installed System</source>
         <translation>Asennettu tietokone</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1175"/>
+        <location filename="../src/mainwindow.cpp" line="1202"/>
         <source>Failed to update package sources.</source>
         <translation>Pakettilähteiden päivitys epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1180"/>
+        <location filename="../src/mainwindow.cpp" line="1207"/>
         <source>Installing packages:</source>
         <translation>Asennetaan paketteja:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1190"/>
+        <location filename="../src/mainwindow.cpp" line="1217"/>
         <source>Success</source>
         <translation>Onnistui</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1190"/>
+        <location filename="../src/mainwindow.cpp" line="1217"/>
         <source>Bootsplash installed successfully.</source>
         <translation>Bootsplash asennettu.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1218"/>
+        <location filename="../src/mainwindow.cpp" line="1245"/>
         <source>Failed to create temporary file.</source>
         <translation>Väliaikaisen tiedoston luominen epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1869"/>
+        <location filename="../src/mainwindow.cpp" line="1909"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
         <translation>Käytät tällä hetkellä live-tilan toram-asetusta. Muista tallentaa pysyvä tiedosto tai remaster, muuten tehdyt muutokset menetetään.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1871"/>
+        <location filename="../src/mainwindow.cpp" line="1911"/>
         <source>Your changes have been successfully applied.</source>
         <translation>Muutokset on otettu käyttöön.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1872"/>
+        <location filename="../src/mainwindow.cpp" line="1912"/>
         <source>Operation Complete</source>
         <translation>Tehtävä valmis</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1948"/>
+        <location filename="../src/mainwindow.cpp" line="1949"/>
+        <location filename="../src/mainwindow.cpp" line="2224"/>
+        <source>Your current system is running in a Virtual Machine,
+Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1988"/>
         <source>Select image to display in bootloader</source>
         <translation>Valitse käynnistyslataajassa näytettävä kuva</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2127"/>
+        <location filename="../src/mainwindow.cpp" line="2167"/>
         <source>Boot Log</source>
         <translation>Boot-loki</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2170"/>
+        <location filename="../src/mainwindow.cpp" line="2210"/>
         <source>Needs reboot</source>
         <translation>Käynnistä uudelleen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2171"/>
+        <location filename="../src/mainwindow.cpp" line="2211"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
         <translation>Plymouth asennettiin juuri, järjestelmä on luultavasti käynnistettävä uudelleen ennen katselua</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2261"/>
+        <location filename="../src/mainwindow.cpp" line="2301"/>
         <source>Click to select theme</source>
         <translation>Klikkaa valitaksesi teema</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2273"/>
+        <location filename="../src/mainwindow.cpp" line="2313"/>
         <source>Select GRUB theme</source>
         <translation>Valitse GRUB:in teema</translation>
     </message>

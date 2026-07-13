@@ -2,12 +2,12 @@
 <context>
     <name>Cmd</name>
     <message>
-        <location filename="../src/cmd.cpp" line="204"/>
+        <location filename="../src/cmd.cpp" line="202"/>
         <source>Administrator Access Required</source>
         <translation>საჭიროა ადმინისტრატორის წვდომა</translation>
     </message>
     <message>
-        <location filename="../src/cmd.cpp" line="205"/>
+        <location filename="../src/cmd.cpp" line="203"/>
         <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
         <translation>ეს ოპერაცია ადმინისტრატორის პრივილეგიებს მოითხოვს. გაუშვით აპლიკაცია თავიდან და შეიყვანეთ პაროლი, როცა გკითხავენ.</translation>
     </message>
@@ -191,316 +191,315 @@
         <translation>გადატარება</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="188"/>
+        <location filename="../src/mainwindow.cpp" line="209"/>
         <source>Still running</source>
         <translation>ჯერ კიდევ გაშვებულია</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1175"/>
-        <location filename="../src/mainwindow.cpp" line="1184"/>
-        <location filename="../src/mainwindow.cpp" line="1218"/>
-        <location filename="../src/mainwindow.cpp" line="1342"/>
-        <location filename="../src/mainwindow.cpp" line="2306"/>
-        <location filename="../src/mainwindow.cpp" line="2319"/>
-        <location filename="../src/mainwindow.cpp" line="2325"/>
+        <location filename="../src/mainwindow.cpp" line="1202"/>
+        <location filename="../src/mainwindow.cpp" line="1211"/>
+        <location filename="../src/mainwindow.cpp" line="1245"/>
+        <location filename="../src/mainwindow.cpp" line="1382"/>
+        <location filename="../src/mainwindow.cpp" line="2346"/>
+        <location filename="../src/mainwindow.cpp" line="2360"/>
+        <location filename="../src/mainwindow.cpp" line="2366"/>
         <source>Error</source>
         <translation>შეცდომა</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1164"/>
+        <location filename="../src/mainwindow.cpp" line="1191"/>
         <source>Installing bootsplash, please wait</source>
         <translation>მიმდინარეობს ჩატვირთვის ეკრანის დაყენება. მოითმინეთ</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="245"/>
-        <location filename="../src/mainwindow.cpp" line="2039"/>
+        <location filename="../src/mainwindow.cpp" line="266"/>
+        <location filename="../src/mainwindow.cpp" line="2079"/>
         <source>Preview is disabled because &apos;splash&apos; parameter is not present in kernel command line. To enable preview, add &apos;splash&apos; to boot parameters and reboot.</source>
         <translation>მინიატურა გათიშულია, რადგან ბირთვის ბრძანების სტრიქონში &apos;splash&apos; პარამეტრი აღმოჩენილი არა. მინიატურის ჩასართავად დაამატეთ ჩატვირთვის პარამეტრებს &apos;splash&apos; და გადატვირთეთ სისტემა.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="249"/>
-        <location filename="../src/mainwindow.cpp" line="2042"/>
+        <location filename="../src/mainwindow.cpp" line="270"/>
+        <location filename="../src/mainwindow.cpp" line="2082"/>
         <source>Preview is disabled while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
         <translation>მინიატურა გათიშულია Wayland-ზე გაშვებისას. Plymouth-ის თემების მინიატურისთვის გაუშვით X11-ის სესია.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="277"/>
+        <location filename="../src/mainwindow.cpp" line="298"/>
         <source>The live boot menu&apos;s default entry is controlled by the MX boot scripts and cannot be changed here.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1171"/>
+        <location filename="../src/mainwindow.cpp" line="1198"/>
         <source>Updating sources</source>
         <translation>წყაროების განახლება</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1184"/>
+        <location filename="../src/mainwindow.cpp" line="1211"/>
         <source>Could not install the bootsplash.</source>
         <translation>ჩატვირთვის ეკრანის დაყენება შეუძლებელია.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1342"/>
+        <location filename="../src/mainwindow.cpp" line="1382"/>
         <source>Could not create a temporary folder</source>
         <translation>დროებითი საქაღალდის შექმნა შეუძლებელია</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1348"/>
-        <location filename="../src/mainwindow.cpp" line="1353"/>
-        <location filename="../src/mainwindow.cpp" line="1372"/>
+        <location filename="../src/mainwindow.cpp" line="1388"/>
+        <location filename="../src/mainwindow.cpp" line="1393"/>
+        <location filename="../src/mainwindow.cpp" line="1412"/>
         <source>Cannot continue</source>
         <translation>გაგრძელება შეუძლებელია</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1348"/>
+        <location filename="../src/mainwindow.cpp" line="1388"/>
         <source>Cannot open LUKS device. Exiting...</source>
         <translation>LUKS მოწყობილობის გახსნა შეუძლებელია. მუშაობის დასრულება...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1354"/>
-        <location filename="../src/mainwindow.cpp" line="1373"/>
+        <location filename="../src/mainwindow.cpp" line="1394"/>
+        <location filename="../src/mainwindow.cpp" line="1413"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>chroot გარემოს შექმნა შეუძლებელია, რადგან ჩატვირთვის პარამეტრების შეცვლა შეუძლებელია. გასვლა...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1725"/>
-        <location filename="../src/mainwindow.cpp" line="2219"/>
+        <location filename="../src/mainwindow.cpp" line="1765"/>
+        <location filename="../src/mainwindow.cpp" line="2259"/>
         <source>Updating configuration, please wait</source>
         <translation>მიმდინარეობს კონფიგურაციის განახლება. მოითმინეთ</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1820"/>
+        <location filename="../src/mainwindow.cpp" line="1860"/>
         <source>Updating initramfs...</source>
         <translation>Initramfs-ის განახლება...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1846"/>
-        <location filename="../src/mainwindow.cpp" line="2234"/>
+        <location filename="../src/mainwindow.cpp" line="1886"/>
+        <location filename="../src/mainwindow.cpp" line="2274"/>
         <source>Updating grub...</source>
         <translation>grub-ის განახლება...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1857"/>
+        <location filename="../src/mainwindow.cpp" line="1897"/>
         <source>Refreshing live boot labels...</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1886"/>
+        <location filename="../src/mainwindow.cpp" line="1926"/>
         <source>About %1</source>
         <translation>%1-ის შესახებ</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1887"/>
+        <location filename="../src/mainwindow.cpp" line="1927"/>
         <source>Version: </source>
         <translation>ვერსია: </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1889"/>
+        <location filename="../src/mainwindow.cpp" line="1929"/>
         <source>Program for selecting common start-up choices</source>
         <translation>პროგრამა ზოგადი გაშვების არჩევნების ასარჩევად</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1891"/>
+        <location filename="../src/mainwindow.cpp" line="1931"/>
         <source>Copyright (c) MX Linux</source>
         <translation>(c) MX Linux საავტორო ფულებები დაცულია</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1892"/>
+        <location filename="../src/mainwindow.cpp" line="1932"/>
         <source>%1 License</source>
         <translation>ლიცენზია %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1898"/>
+        <location filename="../src/mainwindow.cpp" line="1938"/>
         <source>%1 Help</source>
         <translation>%1-ის დახმარება</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1908"/>
-        <location filename="../src/mainwindow.cpp" line="2183"/>
+        <location filename="../src/mainwindow.cpp" line="1948"/>
+        <location filename="../src/mainwindow.cpp" line="2223"/>
         <source>Running in a Virtual Machine</source>
         <translation>გაშვებულია ვირტუალურ მანქანაში</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1909"/>
-        <location filename="../src/mainwindow.cpp" line="2184"/>
-        <source>You current system is running in a Virtual Machine,
-Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
-        <translation>თქვენი სისტემა ამჟამად ვირტუალურ მანქანაზეა გაშვებული.
-Plymouth-ის ჩატვირთვის მისალმების ეკრანი შეზღუდულად იმუშავებს და თქვენ თემის მინიატურებს ვერ ნახავთ</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="1916"/>
+        <location filename="../src/mainwindow.cpp" line="1956"/>
         <source>Plymouth packages not installed</source>
         <translation>Plymouth-ის პაკეტები დაყენებული არაა</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1917"/>
+        <location filename="../src/mainwindow.cpp" line="1957"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
         <translation>Plymouth-ის პაკეტები ამჟამად დაყენებული არაა.
 გნებავთ მათი დაყენება?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1949"/>
+        <location filename="../src/mainwindow.cpp" line="1989"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
         <translation>გამოსახულებეები (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2114"/>
+        <location filename="../src/mainwindow.cpp" line="2154"/>
         <source>Could not read the systemd boot logs.</source>
         <translation>systemd-ის ჩატვირთვის ჟურნალის წაკითხვა შეუძლებელია.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2115"/>
+        <location filename="../src/mainwindow.cpp" line="2155"/>
         <source>Could not read the systemd boot logs%1 or the fallback log at %2.</source>
         <translation>systemd-ის ჟურნალის %1, ან სარეზერვო ჟურნალის %2 წაკითხვა შეუძლებელია.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2116"/>
+        <location filename="../src/mainwindow.cpp" line="2156"/>
         <source> from %1</source>
         <translation> %1-იდან</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2119"/>
+        <location filename="../src/mainwindow.cpp" line="2159"/>
         <source>Could not find any boot logs.</source>
         <translation>ჩატვირთვის ჟურნალი აღმოჩენილი არაა.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2120"/>
+        <location filename="../src/mainwindow.cpp" line="2160"/>
         <source>Could not find log at %1</source>
         <translation>%1-ში ჟურნალი აღმოჩენილი არაა</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2122"/>
+        <location filename="../src/mainwindow.cpp" line="2162"/>
         <source>Log not found</source>
         <translation>ჟურნალი აღმოჩენილი არაა</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2163"/>
+        <location filename="../src/mainwindow.cpp" line="2203"/>
         <source>Preview Unavailable</source>
         <translation>მინიატურა ხელმისაწვდომი არაა</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2164"/>
+        <location filename="../src/mainwindow.cpp" line="2204"/>
         <source>Preview is not available while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
         <translation>მინიატურა გათიშულია Wayland-ზე გაშვებისას. Plymouth-ის თემების მინიატურისთვის გაუშვით X11-ის სესია.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2306"/>
+        <location filename="../src/mainwindow.cpp" line="2346"/>
         <source>Could not retrieve UUID for %1</source>
         <translation>%1-ისთვის UUID-ის მიღება შეუძლებელია</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2314"/>
+        <location filename="../src/mainwindow.cpp" line="2354"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
         <translation>შეიყვანეთ პაროლი დაშიფრული დანაყოფის %1 განბლოკვისთვის:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2319"/>
+        <location filename="../src/mainwindow.cpp" line="2360"/>
         <source>Password entry cancelled or empty for %1</source>
         <translation>პაროლის ჩანაწერი გაუქმებულია, ან ცარიელია %1-ისთვის</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2325"/>
+        <location filename="../src/mainwindow.cpp" line="2366"/>
         <source>Could not open %1 LUKS container</source>
         <translation>LUKS-ის კონტეინერის %1 გახსნა შეუძლებელია</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2134"/>
+        <location filename="../src/mainwindow.cpp" line="2174"/>
         <source>&amp;Close</source>
         <translation>&amp;დახურვა</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="189"/>
+        <location filename="../src/mainwindow.cpp" line="210"/>
         <source>A process is still running. Do you really want to quit?</source>
         <translation>პროცესი ჯერ კიდევ გაშვებულია. მართლა გნებავთ, გახვიდეთ?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="288"/>
+        <location filename="../src/mainwindow.cpp" line="309"/>
         <source>Live System Detected</source>
         <translation>აღმოჩენილია ცოცხალი სისტემა</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="290"/>
+        <location filename="../src/mainwindow.cpp" line="311"/>
         <source>You are currently running a live system. Would you like to modify the boot options for the live system or for an installed system?</source>
         <translation>ამჟამად გაშვებული გაქვთ ცოცხალი სისტემა. გნებავთ ჩატვირთვის პარამეტრების შეცვლა ცოცხალი სისტემისთვის, თუ დაყენებული სისტემისთვის?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="292"/>
+        <location filename="../src/mainwindow.cpp" line="313"/>
         <source>Live System</source>
         <translation>ცოცხალი სისტემა</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="293"/>
+        <location filename="../src/mainwindow.cpp" line="314"/>
         <source>Installed System</source>
         <translation>დაყენებული სისტემა</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1175"/>
+        <location filename="../src/mainwindow.cpp" line="1202"/>
         <source>Failed to update package sources.</source>
         <translation>პაკეტის წყაროების განახლება ჩავარდა.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1180"/>
+        <location filename="../src/mainwindow.cpp" line="1207"/>
         <source>Installing packages:</source>
         <translation>პაკეტების დაყენება:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1190"/>
+        <location filename="../src/mainwindow.cpp" line="1217"/>
         <source>Success</source>
         <translation>წარმატება</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1190"/>
+        <location filename="../src/mainwindow.cpp" line="1217"/>
         <source>Bootsplash installed successfully.</source>
         <translation>ჩატვირთვის მისალმების ეკრანის დაყენება წარმატებულია.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1218"/>
+        <location filename="../src/mainwindow.cpp" line="1245"/>
         <source>Failed to create temporary file.</source>
         <translation>დროებითი ფაილის შექმნის შეცდომა.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1869"/>
+        <location filename="../src/mainwindow.cpp" line="1909"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
         <translation>თქვენ ამჟამად გაშვებული გაქვთ ცოცხალი რეჟიმი პარამეტრით &apos;toram&apos;. დაიმახსოვრეთ, რომ შეინახოთ მუდმივობის ფაილი, ან გადააკეთოთ, არადა შეტანილი ცვლილებები დაიკარგება.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1871"/>
+        <location filename="../src/mainwindow.cpp" line="1911"/>
         <source>Your changes have been successfully applied.</source>
         <translation>თქვენი ცვლილებების გადატარება წარმატებულია.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1872"/>
+        <location filename="../src/mainwindow.cpp" line="1912"/>
         <source>Operation Complete</source>
         <translation>ოპერაცია დასრულდა</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1948"/>
+        <location filename="../src/mainwindow.cpp" line="1949"/>
+        <location filename="../src/mainwindow.cpp" line="2224"/>
+        <source>Your current system is running in a Virtual Machine,
+Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1988"/>
         <source>Select image to display in bootloader</source>
         <translation>აირჩიეთ გამოსახულება ჩამტვირთავში საჩვენებლად</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2127"/>
+        <location filename="../src/mainwindow.cpp" line="2167"/>
         <source>Boot Log</source>
         <translation>ჩატვირთვის ჟურნალი</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2170"/>
+        <location filename="../src/mainwindow.cpp" line="2210"/>
         <source>Needs reboot</source>
         <translation>საჭიროებს გადატვირთვას</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2171"/>
+        <location filename="../src/mainwindow.cpp" line="2211"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
         <translation>Plymouth ახლახან დადგა. მინიატურების საჩვენებლად, შეიძლება, გადატვირთვა დაგჭირდეთ</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2261"/>
+        <location filename="../src/mainwindow.cpp" line="2301"/>
         <source>Click to select theme</source>
         <translation>დააწკაპუნეთ თემის ასარჩევად</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2273"/>
+        <location filename="../src/mainwindow.cpp" line="2313"/>
         <source>Select GRUB theme</source>
         <translation>აირჩიეთ GRUB-ის თემა</translation>
     </message>
