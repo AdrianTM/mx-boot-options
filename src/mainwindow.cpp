@@ -280,12 +280,17 @@ void MainWindow::setupUiElements()
     ui->checkGrubTheme->setVisible(grubThemesExist);
     ui->pushThemeFile->setVisible(grubThemesExist);
     ui->pushThemeFile->setDisabled(true);
+    ui->checkBackground->setChecked(false);
+    ui->pushBgFile->setDisabled(true);
 
     if (liveGrubMode()) {
         // Live media uses a platform-selected set of theme files (not a single pickable file), so the theme
         // picker does not apply -- only the background image plus the timeout and default entry can be changed.
         ui->checkGrubTheme->setVisible(false);
         ui->pushThemeFile->setVisible(false);
+        // The live theme files always reference a background image, so it can be replaced but not disabled.
+        ui->checkBackground->setChecked(true);
+        ui->checkBackground->setEnabled(false);
         ui->pushBgFile->setEnabled(true);
         // save-default (grubenv) and flat-menus (an update-grub generation option) cannot apply to the
         // pre-generated live grub.cfg, so disable them.
@@ -870,12 +875,13 @@ void MainWindow::sendMouseEvents()
 
 void MainWindow::setGeneralConnections()
 {
+    connect(ui->checkBackground, &QCheckBox::clicked, this, &MainWindow::checkBackgroundToggled);
+    connect(ui->checkBackground, &QCheckBox::clicked, ui->pushBgFile, &QPushButton::setEnabled);
     connect(ui->checkBootsplash, &QCheckBox::clicked, this, &MainWindow::comboBootsplashClicked);
     connect(ui->checkBootsplash, &QCheckBox::toggled, this, &MainWindow::comboBootsplashToggled);
     connect(ui->checkBootsplash, &QCheckBox::toggled, ui->comboTheme, &QComboBox::setEnabled);
     connect(ui->checkEnableFlatmenus, &QCheckBox::clicked, this, &MainWindow::comboEnableFlatmenusClicked);
     connect(ui->checkGrubTheme, &QCheckBox::clicked, this, &MainWindow::comboGrubThemeToggled);
-    connect(ui->checkGrubTheme, &QCheckBox::clicked, ui->pushBgFile, &QPushButton::setDisabled);
     connect(ui->checkGrubTheme, &QCheckBox::clicked, ui->pushThemeFile, &QPushButton::setEnabled);
     connect(ui->checkSaveDefault, &QCheckBox::clicked, this, &MainWindow::comboSaveDefaultClicked);
     connect(ui->comboMenuEntry, qOverload<int>(&QComboBox::currentIndexChanged), this,
@@ -1650,6 +1656,14 @@ void MainWindow::readDefaultGrub()
             QString picturePath = line.section('=', 1).remove('"');
             ui->pushBgFile->setText(picturePath);
             ui->pushBgFile->setProperty("file", picturePath);
+            ui->checkBackground->setChecked(true);
+            ui->pushBgFile->setEnabled(true);
+        } else if (line.startsWith("#export GRUB_MENU_PICTURE=")
+                   && ui->pushBgFile->property("file").toString().isEmpty()) {
+            // Remember the image from a disabled background line so re-enabling does not require re-picking it.
+            QString picturePath = line.section('=', 1).remove('"');
+            ui->pushBgFile->setText(picturePath);
+            ui->pushBgFile->setProperty("file", picturePath);
         } else if (line.startsWith("GRUB_THEME=")) {
             processGrubTheme(line);
         } else if (line.startsWith("GRUB_CMDLINE_LINUX_DEFAULT=")) {
@@ -1660,6 +1674,12 @@ void MainWindow::readDefaultGrub()
         }
     }
     file.close();
+
+    // An active theme overrides the background image, regardless of the order of the lines in the file.
+    if (ui->checkGrubTheme->isChecked()) {
+        ui->checkBackground->setChecked(false);
+        ui->pushBgFile->setDisabled(true);
+    }
 }
 
 void MainWindow::processGrubDefault(const QString &line)
@@ -1690,7 +1710,6 @@ void MainWindow::processGrubTheme(const QString &line)
     bool themeExists = QFile::exists(themePath);
     ui->pushThemeFile->setEnabled(themeExists);
     ui->checkGrubTheme->setChecked(themeExists);
-    ui->pushBgFile->setDisabled(themeExists);
 }
 
 void MainWindow::processKernelCommandLine(QString line)
@@ -1796,18 +1815,20 @@ void MainWindow::pushApplyClicked()
         const QString bgFilePath = ui->pushBgFile->property("file").toString();
         const QString themeFilePath = ui->pushThemeFile->property("file").toString();
 
-        if (ui->pushBgFile->isEnabled() && QFile::exists(bgFilePath)) {
+        if (ui->checkBackground->isChecked() && QFile::exists(bgFilePath)) {
             if (!replaceGrubArg("export GRUB_MENU_PICTURE", "\"" + bgFilePath + "\"")) {
-                addGrubLine("export GRUB_MENU_PICTURE=\"" + bgFilePath + "\"");
+                // Uncomments a previously disabled line with the same image in place, or appends a new one.
+                enableGrubLine("export GRUB_MENU_PICTURE=\"" + bgFilePath + "\"");
             }
-        } else if (ui->checkGrubTheme->isChecked() && QFile::exists(themeFilePath)) {
+        } else if (!ui->checkBackground->isChecked()) {
             disableGrubLine("export GRUB_MENU_PICTURE");
+        }
+
+        if (ui->checkGrubTheme->isChecked() && QFile::exists(themeFilePath)) {
             if (!replaceGrubArg("GRUB_THEME", "\"" + themeFilePath + "\"")) {
                 addGrubLine("GRUB_THEME=\"" + themeFilePath + "\"");
             }
-        }
-
-        if (ui->checkGrubTheme->isVisible() && !ui->checkGrubTheme->isChecked()) {
+        } else if (ui->checkGrubTheme->isVisible() && !ui->checkGrubTheme->isChecked()) {
             disableGrubLine("GRUB_THEME=");
         }
 
@@ -2297,10 +2318,37 @@ void MainWindow::comboThemeCurrentIndexChanged(int index)
 
 void MainWindow::comboGrubThemeToggled(bool checked)
 {
+    // The theme replaces the plain background image, so only one of the two can be enabled at a time.
+    // Disabling the background this way is a persistable change on its own, even before a theme is selected.
+    const bool backgroundDisabled = checked && ui->checkBackground->isChecked();
+    if (checked) {
+        ui->checkBackground->setChecked(false);
+        ui->pushBgFile->setDisabled(true);
+    }
     if (checked && ui->pushThemeFile->property("file").toString().isEmpty()) {
         ui->pushThemeFile->setText(tr("Click to select theme"));
         ui->pushThemeFile->setProperty("file", "");
-    } else {
+    }
+    if (!checked || backgroundDisabled || !ui->pushThemeFile->property("file").toString().isEmpty()) {
+        optionsChanged = true;
+        ui->pushApply->setEnabled(true);
+    }
+}
+
+void MainWindow::checkBackgroundToggled(bool checked)
+{
+    // The theme replaces the plain background image, so only one of the two can be enabled at a time.
+    // Disabling the theme this way is a persistable change on its own, even before an image is selected.
+    const bool themeDisabled = checked && ui->checkGrubTheme->isVisible() && ui->checkGrubTheme->isChecked();
+    if (themeDisabled) {
+        ui->checkGrubTheme->setChecked(false);
+        ui->pushThemeFile->setDisabled(true);
+    }
+    if (checked && ui->pushBgFile->property("file").toString().isEmpty()) {
+        ui->pushBgFile->setText(tr("Click to select image"));
+        ui->pushBgFile->setProperty("file", "");
+    }
+    if (!checked || themeDisabled || !ui->pushBgFile->property("file").toString().isEmpty()) {
         optionsChanged = true;
         ui->pushApply->setEnabled(true);
     }

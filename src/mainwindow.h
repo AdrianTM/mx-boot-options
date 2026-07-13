@@ -55,6 +55,7 @@ private slots:
 
     void btnBgFileClicked();
     void btnThemeFileClicked();
+    void checkBackgroundToggled(bool checked);
     void comboBootsplashClicked(bool checked);
     void comboBootsplashToggled(bool checked);
     void comboEnableFlatmenusClicked(bool checked);
