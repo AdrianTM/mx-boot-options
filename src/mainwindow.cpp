@@ -43,6 +43,8 @@
 #include "about.h"
 
 #include <chrono>
+#include <cerrno>
+#include <sys/stat.h>
 #include <unistd.h>
 
 using namespace std::chrono_literals;
@@ -50,6 +52,21 @@ extern const QString starting_home;
 
 namespace
 {
+
+// Distinguishes a path that genuinely does not exist from one whose existence could not be determined
+// (most commonly because a parent directory denies search/read permission). QFile::exists()/QDir::exists()
+// collapse both cases to false, which is wrong for optional live-media paths: a missing path is a legitimate
+// no-op, but an inaccessible one is a real failure that must not be silently swallowed.
+enum class PathState { Absent, Present, Inaccessible };
+
+[[nodiscard]] PathState pathState(const QString &path)
+{
+    struct stat st {};
+    if (::stat(QFile::encodeName(path).constData(), &st) == 0) {
+        return PathState::Present;
+    }
+    return (errno == ENOENT || errno == ENOTDIR) ? PathState::Absent : PathState::Inaccessible;
+}
 
 // RAII wrapper that zeroes sensitive data on scope exit
 struct SecureBuffer
@@ -245,6 +262,13 @@ void MainWindow::setup()
     setupGrubSettings();
     handleSpecialFilesystems();
 
+    // Populating widgets above fires the same change signals used to detect user edits (e.g. setChecked,
+    // setCurrentIndex), which would otherwise leave these flags spuriously set before the user touches anything.
+    kernelOptionsChanged = false;
+    messagesChanged = false;
+    optionsChanged = false;
+    splashChanged = false;
+
     // Final UI adjustments
     ui->radioLimitedMsg->setVisible(!ui->checkBootsplash->isChecked());
     ui->pushApply->setDisabled(true);
@@ -389,7 +413,7 @@ bool MainWindow::hasLiveGrubTree() const
 {
     // Require grub.cfg specifically: it is what readGrubCfg() reads and what the live-mode handling rewrites.
     // Theme files alone (used as a looser signal when locating the boot media) do not make a usable tree.
-    return !bootLocation.isEmpty() && QFile::exists(bootLocation + "/boot/grub/grub.cfg");
+    return !bootLocation.isEmpty() && pathState(bootLocation + "/boot/grub/grub.cfg") == PathState::Present;
 }
 
 bool MainWindow::liveGrubMode() const
@@ -526,8 +550,23 @@ QString MainWindow::resolveLiveBootLocation()
 
 bool MainWindow::refreshLiveGrubTheme()
 {
-    if (!hasLiveGrubTree()) {
+    if (bootLocation.isEmpty()) {
+        return true;
+    }
+
+    switch (pathState(bootLocation + "/boot/grub/grub.cfg")) {
+    case PathState::Absent:
+        // No live GRUB tree on this media (e.g. syslinux-only media); nothing to refresh, which is a
+        // legitimate no-op rather than a failure.
+        return true;
+    case PathState::Inaccessible:
+        // grub.cfg (or one of its parent directories) exists but could not be checked, so we cannot tell
+        // whether a live GRUB tree is actually present; treat this as a real failure rather than a no-op so
+        // the pending change is retained and the user can retry.
+        qWarning() << "Could not access the live GRUB tree at" << bootLocation << "; skipping label refresh.";
         return false;
+    case PathState::Present:
+        break;
     }
 
     const QString releaseName = releaseNameFromSystem();
@@ -539,12 +578,43 @@ bool MainWindow::refreshLiveGrubTheme()
     const QString dateText = QLocale::system().toString(QDate::currentDate(), "MMMM d, yyyy");
     const QString labelText = releaseName + " (" + dateText + ")";
 
-    const auto writeLinesAsRoot
-        = [this](const QString &path, const QStringList &lines) { return writeFileLinesAsRoot(path, lines); };
+    // Tracks genuine write failures across every file touched below so that one file's successful rewrite
+    // cannot mask another's failure.
+    bool anyWriteFailed = false;
+    const auto writeLinesAsRoot = [this, &anyWriteFailed](const QString &path, const QStringList &lines) {
+        const bool ok = writeFileLinesAsRoot(path, lines);
+        if (!ok) {
+            anyWriteFailed = true;
+        }
+        return ok;
+    };
+
+    // Returns true if the caller should stop and treat the path as having nothing to do: either it is
+    // genuinely absent (a legitimate no-op on media that lacks this optional file) or it could not be
+    // checked at all, in which case anyWriteFailed is set so the inaccessible path is reported as a failure
+    // instead of silently being treated the same as a genuinely absent one.
+    const auto optionalPathMissing = [&](const QString &path) {
+        switch (pathState(path)) {
+        case PathState::Absent:
+            return true;
+        case PathState::Inaccessible:
+            qWarning() << "Failed to access" << path << "; it may exist but be unreadable.";
+            anyWriteFailed = true;
+            return true;
+        case PathState::Present:
+            return false;
+        }
+        return false;
+    };
 
     const auto updateMenuTitle = [&](const QString &path) {
+        if (optionalPathMissing(path)) {
+            return true;
+        }
         QFile file(path);
         if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            qWarning() << "Failed to open" << path << "for reading.";
+            anyWriteFailed = true;
             return false;
         }
 
@@ -566,8 +636,13 @@ bool MainWindow::refreshLiveGrubTheme()
     };
 
     const auto updateThemeBanner = [&](const QString &path) {
+        if (optionalPathMissing(path)) {
+            return true;
+        }
         QFile file(path);
         if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            qWarning() << "Failed to open" << path << "for reading.";
+            anyWriteFailed = true;
             return false;
         }
 
@@ -592,8 +667,13 @@ bool MainWindow::refreshLiveGrubTheme()
     };
 
     const auto updateMenuLabel = [&](const QString &path) {
+        if (optionalPathMissing(path)) {
+            return true;
+        }
         QFile file(path);
         if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            qWarning() << "Failed to open" << path << "for reading.";
+            anyWriteFailed = true;
             return false;
         }
 
@@ -621,8 +701,13 @@ bool MainWindow::refreshLiveGrubTheme()
     };
 
     const auto updateReadmeMsg = [&](const QString &path) {
+        if (optionalPathMissing(path)) {
+            return true;
+        }
         QFile file(path);
         if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            qWarning() << "Failed to open" << path << "for reading.";
+            anyWriteFailed = true;
             return false;
         }
 
@@ -649,8 +734,13 @@ bool MainWindow::refreshLiveGrubTheme()
     };
 
     const auto updateMenuEntryFile = [&](const QString &path) {
+        if (optionalPathMissing(path)) {
+            return true;
+        }
         QFile file(path);
         if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            qWarning() << "Failed to open" << path << "for reading.";
+            anyWriteFailed = true;
             return false;
         }
 
@@ -676,36 +766,71 @@ bool MainWindow::refreshLiveGrubTheme()
         return changed && writeLinesAsRoot(path, lines);
     };
 
-    bool updated = false;
     for (const QString &file : {bootLocation + "/boot/isolinux/isolinux.cfg", bootLocation + "/boot/syslinux/syslinux.cfg"}) {
-        updated |= updateMenuTitle(file);
-        updated |= updateMenuLabel(file);
+        updateMenuTitle(file);
+        updateMenuLabel(file);
     }
 
     for (const QString &file : {bootLocation + "/boot/isolinux/readme.msg", bootLocation + "/boot/syslinux/readme.msg"}) {
-        updated |= updateReadmeMsg(file);
+        updateReadmeMsg(file);
     }
 
     const QString themeDir = bootLocation + "/boot/grub/theme";
-    if (QDir(themeDir).exists()) {
-        const QStringList themeFiles = QDir(themeDir).entryList({QStringLiteral("*.txt")}, QDir::Files, QDir::Name);
-        for (const QString &themeFile : themeFiles) {
-            updated |= updateThemeBanner(themeDir + "/" + themeFile);
+    switch (pathState(themeDir)) {
+    case PathState::Absent:
+        break;
+    case PathState::Inaccessible:
+        qWarning() << "Failed to access" << themeDir << "; it may exist but be unreadable.";
+        anyWriteFailed = true;
+        break;
+    case PathState::Present: {
+        const QDir dir(themeDir);
+        if (!dir.isReadable()) {
+            // The directory exists but its contents could not be enumerated (e.g. a permissions problem),
+            // which is a genuine failure rather than the directory legitimately having nothing in it.
+            qWarning() << "Failed to enumerate" << themeDir << "; it may exist but be unreadable.";
+            anyWriteFailed = true;
+            break;
         }
+        const QStringList themeFiles = dir.entryList({QStringLiteral("*.txt")}, QDir::Files, QDir::Name);
+        for (const QString &themeFile : themeFiles) {
+            updateThemeBanner(themeDir + "/" + themeFile);
+        }
+        break;
+    }
     }
 
     const QString grubCfgPath = bootLocation + "/boot/grub/grub.cfg";
-    updated |= updateMenuEntryFile(grubCfgPath);
+    updateMenuEntryFile(grubCfgPath);
 
     const QString configDir = bootLocation + "/boot/grub/config";
-    if (QDir(configDir).exists()) {
-        const QStringList configFiles = QDir(configDir).entryList({QStringLiteral("*.cfg")}, QDir::Files, QDir::Name);
-        for (const QString &configFile : configFiles) {
-            updated |= updateMenuEntryFile(configDir + "/" + configFile);
+    switch (pathState(configDir)) {
+    case PathState::Absent:
+        break;
+    case PathState::Inaccessible:
+        qWarning() << "Failed to access" << configDir << "; it may exist but be unreadable.";
+        anyWriteFailed = true;
+        break;
+    case PathState::Present: {
+        const QDir dir(configDir);
+        if (!dir.isReadable()) {
+            // See the theme directory case above: an unreadable directory is a genuine failure, not an
+            // empty-but-valid one.
+            qWarning() << "Failed to enumerate" << configDir << "; it may exist but be unreadable.";
+            anyWriteFailed = true;
+            break;
         }
+        const QStringList configFiles = dir.entryList({QStringLiteral("*.cfg")}, QDir::Files, QDir::Name);
+        for (const QString &configFile : configFiles) {
+            updateMenuEntryFile(configDir + "/" + configFile);
+        }
+        break;
+    }
     }
 
-    return updated;
+    // A successful no-op (nothing needed changing) and a successful update both return true; only a genuine
+    // write failure along the way returns false.
+    return !anyWriteFailed;
 }
 
 bool MainWindow::writeFileLinesAsRoot(const QString &path, const QStringList &lines)
@@ -721,22 +846,53 @@ bool MainWindow::writeFileLinesAsRoot(const QString &path, const QStringList &li
         stream << line << '\n';
     }
     stream.flush();
-    tmpFile.flush();
+    const bool streamOk = stream.status() == QTextStream::Ok;
+    const bool flushOk = tmpFile.flush();
     tmpFile.close();
+    if (!streamOk || !flushOk) {
+        qWarning() << "Failed to write temporary file for" << path;
+        return false;
+    }
 
     if (!cmd.procAsRoot("cp", {tmpFile.fileName(), path}, nullptr, nullptr, QuietMode::Yes)) {
         qWarning() << "Failed to update" << path;
         return false;
     }
-    cmd.procAsRoot("chown", {"root:", path}, nullptr, nullptr, QuietMode::Yes);
-    cmd.procAsRoot("chmod", {"644", path}, nullptr, nullptr, QuietMode::Yes);
-    return true;
+    bool ok = true;
+    if (!cmd.procAsRoot("chown", {"root:", path}, nullptr, nullptr, QuietMode::Yes)) {
+        qWarning() << "Failed to set ownership of" << path;
+        ok = false;
+    }
+    if (!cmd.procAsRoot("chmod", {"644", path}, nullptr, nullptr, QuietMode::Yes)) {
+        qWarning() << "Failed to set permissions on" << path;
+        ok = false;
+    }
+    return ok;
 }
 
-bool MainWindow::rewriteFileAsRoot(const QString &path, const std::function<bool(QString &)> &transform)
+bool MainWindow::rewriteFileAsRoot(const QString &path, const std::function<bool(QString &)> &transform,
+                                   bool *writeFailed)
 {
+    // A missing file is a legitimate no-op (an optional live config not present on this media), but a path
+    // that exists yet can't be checked (e.g. a permissions problem) is a genuine failure callers need to
+    // know about.
+    switch (pathState(path)) {
+    case PathState::Absent:
+        return false;
+    case PathState::Inaccessible:
+        if (writeFailed) {
+            *writeFailed = true;
+        }
+        return false;
+    case PathState::Present:
+        break;
+    }
+
     QFile file(path);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        if (writeFailed) {
+            *writeFailed = true;
+        }
         return false;
     }
 
@@ -754,27 +910,43 @@ bool MainWindow::rewriteFileAsRoot(const QString &path, const std::function<bool
     }
     file.close();
 
-    return changed && writeFileLinesAsRoot(path, lines);
+    if (!changed) {
+        return false;
+    }
+
+    // The file existed and had matching content to rewrite, so a false return here means the write itself
+    // failed (as opposed to there being nothing to change), which callers need to distinguish to avoid
+    // treating a harmless no-op as a reportable failure.
+    const bool ok = writeFileLinesAsRoot(path, lines);
+    if (!ok && writeFailed) {
+        *writeFailed = true;
+    }
+    return ok;
 }
 
 bool MainWindow::applyLiveGrubTimeout(int seconds)
 {
-    bool updated = false;
+    // Tracks only genuine write failures; a config file being absent or already at the target value is a
+    // legitimate no-op and must not be reported as an apply failure.
+    bool writeFailed = false;
 
     // GRUB: the top-level `set timeout=` line in grub.cfg.
     const QRegularExpression grubTimeoutRx(QStringLiteral(R"(^(\s*set\s+timeout=).*$)"));
-    updated |= rewriteFileAsRoot(bootLocation + "/boot/grub/grub.cfg", [&](QString &line) {
-        const QRegularExpressionMatch match = grubTimeoutRx.match(line);
-        if (!match.hasMatch()) {
-            return false;
-        }
-        const QString replacement = match.captured(1) + QString::number(seconds);
-        if (replacement == line) {
-            return false;
-        }
-        line = replacement;
-        return true;
-    });
+    rewriteFileAsRoot(
+        bootLocation + "/boot/grub/grub.cfg",
+        [&](QString &line) {
+            const QRegularExpressionMatch match = grubTimeoutRx.match(line);
+            if (!match.hasMatch()) {
+                return false;
+            }
+            const QString replacement = match.captured(1) + QString::number(seconds);
+            if (replacement == line) {
+                return false;
+            }
+            line = replacement;
+            return true;
+        },
+        &writeFailed);
 
     // syslinux/isolinux: the top-level `timeout` directive, expressed in tenths of a second.
     const QRegularExpression syslinuxTimeoutRx(QStringLiteral(R"(^(\s*timeout\s+)\d+\s*$)"),
@@ -782,27 +954,41 @@ bool MainWindow::applyLiveGrubTimeout(int seconds)
     const QString deciSeconds = QString::number(seconds * 10);
     for (const QString &cfg :
          {bootLocation + "/boot/syslinux/syslinux.cfg", bootLocation + "/boot/isolinux/isolinux.cfg"}) {
-        updated |= rewriteFileAsRoot(cfg, [&](QString &line) {
-            const QRegularExpressionMatch match = syslinuxTimeoutRx.match(line);
-            if (!match.hasMatch()) {
-                return false;
-            }
-            const QString replacement = match.captured(1) + deciSeconds;
-            if (replacement == line) {
-                return false;
-            }
-            line = replacement;
-            return true;
-        });
+        rewriteFileAsRoot(
+            cfg,
+            [&](QString &line) {
+                const QRegularExpressionMatch match = syslinuxTimeoutRx.match(line);
+                if (!match.hasMatch()) {
+                    return false;
+                }
+                const QString replacement = match.captured(1) + deciSeconds;
+                if (replacement == line) {
+                    return false;
+                }
+                line = replacement;
+                return true;
+            },
+            &writeFailed);
     }
-    return updated;
+    return !writeFailed;
 }
 
 bool MainWindow::applyLiveGrubBackground(const QString &imagePath)
 {
     const QString themeDir = bootLocation + "/boot/grub/theme";
-    if (imagePath.isEmpty() || !QFile::exists(imagePath) || !QDir(themeDir).exists()) {
+    if (imagePath.isEmpty() || !QFile::exists(imagePath)) {
+        // No image to apply; nothing to do.
+        return true;
+    }
+    switch (pathState(themeDir)) {
+    case PathState::Absent:
+        // No live GRUB theme present on this media (e.g. syslinux-only media); nothing to apply.
+        return true;
+    case PathState::Inaccessible:
+        qWarning() << "Failed to access" << themeDir << "; skipping live boot background image update.";
         return false;
+    case PathState::Present:
+        break;
     }
 
     // GRUB picks the image decoder by file extension, so keep the original suffix when copying it in.
@@ -814,35 +1000,46 @@ bool MainWindow::applyLiveGrubBackground(const QString &imagePath)
         qWarning() << "Failed to copy background image to" << destPath;
         return false;
     }
-    cmd.procAsRoot("chown", {"root:", destPath}, nullptr, nullptr, QuietMode::Yes);
-    cmd.procAsRoot("chmod", {"644", destPath}, nullptr, nullptr, QuietMode::Yes);
+    bool ok = true;
+    if (!cmd.procAsRoot("chown", {"root:", destPath}, nullptr, nullptr, QuietMode::Yes)) {
+        qWarning() << "Failed to set ownership of" << destPath;
+        ok = false;
+    }
+    if (!cmd.procAsRoot("chmod", {"644", destPath}, nullptr, nullptr, QuietMode::Yes)) {
+        qWarning() << "Failed to set permissions on" << destPath;
+        ok = false;
+    }
 
     // Point the themed menu at the new image via the `desktop-image:` directive in each theme file, also
     // uncommenting it if present as `#desktop-image:`. (The non-theme gfx_background fallback, only seen when
     // the theme is disabled, keeps the original image.)
     const QRegularExpression desktopImageRx(QStringLiteral(R"(^(\s*)#?\s*desktop-image:\s*.*$)"));
     bool referenced = false;
+    bool writeFailed = false;
     const QStringList themeFiles = QDir(themeDir).entryList({QStringLiteral("*.txt")}, QDir::Files, QDir::Name);
     for (const QString &themeFile : themeFiles) {
-        rewriteFileAsRoot(themeDir + "/" + themeFile, [&](QString &line) {
-            const QRegularExpressionMatch match = desktopImageRx.match(line);
-            if (!match.hasMatch()) {
-                return false;
-            }
-            referenced = true;
-            const QString replacement = match.captured(1) + "desktop-image: \"" + destName + '"';
-            if (replacement == line) {
-                return false;
-            }
-            line = replacement;
-            return true;
-        });
+        rewriteFileAsRoot(
+            themeDir + "/" + themeFile,
+            [&](QString &line) {
+                const QRegularExpressionMatch match = desktopImageRx.match(line);
+                if (!match.hasMatch()) {
+                    return false;
+                }
+                referenced = true;
+                const QString replacement = match.captured(1) + "desktop-image: \"" + destName + '"';
+                if (replacement == line) {
+                    return false;
+                }
+                line = replacement;
+                return true;
+            },
+            &writeFailed);
     }
     if (!referenced) {
         qWarning() << "No desktop-image directive found in the live GRUB theme; background image was copied but"
                    << "is not referenced.";
     }
-    return referenced;
+    return ok && !writeFailed && referenced;
 }
 
 void MainWindow::unmountAndClean(const QStringList &mountList)
@@ -1086,24 +1283,25 @@ bool MainWindow::runUpdateInitramfs()
     return false;
 }
 
-void MainWindow::toggleBootlogd(bool enable)
+bool MainWindow::toggleBootlogd(bool enable)
 {
     const QString rootPath = targetRootPath();
     if (detectPackageManager() == PackageManager::Pacman) {
-        return;
+        return true;
     }
 
     if (QFile::exists(rootPath + "/usr/bin/update-rc.d") || QFile::exists(rootPath + "/sbin/update-rc.d")) {
         const QString action = enable ? QStringLiteral("enable") : QStringLiteral("disable");
-        if (rootPath.isEmpty()) {
-            cmd.procAsRoot("update-rc.d", {"bootlogd", action});
-        } else {
-            cmd.procAsRootInTarget(rootPath, "update-rc.d", {"bootlogd", action});
+        const bool ok = rootPath.isEmpty() ? cmd.procAsRoot("update-rc.d", {"bootlogd", action})
+                                            : cmd.procAsRootInTarget(rootPath, "update-rc.d", {"bootlogd", action});
+        if (!ok) {
+            qWarning() << "Failed to toggle bootlogd via update-rc.d.";
         }
-        return;
+        return ok;
     }
 
     qWarning() << "update-rc.d not found; skipping bootlogd toggle.";
+    return true;
 }
 
 bool MainWindow::isSystemdEnvironment() const
@@ -1523,16 +1721,16 @@ bool MainWindow::replaceGrubArg(const QString &key, const QString &item)
     return replaced;        // Return whether a replacement occurred
 }
 
-void MainWindow::replaceLiveGrubArgs(const QString &args)
+bool MainWindow::replaceLiveGrubArgs(const QString &args)
 {
     if (!QFile::exists("/usr/local/bin/live-grubsave") && !QFile::exists("/usr/bin/live-grubsave")) {
         qDebug() << "live-grubsave not found, skipping live GRUB args update.";
-        return;
+        return true;
     }
 
     if (!cmd.procAsRoot("live-grubsave", {"-r"})) {
         qWarning() << "Failed to reset live-grub settings";
-        return;
+        return false;
     }
 
     QString filteredArgs = args;
@@ -1543,26 +1741,37 @@ void MainWindow::replaceLiveGrubArgs(const QString &args)
         const QStringList argList = filteredArgs.split(' ', Qt::SkipEmptyParts);
         if (!cmd.procAsRoot("live-grubsave", argList)) {
             qWarning() << "Failed to save new live-grub arguments:" << filteredArgs;
+            return false;
         }
     }
+    return true;
 }
 
-void MainWindow::replaceSyslinuxArgs(const QString &args)
+bool MainWindow::replaceSyslinuxArgs(const QString &args)
 {
     const QStringList configFiles
         = {bootLocation + "/boot/syslinux/syslinux.cfg", bootLocation + "/boot/isolinux/isolinux.cfg"};
 
-    const bool anyExist = std::any_of(configFiles.cbegin(), configFiles.cend(),
-                                      [](const QString &f) { return QFile::exists(f); });
-    if (!anyExist) {
-        qDebug() << "No syslinux/isolinux config files found, skipping.";
-        return;
-    }
-
+    bool ok = true;
     for (const QString &configFile : configFiles) {
+        // Only some live media ship both a syslinux and an isolinux config, so an individual file being
+        // absent here is a legitimate no-op, not a failure; one that exists but can't be checked is a
+        // genuine failure.
+        switch (pathState(configFile)) {
+        case PathState::Absent:
+            continue;
+        case PathState::Inaccessible:
+            qWarning() << "Failed to access" << configFile << "; it may exist but be unreadable.";
+            ok = false;
+            continue;
+        case PathState::Present:
+            break;
+        }
+
         QFile file(configFile);
         if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
             qWarning() << "Failed to open" << configFile << "for reading.";
+            ok = false;
             continue;
         }
 
@@ -1597,7 +1806,10 @@ void MainWindow::replaceSyslinuxArgs(const QString &args)
         file.close();
 
         if (!replaced) {
+            // The config file exists and was readable, but has no live section to update, so this is a
+            // genuine failure rather than a no-op (unlike an entirely absent config file, handled above).
             qWarning() << "No APPEND line found in LABEL live section in" << configFile;
+            ok = false;
             continue;
         }
 
@@ -1605,21 +1817,41 @@ void MainWindow::replaceSyslinuxArgs(const QString &args)
         QTemporaryFile tempFile(QDir::tempPath() + "/XXXXXX.tmp");
         if (!tempFile.open()) {
             qWarning() << "Failed to open temporary file for writing.";
+            ok = false;
             continue;
         }
 
         QTextStream stream(&tempFile);
         stream.setEncoding(QStringConverter::Utf8);
         stream << new_list.join('\n') << '\n';
-        tempFile.flush();
+        stream.flush();
+        const bool streamOk = stream.status() == QTextStream::Ok;
+        const bool flushOk = tempFile.flush();
         tempFile.close();
+        if (!streamOk || !flushOk) {
+            qWarning() << "Failed to write temporary file for" << configFile;
+            ok = false;
+            continue;
+        }
 
         // Move the temporary file to the original file
         QString tempFilePath = tempFile.fileName();
         if (!cmd.procAsRoot("mv", {tempFilePath, configFile})) {
             qWarning() << "Failed to move" << tempFilePath << "to" << configFile;
+            ok = false;
+            continue;
+        }
+
+        if (!cmd.procAsRoot("chown", {"root:", configFile}, nullptr, nullptr, QuietMode::Yes)) {
+            qWarning() << "Failed to set ownership of" << configFile;
+            ok = false;
+        }
+        if (!cmd.procAsRoot("chmod", {"644", configFile}, nullptr, nullptr, QuietMode::Yes)) {
+            qWarning() << "Failed to set permissions of" << configFile;
+            ok = false;
         }
     }
+    return ok;
 }
 
 void MainWindow::readGrubCfg()
@@ -1835,11 +2067,23 @@ void MainWindow::pushApplyClicked()
     const QString rootPath = targetRootPath();
     const bool inLiveGrubMode = liveGrubMode();
 
+    // Collected so the end-of-apply summary and pending-state handling reflect every operation that actually
+    // ran, not just whether /etc/default/grub was written.
+    QStringList failedSteps;
+    auto recordStep = [&failedSteps](bool ok, const QString &label) {
+        if (!ok) {
+            failedSteps << label;
+        }
+        return ok;
+    };
+
     if (kernelOptionsChanged) {
         replaceGrubArg("GRUB_CMDLINE_LINUX_DEFAULT", "\"" + ui->textKernel->text() + "\"");
         if (live && !installedMode) {
-            replaceLiveGrubArgs(ui->textKernel->text());
-            replaceSyslinuxArgs(ui->textKernel->text());
+            recordStep(replaceLiveGrubArgs(ui->textKernel->text()),
+                       tr("saving the kernel boot arguments to the live media"));
+            recordStep(replaceSyslinuxArgs(ui->textKernel->text()),
+                       tr("saving the kernel boot arguments to the syslinux configuration"));
         }
     }
 
@@ -1848,13 +2092,14 @@ void MainWindow::pushApplyClicked()
     // /etc/default/grub + update-grub, which do not apply to live media, so the installed-system branch below
     // is skipped in live mode (and those controls are disabled/hidden in the UI).
     if (optionsChanged && inLiveGrubMode) {
-        applyLiveGrubTimeout(ui->spinBoxTimeout->value());
+        recordStep(applyLiveGrubTimeout(ui->spinBoxTimeout->value()), tr("saving the live boot menu timeout"));
         const QString liveBgPath = ui->pushBgFile->property("file").toString();
         if (ui->pushBgFile->isEnabled() && QFile::exists(liveBgPath)) {
-            applyLiveGrubBackground(liveBgPath);
+            recordStep(applyLiveGrubBackground(liveBgPath), tr("saving the live boot menu background image"));
         }
     } else if (optionsChanged) {
-        cmd.procAsRoot("grub-editenv", {"/boot/grub/grubenv", "unset", "next_entry"});
+        recordStep(cmd.procAsRoot("grub-editenv", {"/boot/grub/grubenv", "unset", "next_entry"}),
+                   tr("clearing the pending one-time boot entry"));
 
         const QString bgFilePath = ui->pushBgFile->property("file").toString();
         const QString themeFilePath = ui->pushThemeFile->property("file").toString();
@@ -1884,9 +2129,11 @@ void MainWindow::pushApplyClicked()
         if (ui->comboMenuEntry->currentText().contains(QLatin1String("memtest"))) {
             ui->spinBoxTimeout->setValue(5);
             if (rootPath.isEmpty()) {
-                cmd.procAsRoot("grub-reboot", {ui->comboMenuEntry->currentText()});
+                recordStep(cmd.procAsRoot("grub-reboot", {ui->comboMenuEntry->currentText()}),
+                           tr("setting the one-time boot entry"));
             } else {
-                cmd.procAsRootInTarget(rootPath, "grub-reboot", {ui->comboMenuEntry->currentText()});
+                recordStep(cmd.procAsRootInTarget(rootPath, "grub-reboot", {ui->comboMenuEntry->currentText()}),
+                           tr("setting the one-time boot entry"));
             }
         } else {
             replaceGrubArg("GRUB_DEFAULT", "\"" + grub_entry + '"');
@@ -1896,9 +2143,10 @@ void MainWindow::pushApplyClicked()
             replaceGrubArg("GRUB_DEFAULT", "saved");
             enableGrubLine("GRUB_SAVEDEFAULT=true");
             if (rootPath.isEmpty()) {
-                cmd.procAsRoot("grub-set-default", {grub_entry});
+                recordStep(cmd.procAsRoot("grub-set-default", {grub_entry}), tr("saving the default boot entry"));
             } else {
-                cmd.procAsRootInTarget(rootPath, "grub-set-default", {grub_entry});
+                recordStep(cmd.procAsRootInTarget(rootPath, "grub-set-default", {grub_entry}),
+                           tr("saving the default boot entry"));
             }
         } else {
             disableGrubLine("GRUB_SAVEDEFAULT=true");
@@ -1913,17 +2161,20 @@ void MainWindow::pushApplyClicked()
         if (ui->checkBootsplash->isChecked()) {
             if (!ui->comboTheme->currentText().isEmpty()) {
                 if (rootPath.isEmpty()) {
-                    cmd.procAsRoot("plymouth-set-default-theme", {ui->comboTheme->currentText()});
+                    recordStep(cmd.procAsRoot("plymouth-set-default-theme", {ui->comboTheme->currentText()}),
+                               tr("setting the boot splash theme"));
                 } else {
-                    cmd.procAsRootInTarget(rootPath, "plymouth-set-default-theme", {ui->comboTheme->currentText()});
+                    recordStep(cmd.procAsRootInTarget(rootPath, "plymouth-set-default-theme",
+                                                       {ui->comboTheme->currentText()}),
+                               tr("setting the boot splash theme"));
                 }
             }
-            toggleBootlogd(false);
+            recordStep(toggleBootlogd(false), tr("updating the boot log service state"));
         } else {
-            toggleBootlogd(true);
+            recordStep(toggleBootlogd(true), tr("updating the boot log service state"));
         }
         progress->setLabelText(tr("Updating initramfs..."));
-        if (!runUpdateInitramfs()) {
+        if (!recordStep(runUpdateInitramfs(), tr("updating the initramfs"))) {
             qWarning() << "Failed to update initramfs.";
         }
     }
@@ -1933,39 +2184,39 @@ void MainWindow::pushApplyClicked()
             const QString hushSnippet = QStringLiteral(
                 "\n# hush boot-log into /run/rc.log\n"
                 "[ \"$init\" ] && grep -qw hush /proc/cmdline && exec >> /run/rc.log 2>&1 || true ");
-            cmd.appendToFileAsRootIfMissing("/etc/default/rcS", "hush boot-log into /run/rc.log", hushSnippet,
-                                            QuietMode::Yes, rootPath);
+            recordStep(cmd.appendToFileAsRootIfMissing("/etc/default/rcS", "hush boot-log into /run/rc.log",
+                                                         hushSnippet, QuietMode::Yes, rootPath),
+                       tr("updating boot message settings"));
         } else {
             qWarning() << "Skipping hush configuration: /etc/default/rcS not found.";
         }
     }
 
-    bool grubWriteFailed = false;
-    if (optionsChanged || splashChanged || messagesChanged) {
+    if (optionsChanged || splashChanged || messagesChanged || kernelOptionsChanged) {
         if (grubInstalled) {
             // In pure live mode the on-disk /etc/default/grub is not read into defaultGrub, so it must not be
             // written back (that would truncate it) nor regenerated via update-grub. Live edits go straight to
             // the media via replaceLiveGrubArgs/replaceSyslinuxArgs and refreshLiveGrubTheme instead.
             bool grubUpdated = false;
             if (!inLiveGrubMode) {
-                if (writeDefaultGrub()) {
+                if (recordStep(writeDefaultGrub(), tr("saving the GRUB configuration file"))) {
                     progress->setLabelText(tr("Updating grub..."));
-                    grubUpdated = runUpdateGrub();
+                    grubUpdated = recordStep(runUpdateGrub(), tr("regenerating the GRUB boot menu"));
                     if (!grubUpdated) {
                         qWarning() << "Failed to update GRUB configuration.";
                     }
                     if (live && !bootLocation.isEmpty()) {
-                        cmd.procAsRoot("cp", {"/boot/grub/grub.cfg", bootLocation + "/boot/grub/grub.cfg"});
+                        recordStep(cmd.procAsRoot("cp", {"/boot/grub/grub.cfg", bootLocation + "/boot/grub/grub.cfg"}),
+                                   tr("copying the GRUB configuration to the boot media"));
                     }
                 } else {
                     qWarning() << "Failed to write /etc/default/grub; skipping GRUB update.";
-                    grubWriteFailed = true;
                 }
             }
             bool liveLabelsUpdated = false;
             if (live && !installedMode) {
                 progress->setLabelText(tr("Refreshing live boot labels..."));
-                liveLabelsUpdated = refreshLiveGrubTheme();
+                liveLabelsUpdated = recordStep(refreshLiveGrubTheme(), tr("refreshing the live boot menu labels"));
                 if (!liveLabelsUpdated) {
                     qWarning() << "Failed to refresh the live boot labels.";
                 }
@@ -1973,12 +2224,19 @@ void MainWindow::pushApplyClicked()
             if (grubUpdated || liveLabelsUpdated) {
                 reloadGrubSettings();
             }
+        } else if (optionsChanged || kernelOptionsChanged) {
+            // Without GRUB installed there is nowhere to persist the pending GRUB/kernel option changes; treat
+            // the request as failed (instead of silently dropping it) so the pending state is retained and the
+            // user can retry once GRUB is present.
+            recordStep(false, tr("saving the GRUB configuration file"));
+            qWarning() << "GRUB is not installed; unable to apply pending GRUB/kernel option changes.";
         }
         progress->close();
-        if (grubWriteFailed) {
+        if (!failedSteps.isEmpty()) {
             QMessageBox::critical(this, tr("Operation Incomplete"),
-                                  tr("Failed to save the GRUB configuration; other changes may not have been "
-                                     "fully applied. Please try applying again."));
+                                  tr("The following changes could not be applied: %1. These changes are still "
+                                     "pending; please try applying again.")
+                                      .arg(failedSteps.join(QStringLiteral(", "))));
         } else {
             QString message
                 = live && bootLocation == "/live/to-ram"
@@ -1989,13 +2247,14 @@ void MainWindow::pushApplyClicked()
         }
     }
 
-    // Reset change flags, unless the GRUB configuration write failed and needs to be retried.
-    if (grubWriteFailed) {
+    // Reset change flags, unless an apply step failed and needs to be retried.
+    if (!failedSteps.isEmpty()) {
         ui->pushApply->setEnabled(true);
     } else {
         optionsChanged = false;
         splashChanged = false;
         messagesChanged = false;
+        kernelOptionsChanged = false;
     }
     ui->pushCancel->setEnabled(true);
 }
