@@ -29,9 +29,14 @@
 #include <QProcess>
 #include <QRegularExpression>
 #include <QSet>
+#include <QTemporaryFile>
 #include <QThread>
 
+#include "common.h"
+
 #include <cstdio>
+#include <fcntl.h>
+#include <sys/stat.h>
 #include <unistd.h>
 
 namespace
@@ -214,6 +219,11 @@ void printError(const QString &message)
 [[nodiscard]] bool isAllowedAppendPath(const QString &path)
 {
     return path == QLatin1String("/etc/default/rcS");
+}
+
+[[nodiscard]] bool isAllowedWriteFilePath(const QString &path)
+{
+    return path == QLatin1String("/etc/default/grub");
 }
 
 [[nodiscard]] bool resolvesWithinTarget(const QString &rootPath, const QString &requestedPath, const QString &resolvedPath)
@@ -427,6 +437,87 @@ void printError(const QString &message)
     return 0;
 }
 
+// Replaces an already-existing, allowlisted file atomically: the new content is written to and fsynced in a
+// temporary file in the same directory (so the rename below is a same-filesystem, all-or-nothing swap), given
+// root:root/0644 ownership matching the file it replaces, then renamed over the target. On any failure before
+// the rename, the original file is left untouched and the normal failure code is returned. If the rename itself
+// succeeds but the directory entry cannot be made durable, EXIT_CODE_WRITE_FILE_DURABILITY_UNCERTAIN is returned
+// instead, since the new content is in place but not guaranteed to survive a crash.
+[[nodiscard]] int handleWriteFile(const QString &rootPath, const QStringList &args, const QByteArray &content)
+{
+    if (args.size() != 1) {
+        printError(QStringLiteral("write-file requires exactly one path"));
+        return 1;
+    }
+
+    const QString path = args.constFirst();
+    if (!QDir::isAbsolutePath(path)) {
+        printError(QStringLiteral("write-file path must be absolute"));
+        return 1;
+    }
+    if (!isAllowedWriteFilePath(path)) {
+        printError(QString("write-file path is not allowed: %1").arg(path));
+        return 1;
+    }
+
+    const QString fullPath = pathInTarget(rootPath, path);
+    if (!QFileInfo::exists(fullPath)) {
+        printError(QString("write-file target does not exist: %1").arg(path));
+        return 1;
+    }
+    const QString canonicalPath = QFileInfo(fullPath).canonicalFilePath();
+    if (!resolvesWithinTarget(rootPath, path, canonicalPath)) {
+        printError(QString("write-file path resolves outside the allowed target: %1").arg(path));
+        return 1;
+    }
+
+    const QString dirPath = QFileInfo(canonicalPath).absolutePath();
+    QTemporaryFile tmpFile(dirPath + "/.mxbo-write.XXXXXX");
+    tmpFile.setAutoRemove(false);
+    if (!tmpFile.open()) {
+        printError(QString("Unable to create a temporary file in %1").arg(dirPath));
+        return 1;
+    }
+    const QString tmpPath = tmpFile.fileName();
+
+    bool ok = tmpFile.write(content) == content.size() && tmpFile.flush() && ::fsync(tmpFile.handle()) == 0;
+
+    const QByteArray tmpPathUtf8 = tmpPath.toUtf8();
+    if (ok) {
+        ok = ::chmod(tmpPathUtf8.constData(), 0644) == 0 && ::chown(tmpPathUtf8.constData(), 0, 0) == 0;
+    }
+    if (ok) {
+        // chmod/chown do not touch file data, but fsync again after them so the rename below is never
+        // reached with unsynced content still sitting in the page cache.
+        ok = ::fsync(tmpFile.handle()) == 0;
+    }
+    tmpFile.close();
+    if (ok) {
+        ok = ::rename(tmpPathUtf8.constData(), canonicalPath.toUtf8().constData()) == 0;
+    }
+    if (!ok) {
+        printError(QString("Failed to write %1").arg(path));
+        QFile::remove(tmpPath);
+        return 1;
+    }
+
+    // fsync the containing directory so the rename is durable across a crash. The rename already succeeded at
+    // this point, so failures here are reported as durability-uncertain rather than a plain write failure.
+    const int dirFd = ::open(dirPath.toUtf8().constData(), O_RDONLY | O_DIRECTORY);
+    if (dirFd < 0) {
+        printError(QString("Failed to open %1 to make the write to %2 durable").arg(dirPath, path));
+        return EXIT_CODE_WRITE_FILE_DURABILITY_UNCERTAIN;
+    }
+    const bool dirSynced = ::fsync(dirFd) == 0;
+    ::close(dirFd);
+    if (!dirSynced) {
+        printError(QString("Failed to fsync %1 to make the write to %2 durable").arg(dirPath, path));
+        return EXIT_CODE_WRITE_FILE_DURABILITY_UNCERTAIN;
+    }
+
+    return 0;
+}
+
 [[nodiscard]] int handlePreviewPlymouth()
 {
     int exitCode = runAllowedCommand({}, "plymouthd", {});
@@ -509,6 +600,9 @@ int main(int argc, char *argv[])
     }
     if (action == QLatin1String("read-file")) {
         return handleReadFile(rootPath, remainingArgs);
+    }
+    if (action == QLatin1String("write-file")) {
+        return handleWriteFile(rootPath, remainingArgs, readHelperInput());
     }
 
     printError(QString("Unsupported helper action: %1").arg(action));

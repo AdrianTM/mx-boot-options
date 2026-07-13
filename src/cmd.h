@@ -32,6 +32,8 @@ public:
                                                 const QString &rootPath = {}, QuietMode quiet = QuietMode::No);
     bool appendToFileAsRootIfMissing(const QString &path, const QString &needle, const QString &content,
                                      QuietMode quiet = QuietMode::No, const QString &rootPath = {});
+    bool writeFileAsRoot(const QString &path, const QByteArray &content, const QString &rootPath = {},
+                         QuietMode quiet = QuietMode::No, bool *durabilityUncertain = nullptr);
     bool previewPlymouthAsRoot(QuietMode quiet = QuietMode::No);
 
 signals:

@@ -1,5 +1,7 @@
 #include "cmd.h"
 
+#include "common.h"
+
 #include <QApplication>
 #include <QDebug>
 #include <QEventLoop>
@@ -108,6 +110,19 @@ bool Cmd::appendToFileAsRootIfMissing(const QString &path, const QString &needle
     helperArgs += helperRootArgs(rootPath);
     helperArgs << path << needle << content;
     return helperProc(helperArgs, nullptr, nullptr, quiet);
+}
+
+bool Cmd::writeFileAsRoot(const QString &path, const QByteArray &content, const QString &rootPath, QuietMode quiet,
+                          bool *durabilityUncertain)
+{
+    QStringList helperArgs {"write-file"};
+    helperArgs += helperRootArgs(rootPath);
+    helperArgs << path;
+    const bool result = helperProc(helperArgs, nullptr, &content, quiet);
+    if (durabilityUncertain) {
+        *durabilityUncertain = !result && exitCode() == EXIT_CODE_WRITE_FILE_DURABILITY_UNCERTAIN;
+    }
+    return result;
 }
 
 bool Cmd::previewPlymouthAsRoot(QuietMode quiet)

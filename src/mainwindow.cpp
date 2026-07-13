@@ -1233,35 +1233,68 @@ bool MainWindow::inVirtualMachine()
 }
 
 // Write new config in /etc/default/grub
-void MainWindow::writeDefaultGrub()
+bool MainWindow::writeDefaultGrub()
 {
-    const QString chr = chroot.section(' ', 1, 1);
-    const QString grubFilePath = chr + "/etc/default/grub";
+    const QString rootPath = targetRootPath();
+    const QString grubFilePath = rootPath + "/etc/default/grub";
     const QString backupFilePath = grubFilePath + ".bak";
 
-    // Create a new backup file
-    cmd.procAsRoot("cp", {backupFilePath, backupFilePath + ".0"});
-    cmd.procAsRoot("rm", {backupFilePath});
-    cmd.procAsRoot("cp", {grubFilePath, backupFilePath});
-    cmd.procAsRoot("chown", {"root:", backupFilePath}, nullptr, nullptr, QuietMode::Yes);
-    cmd.procAsRoot("chmod", {"644", backupFilePath}, nullptr, nullptr, QuietMode::Yes);
-
-    QTemporaryFile tmpFile;
-    if (!tmpFile.open()) {
-        QMessageBox::critical(this, tr("Error"), tr("Failed to create temporary file."));
-        return;
+    if (!QFile::exists(grubFilePath)) {
+        QMessageBox::critical(this, tr("Error"), tr("Cannot find %1 to update.").arg(grubFilePath));
+        return false;
     }
 
-    QTextStream stream(&tmpFile);
+    // Rotate the previous backup out of the way, if one exists. Both steps must succeed before the existing
+    // backup is removed, so a failed rotation never destroys the only prior backup.
+    if (QFile::exists(backupFilePath)) {
+        if (!cmd.procAsRoot("cp", {backupFilePath, backupFilePath + ".0"})) {
+            QMessageBox::critical(
+                this, tr("Error"),
+                tr("Failed to rotate backup %1; leaving the current configuration in place.").arg(backupFilePath));
+            return false;
+        }
+        if (!cmd.procAsRoot("rm", {backupFilePath})) {
+            QMessageBox::critical(
+                this, tr("Error"),
+                tr("Failed to remove old backup %1; leaving the current configuration in place.").arg(backupFilePath));
+            return false;
+        }
+    }
+
+    // The fresh backup below must succeed before the live file is touched.
+    if (!cmd.procAsRoot("cp", {grubFilePath, backupFilePath})
+        || !cmd.procAsRoot("chown", {"root:", backupFilePath}, nullptr, nullptr, QuietMode::Yes)
+        || !cmd.procAsRoot("chmod", {"644", backupFilePath}, nullptr, nullptr, QuietMode::Yes)) {
+        QMessageBox::critical(
+            this, tr("Error"),
+            tr("Failed to back up %1; leaving the current configuration in place.").arg(grubFilePath));
+        return false;
+    }
+
+    QString content;
+    QTextStream stream(&content);
     for (const QString &line : defaultGrub) {
         stream << line << '\n';
     }
-    tmpFile.flush();
-    tmpFile.close();
 
-    cmd.procAsRoot("mv", {tmpFile.fileName(), grubFilePath});
-    cmd.procAsRoot("chown", {"root:", grubFilePath}, nullptr, nullptr, QuietMode::Yes);
-    cmd.procAsRoot("chmod", {"644", grubFilePath}, nullptr, nullptr, QuietMode::Yes);
+    // Written and fsynced to a temporary file in the destination directory, then renamed into place, all
+    // inside the privileged helper so the replacement is atomic even though this process cannot write there.
+    bool durabilityUncertain = false;
+    if (!cmd.writeFileAsRoot("/etc/default/grub", content.toUtf8(), rootPath, QuietMode::No, &durabilityUncertain)) {
+        if (durabilityUncertain) {
+            QMessageBox::critical(this, tr("Error"),
+                                  tr("Wrote %1, but could not confirm the change was saved durably. Please verify "
+                                     "it before rebooting.")
+                                      .arg(grubFilePath));
+        } else {
+            QMessageBox::critical(this, tr("Error"),
+                                  tr("Failed to write %1; the previous configuration was left in place.")
+                                      .arg(grubFilePath));
+        }
+        return false;
+    }
+
+    return true;
 }
 
 QStringList MainWindow::getLinuxPartitions()
@@ -1907,6 +1940,7 @@ void MainWindow::pushApplyClicked()
         }
     }
 
+    bool grubWriteFailed = false;
     if (optionsChanged || splashChanged || messagesChanged) {
         if (grubInstalled) {
             // In pure live mode the on-disk /etc/default/grub is not read into defaultGrub, so it must not be
@@ -1914,14 +1948,18 @@ void MainWindow::pushApplyClicked()
             // the media via replaceLiveGrubArgs/replaceSyslinuxArgs and refreshLiveGrubTheme instead.
             bool grubUpdated = false;
             if (!inLiveGrubMode) {
-                writeDefaultGrub();
-                progress->setLabelText(tr("Updating grub..."));
-                grubUpdated = runUpdateGrub();
-                if (!grubUpdated) {
-                    qWarning() << "Failed to update GRUB configuration.";
-                }
-                if (live && !bootLocation.isEmpty()) {
-                    cmd.procAsRoot("cp", {"/boot/grub/grub.cfg", bootLocation + "/boot/grub/grub.cfg"});
+                if (writeDefaultGrub()) {
+                    progress->setLabelText(tr("Updating grub..."));
+                    grubUpdated = runUpdateGrub();
+                    if (!grubUpdated) {
+                        qWarning() << "Failed to update GRUB configuration.";
+                    }
+                    if (live && !bootLocation.isEmpty()) {
+                        cmd.procAsRoot("cp", {"/boot/grub/grub.cfg", bootLocation + "/boot/grub/grub.cfg"});
+                    }
+                } else {
+                    qWarning() << "Failed to write /etc/default/grub; skipping GRUB update.";
+                    grubWriteFailed = true;
                 }
             }
             bool liveLabelsUpdated = false;
@@ -1937,17 +1975,28 @@ void MainWindow::pushApplyClicked()
             }
         }
         progress->close();
-        QString message = live && bootLocation == "/live/to-ram"
-                              ? tr("You are currently running in live mode with the 'toram' option. Please remember to "
-                                   "save the persistence file or remaster, otherwise any changes made will be lost.")
-                              : tr("Your changes have been successfully applied.");
-        QMessageBox::information(this, tr("Operation Complete"), message);
+        if (grubWriteFailed) {
+            QMessageBox::critical(this, tr("Operation Incomplete"),
+                                  tr("Failed to save the GRUB configuration; other changes may not have been "
+                                     "fully applied. Please try applying again."));
+        } else {
+            QString message
+                = live && bootLocation == "/live/to-ram"
+                      ? tr("You are currently running in live mode with the 'toram' option. Please remember to "
+                           "save the persistence file or remaster, otherwise any changes made will be lost.")
+                      : tr("Your changes have been successfully applied.");
+            QMessageBox::information(this, tr("Operation Complete"), message);
+        }
     }
 
-    // Reset change flags
-    optionsChanged = false;
-    splashChanged = false;
-    messagesChanged = false;
+    // Reset change flags, unless the GRUB configuration write failed and needs to be retried.
+    if (grubWriteFailed) {
+        ui->pushApply->setEnabled(true);
+    } else {
+        optionsChanged = false;
+        splashChanged = false;
+        messagesChanged = false;
+    }
     ui->pushCancel->setEnabled(true);
 }
 
@@ -2302,13 +2351,18 @@ void MainWindow::comboEnableFlatmenusClicked(bool checked)
         disableGrubLine(grubLine);
     }
 
-    writeDefaultGrub();
-    progress->setLabelText(tr("Updating grub..."));
-    setConnections();
-    if (!runUpdateGrub()) {
-        qWarning() << "Failed to update GRUB configuration.";
+    if (writeDefaultGrub()) {
+        progress->setLabelText(tr("Updating grub..."));
+        setConnections();
+        if (!runUpdateGrub()) {
+            qWarning() << "Failed to update GRUB configuration.";
+        }
+        readGrubCfg();
+    } else {
+        qWarning() << "Failed to write /etc/default/grub; GRUB configuration not updated.";
+        optionsChanged = true;
+        ui->pushApply->setEnabled(true);
     }
-    readGrubCfg();
     progress->close();
 }
 

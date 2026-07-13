@@ -161,5 +161,5 @@ private:
     void setupGrubSettings();
     void toggleBootlogd(bool enable);
     void unmountAndClean(const QStringList &mountList);
-    void writeDefaultGrub();
+    bool writeDefaultGrub();
 };
