@@ -32,6 +32,7 @@
 #include <QThread>
 
 #include <cstdio>
+#include <unistd.h>
 
 namespace
 {
@@ -93,12 +94,46 @@ void printError(const QString &message)
     return commands;
 }
 
+// The unprivileged user on whose behalf the helper runs. pkexec sets PKEXEC_UID to the real caller
+// and sanitizes the environment, so the value is trustworthy when running elevated; without it (direct
+// invocation, e.g. by root) fall back to the real uid.
+[[nodiscard]] uid_t invokingUid()
+{
+    const QByteArray pkexecUid = qgetenv("PKEXEC_UID");
+    if (!pkexecUid.isEmpty()) {
+        bool ok = false;
+        const uint uid = pkexecUid.toUInt(&ok);
+        if (ok) {
+            return uid;
+        }
+    }
+    return getuid();
+}
+
+// Anything the helper runs or enters as root must not be controllable by the invoking user: not owned
+// by them (they cannot create files owned by anyone else without already being root) and not writable
+// by group/other. This blocks staged targets (e.g. a crafted chroot tree or a replaced binary) while
+// still accepting system files with shifted ownership (NFS root_squash, ID-mapped mounts, containers),
+// which a root-ownership requirement would wrongly reject.
+[[nodiscard]] bool isSafeFromInvokingUser(const QString &path)
+{
+    const uid_t callerUid = invokingUid();
+    if (callerUid == 0) {
+        return QFileInfo::exists(path); // a root caller is fully trusted
+    }
+    const QFileInfo info(path);
+    if (!info.exists() || info.ownerId() == callerUid) {
+        return false;
+    }
+    return !(info.permissions() & (QFile::WriteGroup | QFile::WriteOther));
+}
+
 [[nodiscard]] QString resolveHostBinary(const QStringList &candidates, const QString &rootPath = {})
 {
     for (const QString &candidate : candidates) {
         const QString fullPath = rootPath.isEmpty() ? candidate : rootPath + candidate;
         const QFileInfo info(fullPath);
-        if (info.exists() && info.isExecutable()) {
+        if (info.exists() && info.isExecutable() && isSafeFromInvokingUser(fullPath)) {
             return candidate;
         }
     }
@@ -141,9 +176,20 @@ void printError(const QString &message)
     return result.exitStatus == QProcess::NormalExit ? result.exitCode : 1;
 }
 
+// A --root target must be the root of a mounted system: absolute, and once resolved, not controllable
+// by the invoking user. This rejects directories the caller owns or can write to (including /tmp-style
+// sticky directories), which they could otherwise populate with binaries for the helper to execute
+// via chroot.
 [[nodiscard]] bool isValidRootPath(const QString &rootPath)
 {
-    return rootPath.isEmpty() || (QDir::isAbsolutePath(rootPath) && QDir(rootPath).exists());
+    if (rootPath.isEmpty()) {
+        return true;
+    }
+    if (!QDir::isAbsolutePath(rootPath)) {
+        return false;
+    }
+    const QString canonical = QDir(rootPath).canonicalPath();
+    return !canonical.isEmpty() && isSafeFromInvokingUser(canonical);
 }
 
 [[nodiscard]] QString pathInTarget(const QString &rootPath, const QString &path)
@@ -440,7 +486,8 @@ int main(int argc, char *argv[])
     }
 
     if (!isValidRootPath(rootPath)) {
-        printError(QString("Invalid root path: %1").arg(rootPath));
+        printError(QString("Invalid root path (must exist and not be owned or writable by the invoking user): %1")
+                       .arg(rootPath));
         return 1;
     }
 
