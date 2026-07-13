@@ -1403,6 +1403,8 @@ void MainWindow::installSplash()
 
     if (!runPackageUpdate()) {
         progress->close();
+        bar = nullptr;
+        progress->deleteLater();
         QMessageBox::critical(this, tr("Error"), tr("Failed to update package sources."));
         return;
     }
@@ -1412,12 +1414,16 @@ void MainWindow::installSplash()
 
     if (!installPackages(packages)) {
         progress->close();
+        bar = nullptr;
+        progress->deleteLater();
         QMessageBox::critical(this, tr("Error"), tr("Could not install the bootsplash."));
         ui->checkBootsplash->setChecked(false);
         return;
     }
 
     progress->close();
+    bar = nullptr;
+    progress->deleteLater();
     QMessageBox::information(this, tr("Success"), tr("Bootsplash installed successfully."));
 }
 
@@ -2018,6 +2024,9 @@ QString MainWindow::readKernelOpts()
 
 void MainWindow::cmdStart()
 {
+    if (!bar) {
+        return;
+    }
     setCursor(Qt::BusyCursor);
     bar->setValue(0);
     timer.start(100ms);
@@ -2025,13 +2034,20 @@ void MainWindow::cmdStart()
 
 void MainWindow::cmdDone()
 {
+    timer.stop();
+    if (!bar) {
+        return;
+    }
     setCursor(Qt::ArrowCursor);
     bar->setValue(bar->maximum());
-    timer.stop();
 }
 
 void MainWindow::procTime()
 {
+    if (!bar) {
+        timer.stop();
+        return;
+    }
     bar->setValue((bar->value() + 10) % bar->maximum() + 1);
 }
 
@@ -2041,8 +2057,9 @@ void MainWindow::setConnections()
     timer.stop();
 
     connect(&timer, &QTimer::timeout, this, &MainWindow::procTime);
-    connect(&cmd, &QProcess::started, this, &MainWindow::cmdStart);
-    connect(&cmd, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MainWindow::cmdDone);
+    connect(&cmd, &QProcess::started, this, &MainWindow::cmdStart, Qt::UniqueConnection);
+    connect(&cmd, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MainWindow::cmdDone,
+            Qt::UniqueConnection);
 }
 
 void MainWindow::pushApplyClicked()
@@ -2232,6 +2249,8 @@ void MainWindow::pushApplyClicked()
             qWarning() << "GRUB is not installed; unable to apply pending GRUB/kernel option changes.";
         }
         progress->close();
+        bar = nullptr;
+        progress->deleteLater();
         if (!failedSteps.isEmpty()) {
             QMessageBox::critical(this, tr("Operation Incomplete"),
                                   tr("The following changes could not be applied: %1. These changes are still "
@@ -2623,6 +2642,8 @@ void MainWindow::comboEnableFlatmenusClicked(bool checked)
         ui->pushApply->setEnabled(true);
     }
     progress->close();
+    bar = nullptr;
+    progress->deleteLater();
 }
 
 void MainWindow::comboSaveDefaultClicked()
