@@ -99,6 +99,7 @@ private:
 
     QString bootLocation;
     QString chroot;
+    QString luksMapper;
     QString user;
     QStringList defaultGrub;
     QStringList grubCfg;

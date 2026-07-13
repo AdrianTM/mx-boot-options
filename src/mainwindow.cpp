@@ -1335,6 +1335,14 @@ void MainWindow::cleanup()
     if (!cmd.procAsRoot("rmdir", {path})) {
         qWarning() << "Failed to remove directory" << path;
     }
+
+    // Close the LUKS mapping opened by openLuks(), if any
+    if (!luksMapper.isEmpty()) {
+        if (!cmd.procAsRoot("cryptsetup", {"close", luksMapper})) {
+            qWarning() << "Failed to close LUKS mapping" << luksMapper;
+        }
+        luksMapper.clear();
+    }
 }
 
 QString MainWindow::selectPartition(const QStringList &list)
@@ -2417,11 +2425,16 @@ bool MainWindow::openLuks(const QString &partition, const QString &path)
         QMessageBox::critical(this, tr("Error"), tr("Could not open %1 LUKS container").arg(partition));
         return false;
     }
-    if (cmd.procAsRoot("mount", {"/dev/mapper/" + mapper, path})) {
-        // Root mount succeeded; record it now so cleanup() can unmount it if mountBoot() fails below,
-        // instead of leaking it while createChrootEnv() still thinks nothing is mounted.
-        chroot = "chroot " + path + " ";
+    if (!cmd.procAsRoot("mount", {"/dev/mapper/" + mapper, path})) {
+        QMessageBox::critical(this, tr("Error"), tr("Could not mount %1 LUKS container").arg(partition));
+        cmd.procAsRoot("cryptsetup", {"close", mapper});
+        return false;
     }
+    // Root mount succeeded; record it now so cleanup() can unmount the root and close the
+    // mapping if mountBoot() fails below, instead of leaking either while createChrootEnv()
+    // still thinks nothing is mounted.
+    chroot = "chroot " + path + " ";
+    luksMapper = mapper;
     if (!mountBoot(path)) {
         return false;
     }
