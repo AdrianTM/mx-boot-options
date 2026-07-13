@@ -1402,6 +1402,10 @@ void MainWindow::createChrootEnv(const QString &root)
         exit(EXIT_FAILURE);
     }
 
+    // Root filesystem is mounted from this point on; set chroot now so cleanup() unmounts
+    // it (and any bind mounts below) on every remaining failure path, not just on success.
+    chroot = "chroot " + tempDir.path() + " ";
+
     const QStringList chrootDirs = {tempDir.path() + "/dev", tempDir.path() + "/sys", tempDir.path() + "/proc",
                                     tempDir.path() + "/run"};
     QStringList mkdirArgs {"-p"};
@@ -1421,7 +1425,6 @@ void MainWindow::createChrootEnv(const QString &root)
         exit(EXIT_FAILURE);
     }
 
-    chroot = "chroot " + tempDir.path() + " ";
     ui->pushPreview->setDisabled(true); // Disable preview when running chroot
 }
 
@@ -2414,7 +2417,11 @@ bool MainWindow::openLuks(const QString &partition, const QString &path)
         QMessageBox::critical(this, tr("Error"), tr("Could not open %1 LUKS container").arg(partition));
         return false;
     }
-    cmd.procAsRoot("mount", {"/dev/mapper/" + mapper, path});
+    if (cmd.procAsRoot("mount", {"/dev/mapper/" + mapper, path})) {
+        // Root mount succeeded; record it now so cleanup() can unmount it if mountBoot() fails below,
+        // instead of leaking it while createChrootEnv() still thinks nothing is mounted.
+        chroot = "chroot " + path + " ";
+    }
     if (!mountBoot(path)) {
         return false;
     }
