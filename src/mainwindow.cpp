@@ -2267,6 +2267,7 @@ void MainWindow::pushApplyClicked()
             recordStep(false, tr("saving the GRUB configuration file"));
             qWarning() << "GRUB is not installed; unable to apply pending GRUB/kernel option changes.";
         }
+        disconnect(progress, &QProgressDialog::canceled, &cmd, &Cmd::cancel);
         progress->close();
         bar = nullptr;
         progress->deleteLater();
