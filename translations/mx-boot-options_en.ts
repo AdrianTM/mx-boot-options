@@ -197,36 +197,36 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1419"/>
-        <location filename="../src/mainwindow.cpp" line="1431"/>
-        <location filename="../src/mainwindow.cpp" line="1460"/>
-        <location filename="../src/mainwindow.cpp" line="1469"/>
-        <location filename="../src/mainwindow.cpp" line="1475"/>
-        <location filename="../src/mainwindow.cpp" line="1486"/>
-        <location filename="../src/mainwindow.cpp" line="1502"/>
-        <location filename="../src/mainwindow.cpp" line="1507"/>
-        <location filename="../src/mainwindow.cpp" line="1646"/>
-        <location filename="../src/mainwindow.cpp" line="2777"/>
+        <location filename="../src/mainwindow.cpp" line="1433"/>
+        <location filename="../src/mainwindow.cpp" line="1445"/>
+        <location filename="../src/mainwindow.cpp" line="1474"/>
+        <location filename="../src/mainwindow.cpp" line="1483"/>
+        <location filename="../src/mainwindow.cpp" line="1489"/>
+        <location filename="../src/mainwindow.cpp" line="1500"/>
+        <location filename="../src/mainwindow.cpp" line="1516"/>
+        <location filename="../src/mainwindow.cpp" line="1521"/>
+        <location filename="../src/mainwindow.cpp" line="1660"/>
         <location filename="../src/mainwindow.cpp" line="2791"/>
-        <location filename="../src/mainwindow.cpp" line="2797"/>
-        <location filename="../src/mainwindow.cpp" line="2801"/>
+        <location filename="../src/mainwindow.cpp" line="2805"/>
+        <location filename="../src/mainwindow.cpp" line="2811"/>
+        <location filename="../src/mainwindow.cpp" line="2815"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1405"/>
+        <location filename="../src/mainwindow.cpp" line="1419"/>
         <source>Installing bootsplash, please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="290"/>
-        <location filename="../src/mainwindow.cpp" line="2472"/>
+        <location filename="../src/mainwindow.cpp" line="2486"/>
         <source>Preview is disabled because &apos;splash&apos; parameter is not present in kernel command line. To enable preview, add &apos;splash&apos; to boot parameters and reboot.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="294"/>
-        <location filename="../src/mainwindow.cpp" line="2475"/>
+        <location filename="../src/mainwindow.cpp" line="2489"/>
         <source>Preview is disabled while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -236,321 +236,321 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1403"/>
-        <location filename="../src/mainwindow.cpp" line="2090"/>
-        <location filename="../src/mainwindow.cpp" line="2653"/>
+        <location filename="../src/mainwindow.cpp" line="1417"/>
+        <location filename="../src/mainwindow.cpp" line="2104"/>
+        <location filename="../src/mainwindow.cpp" line="2667"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1412"/>
+        <location filename="../src/mainwindow.cpp" line="1426"/>
         <source>Updating sources</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1431"/>
+        <location filename="../src/mainwindow.cpp" line="1445"/>
         <source>Could not install the bootsplash.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1460"/>
+        <location filename="../src/mainwindow.cpp" line="1474"/>
         <source>Cannot find %1 to update.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1470"/>
+        <location filename="../src/mainwindow.cpp" line="1484"/>
         <source>Failed to rotate backup %1; leaving the current configuration in place.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1476"/>
+        <location filename="../src/mainwindow.cpp" line="1490"/>
         <source>Failed to remove old backup %1; leaving the current configuration in place.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1487"/>
+        <location filename="../src/mainwindow.cpp" line="1501"/>
         <source>Failed to back up %1; leaving the current configuration in place.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1503"/>
+        <location filename="../src/mainwindow.cpp" line="1517"/>
         <source>Wrote %1, but could not confirm the change was saved durably. Please verify it before rebooting.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1508"/>
+        <location filename="../src/mainwindow.cpp" line="1522"/>
         <source>Failed to write %1; the previous configuration was left in place.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1646"/>
+        <location filename="../src/mainwindow.cpp" line="1660"/>
         <source>Could not create a temporary folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1652"/>
-        <location filename="../src/mainwindow.cpp" line="1657"/>
-        <location filename="../src/mainwindow.cpp" line="1680"/>
+        <location filename="../src/mainwindow.cpp" line="1666"/>
+        <location filename="../src/mainwindow.cpp" line="1671"/>
+        <location filename="../src/mainwindow.cpp" line="1694"/>
         <source>Cannot continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1652"/>
+        <location filename="../src/mainwindow.cpp" line="1666"/>
         <source>Cannot open LUKS device. Exiting...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1658"/>
-        <location filename="../src/mainwindow.cpp" line="1681"/>
+        <location filename="../src/mainwindow.cpp" line="1672"/>
+        <location filename="../src/mainwindow.cpp" line="1695"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2092"/>
-        <location filename="../src/mainwindow.cpp" line="2655"/>
+        <location filename="../src/mainwindow.cpp" line="2106"/>
+        <location filename="../src/mainwindow.cpp" line="2669"/>
         <source>Updating configuration, please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2116"/>
+        <location filename="../src/mainwindow.cpp" line="2130"/>
         <source>saving the kernel boot arguments to the live media</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2119"/>
+        <location filename="../src/mainwindow.cpp" line="2133"/>
         <source>saving the kernel boot arguments to the syslinux configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2129"/>
+        <location filename="../src/mainwindow.cpp" line="2143"/>
         <source>saving the live boot menu timeout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2132"/>
+        <location filename="../src/mainwindow.cpp" line="2146"/>
         <source>saving the live boot menu background image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2136"/>
+        <location filename="../src/mainwindow.cpp" line="2150"/>
         <source>clearing the pending one-time boot entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2167"/>
-        <location filename="../src/mainwindow.cpp" line="2170"/>
+        <location filename="../src/mainwindow.cpp" line="2181"/>
+        <location filename="../src/mainwindow.cpp" line="2184"/>
         <source>setting the one-time boot entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2180"/>
-        <location filename="../src/mainwindow.cpp" line="2183"/>
+        <location filename="../src/mainwindow.cpp" line="2194"/>
+        <location filename="../src/mainwindow.cpp" line="2197"/>
         <source>saving the default boot entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2199"/>
-        <location filename="../src/mainwindow.cpp" line="2203"/>
+        <location filename="../src/mainwindow.cpp" line="2213"/>
+        <location filename="../src/mainwindow.cpp" line="2217"/>
         <source>setting the boot splash theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2207"/>
-        <location filename="../src/mainwindow.cpp" line="2210"/>
+        <location filename="../src/mainwindow.cpp" line="2221"/>
+        <location filename="../src/mainwindow.cpp" line="2224"/>
         <source>updating the boot log service state</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2212"/>
+        <location filename="../src/mainwindow.cpp" line="2226"/>
         <source>Updating initramfs...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2213"/>
+        <location filename="../src/mainwindow.cpp" line="2227"/>
         <source>updating the initramfs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2225"/>
+        <location filename="../src/mainwindow.cpp" line="2239"/>
         <source>updating boot message settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2238"/>
-        <location filename="../src/mainwindow.cpp" line="2267"/>
+        <location filename="../src/mainwindow.cpp" line="2252"/>
+        <location filename="../src/mainwindow.cpp" line="2281"/>
         <source>saving the GRUB configuration file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2239"/>
-        <location filename="../src/mainwindow.cpp" line="2670"/>
+        <location filename="../src/mainwindow.cpp" line="2253"/>
+        <location filename="../src/mainwindow.cpp" line="2684"/>
         <source>Updating grub...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2240"/>
+        <location filename="../src/mainwindow.cpp" line="2254"/>
         <source>regenerating the GRUB boot menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2246"/>
+        <location filename="../src/mainwindow.cpp" line="2260"/>
         <source>copying the GRUB configuration to the boot media</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2254"/>
+        <location filename="../src/mainwindow.cpp" line="2268"/>
         <source>Refreshing live boot labels...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2255"/>
+        <location filename="../src/mainwindow.cpp" line="2269"/>
         <source>refreshing the live boot menu labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2275"/>
+        <location filename="../src/mainwindow.cpp" line="2289"/>
         <source>Operation Incomplete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2276"/>
+        <location filename="../src/mainwindow.cpp" line="2290"/>
         <source>The following changes could not be applied: %1. These changes are still pending; please try applying again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2296"/>
+        <location filename="../src/mainwindow.cpp" line="2310"/>
         <source>Operation Cancelled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2297"/>
+        <location filename="../src/mainwindow.cpp" line="2311"/>
         <source>The operation was cancelled. Changes already completed were kept; the remaining changes are still pending.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2319"/>
+        <location filename="../src/mainwindow.cpp" line="2333"/>
         <source>About %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2320"/>
+        <location filename="../src/mainwindow.cpp" line="2334"/>
         <source>Version: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2322"/>
+        <location filename="../src/mainwindow.cpp" line="2336"/>
         <source>Program for selecting common start-up choices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2324"/>
+        <location filename="../src/mainwindow.cpp" line="2338"/>
         <source>Copyright (c) MX Linux</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2325"/>
+        <location filename="../src/mainwindow.cpp" line="2339"/>
         <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2331"/>
+        <location filename="../src/mainwindow.cpp" line="2345"/>
         <source>%1 Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2341"/>
-        <location filename="../src/mainwindow.cpp" line="2616"/>
+        <location filename="../src/mainwindow.cpp" line="2355"/>
+        <location filename="../src/mainwindow.cpp" line="2630"/>
         <source>Running in a Virtual Machine</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2349"/>
+        <location filename="../src/mainwindow.cpp" line="2363"/>
         <source>Plymouth packages not installed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2350"/>
+        <location filename="../src/mainwindow.cpp" line="2364"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2382"/>
+        <location filename="../src/mainwindow.cpp" line="2396"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2547"/>
+        <location filename="../src/mainwindow.cpp" line="2561"/>
         <source>Could not read the systemd boot logs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2548"/>
+        <location filename="../src/mainwindow.cpp" line="2562"/>
         <source>Could not read the systemd boot logs%1 or the fallback log at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2549"/>
+        <location filename="../src/mainwindow.cpp" line="2563"/>
         <source> from %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2552"/>
+        <location filename="../src/mainwindow.cpp" line="2566"/>
         <source>Could not find any boot logs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2553"/>
+        <location filename="../src/mainwindow.cpp" line="2567"/>
         <source>Could not find log at %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2555"/>
+        <location filename="../src/mainwindow.cpp" line="2569"/>
         <source>Log not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2596"/>
+        <location filename="../src/mainwindow.cpp" line="2610"/>
         <source>Preview Unavailable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2597"/>
+        <location filename="../src/mainwindow.cpp" line="2611"/>
         <source>Preview is not available while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2731"/>
+        <location filename="../src/mainwindow.cpp" line="2745"/>
         <source>Click to select image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2777"/>
+        <location filename="../src/mainwindow.cpp" line="2791"/>
         <source>Could not retrieve UUID for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2785"/>
+        <location filename="../src/mainwindow.cpp" line="2799"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2791"/>
+        <location filename="../src/mainwindow.cpp" line="2805"/>
         <source>Password entry cancelled or empty for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2797"/>
+        <location filename="../src/mainwindow.cpp" line="2811"/>
         <source>Could not open %1 LUKS container</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2801"/>
+        <location filename="../src/mainwindow.cpp" line="2815"/>
         <source>Could not mount %1 LUKS container</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2567"/>
+        <location filename="../src/mainwindow.cpp" line="2581"/>
         <source>&amp;Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -580,74 +580,74 @@ OK to go ahead and install them?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1419"/>
+        <location filename="../src/mainwindow.cpp" line="1433"/>
         <source>Failed to update package sources.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1424"/>
+        <location filename="../src/mainwindow.cpp" line="1438"/>
         <source>Installing packages:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1440"/>
+        <location filename="../src/mainwindow.cpp" line="1454"/>
         <source>Success</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1440"/>
+        <location filename="../src/mainwindow.cpp" line="1454"/>
         <source>Bootsplash installed successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2282"/>
+        <location filename="../src/mainwindow.cpp" line="2296"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2284"/>
+        <location filename="../src/mainwindow.cpp" line="2298"/>
         <source>Your changes have been successfully applied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2285"/>
+        <location filename="../src/mainwindow.cpp" line="2299"/>
         <source>Operation Complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2342"/>
-        <location filename="../src/mainwindow.cpp" line="2617"/>
+        <location filename="../src/mainwindow.cpp" line="2356"/>
+        <location filename="../src/mainwindow.cpp" line="2631"/>
         <source>Your current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2381"/>
+        <location filename="../src/mainwindow.cpp" line="2395"/>
         <source>Select image to display in bootloader</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2560"/>
+        <location filename="../src/mainwindow.cpp" line="2574"/>
         <source>Boot Log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2603"/>
+        <location filename="../src/mainwindow.cpp" line="2617"/>
         <source>Needs reboot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2604"/>
+        <location filename="../src/mainwindow.cpp" line="2618"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2712"/>
+        <location filename="../src/mainwindow.cpp" line="2726"/>
         <source>Click to select theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2744"/>
+        <location filename="../src/mainwindow.cpp" line="2758"/>
         <source>Select GRUB theme</source>
         <translation type="unfinished"></translation>
     </message>

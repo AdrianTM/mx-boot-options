@@ -1,3 +1,9 @@
+mx-boot-options (26.07.1) mx; urgency=medium
+
+  * Saving boot log settings no longer fails when bootlogd is not installed.
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 15 Jul 2026 11:17:35 -0400
+
 mx-boot-options (26.07) mx; urgency=medium
 
   * Add an option to turn off the GRUB boot menu background image.
