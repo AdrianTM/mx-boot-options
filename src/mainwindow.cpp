@@ -1298,7 +1298,21 @@ bool MainWindow::toggleBootlogd(bool enable)
         return true;
     }
 
-    if (QFile::exists(rootPath + "/usr/bin/update-rc.d") || QFile::exists(rootPath + "/sbin/update-rc.d")) {
+    // update-rc.d ships with init-system-helpers on every Debian system, but it fails when the service it is
+    // asked to toggle has no init script, so only attempt the toggle when bootlogd is actually installed.
+    switch (pathState(rootPath + "/etc/init.d/bootlogd")) {
+    case PathState::Absent:
+        qWarning() << "bootlogd is not installed; skipping bootlogd toggle.";
+        return true;
+    case PathState::Inaccessible:
+        qWarning() << "Could not access the bootlogd init script; unable to determine its service state.";
+        return false;
+    case PathState::Present:
+        break;
+    }
+
+    if (QFile::exists(rootPath + "/usr/sbin/update-rc.d") || QFile::exists(rootPath + "/sbin/update-rc.d")
+        || QFile::exists(rootPath + "/usr/bin/update-rc.d")) {
         const QString action = enable ? QStringLiteral("enable") : QStringLiteral("disable");
         const bool ok = rootPath.isEmpty() ? cmd.procAsRoot("update-rc.d", {"bootlogd", action})
                                             : cmd.procAsRootInTarget(rootPath, "update-rc.d", {"bootlogd", action});
