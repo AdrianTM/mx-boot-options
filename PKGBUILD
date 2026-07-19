@@ -22,6 +22,7 @@ build() {
     cmake -G Ninja \
         -B build \
         -DCMAKE_BUILD_TYPE=Release \
+        -DHELPER_INSTALL_DIR=/usr/lib/mx-boot-options \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
@@ -44,7 +45,7 @@ package() {
     install -Dm755 build/helper "${pkgdir}/usr/lib/mx-boot-options/helper"
 
     # Install PolicyKit policy
-    install -Dm644 scripts/org.mxlinux.pkexec.mxbo-helper.policy \
+    install -Dm644 build/org.mxlinux.pkexec.mxbo-helper.policy \
         "${pkgdir}/usr/share/polkit-1/actions/org.mxlinux.pkexec.mxbo-helper.policy"
 
     # Install desktop file

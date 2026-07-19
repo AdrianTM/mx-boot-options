@@ -2,6 +2,6 @@ help/*				usr/share/doc/mx-boot-options
 images/mx-boot-options.png	usr/share/icons/hicolor/1024x1024/apps
 images/mx-boot-options.svg	usr/share/icons/hicolor/scalable/apps
 mx-boot-options.desktop		usr/share/applications
-scripts/*.policy		usr/share/polkit-1/actions
-obj-*/helper			usr/lib/mx-boot-options
+obj-*/*.policy		usr/share/polkit-1/actions
+obj-*/helper			usr/libexec/mx-boot-options
 obj-*/*.qm 			usr/share/mx-boot-options/locale
