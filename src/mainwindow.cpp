@@ -1889,9 +1889,22 @@ bool MainWindow::replaceSyslinuxArgs(const QString &args)
 
 void MainWindow::readGrubCfg()
 {
-    const QString rootPath = targetRootPath();
-    const QString grubFilePath = liveGrubMode() ? bootLocation + "/boot/grub/grub.cfg" : "/boot/grub/grub.cfg";
-    QStringList content = cmd.readFileAsRoot(grubFilePath, QuietMode::Yes, rootPath).split('\n', Qt::SkipEmptyParts);
+    const bool liveMode = liveGrubMode();
+
+    // The live grub.cfg lives on media that the rest of the live-mode file handling in this file already
+    // reads directly (it is normally accessible without elevation), and it is not one of the paths the
+    // privileged helper's read-file allowlist recognizes, so read it as a plain file instead of routing it
+    // through the helper.
+    QString rawContent;
+    if (liveMode) {
+        QFile file(bootLocation + "/boot/grub/grub.cfg");
+        if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            rawContent = QString::fromUtf8(file.readAll());
+        }
+    } else {
+        rawContent = cmd.readFileAsRoot("/boot/grub/grub.cfg", QuietMode::Yes, targetRootPath());
+    }
+    QStringList content = rawContent.split('\n', Qt::SkipEmptyParts);
 
     if (content.isEmpty()) {
         qDebug() << "Could not read grub.cfg file";
@@ -1903,7 +1916,6 @@ void MainWindow::readGrubCfg()
     int menuCount = 0;
     int submenuCount = 0;
     QString menuId;
-    const bool liveMode = liveGrubMode();
 
     for (const auto &line : content) {
         QString trimmedLine = line.trimmed();
