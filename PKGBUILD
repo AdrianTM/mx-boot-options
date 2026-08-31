@@ -52,7 +52,7 @@ package() {
     install -Dm644 mx-boot-options.desktop "${pkgdir}/usr/share/applications/mx-boot-options.desktop"
 
     # Install icons
-    install -Dm644 images/mx-boot-options.png "${pkgdir}/usr/share/icons/hicolor/1024x1024/apps/mx-boot-options.png"
+    install -Dm644 images/mx-boot-options.png "${pkgdir}/usr/share/icons/hicolor/64x64/apps/mx-boot-options.png"
     install -Dm644 images/mx-boot-options.svg "${pkgdir}/usr/share/icons/hicolor/scalable/apps/mx-boot-options.svg"
 
     # Install documentation

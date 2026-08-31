@@ -1,5 +1,5 @@
 help/*				usr/share/doc/mx-boot-options
-images/mx-boot-options.png	usr/share/icons/hicolor/1024x1024/apps
+images/mx-boot-options.png	usr/share/icons/hicolor/64x64/apps
 images/mx-boot-options.svg	usr/share/icons/hicolor/scalable/apps
 mx-boot-options.desktop		usr/share/applications
 obj-*/*.policy		usr/share/polkit-1/actions

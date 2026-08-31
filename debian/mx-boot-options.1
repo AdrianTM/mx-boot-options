@@ -1,0 +1,29 @@
+.TH MX-BOOT-OPTIONS 1 "August 2026" "mx-boot-options" "MX Linux"
+.SH NAME
+mx-boot-options \- GUI for managing boot options and UEFI settings
+.SH SYNOPSIS
+.B mx-boot-options
+.RI [ options ]
+.SH DESCRIPTION
+.B mx-boot-options
+is a graphical utility for configuring boot-related settings on MX Linux
+systems. It allows the user to adjust GRUB settings such as the boot menu
+timeout, default entry and kernel parameters, configure the Plymouth boot
+splash theme, and manage UEFI boot entries. Both live and installed systems
+are supported.
+.PP
+The program must be run as a normal user; it uses
+.BR pkexec (1)
+to escalate privileges for the individual system changes that require them.
+.SH OPTIONS
+.TP
+.BR \-h ", " \-\-help
+Displays help on commandline options.
+.TP
+.BR \-v ", " \-\-version
+Displays version information.
+.SH SEE ALSO
+.BR update\-grub (8),
+.BR pkexec (1)
+.SH AUTHOR
+Written by Adrian for MX Linux <http://mxlinux.org>.
