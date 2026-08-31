@@ -183,6 +183,9 @@ if(BUILD_TESTS)
         Qt6::Widgets
     )
     target_include_directories(mx-boot-options-tests PRIVATE src)
+    target_compile_definitions(mx-boot-options-tests PRIVATE
+        HELPER_PATH="${HELPER_PATH}"
+    )
     add_test(NAME mx-boot-options-tests COMMAND mx-boot-options-tests)
 endif()
 
