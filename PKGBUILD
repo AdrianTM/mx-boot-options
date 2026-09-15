@@ -1,6 +1,6 @@
 # Maintainer: Adrian <adrian@mxlinux.org>
 pkgname=mx-boot-options
-pkgver=${PKGVER:-25.11.3}
+pkgver=${PKGVER:-26.07.1}
 pkgrel=1
 pkgdesc="GUI for managing boot options and UEFI settings"
 arch=('x86_64' 'i686')
